@@ -1,6 +1,7 @@
 import React from 'react';
 
-import StyledComponentsRegistry from '@/lib/StyledComponentsRegistry';
+import GlobalStyles from '@/styles/GlobalStyles';
+import Providers from '@/styles/Providers';
 
 export const metadata = {
   title: 'Next.js',
@@ -14,8 +15,23 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <head>
+        <link
+          rel="preload"
+          href="https://webfontworld.github.io/gmarket/GmarketSans.css"
+          as="font"
+        />
+        <link
+          rel="preload"
+          href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css"
+          as="font"
+        />
+      </head>
       <body>
-        <StyledComponentsRegistry>{children}</StyledComponentsRegistry>
+        <Providers>
+          <GlobalStyles />
+          {children}
+        </Providers>
       </body>
     </html>
   );

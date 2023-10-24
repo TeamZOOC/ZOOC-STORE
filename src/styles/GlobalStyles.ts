@@ -1,10 +1,11 @@
+'use client';
+
 import { createGlobalStyle } from 'styled-components';
 import reset from 'styled-reset';
 
-export const GlobalStyle = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
 ${reset}
 
-@import url('https://webfontworld.github.io/gmarket/GmarketSans.css');
 
 #root, body, html {
   width: 100vw;
@@ -13,7 +14,8 @@ ${reset}
   margin: 0 auto;
   overflow-y: auto;
   
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.zw_background};
+  font-size: 62.5%;
 
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
   scrollbar-width: none; /* 파이어폭스 */
@@ -29,4 +31,4 @@ ${reset}
   }
 `;
 
-export default GlobalStyle;
+export default GlobalStyles;
