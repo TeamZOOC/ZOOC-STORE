@@ -8,8 +8,8 @@ const page = () => (
   <div>
     <IcBack />
     <IcZooc />
-    <StGmarket>지마켓산스 폰트 GmarketSans</StGmarket>
-    <StPretendard>프리텐다드 폰트 Pretendard</StPretendard>
+    <StGmarket>지마켓산스 폰트 GmarketSans price_big ZOOC</StGmarket>
+    <StPretendard>Subhead1 프리텐다드 폰트 Pretendard</StPretendard>
   </div>
 );
 

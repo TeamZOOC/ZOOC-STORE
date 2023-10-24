@@ -17,14 +17,12 @@ export default function RootLayout({
     <html lang="ko">
       <head>
         <link
-          rel="preload"
+          rel="stylesheet"
           href="https://webfontworld.github.io/gmarket/GmarketSans.css"
-          as="font"
         />
         <link
-          rel="preload"
+          rel="stylesheet"
           href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css"
-          as="font"
         />
       </head>
       <body>
