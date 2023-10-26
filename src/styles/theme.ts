@@ -2,28 +2,28 @@ import { css } from 'styled-components';
 
 export const fonts = {
   zw_price_big: css`
-    font-family: 'GmarketSans';
+    font-family: var(--font-gmarketsans-bold);
     font-size: 2.2rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
   `,
   zw_price_middle: css`
-    font-family: 'GmarketSans';
+    font-family: var(--font-gmarketsans-medium);
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
   `,
   zw_price_small: css`
-    font-family: 'GmarketSans';
+    font-family: var(--font-gmarketsans-medium);
     font-size: 1.2rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
   `,
   zw_Subhead1: css`
-    font-family: 'Pretendard Variable';
+    font-family: var(--font-pretendard);
     font-size: 1.8rem;
     font-style: normal;
     font-weight: 600;
@@ -31,7 +31,7 @@ export const fonts = {
     letter-spacing: -0.03rem;
   `,
   zw_Subhead2: css`
-    font-family: 'Pretendard Variable';
+    font-family: var(--font-pretendard);
     font-size: 1.8rem;
     font-style: normal;
     font-weight: 500;
@@ -39,14 +39,14 @@ export const fonts = {
     letter-spacing: -0.03rem;
   `,
   zw_Subhead3: css`
-    font-family: 'Pretendard Variable';
+    font-family: var(--font-pretendard);
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
   `,
   zw_Subhead4: css`
-    font-family: 'Pretendard Variable';
+    font-family: var(--font-pretendard);
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 500;
@@ -54,7 +54,7 @@ export const fonts = {
     letter-spacing: -0.0042rem;
   `,
   zw_Body1: css`
-    font-family: 'Pretendard Variable';
+    font-family: var(--font-pretendard);
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 400;
@@ -62,7 +62,7 @@ export const fonts = {
     letter-spacing: -0.0048rem;
   `,
   zw_Body2: css`
-    font-family: 'Pretendard Variable';
+    font-family: var(--font-pretendard);
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 400;
@@ -70,7 +70,7 @@ export const fonts = {
     letter-spacing: -0.03rem;
   `,
   zw_caption: css`
-    font-family: 'Pretendard Variable';
+    font-family: var(--font-pretendard);
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 400;
