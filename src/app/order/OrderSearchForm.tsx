@@ -1,58 +1,69 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 'use client';
 
-import { useState } from 'react';
+import Link from 'next/link';
+import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import { TextInput } from '@/components/input';
 
-const OrderSearchForm = () => {
-  const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+import { IcKey } from '../../../public/icons';
 
-  const inputConfigs = [
-    {
-      id: 'name',
-      label: '이름',
-      placeholder: '홍길동',
-      state: name,
-      setState: setName,
-    },
-    {
-      id: 'phone',
-      label: '연락처',
-      placeholder: '010-1234-5678',
-      state: phone,
-      setState: setPhone,
-    },
-    {
-      id: 'password',
-      label: '주문내역 조회 비밀번호',
-      placeholder: '네자리 수 숫자 비밀번호',
-      state: password,
-      setState: setPassword,
-    },
-  ];
+type OrderSearchFormData = {
+  name: string;
+  phone: string;
+  password: number;
+};
+
+const OrderSearchForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<OrderSearchFormData>();
+
+  const onSubmit = async (data: OrderSearchFormData) => {
+    await new Promise((r) => {
+      setTimeout(r, 1_000);
+    });
+    console.log(JSON.stringify(data));
+  };
 
   return (
     <StOrderSearchForm>
       <h1>주문내역 조회</h1>
       <p>구매 시 입력했던 정보를 입력해주세요</p>
-      <StSearchForm>
-        {inputConfigs.map(({ id, state, label, placeholder, setState }) => (
-          <TextInput
-            key={id}
-            value={state}
-            label={label}
-            placeholder={placeholder}
-            onChange={(newValue) => setState(newValue)}
-          />
-        ))}
+      <StSearchForm onSubmit={handleSubmit(onSubmit)}>
+        <TextInput
+          id="name"
+          label="이름"
+          placeholder="홍길동"
+          {...register('name')}
+        />
+        <TextInput
+          id="phone"
+          label="전화번호"
+          placeholder="010-1234-5678"
+          {...register('phone')}
+        />
+        <TextInput
+          id="password"
+          label="주문내역 조회 비밀번호"
+          placeholder="네자리 수 숫자 비밀번호"
+          {...register('password')}
+        />
+        <StForgetPassword>
+          <IcKey />
+          <Link href="https://github.com/TeamZOOC/ZOOC-STORE">
+            조회 비밀번호를 잊어버리셨나요?
+          </Link>
+        </StForgetPassword>
+        <button type="submit">주문내역 조회하기</button>
       </StSearchForm>
     </StOrderSearchForm>
   );
 };
-
 export default OrderSearchForm;
 
 const StOrderSearchForm = styled.section`
@@ -72,4 +83,17 @@ const StOrderSearchForm = styled.section`
 
 const StSearchForm = styled.form`
   margin-top: 5rem;
+`;
+
+const StForgetPassword = styled.p`
+  text-align: center;
+  margin-top: 12.3rem;
+
+  & > a {
+    margin-left: 0.65rem;
+    text-decoration: none;
+
+    color: ${({ theme }) => theme.colors.zw_gray};
+    ${({ theme }) => theme.fonts.zw_caption};
+  }
 `;

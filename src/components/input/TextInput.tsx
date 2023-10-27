@@ -3,29 +3,17 @@ import React from 'react';
 import { styled } from 'styled-components';
 
 interface TextInputProps {
-  value: string;
+  id: string;
   label: string;
   placeholder: string;
-  onChange: (value: string) => void;
 }
 
-const TextInput = ({ value, label, placeholder, onChange }: TextInputProps) => {
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(event.target.value);
-  };
-  return (
-    <StTextInput>
-      <label htmlFor={value}>{label}</label>
-      <input
-        type="text"
-        value={value}
-        placeholder={placeholder}
-        onChange={handleInputChange}
-      />
-    </StTextInput>
-  );
-};
-
+const TextInput = ({ id, label, placeholder }: TextInputProps) => (
+  <StTextInput>
+    <label htmlFor={id}>{label}</label>
+    <input type="text" id={id} placeholder={placeholder} />
+  </StTextInput>
+);
 export default TextInput;
 
 const StTextInput = styled.div`
