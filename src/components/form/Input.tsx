@@ -1,19 +1,31 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import { Control, Controller } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 interface TextInputProps {
-  id: string;
+  name: string;
   label: string;
   placeholder: string;
+  control: Control<any>;
 }
 
-const TextInput = ({ id, label, placeholder }: TextInputProps) => (
-  <StTextInput>
-    <label htmlFor={id}>{label}</label>
-    <input type="text" id={id} placeholder={placeholder} />
-  </StTextInput>
-);
+function TextInput({ name, label, placeholder, control }: TextInputProps) {
+  return (
+    <StTextInput>
+      <label htmlFor={name}>{label}</label>
+      <Controller
+        name={name}
+        control={control}
+        defaultValue=""
+        render={({ field }) => (
+          <input id={name} placeholder={placeholder} type="text" {...field} />
+        )}
+      />
+    </StTextInput>
+  );
+}
+
 export default TextInput;
 
 const StTextInput = styled.div`

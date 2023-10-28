@@ -1,33 +1,24 @@
-/* eslint-disable react/jsx-props-no-spreading */
-
 'use client';
 
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
-import { TextInput } from '@/components/input';
+import { Input } from '@/components/form';
 
 import { IcKey } from '../../../public/icons';
 
-type OrderSearchFormData = {
+export interface OrderSearchFormData {
   name: string;
   phone: string;
-  password: number;
-};
+  password: string;
+}
 
 const OrderSearchForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<OrderSearchFormData>();
+  const { control, handleSubmit } = useForm<OrderSearchFormData>();
 
-  const onSubmit = async (data: OrderSearchFormData) => {
-    await new Promise((r) => {
-      setTimeout(r, 1_000);
-    });
-    console.log(JSON.stringify(data));
+  const onSubmit = (data: OrderSearchFormData) => {
+    console.log(data);
   };
 
   return (
@@ -35,23 +26,23 @@ const OrderSearchForm = () => {
       <h1>주문내역 조회</h1>
       <p>구매 시 입력했던 정보를 입력해주세요</p>
       <StSearchForm onSubmit={handleSubmit(onSubmit)}>
-        <TextInput
-          id="name"
+        <Input
+          name="name"
           label="이름"
           placeholder="홍길동"
-          {...register('name')}
+          control={control}
         />
-        <TextInput
-          id="phone"
+        <Input
+          name="phone"
           label="전화번호"
           placeholder="010-1234-5678"
-          {...register('phone')}
+          control={control}
         />
-        <TextInput
-          id="password"
+        <Input
+          name="password"
           label="주문내역 조회 비밀번호"
           placeholder="네자리 수 숫자 비밀번호"
-          {...register('password')}
+          control={control}
         />
         <StForgetPassword>
           <IcKey />
