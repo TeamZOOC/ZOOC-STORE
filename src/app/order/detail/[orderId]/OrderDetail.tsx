@@ -1,4 +1,5 @@
-/* eslint-disable react/no-array-index-key */
+'use client';
+
 import { styled } from 'styled-components';
 
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
@@ -13,6 +14,7 @@ const OrderDetail = () => {
   return (
     <StDetailWrapper>
       <OrderItem date={date} order={products} />
+      <StHr />
       {delivery && (
         <StDetailSection>
           <p> 배송 정보</p>
@@ -24,6 +26,7 @@ const OrderDetail = () => {
           </StDeliveryInfo>
         </StDetailSection>
       )}
+      <StHr />
       {payment && (
         <StDetailSection>
           <p> 결제 정보</p>
@@ -52,64 +55,58 @@ const OrderDetail = () => {
 export default OrderDetail;
 
 const StDetailWrapper = styled.section`
-  margin-top: 2.4rem;
-  margin-bottom: 3.2rem;
+  margin-top: 2rem;
+`;
+
+const StHr = styled.hr`
+  height: 0.1rem;
+  margin: 0 0 0 2.8rem;
+
+  border: none;
+  background-color: ${({ theme }) => theme.colors.zw_brightgray};
 `;
 
 const StDetailSection = styled.div`
-  padding: 3rem;
-  border-top: 1px solid ${({ theme }) => theme.colors.zw_point};
+  padding: 3.6rem 2.8rem;
 
-  & > p:first-child {
+  & > p {
     margin-bottom: 2.4rem;
-    color: ${({ theme }) => theme.colors.zw_darkgray};
-    ${({ theme }) => theme.fonts.zw_Subhead2};
+    color: ${({ theme }) => theme.colors.zw_black};
+    ${({ theme }) => theme.fonts.zw_Subhead1};
   }
 `;
 
 const StDeliveryInfo = styled.div`
   & > p {
     display: grid;
-    grid-template-columns: 2fr 8fr;
+    grid-template-columns: 3fr 7fr;
 
     color: ${({ theme }) => theme.colors.zw_gray};
-
-    font-family: 'Pretendard';
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+    ${({ theme }) => theme.fonts.zw_Body1};
   }
   & > p:not(:last-child) {
     margin-bottom: 1.6rem;
   }
   & > p > strong {
-    color: ${({ theme }) => theme.colors.zw_gray};
-
-    font-family: 'Pretendard';
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+    color: ${({ theme }) => theme.colors.zw_black};
+    ${({ theme }) => theme.fonts.zw_Body1};
   }
 `;
 
 const StPaymentInfo = styled.div`
-  & > p,
-  & > p > strong {
+  & > p {
     display: flex;
     justify-content: space-between;
 
+    color: ${({ theme }) => theme.colors.zw_black};
+    ${({ theme }) => theme.fonts.zw_price_middle};
+  }
+  & > p > strong {
     color: ${({ theme }) => theme.colors.zw_gray};
-
-    font-family: 'Pretendard';
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+    ${({ theme }) => theme.fonts.zw_Body1};
   }
   & > p:not(:last-child) {
-    margin-bottom: 1rem;
+    margin-bottom: 0.8rem;
   }
 `;
 
@@ -117,35 +114,18 @@ const StTotalPrice = styled.div`
   display: flex;
   justify-content: space-between;
 
-  margin-top: 2.3rem;
+  margin-top: 2.6rem;
 
   & > strong {
-    color: ${({ theme }) => theme.colors.zw_gray};
-
-    font-family: 'Pretendard';
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+    color: ${({ theme }) => theme.colors.zw_black};
+    ${({ theme }) => theme.fonts.zw_Body1};
   }
   & > p {
-    color: ${({ theme }) => theme.colors.zw_gray};
-
-    font-family: 'Pretendard';
-    font-size: 1.6rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 2.2rem;
-    letter-spacing: -0.01rem;
+    color: ${({ theme }) => theme.colors.zw_black};
+    ${({ theme }) => theme.fonts.zw_price_middle};
   }
   & > p > span {
     color: ${({ theme }) => theme.colors.zw_point};
-
-    font-family: 'Pretendard';
-    font-size: 2rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 2.2rem; /* 110% */
-    letter-spacing: -0.01rem;
+    ${({ theme }) => theme.fonts.zw_price_big};
   }
 `;

@@ -31,8 +31,8 @@ export const ORDER_DETAIL: OrderDetailInfo = {
   delivery: {
     receiverName: 'ZZ',
     receiverPhone: '010',
-    address: 'tt ',
-    request: null,
+    address: 'ttsdfjsldfkwje.dfjlsdjㅇ라ㅣ너이ㅏ렂디ㅏ거지ㅓㅏㄷㄱ ',
+    request: 'dfjlsdjㅇ라ㅣ너이ㅏ렂디ㅏ거지ㅓㅏㄷㄱ',
   },
   payment: {
     productPrice: 120000,

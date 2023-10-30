@@ -42,7 +42,6 @@ const OrderItem = ({ order, date, onDetailClick }: OrderItemProps) => {
       {orderData.map((orderItem) => (
         <OrderProduct key={orderItem.id} order={orderItem} />
       ))}
-      <StHr />
     </StOrderItem>
   );
 };
@@ -50,15 +49,9 @@ const OrderItem = ({ order, date, onDetailClick }: OrderItemProps) => {
 export default OrderItem;
 
 const StOrderItem = styled.article`
-  margin-bottom: 2.8rem;
-`;
-
-const StHr = styled.hr`
-  height: 0.1rem;
-  margin: 2rem 0 0 0;
-
-  border: none;
-  background-color: ${({ theme }) => theme.colors.zw_brightgray};
+  & > :last-child {
+    padding-bottom: 3.6rem;
+  }
 `;
 
 const StOrderTitle = styled.div`

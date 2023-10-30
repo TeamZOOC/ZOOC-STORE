@@ -18,11 +18,14 @@ const OrderList = () => {
   return (
     <StOrderListWrapper>
       {orderList.map((orderInfo) => (
-        <OrderItem
-          key={orderInfo.id}
-          order={orderInfo}
-          onDetailClick={handleOrderDetail}
-        />
+        <>
+          <OrderItem
+            key={orderInfo.id}
+            order={orderInfo}
+            onDetailClick={handleOrderDetail}
+          />
+          <StHr />
+        </>
       ))}
     </StOrderListWrapper>
   );
@@ -34,5 +37,13 @@ const StOrderListWrapper = styled.section`
   display: flex;
   flex-direction: column;
 
-  margin-top: 2.4rem;
+  margin-top: 2rem;
+`;
+
+const StHr = styled.hr`
+  height: 0.1rem;
+  margin: 0 0 2.8rem 2.8rem;
+
+  border: none;
+  background-color: ${({ theme }) => theme.colors.zw_brightgray};
 `;
