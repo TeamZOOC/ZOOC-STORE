@@ -1,9 +1,10 @@
+/* eslint-disable no-unused-vars */
+
 'use client';
 
 import Link from 'next/link';
 import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
-import * as Yup from 'yup';
 
 import { Input } from '@/components/form';
 import { useToast } from '@/hooks/useToast';
@@ -15,26 +16,16 @@ interface OrderSearchFormData {
   phone: string;
   password: string;
 }
-const schema = Yup.object({
-  username: Yup.string().email().required(),
-  password: Yup.string().matches().required(),
-});
-
-type FormData = Yup.InferType<typeof schema>;
 
 const OrderSearchForm = () => {
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<OrderSearchFormData>({ resolver: yupResolver(schema) });
+  } = useForm<OrderSearchFormData>();
   const { showToast } = useToast();
 
   const onSubmit = (data: OrderSearchFormData) => {
-    if (errors.password) {
-      showToast(errors.password.message);
-    }
-
     console.log(data);
   };
 
@@ -113,8 +104,3 @@ const StForgetPassword = styled.p`
     ${({ theme }) => theme.fonts.zw_caption};
   }
 `;
-function yupResolver(
-  schema: any,
-): import('react-hook-form').Resolver<OrderSearchFormData, any> | undefined {
-  throw new Error('Function not implemented.');
-}
