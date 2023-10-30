@@ -13,7 +13,7 @@ export const ORDER_DETAIL: OrderDetailInfo = {
       pieces: 1,
       optionCategory: '기종',
       optionDetail: 'Iphone 12',
-      deliveryState: '접수진행',
+      deliveryState: '배송완료',
     },
     {
       image:

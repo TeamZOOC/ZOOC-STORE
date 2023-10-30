@@ -17,17 +17,17 @@ export interface OrderListInfo {
   data: OrderInfo[];
 }
 
-export interface OrderProductInfo {
-  image: string;
-  petName: string;
-  product: string;
-  price: number;
-  optionAdditionalPrice: number;
-  pieces: number;
-  optionCategory: string;
-  optionDetail: string;
-  deliveryState: string;
-}
+// export interface OrderProductInfo {
+//   image: string;
+//   petName: string;
+//   product: string;
+//   price: number;
+//   optionAdditionalPrice: number;
+//   pieces: number;
+//   optionCategory: string;
+//   optionDetail: string;
+//   deliveryState: string;
+// }
 
 export interface DeliveryInfo {
   receiverName: string;
@@ -44,7 +44,7 @@ export interface PaymentInfo {
 
 export interface OrderDetailInfo {
   date: Date;
-  products: OrderProductInfo[];
+  products: OrderInfo[];
   delivery: DeliveryInfo;
   payment: PaymentInfo;
 }

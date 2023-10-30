@@ -1,4 +1,4 @@
-import { OrderListInfo } from '../types/order/order';
+import { OrderListInfo } from '@/types/order';
 
 export const ORDER_LIST: OrderListInfo[] = [
   {
@@ -12,7 +12,7 @@ export const ORDER_LIST: OrderListInfo[] = [
         price: 24500,
         image: 'https://i.ibb.co/Q7gCtbJ/4.png',
         optionCategory: '기종',
-        deliveryState: '접수진행',
+        deliveryState: '배송완료',
         petName: '은시링!',
         optionDetail: 'Iphone 10',
         optionAdditionalPrice: 0,
@@ -30,7 +30,7 @@ export const ORDER_LIST: OrderListInfo[] = [
         price: 24500,
         image: 'https://i.ibb.co/Q7gCtbJ/4.png',
         optionCategory: '기종',
-        deliveryState: '접수진행',
+        deliveryState: '배송완료',
         petName: '은시링!',
         optionDetail: 'Iphone 10',
         optionAdditionalPrice: 0,
@@ -54,14 +54,14 @@ export const ORDER_LIST: OrderListInfo[] = [
         optionAdditionalPrice: 0,
       },
       {
-        id: 94,
+        id: 194,
         pieces: 1,
         product: '핸드폰 케이스',
         createdAt: new Date('2023-09-20 12:12:58.372'),
         price: 24500,
         image: 'https://i.ibb.co/Q7gCtbJ/4.png',
         optionCategory: '기종',
-        deliveryState: '접수진행',
+        deliveryState: '배송완료',
         petName: '은시링!',
         optionDetail: 'Iphone 11',
         optionAdditionalPrice: 0,
@@ -72,7 +72,7 @@ export const ORDER_LIST: OrderListInfo[] = [
     id: 66,
     data: [
       {
-        id: 66,
+        id: 626,
         pieces: 1,
         product: '핸드폰 케이스',
         createdAt: new Date('2023-09-14 12:31:47.155'),
@@ -90,7 +90,7 @@ export const ORDER_LIST: OrderListInfo[] = [
     id: 36,
     data: [
       {
-        id: 36,
+        id: 236,
         pieces: 1,
         product: '핸드폰 케이스',
         createdAt: new Date('2023-09-10 18:11:24.617'),
@@ -108,7 +108,7 @@ export const ORDER_LIST: OrderListInfo[] = [
     id: 35,
     data: [
       {
-        id: 35,
+        id: 355,
         pieces: 2,
         product: '핸드폰 케이스',
         createdAt: new Date('2023-09-09 06:23:13.016'),
@@ -121,7 +121,7 @@ export const ORDER_LIST: OrderListInfo[] = [
         optionAdditionalPrice: 0,
       },
       {
-        id: 35,
+        id: 352,
         pieces: 1,
         product: '핸드폰 케이스',
         createdAt: new Date('2023-09-09 06:23:13.016'),
@@ -134,7 +134,7 @@ export const ORDER_LIST: OrderListInfo[] = [
         optionAdditionalPrice: 0,
       },
       {
-        id: 35,
+        id: 3525,
         pieces: 1,
         product: '핸드폰 케이스',
         createdAt: new Date('2023-09-09 06:23:13.016'),
@@ -152,7 +152,7 @@ export const ORDER_LIST: OrderListInfo[] = [
     id: 34,
     data: [
       {
-        id: 34,
+        id: 3224,
         pieces: 2,
         product: '핸드폰 케이스',
         createdAt: new Date('2023-09-07 12:41:16.36'),
@@ -165,7 +165,7 @@ export const ORDER_LIST: OrderListInfo[] = [
         optionAdditionalPrice: 0,
       },
       {
-        id: 34,
+        id: 3564,
         pieces: 1,
         product: '핸드폰 케이스',
         createdAt: new Date('2023-09-07 12:41:16.36'),
@@ -178,7 +178,7 @@ export const ORDER_LIST: OrderListInfo[] = [
         optionAdditionalPrice: 0,
       },
       {
-        id: 34,
+        id: 3234,
         pieces: 1,
         product: '핸드폰 케이스',
         createdAt: new Date('2023-09-07 12:41:16.36'),

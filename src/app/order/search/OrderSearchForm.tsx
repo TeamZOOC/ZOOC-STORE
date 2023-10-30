@@ -3,13 +3,14 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import { Input } from '@/components/form';
 import { useToast } from '@/hooks/useToast';
 
-import { IcKey } from '../../../public/icons';
+import { IcKey } from '../../../../public/icons';
 
 interface OrderSearchFormData {
   name: string;
@@ -23,10 +24,12 @@ const OrderSearchForm = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<OrderSearchFormData>();
+  const router = useRouter();
   const { showToast } = useToast();
 
   const onSubmit = (data: OrderSearchFormData) => {
     console.log(data);
+    router.push(`/order/list`);
   };
 
   return (
