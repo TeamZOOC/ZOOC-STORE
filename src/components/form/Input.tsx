@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
-import { Control, Controller } from 'react-hook-form';
+import { Control, useController } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 interface TextInputProps {
@@ -8,19 +8,37 @@ interface TextInputProps {
   label: string;
   placeholder: string;
   control: Control<any>;
+  rules?: Record<string, any>;
+  pattern?: string;
+  maxLength?: number;
 }
 
-function TextInput({ name, label, placeholder, control }: TextInputProps) {
+function TextInput({
+  name,
+  label,
+  placeholder,
+  control,
+  rules,
+  pattern,
+  maxLength,
+}: TextInputProps) {
+  const { field } = useController({
+    name,
+    control,
+    defaultValue: '',
+    rules,
+  });
+
   return (
     <StTextInput>
       <label htmlFor={name}>{label}</label>
-      <Controller
-        name={name}
-        control={control}
-        defaultValue=""
-        render={({ field }) => (
-          <input id={name} placeholder={placeholder} type="text" {...field} />
-        )}
+      <input
+        type="text"
+        id={name}
+        placeholder={placeholder}
+        pattern={pattern}
+        maxLength={maxLength}
+        {...field}
       />
     </StTextInput>
   );
