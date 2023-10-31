@@ -52,6 +52,8 @@ export default ThirdStep;
 const StUnSelectedThird = styled(StUnSelected)``;
 
 const StThirdStepBox = styled(StStepBox)`
+  gap: 1.7rem;
+
   height: 23.9rem;
 `;
 
@@ -67,6 +69,8 @@ const StContent = styled.div`
     ${({ theme }) => theme.fonts.zw_Body1};
   }
   & > p {
+    margin-bottom: 0.7rem;
+
     color: ${({ theme }) => theme.colors.zw_gray};
     ${({ theme }) => theme.fonts.zw_Body1};
   }

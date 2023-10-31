@@ -6,6 +6,7 @@ import { styled } from 'styled-components';
 import { PopupButton } from '@/components/button';
 
 import { IcFirstStep } from '../../../../public/icons';
+import { ACCOUNT_NUMBER } from '../../../constants/payment';
 
 interface FirstStepProps {
   currentStep: number;
@@ -13,6 +14,12 @@ interface FirstStepProps {
 }
 
 const FirstStep = ({ currentStep, handleNextStep }: FirstStepProps) => {
+  const handleCopy = () => {
+    navigator.clipboard.writeText(ACCOUNT_NUMBER).then(() => {
+      alert('계좌번호를 복사했어요.');
+    });
+  };
+
   if (currentStep !== 1) {
     return (
       <StUnSelected>
@@ -37,6 +44,7 @@ const FirstStep = ({ currentStep, handleNextStep }: FirstStepProps) => {
       <PopupButton
         btnName="복사하기"
         handleClick={() => {
+          handleCopy();
           handleNextStep(2);
         }}
       />
