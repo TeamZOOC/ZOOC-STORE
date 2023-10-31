@@ -1,11 +1,5 @@
-import FirstStep from './FirstStep';
-import SecondStep from './SecondStep';
+import AllStep from './(step)/AllStep';
 
-const page = () => (
-  <>
-    <FirstStep />
-    <SecondStep />
-  </>
-);
+const page = () => <AllStep />;
 
 export default page;

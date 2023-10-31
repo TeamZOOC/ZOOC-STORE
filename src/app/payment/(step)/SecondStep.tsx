@@ -9,10 +9,14 @@ import {
   IcKakaoPay,
   IcSecondStep,
   IcToss
-} from '../../../public/icons';
+} from '../../../../public/icons';
 import { StStepBox, StTitle } from './FirstStep';
 
-const SecondStep = () => (
+interface SecondStepProps {
+  handleNextStep: () => void;
+}
+
+const SecondStep = ({ handleNextStep }: SecondStepProps) => (
   <StSecondStepBox>
     <StSecondTitle>
       <IcSecondStep /> 입금
@@ -30,12 +34,7 @@ const SecondStep = () => (
       </StImages>
       <p>선택 시, 해당 서비스로 이동할 수 있어요</p>
     </StSecondContent>
-    <PopupButton
-      btnName="입금을 완료했어요"
-      handleClick={() => {
-        console.log('입금을 완료했어요');
-      }}
-    />
+    <PopupButton btnName="입금을 완료했어요" handleClick={handleNextStep} />
   </StSecondStepBox>
 );
 
