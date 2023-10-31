@@ -3,6 +3,7 @@ import React from 'react';
 
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
+import RecoilRootProvider from '@/lib/RecoilRootProvider';
 
 const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -36,8 +37,10 @@ export default function RootLayout({
     >
       <body>
         <Providers>
-          <GlobalStyles />
-          {children}
+          <RecoilRootProvider>
+            <GlobalStyles />
+            {children}
+          </RecoilRootProvider>
         </Providers>
       </body>
     </html>
