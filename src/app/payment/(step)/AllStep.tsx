@@ -12,19 +12,17 @@ const AllStep = () => {
 
   return (
     <StAllStep>
-      {currentStep === 1 && (
-        <FirstStep handleNextStep={() => setCurrentStep(2)} />
-      )}
-      {currentStep === 2 && (
-        <SecondStep handleNextStep={() => setCurrentStep(3)} />
-      )}
-      {currentStep === 3 && (
-        <ThirdStep handleNextStep={() => setCurrentStep(3)} />
-      )}
+      <FirstStep currentStep={currentStep} handleNextStep={setCurrentStep} />
+      <SecondStep currentStep={currentStep} handleNextStep={setCurrentStep} />
+      <ThirdStep currentStep={currentStep} />
     </StAllStep>
   );
 };
 
 export default AllStep;
 
-const StAllStep = styled.div``;
+const StAllStep = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+`;

@@ -1,5 +1,6 @@
 'use client';
 
+import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
 
 import { PopupButton } from '@/components/button';
@@ -8,7 +9,7 @@ import { IcFirstStep } from '../../../../public/icons';
 
 interface FirstStepProps {
   currentStep: number;
-  handleNextStep: () => void;
+  handleNextStep: Dispatch<SetStateAction<number>>;
 }
 
 const FirstStep = ({ currentStep, handleNextStep }: FirstStepProps) => {
@@ -33,19 +34,25 @@ const FirstStep = ({ currentStep, handleNextStep }: FirstStepProps) => {
           <p>우리은행 1002259752313</p>
         </StInfo>
       </StContent>
-      <PopupButton btnName="복사하기" handleClick={handleNextStep} />
+      <PopupButton
+        btnName="복사하기"
+        handleClick={() => {
+          handleNextStep(2);
+        }}
+      />
     </StStepBox>
   );
 };
 
 export default FirstStep;
 
-const StUnSelected = styled.div`
+export const StUnSelected = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
 
   height: 7rem;
+  margin: 0 2.8rem;
   padding: 2.3rem 2.4rem;
   box-sizing: border-box;
 

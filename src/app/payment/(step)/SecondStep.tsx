@@ -1,5 +1,6 @@
 'use client';
 
+import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
 
 import { PopupButton } from '@/components/button';
@@ -10,35 +11,54 @@ import {
   IcSecondStep,
   IcToss
 } from '../../../../public/icons';
-import { StStepBox, StTitle } from './FirstStep';
+import { StStepBox, StTitle, StUnSelected } from './FirstStep';
 
 interface SecondStepProps {
-  handleNextStep: () => void;
+  currentStep: number;
+  handleNextStep: Dispatch<SetStateAction<number>>;
 }
 
-const SecondStep = ({ handleNextStep }: SecondStepProps) => (
-  <StSecondStepBox>
-    <StSecondTitle>
-      <IcSecondStep /> 입금
-    </StSecondTitle>
-    <StSecondContent>
-      <StInfo>
-        원하시는 금융앱에서
-        <br />
-        <span>47,000</span>원을 입금해주세요
-      </StInfo>
-      <StImages>
-        <IcToss />
-        <IcKakaoBank />
-        <IcKakaoPay />
-      </StImages>
-      <p>선택 시, 해당 서비스로 이동할 수 있어요</p>
-    </StSecondContent>
-    <PopupButton btnName="입금을 완료했어요" handleClick={handleNextStep} />
-  </StSecondStepBox>
-);
+const SecondStep = ({ currentStep, handleNextStep }: SecondStepProps) => {
+  if (currentStep !== 2) {
+    return (
+      <StUnSelectedSecond>
+        <IcSecondStep />
+        입금
+      </StUnSelectedSecond>
+    );
+  }
+
+  return (
+    <StSecondStepBox>
+      <StSecondTitle>
+        <IcSecondStep /> 입금
+      </StSecondTitle>
+      <StSecondContent>
+        <StInfo>
+          원하시는 금융앱에서
+          <br />
+          <span>47,000</span>원을 입금해주세요
+        </StInfo>
+        <StImages>
+          <IcToss />
+          <IcKakaoBank />
+          <IcKakaoPay />
+        </StImages>
+        <p>선택 시, 해당 서비스로 이동할 수 있어요</p>
+      </StSecondContent>
+      <PopupButton
+        btnName="입금을 완료했어요"
+        handleClick={() => {
+          handleNextStep(3);
+        }}
+      />
+    </StSecondStepBox>
+  );
+};
 
 export default SecondStep;
+
+const StUnSelectedSecond = styled(StUnSelected)``;
 
 const StSecondStepBox = styled(StStepBox)`
   height: 31.9rem;
