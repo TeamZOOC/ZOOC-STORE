@@ -7,7 +7,7 @@ import { PopupButton } from '@/components/button';
 import { IcFirstStep } from '../../../public/icons';
 
 const FirstStep = () => (
-  <StFirstStep>
+  <StStepBox>
     <StTitle>
       <IcFirstStep /> 계좌번호 복사
     </StTitle>
@@ -24,12 +24,12 @@ const FirstStep = () => (
         console.log('복사하기');
       }}
     />
-  </StFirstStep>
+  </StStepBox>
 );
 
 export default FirstStep;
 
-const StFirstStep = styled.div`
+export const StStepBox = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
@@ -44,7 +44,7 @@ const StFirstStep = styled.div`
   box-shadow: 0 0 1rem 0 rgba(0, 0, 0, 0.05);
 `;
 
-const StTitle = styled.h2`
+export const StTitle = styled.h2`
   display: flex;
   align-items: center;
   gap: 1rem;
