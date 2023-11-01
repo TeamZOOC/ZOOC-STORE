@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useRouter } from 'next/navigation';
 import {
   IcBack,
   IcZooc,
@@ -12,28 +13,33 @@ interface HeaderProps {
   title?: string;
   exit?: boolean;
   sideMenu?: boolean;
+  exitFunc?: () => void;
 }
 
-const Header = ({ page, title, exit, sideMenu }: HeaderProps) => (
-  <StHeader>
-    {page === 'home' ? <IcZooc /> : <IcBack />}
-    <StHeaderTitle>{title}</StHeaderTitle>
-    {sideMenu ? (
-      <StHeaderRight>
-        {exit ? (
-          <IcExit />
-        ) : (
-          <>
-            <IcOrderList />
-            <IcCart />
-          </>
-        )}
-      </StHeaderRight>
-    ) : (
-      <StEmpty />
-    )}
-  </StHeader>
-);
+const Header = ({ page, title, exit, sideMenu, exitFunc }: HeaderProps) => {
+  const router = useRouter();
+
+  return (
+    <StHeader>
+      {page === 'home' ? <IcZooc /> : <IcBack onClick={() => router.back()} />}
+      <StHeaderTitle>{title}</StHeaderTitle>
+      {sideMenu ? (
+        <StHeaderRight>
+          {exit ? (
+            <IcExit onClick={exitFunc} />
+          ) : (
+            <>
+              <IcOrderList />
+              <IcCart />
+            </>
+          )}
+        </StHeaderRight>
+      ) : (
+        <StEmpty />
+      )}
+    </StHeader>
+  );
+};
 
 export default Header;
 
