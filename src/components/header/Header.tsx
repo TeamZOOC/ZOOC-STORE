@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import {
@@ -13,7 +14,7 @@ interface HeaderProps {
   title?: string;
   exit?: boolean;
   sideMenu?: boolean;
-  exitFunc?: () => void;
+  exitFunc?: React.MouseEventHandler;
 }
 
 const Header = ({ page, title, exit, sideMenu, exitFunc }: HeaderProps) => {
