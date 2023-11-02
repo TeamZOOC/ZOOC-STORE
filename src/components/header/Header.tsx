@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import {
   IcBack,
   IcZooc,
@@ -10,34 +10,28 @@ import {
 } from '../../../public/icons';
 
 interface HeaderProps {
-  page?: string;
-  title?: string;
+  headerTitle?: string;
   exit?: boolean;
   sideMenu?: boolean;
   exitFunc?: React.MouseEventHandler;
 }
 
-const Header = ({ page, title, exit, sideMenu, exitFunc }: HeaderProps) => {
+const Header = ({ headerTitle, exit, sideMenu, exitFunc }: HeaderProps) => {
   const router = useRouter();
+  const pathname = usePathname();
 
   return (
     <StHeader>
-      {page === 'home' ? <IcZooc /> : <IcBack onClick={() => router.back()} />}
-      <StHeaderTitle>{title}</StHeaderTitle>
-      {sideMenu ? (
+      {pathname === '/' ? <IcZooc /> : <IcBack onClick={() => router.back()} />}
+      <StHeaderTitle>{headerTitle}</StHeaderTitle>
+      {sideMenu && (
         <StHeaderRight>
-          {exit ? (
-            <IcExit onClick={exitFunc} />
-          ) : (
-            <>
-              <IcOrderList />
-              <IcCart />
-            </>
-          )}
+          <IcOrderList />
+          <IcCart />
         </StHeaderRight>
-      ) : (
-        <StEmpty />
       )}
+      {exit && <IcExit onClick={exitFunc} />}
+      {!sideMenu && !exit && <StEmpty />}
     </StHeader>
   );
 };
@@ -51,7 +45,7 @@ const StHeader = styled.header`
 
   padding: 1.6rem 2.8rem;
 
-  background-color: ${({ theme }) => theme.colors.zw_background};
+  background-color: ${({ theme }) => theme.colors.zw_white};
 `;
 
 const StHeaderTitle = styled.h1`
