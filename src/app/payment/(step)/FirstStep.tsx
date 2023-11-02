@@ -70,10 +70,10 @@ export const StUnSelected = styled.div`
   ${({ theme }) => theme.fonts.zw_Subhead2};
 
   & > svg > path {
-    fill: #bfbfbf;
+    fill: ${({ theme }) => theme.colors.zw_lightgray};
   }
   & > svg > circle {
-    stroke: #bfbfbf;
+    stroke: ${({ theme }) => theme.colors.zw_lightgray};
   }
 `;
 
