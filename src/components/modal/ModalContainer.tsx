@@ -8,16 +8,17 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { useRecoilValue } from 'recoil';
 
-import { modalListState } from '@/recoil/modal/atom';
+import { modalListState, ModalType } from '@/recoil/modal/atom';
 
 import ImageValidateModal from './ImageValidateModal';
 import ModalBackground from './ModalBackground';
 import QuitModal from './QuitModal';
 
-const MODAL_COMPONENTS: Record<string, (props: any) => React.ReactElement> = {
-  quit: () => <QuitModal />,
-  imageValidate: (props) => <ImageValidateModal {...props} />,
-};
+const MODAL_COMPONENTS: Record<ModalType, (props: any) => React.ReactElement> =
+  {
+    quit: () => <QuitModal />,
+    imageValidate: (props) => <ImageValidateModal {...props} />,
+  };
 
 const ModalContainer = () => {
   const modalList = useRecoilValue(modalListState);

@@ -1,6 +1,8 @@
 import { atom, atomFamily } from 'recoil';
 
-export type ModalType = string;
+const MODAL_TYPE = ['quit', 'imageValidate'] as const;
+
+export type ModalType = (typeof MODAL_TYPE)[number];
 export type ModalProps = Record<string, unknown> | null;
 export type Modal = {
   id: ModalType;
