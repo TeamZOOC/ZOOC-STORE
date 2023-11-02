@@ -4,6 +4,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { styled } from 'styled-components';
+import Image from 'next/image';
+import { CARUSEL_LIST } from '@/mocks/caruselData';
 
 const HomeCarusel = () => {
   const settings = {
@@ -14,9 +16,11 @@ const HomeCarusel = () => {
   };
   return (
     <Slider {...settings}>
-      <StHomeCaruselItem1>1</StHomeCaruselItem1>
-      <StHomeCaruselItem2>2</StHomeCaruselItem2>
-      <StHomeCaruselItem3>3</StHomeCaruselItem3>
+      {CARUSEL_LIST.map(({ id, imgSrc, imgAlt }) => (
+        <StHomeCaruselItem key={id}>
+          <Image src={imgSrc} alt={imgAlt} fill priority />
+        </StHomeCaruselItem>
+      ))}
     </Slider>
   );
 };
@@ -24,16 +28,7 @@ const HomeCarusel = () => {
 export default HomeCarusel;
 
 const StHomeCaruselItem = styled.div`
-  width: 100%;
-  height: 49rem;
-`;
+  position: relative;
 
-const StHomeCaruselItem1 = styled(StHomeCaruselItem)`
-  background-color: #eaeaea;
-`;
-const StHomeCaruselItem2 = styled(StHomeCaruselItem)`
-  background-color: black;
-`;
-const StHomeCaruselItem3 = styled(StHomeCaruselItem)`
-  background-color: blue;
+  aspect-ratio: 1/1.53;
 `;
