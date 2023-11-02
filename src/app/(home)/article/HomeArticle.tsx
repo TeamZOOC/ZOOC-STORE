@@ -1,13 +1,21 @@
 'use client';
 
-import { ArticleInfo } from '@/types/article';
 import { styled } from 'styled-components';
+import Image from 'next/image';
+import { ImageArticle } from '../../../../public/images';
+
+interface ArticleInfo {
+  articleTitle: string;
+  articleDesc: string;
+}
 
 const HomeArticle = ({ article }: { article: ArticleInfo }) => {
   const { articleTitle, articleDesc } = article;
   return (
     <StHomeArticle>
-      <StHomeArticleImage />
+      <StHomeArticleImage>
+        <Image src={ImageArticle} alt="아티클" fill />
+      </StHomeArticleImage>
       <StHomeArticleTitle>{articleTitle}</StHomeArticleTitle>
       <StHomeArticleDesc>{articleDesc}</StHomeArticleDesc>
     </StHomeArticle>
@@ -21,11 +29,11 @@ const StHomeArticle = styled.section`
 `;
 
 const StHomeArticleImage = styled.div`
-  width: 100%;
-  height: 20rem;
+  position: relative;
+
   margin-bottom: 2rem;
 
-  background-color: #eaeaea;
+  aspect-ratio: 1.5/1;
 `;
 
 const StHomeArticleTitle = styled.p`
