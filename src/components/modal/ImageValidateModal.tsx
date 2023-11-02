@@ -1,41 +1,35 @@
-import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
-import { useModal } from '@/hooks/modal';
+interface ImageValidateModalProps {
+  title: string;
+  content: string;
+  handleReset: () => void;
+  handleCancel: () => void;
+}
 
-const QuitModal = () => {
-  const { closeModal } = useModal();
-  const router = useRouter();
+const ImageValidateModal = ({
+  title,
+  content,
+  handleReset,
+  handleCancel,
+}: ImageValidateModalProps) => (
+  <StImageValidateModal>
+    <strong>{title}</strong>
+    <p>{content}</p>
+    <StButtonWrapper>
+      <StCancelButton type="button" onClick={handleCancel}>
+        취소
+      </StCancelButton>
+      <StResetButton type="button" onClick={handleReset}>
+        다시 고르기
+      </StResetButton>
+    </StButtonWrapper>
+  </StImageValidateModal>
+);
 
-  return (
-    <StQuitModal>
-      <strong>구매를 그만두시나요?</strong>
-      <p>지금 떠나면 구매 과정이 저장되지 않아요</p>
-      <StButtonWrapper>
-        <StQuitButton
-          type="button"
-          onClick={() => {
-            router.push('/home');
-          }}
-        >
-          그만두기
-        </StQuitButton>
-        <StCancelButton
-          type="button"
-          onClick={() => {
-            closeModal('quit');
-          }}
-        >
-          취소하기
-        </StCancelButton>
-      </StButtonWrapper>
-    </StQuitModal>
-  );
-};
+export default ImageValidateModal;
 
-export default QuitModal;
-
-const StQuitModal = styled.div`
+const StImageValidateModal = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,7 +72,7 @@ const StButtonWrapper = styled.div`
   }
 `;
 
-const StQuitButton = styled.button`
+const StResetButton = styled.button`
   width: 55%;
 
   background: ${({ theme }) => theme.colors.zw_black};

@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { useRecoilCallback } from 'recoil';
 
-import { Modal, ModalParams, ModalType } from '@/recoil/modal/atom';
+import { Modal, ModalProps, ModalType } from '@/recoil/modal/atom';
 import { modalSelector } from '@/recoil/modal/selector';
 
 const useModal = () => {
@@ -22,11 +22,11 @@ const useModal = () => {
   );
 
   const handleOpenModal = useCallback(
-    (id: ModalType, params: ModalParams = null) => {
+    (id: ModalType, props: ModalProps = null) => {
       const value = {
         id,
         isOpen: true,
-        params,
+        props,
       };
       setModal(id, value);
     },

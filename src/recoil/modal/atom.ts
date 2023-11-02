@@ -1,11 +1,11 @@
 import { atom, atomFamily } from 'recoil';
 
 export type ModalType = string;
-export type ModalParams = Record<string, unknown> | null;
+export type ModalProps = Record<string, unknown> | null;
 export type Modal = {
   id: ModalType;
   isOpen: boolean;
-  params: ModalParams;
+  props?: ModalProps;
 };
 
 export const modalState = atomFamily<Modal, ModalType>({
@@ -13,11 +13,11 @@ export const modalState = atomFamily<Modal, ModalType>({
   default: (id) => ({
     id,
     isOpen: false,
-    params: null,
+    props: null,
   }),
 });
 
-export const modalListState = atom<ModalType[]>({
+export const modalListState = atom<Modal[]>({
   key: 'modalListState',
   default: [],
 });
