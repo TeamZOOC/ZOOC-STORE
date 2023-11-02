@@ -1,9 +1,9 @@
 import localFont from 'next/font/local';
 import React from 'react';
 
+import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
-import RecoilRootProvider from '@/lib/RecoilRootProvider';
 
 const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -40,6 +40,7 @@ export default function RootLayout({
           <RecoilRootProvider>
             <GlobalStyles />
             {children}
+            <div id="portal" />
           </RecoilRootProvider>
         </Providers>
       </body>

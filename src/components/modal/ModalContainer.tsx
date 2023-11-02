@@ -8,11 +8,10 @@ import { useRecoilValue } from 'recoil';
 import { modalListState } from '@/recoil/modal/atom';
 
 import ModalBackground from './ModalBackground';
-
-// import QuitModal from './QuitModal';
+import QuitModal from './QuitModal';
 
 const MODAL_COMPONENTS: Record<string, () => React.ReactElement> = {
-  // quit: QuitModal,
+  quit: QuitModal,
 };
 
 const ModalContainer = () => {
