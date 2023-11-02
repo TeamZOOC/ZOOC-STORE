@@ -6,6 +6,9 @@ import IcSecondStep from './ic_second_step.svg';
 import IcThirdStep from './ic_third_step.svg';
 import IcToss from './ic_toss.svg';
 import IcZooc from './ic_zooc.svg';
+import IcOrderList from './ic_orderlist.svg';
+import IcCart from './ic_cart.svg';
+import IcExit from './ic_exit.svg';
 
 export {
   IcBack,
@@ -16,4 +19,7 @@ export {
   IcKakaoBank,
   IcKakaoPay,
   IcToss,
+  IcOrderList, 
+  IcCart, 
+  IcExit,
 };
