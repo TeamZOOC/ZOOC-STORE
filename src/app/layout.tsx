@@ -1,6 +1,7 @@
 import localFont from 'next/font/local';
 import React from 'react';
 
+import ModalContainer from '@/components/modal/ModalContainer';
 import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
@@ -41,6 +42,7 @@ export default function RootLayout({
             <GlobalStyles />
             {children}
             <div id="portal" />
+            <ModalContainer />
           </RecoilRootProvider>
         </Providers>
       </body>
