@@ -17,7 +17,7 @@ const StPopupButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  width: 27.1rem;
+  width: 100%;
   height: 5.1rem;
 
   border-radius: 0.2rem;
