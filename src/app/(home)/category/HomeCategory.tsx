@@ -8,7 +8,9 @@ const HomeCategory = () => (
   <StHomeCategory>
     <StHomeCategoryTop>
       <h2>카테고리</h2>
-      <span>상품 전체보기</span>
+      <StHomeCategoryViewAllButton type="button">
+        상품 전체보기
+      </StHomeCategoryViewAllButton>
     </StHomeCategoryTop>
     <StHomeCatoryList>
       {CATEGORY_LIST.map(({ categoryName, id }) => (
@@ -37,11 +39,11 @@ const StHomeCategoryTop = styled.div`
     color: ${({ theme }) => theme.colors.zw_black};
     ${({ theme }) => theme.fonts.zw_Subhead1};
   }
+`;
 
-  & > span {
-    color: ${({ theme }) => theme.colors.zw_gray};
-    ${({ theme }) => theme.fonts.zw_Body2};
-  }
+const StHomeCategoryViewAllButton = styled.button`
+  color: ${({ theme }) => theme.colors.zw_gray};
+  ${({ theme }) => theme.fonts.zw_Body2};
 `;
 
 const StHomeCatoryList = styled.div`

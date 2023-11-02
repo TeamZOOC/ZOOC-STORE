@@ -7,7 +7,7 @@ interface HomeCategoryItemProps {
 }
 
 const HomeCategoryItem = ({ categoryName }: HomeCategoryItemProps) => (
-  <StHomeCategoryItem>
+  <StHomeCategoryItem type="button">
     <StHomeCategoryMetaItemBox />
     <span>{categoryName}</span>
   </StHomeCategoryItem>
@@ -15,7 +15,7 @@ const HomeCategoryItem = ({ categoryName }: HomeCategoryItemProps) => (
 
 export default HomeCategoryItem;
 
-const StHomeCategoryItem = styled.div`
+const StHomeCategoryItem = styled.button`
   display: flex;
   flex-direction: column;
   justify-content: center;
