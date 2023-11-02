@@ -1,6 +1,4 @@
-import { CategoryListInfo } from '@/types/category';
-
-export const CATEGORY_LIST: CategoryListInfo[] = [
+export const CATEGORY_LIST = [
   {
     id: 1,
     categoryName: '악세서리',
