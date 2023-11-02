@@ -1,1 +1,1 @@
-export { default as FooterButton } from './FooterButton';
+export { default as BottomButton } from './BottomButton';
