@@ -9,7 +9,6 @@ import { createPortal } from 'react-dom';
 import { useRecoilValue } from 'recoil';
 
 import { modalListState } from '@/recoil/modal/atom';
-import { modalSelector } from '@/recoil/modal/selector';
 
 import ImageValidateModal from './ImageValidateModal';
 import ModalBackground from './ModalBackground';
@@ -32,7 +31,7 @@ const ModalContainer = () => {
     const ModalComponent = MODAL_COMPONENTS[id];
     return (
       <ModalBackground key={id}>
-        <ModalComponent key={id} {...props} />
+        <ModalComponent {...props} />
       </ModalBackground>
     );
   });

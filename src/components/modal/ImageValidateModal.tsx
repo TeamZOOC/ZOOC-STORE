@@ -1,3 +1,4 @@
+import React from 'react';
 import { styled } from 'styled-components';
 
 interface ImageValidateModalProps {
@@ -27,7 +28,7 @@ const ImageValidateModal = ({
   </StImageValidateModal>
 );
 
-export default ImageValidateModal;
+export default React.memo(ImageValidateModal);
 
 const StImageValidateModal = styled.div`
   display: flex;

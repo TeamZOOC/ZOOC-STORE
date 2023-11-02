@@ -21,7 +21,7 @@ const useModal = () => {
     [],
   );
 
-  const handleOpenModal = useCallback(
+  const openModal = useCallback(
     (id: ModalType, props: ModalProps = null) => {
       const value = {
         id,
@@ -33,7 +33,7 @@ const useModal = () => {
     [setModal],
   );
 
-  return { openModal: handleOpenModal, closeModal };
+  return { openModal, closeModal };
 };
 
 export default useModal;

@@ -9,7 +9,7 @@ const ModalBackground = ({ children }: ModalBackgroundProps) => (
   <StModalBackground>{children}</StModalBackground>
 );
 
-export default ModalBackground;
+export default React.memo(ModalBackground);
 
 const StModalBackground = styled.div`
   position: absolute;

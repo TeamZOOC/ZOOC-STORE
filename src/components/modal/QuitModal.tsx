@@ -1,4 +1,5 @@
 import { useRouter } from 'next/navigation';
+import React, { useCallback } from 'react';
 import { styled } from 'styled-components';
 
 import { useModal } from '@/hooks/modal';
@@ -7,25 +8,23 @@ const QuitModal = () => {
   const { closeModal } = useModal();
   const router = useRouter();
 
+  const handleQuit = useCallback(() => {
+    router.push('/home');
+  }, [router]);
+
+  const handleCancel = useCallback(() => {
+    closeModal('quit');
+  }, [closeModal]);
+
   return (
     <StQuitModal>
       <strong>구매를 그만두시나요?</strong>
       <p>지금 떠나면 구매 과정이 저장되지 않아요</p>
       <StButtonWrapper>
-        <StQuitButton
-          type="button"
-          onClick={() => {
-            router.push('/home');
-          }}
-        >
+        <StQuitButton type="button" onClick={handleQuit}>
           그만두기
         </StQuitButton>
-        <StCancelButton
-          type="button"
-          onClick={() => {
-            closeModal('quit');
-          }}
-        >
+        <StCancelButton type="button" onClick={handleCancel}>
           취소하기
         </StCancelButton>
       </StButtonWrapper>
@@ -33,7 +32,7 @@ const QuitModal = () => {
   );
 };
 
-export default QuitModal;
+export default React.memo(QuitModal);
 
 const StQuitModal = styled.div`
   display: flex;
