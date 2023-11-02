@@ -1,14 +1,30 @@
 'use client';
 
-import { ProductInfo } from '@/types/product';
+import Image, { StaticImageData } from 'next/image';
 import { styled } from 'styled-components';
 
+interface ProductInfo {
+  newProduct: boolean;
+  imgSrc: StaticImageData;
+  imgAlt: string;
+  productTitle: string;
+  productSalePercent?: string;
+  productPrice: string;
+}
+
 const HomeProductItem = ({ product }: { product: ProductInfo }) => {
-  const { newProduct, productTitle, productSalePercent, productPrice } =
-    product;
+  const {
+    newProduct,
+    imgSrc,
+    imgAlt,
+    productTitle,
+    productSalePercent,
+    productPrice,
+  } = product;
   return (
     <StHomeProductItem>
       <StHomeProductImage>
+        <Image src={imgSrc} alt={imgAlt} fill />
         {newProduct && <StHomeSaleTicker>NEW</StHomeSaleTicker>}
       </StHomeProductImage>
       <StHomeProductTitle>{productTitle}</StHomeProductTitle>
@@ -26,15 +42,15 @@ const HomeProductItem = ({ product }: { product: ProductInfo }) => {
 
 export default HomeProductItem;
 
-const StHomeProductItem = styled.div`
+const StHomeProductItem = styled.button`
   width: 100%;
+  aspect-ratio: 1/1.35;
 `;
 
 const StHomeProductImage = styled.div`
   position: relative;
 
-  width: 100%;
-  height: 13.5rem;
+  aspect-ratio: 1/1.35;
 
   background-color: #eaeaea;
 `;
@@ -61,6 +77,8 @@ const StHomeProductTitle = styled.p`
 
   color: ${({ theme }) => theme.colors.zw_black};
   ${({ theme }) => theme.fonts.zw_Subhead4};
+
+  text-align: left;
 `;
 
 const StHomeProductPriceBox = styled.div`
