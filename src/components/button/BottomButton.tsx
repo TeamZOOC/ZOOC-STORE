@@ -14,12 +14,22 @@ const BottomButton = ({
   disabled,
   activeFunc,
 }: BottomButtonProps) => (
-  <StBottomButton type={btnType} disabled={disabled} onClick={activeFunc}>
-    {btnName}
-  </StBottomButton>
+  <StBottomButtonWrapper>
+    <StBottomButton type={btnType} disabled={disabled} onClick={activeFunc}>
+      {btnName}
+    </StBottomButton>
+  </StBottomButtonWrapper>
 );
 
 export default BottomButton;
+
+const StBottomButtonWrapper = styled.div`
+  position: absolute;
+  bottom: 0;
+
+  width: 100vw;
+  max-width: 43rem;
+`;
 
 const StBottomButton = styled.button`
   width: 100%;
