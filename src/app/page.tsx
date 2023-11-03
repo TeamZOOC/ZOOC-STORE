@@ -1,6 +1,7 @@
+import { Header } from '@/components/header';
 import { MainLayout } from '@/components/layout';
 import { ARTICLE_LIST } from '@/mocks/articleData';
-import { Header } from '@/components/header';
+
 import { HomeArticle, HomeCategory, HomeProduct } from './(home)';
 import HomeCarusel from './(home)/carusel/HomeCarusel';
 

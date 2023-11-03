@@ -25,6 +25,9 @@ module.exports = {
     return config;
   },
   compiler: {
-    styledComponents: true,
+    styledComponents: {
+      displayName: true,
+      ssr: true,
+    },
   },
 };
