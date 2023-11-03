@@ -5,9 +5,7 @@
     "airbnb/base",
     "eslint-config-prettier"
   ],
-  "plugins": [
-    "eslint-plugin-prettier"
-  ],
+  "plugins": ["eslint-plugin-prettier"],
   "rules": {
     "@typescript-eslint/no-use-before-define": "off",
     "import/extensions": [
@@ -24,9 +22,7 @@
     "jsx-a11y/label-has-associated-control": [
       2,
       {
-        "labelAttributes": [
-          "htmlFor"
-        ]
+        "labelAttributes": ["htmlFor"]
       }
     ],
     "no-alert": "off",
@@ -43,23 +39,18 @@
     "react/function-component-definition": [
       2,
       {
-        "namedComponents": [
-          "arrow-function",
-          "function-declaration"
-        ]
+        "namedComponents": ["arrow-function", "function-declaration"]
       }
     ],
     // 경고표시, 파일 확장자를 .ts나 .tsx 모두 허용함
     "react/jsx-filename-extension": [
       "warn",
       {
-        "extensions": [
-          ".ts",
-          ".tsx"
-        ]
+        "extensions": [".ts", ".tsx"]
       }
     ],
     "react/react-in-jsx-scope": "off", // react 17부턴 import 안해도돼서 기능 끔
-    "react/require-default-props": "off"
+    "react/require-default-props": "off",
+    "react/jsx-props-no-spreading": "off"
   }
 }
