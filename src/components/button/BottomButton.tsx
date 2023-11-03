@@ -26,13 +26,17 @@ export default BottomButton;
 const StBottomButtonWrapper = styled.div`
   position: absolute;
   bottom: 0;
+  left: 0;
 
-  width: 100vw;
-  max-width: 43rem;
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
 `;
 
 const StBottomButton = styled.button`
   width: 100%;
+  max-width: 43rem;
   height: 7.7rem;
 
   color: ${({ theme }) => theme.colors.zw_white};
