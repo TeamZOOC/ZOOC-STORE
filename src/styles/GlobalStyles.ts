@@ -14,7 +14,7 @@ ${reset}
   margin: 0 auto;
   overflow-y: auto;
   
-  background-color: ${({ theme }) => theme.colors.zw_white};
+  background-color: ${({ theme }) => theme.colors.zw_background};
   font-size: 62.5%;
 
   -ms-overflow-style: none; /* 인터넷 익스플로러 */
