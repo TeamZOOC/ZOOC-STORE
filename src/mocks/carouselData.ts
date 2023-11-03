@@ -1,19 +1,19 @@
-import { ImageCarusel } from '../../public/images';
+import { ImageCarousel } from '../../public/images';
 
-export const CARUSEL_LIST = [
+export const CAROUSEL_LIST = [
   {
     id: 1,
-    imgSrc: ImageCarusel,
+    imgSrc: ImageCarousel,
     imgAlt: '캐러셀 이미지',
   },
   {
     id: 1,
-    imgSrc: ImageCarusel,
+    imgSrc: ImageCarousel,
     imgAlt: '캐러셀 이미지',
   },
   {
     id: 1,
-    imgSrc: ImageCarusel,
+    imgSrc: ImageCarousel,
     imgAlt: '캐러셀 이미지',
   },
 ];

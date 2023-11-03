@@ -5,7 +5,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { styled } from 'styled-components';
 import Image from 'next/image';
-import { CARUSEL_LIST } from '@/mocks/caruselData';
+import { CAROUSEL_LIST } from '@/mocks/carouselData';
 
 const HomeCarusel = () => {
   const settings = {
@@ -16,7 +16,7 @@ const HomeCarusel = () => {
   };
   return (
     <Slider {...settings}>
-      {CARUSEL_LIST.map(({ id, imgSrc, imgAlt }) => (
+      {CAROUSEL_LIST.map(({ id, imgSrc, imgAlt }) => (
         <StHomeCaruselItem key={id}>
           <Image src={imgSrc} alt={imgAlt} fill priority />
         </StHomeCaruselItem>
