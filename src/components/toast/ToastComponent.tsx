@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { css, keyframes, styled } from 'styled-components';
 
 import { useToast } from '@/hooks/toast';
@@ -18,21 +18,20 @@ const ToastComponent = ({ id, message }: ToastComponentProps) => {
     return () => clearTimeout(timeout);
   }, []);
 
+  const handleAnimationEnd = useCallback(() => {
+    hideToast(id);
+  }, [id, hideToast]);
+
   return (
     <StToastWrapper>
-      <StToast
-        $fadeout={fadeOutActive}
-        onAnimationEnd={() => {
-          hideToast(id);
-        }}
-      >
+      <StToast $fadeout={fadeOutActive} onAnimationEnd={handleAnimationEnd}>
         {message}
       </StToast>
     </StToastWrapper>
   );
 };
 
-export default ToastComponent;
+export default React.memo(ToastComponent);
 
 const StToastWrapper = styled.div`
   position: absolute;
