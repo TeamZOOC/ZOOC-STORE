@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import styled from 'styled-components';
 import { usePathname, useRouter } from 'next/navigation';
@@ -45,7 +47,7 @@ const StHeader = styled.header`
 
   padding: 1.6rem 2.8rem;
 
-  background-color: ${({ theme }) => theme.colors.zw_white};
+  background-color: ${({ theme }) => theme.colors.zw_background};
 `;
 
 const StHeaderTitle = styled.h1`
