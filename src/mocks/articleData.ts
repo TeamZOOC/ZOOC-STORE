@@ -1,6 +1,4 @@
-import { ArticleInfo } from '@/types/article';
-
-export const ARTICLE_LIST: ArticleInfo[] = [
+export const ARTICLE_LIST = [
   {
     articleTitle: '우리집 강아지의 어린 시절 되살리기',
     articleDesc:
