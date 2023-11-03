@@ -19,18 +19,31 @@ const ToastComponent = ({ id, message }: ToastComponentProps) => {
   }, []);
 
   return (
-    <StToast
-      $fadeout={fadeOutActive}
-      onAnimationEnd={() => {
-        hideToast(id);
-      }}
-    >
-      {message}
-    </StToast>
+    <StToastWrapper>
+      <StToast
+        $fadeout={fadeOutActive}
+        onAnimationEnd={() => {
+          hideToast(id);
+        }}
+      >
+        {message}
+      </StToast>
+    </StToastWrapper>
   );
 };
 
 export default ToastComponent;
+
+const StToastWrapper = styled.div`
+  position: absolute;
+  bottom: 9.7rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+`;
 
 const fadeOutAnimataion = keyframes`
   from {
@@ -42,9 +55,6 @@ const fadeOutAnimataion = keyframes`
 `;
 
 const StToast = styled.div<{ $fadeout: boolean }>`
-  position: absolute;
-  bottom: 2rem;
-
   display: flex;
   justify-content: center;
   align-items: center;
