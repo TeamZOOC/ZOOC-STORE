@@ -17,6 +17,6 @@ export const toastState = atomFamily<Toast, ToastType>({
 });
 
 export const toastListState = atom<Toast[]>({
-  key: 'toastStateState',
+  key: 'toastListState',
   default: [],
 });
