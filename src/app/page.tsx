@@ -7,9 +7,9 @@ import HomeCarusel from './(home)/carusel/HomeCarusel';
 
 const page = () => (
   <>
-    <Header sideMenu />;
+    <Header sideMenu />
+    <HomeCarusel />
     <MainLayout>
-      <HomeCarusel />
       <HomeCategory />
       <HomeArticle article={ARTICLE_LIST[0]} />
       <HomeProduct />
