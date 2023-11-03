@@ -29,12 +29,12 @@ const useToast = () => {
   const showToast = useCallback(
     (id: ToastType) => {
       setToast(id);
-      setTimeout(() => hideToast(id), 1500);
+      setTimeout(() => hideToast(id), 2000);
     },
     [hideToast, setToast],
   );
 
-  return { showToast };
+  return { showToast, hideToast };
 };
 
 export default useToast;
