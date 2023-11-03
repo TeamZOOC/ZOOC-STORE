@@ -29,9 +29,8 @@ const useToast = () => {
   const showToast = useCallback(
     (id: ToastType) => {
       setToast(id);
-      setTimeout(() => hideToast(id), 2000);
     },
-    [hideToast, setToast],
+    [setToast],
   );
 
   return { showToast, hideToast };

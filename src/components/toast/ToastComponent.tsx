@@ -14,7 +14,7 @@ const ToastComponent = ({ id, message }: ToastComponentProps) => {
   const { hideToast } = useToast();
 
   useEffect(() => {
-    const timeout = setTimeout(() => setFadeOutActive(true), 1800);
+    const timeout = setTimeout(() => setFadeOutActive(true), 2000);
     return () => clearTimeout(timeout);
   }, []);
 
