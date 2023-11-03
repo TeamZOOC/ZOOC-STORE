@@ -19,7 +19,7 @@ export {
   IcKakaoBank,
   IcKakaoPay,
   IcToss,
-  IcOrderList, 
-  IcCart, 
+  IcOrderList,
+  IcCart,
   IcExit,
 };
