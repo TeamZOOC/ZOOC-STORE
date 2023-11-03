@@ -3,7 +3,11 @@
 import React, { ReactNode } from 'react';
 import { styled } from 'styled-components';
 
-const MainLayout = ({ children }: { children: ReactNode }) => (
+interface MainLayoutProps {
+  children: ReactNode;
+}
+
+const MainLayout = ({ children }: MainLayoutProps) => (
   <StMainLayout>{children}</StMainLayout>
 );
 
