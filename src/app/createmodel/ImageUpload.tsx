@@ -5,9 +5,10 @@ import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
+import { useModal } from '@/hooks/modal';
 import {
   imageThumbnailsState,
-  uploadImagesState,
+  uploadImagesState
 } from '@/recoil/createmodel/atom';
 
 import ImageConfirm from './ImageConfirm';
@@ -19,6 +20,7 @@ const ImageUpload = () => {
   const [imageThumbnails, setImageThumbnails] =
     useRecoilState<string[]>(imageThumbnailsState);
   const imageInputRef = useRef<HTMLInputElement>(null);
+  const { openModal, closeModal } = useModal();
 
   const handleUploadImage = () => {
     imageInputRef.current?.click();
@@ -56,9 +58,34 @@ const ImageUpload = () => {
     }
   };
 
+  const handleOpenValidateModal = (modalTitle: string) => {
+    openModal('imageValidate', {
+      title: modalTitle,
+      content: '8장 이상 15장 미만의 사진을 선택해주세요',
+      handleReset: () => {
+        console.log('다시 고르기');
+      },
+      handleCancel: () => {
+        closeModal('imageValidate');
+      },
+    });
+  };
+
+  const handleImageValidate = (imageLength: number) => {
+    if (imageLength < 8 || imageLength >= 16) {
+      const title =
+        uploadImages.length < 8
+          ? '생성에 필요한 사진이 부족해요'
+          : '현재 고른 사진이 너무 많아요';
+      handleOpenValidateModal(title);
+    } else {
+      createThumbnails();
+    }
+  };
+
   useEffect(() => {
     if (uploadImages.length > 0) {
-      createThumbnails();
+      handleImageValidate(uploadImages.length);
     }
   }, [uploadImages]);
 
