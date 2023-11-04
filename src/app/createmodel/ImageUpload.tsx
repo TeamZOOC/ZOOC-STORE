@@ -1,16 +1,23 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
+import {
+  imageThumbnailsState,
+  uploadImagesState,
+} from '@/recoil/createmodel/atom';
 
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
 
 const ImageUpload = () => {
-  const [uploadImages, setUploadImages] = useState<File[]>([]);
-  const [imageThumbnails, setImageThumbnails] = useState<string[]>([]);
+  const [uploadImages, setUploadImages] =
+    useRecoilState<File[]>(uploadImagesState);
+  const [imageThumbnails, setImageThumbnails] =
+    useRecoilState<string[]>(imageThumbnailsState);
   const imageInputRef = useRef<HTMLInputElement>(null);
 
   const handleUploadImage = () => {
@@ -58,11 +65,7 @@ const ImageUpload = () => {
   return (
     <>
       <StImageUpload>
-        {imageThumbnails.length === 0 ? (
-          <ImageGuide />
-        ) : (
-          <ImageConfirm imageThumbnails={imageThumbnails} />
-        )}
+        {imageThumbnails.length === 0 ? <ImageGuide /> : <ImageConfirm />}
         <StImageInput
           type="file"
           multiple
