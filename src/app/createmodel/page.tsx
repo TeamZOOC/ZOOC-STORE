@@ -5,7 +5,7 @@ import ImageUpload from './ImageUpload';
 
 const page = () => (
   <>
-    <Header headerTitle="이미지 업로드" exit />
+    <Header headerTitle="AI 모델 생성" exit />
     <MainLayout>
       <ImageUpload />
     </MainLayout>

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import Image from 'next/image';
 import { styled } from 'styled-components';
 
@@ -8,7 +7,7 @@ import {
   ImageCorrect3,
   ImageWrong1,
   ImageWrong2,
-  ImageWrong3
+  ImageWrong3,
 } from '../../../public/images';
 
 const ImageGuide = () => (
