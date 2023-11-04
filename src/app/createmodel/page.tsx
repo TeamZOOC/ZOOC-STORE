@@ -5,7 +5,7 @@ import ImageUpload from './ImageUpload';
 
 const page = () => (
   <>
-    <Header headerTitle="이미지 업로드" exit />;
+    <Header headerTitle="이미지 업로드" exit />
     <MainLayout>
       <ImageUpload />
     </MainLayout>

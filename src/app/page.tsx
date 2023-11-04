@@ -7,7 +7,7 @@ import HomeCarusel from './(home)/carusel/HomeCarusel';
 
 const page = () => (
   <>
-    <Header sideMenu />;
+    <Header sideMenu />
     <MainLayout>
       <HomeCarusel />
       <HomeCategory />
