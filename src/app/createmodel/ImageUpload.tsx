@@ -8,7 +8,7 @@ import { BottomButton } from '@/components/button';
 import { useModal } from '@/hooks/modal';
 import {
   imageThumbnailsState,
-  uploadImagesState
+  uploadImagesState,
 } from '@/recoil/createmodel/atom';
 
 import ImageConfirm from './ImageConfirm';
@@ -54,8 +54,12 @@ const ImageUpload = () => {
     if (files && files.length > 0) {
       const selectFiles = Array.from(files);
       setUploadImages(selectFiles);
-      console.log(selectFiles);
     }
+  };
+
+  const handleResetImage = () => {
+    setUploadImages([]);
+    setImageThumbnails([]);
   };
 
   const handleOpenValidateModal = (modalTitle: string) => {
@@ -63,9 +67,12 @@ const ImageUpload = () => {
       title: modalTitle,
       content: '8장 이상 15장 미만의 사진을 선택해주세요',
       handleReset: () => {
-        console.log('다시 고르기');
+        handleResetImage();
+        handleUploadImage();
+        closeModal('imageValidate');
       },
       handleCancel: () => {
+        handleResetImage();
         closeModal('imageValidate');
       },
     });
