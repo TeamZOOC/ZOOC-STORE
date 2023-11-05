@@ -24,7 +24,7 @@ const OrderList = () => {
             order={orderInfo}
             onDetailClick={handleOrderDetail}
           />
-          <StHr />
+          {orderList.indexOf(orderInfo) !== orderList.length - 1 && <StHr />}
         </>
       ))}
     </StOrderListWrapper>
