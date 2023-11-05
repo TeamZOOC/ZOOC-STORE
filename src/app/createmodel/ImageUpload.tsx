@@ -97,24 +97,38 @@ const ImageUpload = () => {
   }, [uploadImages]);
 
   return (
-    <>
-      <StImageUpload>
-        {imageThumbnails.length === 0 ? <ImageGuide /> : <ImageConfirm />}
-        <StImageInput
-          type="file"
-          multiple
-          ref={imageInputRef}
-          onChange={handleImageChange}
-          accept="image/*"
-        />
-      </StImageUpload>
-      <BottomButton
-        btnType="button"
-        btnName="8 - 15장의 사진 업로드"
-        disabled={false}
-        activeFunc={handleUploadImage}
+    <StImageUpload>
+      <StImageInput
+        type="file"
+        multiple
+        ref={imageInputRef}
+        onChange={handleImageChange}
+        accept="image/*"
       />
-    </>
+      {imageThumbnails.length === 0 ? (
+        <>
+          <ImageGuide />
+          <BottomButton
+            btnType="button"
+            btnName="8 - 15장의 사진 업로드"
+            disabled={false}
+            activeFunc={handleUploadImage}
+          />
+        </>
+      ) : (
+        <>
+          <ImageConfirm />
+          <BottomButton
+            btnType="button"
+            btnName="사진 업로드 완료"
+            disabled={false}
+            activeFunc={() => {
+              console.log('다음 페이지 라우팅');
+            }}
+          />
+        </>
+      )}
+    </StImageUpload>
   );
 };
 
