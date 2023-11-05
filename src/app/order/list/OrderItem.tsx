@@ -59,7 +59,6 @@ const StOrderTitle = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  height: 3.6rem;
   padding: 0rem 2.8rem;
 
   & > p {
@@ -70,6 +69,8 @@ const StOrderTitle = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
+
+    height: 3.6rem;
 
     color: ${({ theme }) => theme.colors.zw_gray};
     ${({ theme }) => theme.fonts.zw_caption};
