@@ -85,9 +85,9 @@ const ImageUpload = () => {
           ? '생성에 필요한 사진이 부족해요'
           : '현재 고른 사진이 너무 많아요';
       handleOpenValidateModal(title);
-    } else {
-      createThumbnails();
+      return;
     }
+    createThumbnails();
   };
 
   useEffect(() => {
