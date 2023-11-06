@@ -1,8 +1,8 @@
 import localFont from 'next/font/local';
 import React from 'react';
 
-import ModalContainer from '@/components/modal/ModalContainer';
-import ToastContainer from '@/components/toast/ToastContainer';
+import { ModalContainer } from '@/components/modal';
+import { ToastContainer } from '@/components/toast';
 import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
