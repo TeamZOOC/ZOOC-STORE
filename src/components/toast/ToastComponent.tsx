@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { css, keyframes, styled } from 'styled-components';
+import { css, styled } from 'styled-components';
 
 import { useToast } from '@/hooks/toast';
 import { ToastType } from '@/recoil/toast/atom';
+import fadeOutAnimataion from '@/styles/animation/fadeOut';
 
 interface ToastComponentProps {
   id: ToastType;
@@ -42,15 +43,6 @@ const StToastWrapper = styled.div`
   align-items: center;
 
   width: 100%;
-`;
-
-const fadeOutAnimataion = keyframes`
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-  }
 `;
 
 const StToast = styled.div<{ $fadeout: boolean }>`
