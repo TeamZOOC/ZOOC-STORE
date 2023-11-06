@@ -71,15 +71,13 @@ const StThumbnailContainer = styled.div`
   padding: 0.8rem 1.4rem;
   margin: auto;
   box-sizing: border-box;
-
-  & > img {
-    width: 9rem;
-    height: 9rem;
-    object-fit: cover;
-  }
 `;
 
-const StThumbnail = styled.img``;
+const StThumbnail = styled.img`
+  width: 9rem;
+  height: 9rem;
+  object-fit: cover;
+`;
 
 const StResetButton = styled.button`
   position: absolute;
