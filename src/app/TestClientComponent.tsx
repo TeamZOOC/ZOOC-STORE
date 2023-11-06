@@ -2,11 +2,14 @@
 
 import { styled } from 'styled-components';
 
+import { useToast } from '@/hooks/toast';
+
 import { IcBack, IcZooc } from '../../public/icons';
 import useModal from '../hooks/modal/useModal';
 
 const TestClientComponent = () => {
   const { openModal, closeModal } = useModal();
+  const { showToast } = useToast();
 
   return (
     <>
@@ -14,6 +17,14 @@ const TestClientComponent = () => {
       <IcZooc />
       <StGmarket>지마켓산스 폰트 GmarketSans price_big ZOOC</StGmarket>
       <StPretendard>Subhead1 프리텐다드 폰트 Pretendard</StPretendard>
+      <button
+        type="button"
+        onClick={() => {
+          showToast('delivery');
+        }}
+      >
+        토스트 열기
+      </button>
       <button
         type="button"
         onClick={() => {
