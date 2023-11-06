@@ -1,10 +1,13 @@
 import localFont from 'next/font/local';
 import React from 'react';
 
-import ModalContainer from '@/components/modal/ModalContainer';
+import { ModalContainer } from '@/components/modal';
+import { ToastContainer } from '@/components/toast';
 import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
+
+import TestClientComponent from './TestClientComponent';
 
 const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -40,9 +43,11 @@ export default function RootLayout({
         <Providers>
           <RecoilRootProvider>
             <GlobalStyles />
+            <TestClientComponent />
             {children}
             <div id="portal" />
             <ModalContainer />
+            <ToastContainer />
           </RecoilRootProvider>
         </Providers>
       </body>
