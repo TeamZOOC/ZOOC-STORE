@@ -14,5 +14,5 @@ const MainLayout = ({ children }: MainLayoutProps) => (
 export default MainLayout;
 
 const StMainLayout = styled.section`
-  padding: 1.6rem 2.8rem 2.8rem 2.8rem;
+  padding: 1.6rem 2.8rem 0 2.8rem;
 `;
