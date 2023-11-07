@@ -8,6 +8,7 @@ import { addressState } from '@/recoil/order/atom';
 const AddressInput = () => {
   const [address, setAddress] = useRecoilState(addressState);
   const { openModal } = useModal();
+
   return (
     <SrAddressForm>
       <StLabel>
