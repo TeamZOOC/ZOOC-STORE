@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { OrderInfo, OrderListInfo } from '@/types/order';
 import { formatDate } from '@/utils/formatDate';
 
-import { IcArrowRight } from '../../../../public/icons';
+import { IcArrowRight } from '../../../../../public/icons';
 import OrderProduct from './OrderProduct';
 
 interface OrderItemProps {

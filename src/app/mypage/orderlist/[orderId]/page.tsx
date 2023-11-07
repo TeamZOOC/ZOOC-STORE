@@ -1,6 +1,6 @@
 import { Header } from '@/components/header';
 
-import OrderDetail from './OrderDetail';
+import OrderDetail from './(detail)/OrderDetail';
 
 const page = () => (
   <>
