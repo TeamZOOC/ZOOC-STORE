@@ -7,8 +7,6 @@ import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
 
-import TestClientComponent from './TestClientComponent';
-
 const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
   variable: '--font-pretendard',
@@ -43,7 +41,6 @@ export default function RootLayout({
         <Providers>
           <RecoilRootProvider>
             <GlobalStyles />
-            <TestClientComponent />
             {children}
             <div id="portal" />
             <ModalContainer />

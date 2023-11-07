@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 import { formatPrice } from '@/utils/formatPrice';
 
-import OrderItem from '../../list/OrderItem';
+import OrderItem from '../OrderItem';
 import DetailInfo from './DetailInfo';
 
 const OrderDetail = () => {
