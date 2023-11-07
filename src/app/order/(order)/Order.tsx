@@ -3,12 +3,16 @@
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
+import { ORDER_DETAIL } from '@/mocks/orderDetailData';
+
+import ProductInfo from './ProductInfo/ProductInfo';
 
 const Order = () => {
   console.log('주문하기');
   return (
     <StOrder>
-      주문하기
+      <ProductInfo products={ORDER_DETAIL.products} />
+      <StHr />
       <BottomButton
         btnType="button"
         btnName="38,000원 결제하기"
@@ -24,3 +28,11 @@ const Order = () => {
 export default Order;
 
 const StOrder = styled.div``;
+
+const StHr = styled.hr`
+  height: 0.1rem;
+  margin: 0 0 0 2.8rem;
+
+  border: none;
+  background-color: ${({ theme }) => theme.colors.zw_brightgray};
+`;

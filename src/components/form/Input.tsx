@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Control, useController } from 'react-hook-form';
 import { styled } from 'styled-components';
