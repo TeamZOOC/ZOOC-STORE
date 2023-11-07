@@ -1,24 +1,24 @@
 import { DefaultValue, selectorFamily } from 'recoil';
 
-import { Toast, toastListState, toastState, ToastType } from './atom';
+import { Toast, ToastKey, toastListState, toastState } from './atom';
 
-export const toastSelector = selectorFamily<Toast, ToastType>({
+export const toastSelector = selectorFamily<Toast, ToastKey>({
   key: 'toastSelector',
   get:
-    (toastType) =>
+    (toastKey) =>
     ({ get }) =>
-      get(toastState(toastType)),
+      get(toastState(toastKey)),
   set:
-    (toastType) =>
+    (toastKey) =>
     ({ get, set, reset }, newValue) => {
       if (newValue instanceof DefaultValue) {
         set(toastListState, (prev) =>
-          prev.filter((toast) => toast.id !== toastType),
+          prev.filter((toast) => toast.id !== toastKey),
         );
-        reset(toastState(toastType));
+        reset(toastState(toastKey));
         return;
       }
-      set(toastState(toastType), newValue);
+      set(toastState(toastKey), newValue);
 
       if (get(toastListState).find((toast) => toast.id === newValue.id)) return;
       set(toastListState, (prev) => [

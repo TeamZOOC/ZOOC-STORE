@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { useRecoilCallback } from 'recoil';
 
-import { TOAST_MESSAGES, ToastType } from '@/recoil/toast/atom';
+import { TOAST_MESSAGES, ToastKey } from '@/recoil/toast/atom';
 import { toastSelector } from '@/recoil/toast/selector';
 
 const useToast = () => {
   const setToast = useRecoilCallback(
     ({ set }) =>
-      (id: ToastType) => {
+      (id: ToastKey) => {
         const message = TOAST_MESSAGES[id];
         const value = {
           id,
@@ -20,14 +20,14 @@ const useToast = () => {
 
   const hideToast = useRecoilCallback(
     ({ reset }) =>
-      (id: ToastType) => {
+      (id: ToastKey) => {
         reset(toastSelector(id));
       },
     [],
   );
 
   const showToast = useCallback(
-    (id: ToastType) => {
+    (id: ToastKey) => {
       setToast(id);
     },
     [setToast],

@@ -1,12 +1,14 @@
+'use client';
+
 import React, { useCallback, useEffect, useState } from 'react';
 import { css, styled } from 'styled-components';
 
 import { useToast } from '@/hooks/toast';
-import { ToastType } from '@/recoil/toast/atom';
+import { ToastKey } from '@/recoil/toast/atom';
 import fadeOutAnimataion from '@/styles/animation/fadeOut';
 
 interface ToastComponentProps {
-  id: ToastType;
+  id: ToastKey;
   message: string;
 }
 
@@ -35,6 +37,8 @@ const ToastComponent = ({ id, message }: ToastComponentProps) => {
 export default React.memo(ToastComponent);
 
 const StToastWrapper = styled.div`
+  z-index: 1;
+
   position: absolute;
   bottom: 9.7rem;
 
@@ -43,6 +47,7 @@ const StToastWrapper = styled.div`
   align-items: center;
 
   width: 100%;
+  max-width: 43rem;
 `;
 
 const StToast = styled.div<{ $fadeout: boolean }>`
