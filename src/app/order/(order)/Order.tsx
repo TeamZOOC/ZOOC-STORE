@@ -3,26 +3,32 @@
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
+import { PaymentInfo } from '@/components/order';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 
 import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
-import PaymentInfo from './paymentInfo/PaymentInfo';
 import PaymentMethod from './paymentMethod/PaymentMethod';
 import ProductInfo from './productInfo/ProductInfo';
 
 const Order = () => {
-  console.log('주문하기');
+  const { products, payment } = ORDER_DETAIL;
   return (
     <StOrder>
-      <ProductInfo products={ORDER_DETAIL.products} />
+      <ProductInfo products={products} />
       <StHr />
       <CustomerInfo />
       <DeliveryInfo />
       <StHr />
       <PaymentMethod />
       <StHr />
-      <PaymentInfo />
+      <StPaymentInfoWrapper>
+        <PaymentInfo
+          productPrice={payment.productPrice}
+          deliveryFee={payment.deliveryFee}
+          totalPrice={payment.totalPrice}
+        />
+      </StPaymentInfoWrapper>
       <StHr />
       <BottomButton
         btnType="button"
@@ -48,4 +54,8 @@ const StHr = styled.hr`
 
   border: none;
   background-color: ${({ theme }) => theme.colors.zw_brightgray};
+`;
+
+const StPaymentInfoWrapper = styled.div`
+  padding: 4rem 2.8rem;
 `;

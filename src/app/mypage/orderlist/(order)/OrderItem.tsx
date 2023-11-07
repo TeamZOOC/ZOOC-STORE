@@ -28,9 +28,11 @@ const OrderItem = ({ order, date, onDetailClick }: OrderItemProps) => {
     <StOrderItem>
       <StOrderTitle>
         {date ? (
-          <p>{formatDate(date)}</p>
+          <time>{formatDate(date)}</time>
         ) : (
-          <p>{orderData[0]?.createdAt && formatDate(orderData[0].createdAt)}</p>
+          <time>
+            {orderData[0]?.createdAt && formatDate(orderData[0].createdAt)}
+          </time>
         )}
         {onDetailClick && (
           <button type="button" onClick={() => onDetailClick(orderId)}>
@@ -62,7 +64,7 @@ const StOrderTitle = styled.div`
   margin-bottom: 1.6rem;
   height: 3.6rem;
 
-  & > p {
+  & > time {
     color: ${({ theme }) => theme.colors.zw_black};
     ${({ theme }) => theme.fonts.zw_price_middle};
   }
