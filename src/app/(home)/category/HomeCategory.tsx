@@ -2,6 +2,7 @@
 
 import { styled } from 'styled-components';
 import { CATEGORY_LIST } from '@/mocks/categoryListData';
+import Link from 'next/link';
 import HomeCategoryItem from './HomeCategoryItem';
 
 const HomeCategory = () => (
@@ -9,7 +10,7 @@ const HomeCategory = () => (
     <StHomeCategoryTop>
       <h2>카테고리</h2>
       <StHomeCategoryViewAllButton type="button">
-        상품 전체보기
+        <Link href="/product/all">상품 전체보기</Link>
       </StHomeCategoryViewAllButton>
     </StHomeCategoryTop>
     <StHomeCatoryList>
@@ -19,7 +20,6 @@ const HomeCategory = () => (
     </StHomeCatoryList>
   </StHomeCategory>
 );
-
 export default HomeCategory;
 
 const StHomeCategory = styled.section`
