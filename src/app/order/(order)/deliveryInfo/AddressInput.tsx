@@ -1,9 +1,12 @@
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { StInputLabel, StRequired } from '@/components/form/Input';
 import { useModal } from '@/hooks/modal';
+import { addressState } from '@/recoil/order/atom';
 
 const AddressInput = () => {
+  const [address, setAddress] = useRecoilState(addressState);
   const { openModal } = useModal();
   return (
     <SrAddressForm>
@@ -15,8 +18,10 @@ const AddressInput = () => {
         <StZipCodeInput
           type="number"
           id="zip_code"
+          value={address.postcode}
           placeholder="우편번호"
-          maxLength={30}
+          maxLength={5}
+          readOnly
         />
         <StAddressSearchBtn
           type="button"
@@ -30,12 +35,14 @@ const AddressInput = () => {
       <StAddressInput
         type="text"
         id="address"
+        value={address.address}
         placeholder="주소"
         maxLength={30}
+        readOnly
       />
       <StDetailAddressInput
         type="text"
-        id="detail_address"
+        id="addressDetail"
         placeholder="상세주소"
         maxLength={30}
       />

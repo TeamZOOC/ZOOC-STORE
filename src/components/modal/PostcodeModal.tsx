@@ -1,19 +1,21 @@
 import DaumPostcodeEmbed from 'react-daum-postcode';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { useModal } from '@/hooks/modal';
+import { addressState } from '@/recoil/order/atom';
 
 const PostcodeModal = () => {
   const { closeModal } = useModal();
+  const [, setResAddress] = useRecoilState(addressState);
 
   const handleComplete = (data: any) => {
     const address = {
       postcode: data.zonecode,
       address: data.address,
     };
-    console.log(data);
     console.log(address);
-
+    setResAddress({ address: address.address, postcode: address.postcode });
     closeModal('postcode');
   };
 
