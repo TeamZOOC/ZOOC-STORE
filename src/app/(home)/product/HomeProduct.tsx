@@ -2,12 +2,12 @@
 
 import { styled } from 'styled-components';
 import { PRODUCT_LIST } from '@/mocks/productListData';
-import HomeProductItem from './HomeProductItem';
+import { ProductItem } from '@/components/product';
 
 const HomeProduct = () => (
   <StHomeProduct>
-    {PRODUCT_LIST.map((product) => (
-      <HomeProductItem key={product.id} product={product} />
+    {PRODUCT_LIST.slice(0, 3).map((product) => (
+      <ProductItem key={product.id} product={product} />
     ))}
   </StHomeProduct>
 );
