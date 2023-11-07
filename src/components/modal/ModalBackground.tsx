@@ -14,6 +14,8 @@ const ModalBackground = ({ children }: ModalBackgroundProps) => (
 export default React.memo(ModalBackground);
 
 const StModalBackground = styled.div`
+  z-index: 1;
+
   position: absolute;
   top: 0;
   left: 0;
