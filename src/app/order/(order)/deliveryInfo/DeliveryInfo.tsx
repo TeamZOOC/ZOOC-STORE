@@ -3,14 +3,15 @@ import { styled } from 'styled-components';
 import { useTab } from '@/hooks/tab';
 
 import { StInfoTitle } from '../productInfo/ProductInfo';
+import DeliveryForm from './DeliveryForm';
 
 const DeliveryInfo = () => {
   const DELIVERY_TAB = ['기존 배송지', '신규입력'];
-
   const { activeTab, setActiveTab } = useTab({
     tabList: DELIVERY_TAB,
     defaultTabIndex: 1,
   });
+
   const handleSameAsBuyer = () => {};
 
   return (
@@ -21,17 +22,20 @@ const DeliveryInfo = () => {
           구매자와 동일해요
         </StSameAsBuyerBtn>
       </StDeliveryTitle>
-      <StAddressTabs>
+      <StDeliveryTabs>
         {DELIVERY_TAB.map((addressTab, index) => (
-          <StAddressTab
+          <StDeliveryTab
             type="button"
             onClick={() => setActiveTab(index)}
             $isActiveTab={activeTab === addressTab}
           >
             {addressTab}
-          </StAddressTab>
+          </StDeliveryTab>
         ))}
-      </StAddressTabs>
+      </StDeliveryTabs>
+      <StAddressForm>
+        {activeTab === '신규입력' && <DeliveryForm />}
+      </StAddressForm>
     </StDeliveryInfoSection>
   );
 };
@@ -54,12 +58,14 @@ const StSameAsBuyerBtn = styled.button`
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_gray};
 `;
 
-const StAddressTabs = styled.div`
+const StDeliveryTabs = styled.div`
   display: flex;
   gap: 2.3rem;
+
+  margin-bottom: 2rem;
 `;
 
-const StAddressTab = styled.button<{ $isActiveTab: boolean }>`
+const StDeliveryTab = styled.button<{ $isActiveTab: boolean }>`
   height: 3rem;
 
   ${({ theme, $isActiveTab }) =>
@@ -75,3 +81,5 @@ const StAddressTab = styled.button<{ $isActiveTab: boolean }>`
     ${theme.fonts.zw_Body1};
   `}
 `;
+
+const StAddressForm = styled.div``;
