@@ -2,11 +2,11 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { css, styled } from 'styled-components';
 
 import { useToast } from '@/hooks/toast';
-import { ToastType } from '@/recoil/toast/atom';
+import { ToastKey } from '@/recoil/toast/atom';
 import fadeOutAnimataion from '@/styles/animation/fadeOut';
 
 interface ToastComponentProps {
-  id: ToastType;
+  id: ToastKey;
   message: string;
 }
 
