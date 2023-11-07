@@ -43,7 +43,7 @@ const DeliveryInfo = () => {
 export default DeliveryInfo;
 
 const StDeliveryInfoSection = styled.div`
-  padding: 2rem 2.8rem 4rem 2.8rem;
+  padding: 2rem 2.8rem;
 `;
 
 const StDeliveryTitle = styled(StInfoTitle)`

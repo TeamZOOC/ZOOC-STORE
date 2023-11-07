@@ -7,6 +7,8 @@ import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 
 import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
+import PaymentInfo from './paymentInfo/PaymentInfo';
+import PaymentMethod from './paymentMethod/PaymentMethod';
 import ProductInfo from './productInfo/ProductInfo';
 
 const Order = () => {
@@ -17,6 +19,10 @@ const Order = () => {
       <StHr />
       <CustomerInfo />
       <DeliveryInfo />
+      <StHr />
+      <PaymentMethod />
+      <StHr />
+      <PaymentInfo />
       <StHr />
       <BottomButton
         btnType="button"
