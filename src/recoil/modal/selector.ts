@@ -1,24 +1,24 @@
 import { DefaultValue, selectorFamily } from 'recoil';
 
-import { Modal, modalListState, modalState, ModalType } from './atom';
+import { Modal, ModalKey, modalListState, modalState } from './atom';
 
-export const modalSelector = selectorFamily<Modal, ModalType>({
+export const modalSelector = selectorFamily<Modal, ModalKey>({
   key: 'modalSelector',
   get:
-    (modalType) =>
+    (modalKey) =>
     ({ get }) =>
-      get(modalState(modalType)),
+      get(modalState(modalKey)),
   set:
-    (modalType) =>
+    (modalKey) =>
     ({ get, set, reset }, newValue) => {
       if (newValue instanceof DefaultValue) {
         set(modalListState, (prev) =>
-          prev.filter((modal) => modal.id !== modalType),
+          prev.filter((modal) => modal.id !== modalKey),
         );
-        reset(modalState(modalType));
+        reset(modalState(modalKey));
         return;
       }
-      set(modalState(modalType), newValue);
+      set(modalState(modalKey), newValue);
 
       if (get(modalListState).find((modal) => modal.id === newValue.id)) return;
       set(modalListState, (prev) => [

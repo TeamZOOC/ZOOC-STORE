@@ -1,16 +1,16 @@
 import { atom, atomFamily } from 'recoil';
 
-const MODAL_TYPE = ['quit', 'imageValidate'] as const;
+const MODAL_KEY = ['quit', 'imageValidate'] as const;
 
-export type ModalType = (typeof MODAL_TYPE)[number];
+export type ModalKey = (typeof MODAL_KEY)[number];
 export type ModalProps = Record<string, unknown> | null;
 export type Modal = {
-  id: ModalType;
+  id: ModalKey;
   isOpen: boolean;
   props?: ModalProps;
 };
 
-export const modalState = atomFamily<Modal, ModalType>({
+export const modalState = atomFamily<Modal, ModalKey>({
   key: 'modalState',
   default: (id) => ({
     id,
