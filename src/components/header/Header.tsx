@@ -44,10 +44,14 @@ const StHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: -1px;
 
   padding: 1.6rem 2.8rem;
 
   background-color: ${({ theme }) => theme.colors.zw_background};
+
+  z-index: 10;
 `;
 
 const StHeaderTitle = styled.h1`
