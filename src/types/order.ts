@@ -6,7 +6,7 @@ export interface OrderInfo {
   price: number;
   image: string;
   optionCategory: string;
-  deliveryState: string;
+  deliveryState?: string;
   petName: string;
   optionDetail: string;
   optionAdditionalPrice: number;

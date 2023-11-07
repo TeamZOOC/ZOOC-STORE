@@ -54,9 +54,7 @@ const OrderDetail = () => {
 
 export default OrderDetail;
 
-const StDetailWrapper = styled.section`
-  margin-top: 2rem;
-`;
+const StDetailWrapper = styled.section``;
 
 const StHr = styled.hr`
   height: 0.1rem;
