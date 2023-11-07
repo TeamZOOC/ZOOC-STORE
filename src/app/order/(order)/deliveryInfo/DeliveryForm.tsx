@@ -3,6 +3,8 @@ import { styled } from 'styled-components';
 
 import { Input } from '@/components/form';
 
+import AddressInput from './AddressInput';
+
 interface DeliveryInfoFormData {
   receiver: string;
   receiver_phone: string;
@@ -32,6 +34,7 @@ const DeliveryForm = () => {
         maxLength={13}
         isRequired
       />
+      <AddressInput control={control} />
       <Input
         name="request"
         label="요청사항"

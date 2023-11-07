@@ -71,7 +71,7 @@ const StTextInput = styled.div`
   }
 `;
 
-const StInputLabel = styled.label`
+export const StInputLabel = styled.label`
   display: flex;
   gap: 0.4rem;
 
@@ -79,7 +79,7 @@ const StInputLabel = styled.label`
   ${({ theme }) => theme.fonts.zw_Subhead4};
 `;
 
-const StRequired = styled.div`
+export const StRequired = styled.div`
   width: 0.6rem;
   height: 0.6rem;
   margin-top: 0.25rem;
