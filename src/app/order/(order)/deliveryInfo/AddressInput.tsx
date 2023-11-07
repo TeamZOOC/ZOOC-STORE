@@ -1,38 +1,47 @@
 import { styled } from 'styled-components';
 
 import { StInputLabel, StRequired } from '@/components/form/Input';
+import { useModal } from '@/hooks/modal';
 
-const AddressInput = () => (
-  <SrAddressForm>
-    <StLabel>
-      배송지
-      <StRequiredCircle />
-    </StLabel>
-    <StAddress>
-      <StZipCodeInput
-        type="number"
-        id="zip_code"
-        placeholder="우편번호"
+const AddressInput = () => {
+  const { openModal } = useModal();
+  return (
+    <SrAddressForm>
+      <StLabel>
+        배송지
+        <StRequiredCircle />
+      </StLabel>
+      <StAddress>
+        <StZipCodeInput
+          type="number"
+          id="zip_code"
+          placeholder="우편번호"
+          maxLength={30}
+        />
+        <StAddressSearchBtn
+          type="button"
+          onClick={() => {
+            openModal('postcode');
+          }}
+        >
+          주소 검색
+        </StAddressSearchBtn>
+      </StAddress>
+      <StAddressInput
+        type="text"
+        id="address"
+        placeholder="주소"
         maxLength={30}
       />
-      <StAddressSearchBtn type="button" onClick={() => {}}>
-        주소 검색
-      </StAddressSearchBtn>
-    </StAddress>
-    <StAddressInput
-      type="text"
-      id="address"
-      placeholder="주소"
-      maxLength={30}
-    />
-    <StDetailAddressInput
-      type="text"
-      id="detail_address"
-      placeholder="상세주소"
-      maxLength={30}
-    />
-  </SrAddressForm>
-);
+      <StDetailAddressInput
+        type="text"
+        id="detail_address"
+        placeholder="상세주소"
+        maxLength={30}
+      />
+    </SrAddressForm>
+  );
+};
 
 export default AddressInput;
 
