@@ -37,6 +37,8 @@ const ToastComponent = ({ id, message }: ToastComponentProps) => {
 export default React.memo(ToastComponent);
 
 const StToastWrapper = styled.div`
+  z-index: 1;
+
   position: absolute;
   bottom: 9.7rem;
 
@@ -45,6 +47,7 @@ const StToastWrapper = styled.div`
   align-items: center;
 
   width: 100%;
+  max-width: 43rem;
 `;
 
 const StToast = styled.div<{ $fadeout: boolean }>`
