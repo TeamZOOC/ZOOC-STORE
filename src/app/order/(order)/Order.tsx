@@ -6,6 +6,7 @@ import { BottomButton } from '@/components/button';
 import { PaymentInfo } from '@/components/order';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 
+import Agreement from './agreement/Agreement';
 import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
 import PaymentMethod from './paymentMethod/PaymentMethod';
@@ -30,6 +31,7 @@ const Order = () => {
         />
       </StPaymentInfoWrapper>
       <StHr />
+      <Agreement />
       <BottomButton
         btnType="button"
         btnName="38,000원 결제하기"

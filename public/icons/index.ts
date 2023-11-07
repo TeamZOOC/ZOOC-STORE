@@ -1,6 +1,8 @@
 import IcArrowRight from './ic_arrow_right.svg';
 import IcBack from './ic_back.svg';
 import IcCart from './ic_cart.svg';
+import IcCheckboxAfter from './ic_checkbox_after.svg';
+import IcCheckboxBefore from './ic_checkbox_before.svg';
 import IcExit from './ic_exit.svg';
 import IcFirstStep from './ic_first_step.svg';
 import IcKakaoBank from './ic_kakaobank.svg';
@@ -26,4 +28,6 @@ export {
   IcOrderList,
   IcCart,
   IcExit,
+  IcCheckboxAfter,
+  IcCheckboxBefore,
 };
