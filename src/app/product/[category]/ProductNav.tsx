@@ -2,23 +2,38 @@
 
 import { CATEGORY_LIST } from '@/constants/category';
 import { css, styled } from 'styled-components';
-import React from 'react';
-import { useRecoilState } from 'recoil';
-import { categorySelectState } from '@/recoil/category/atom';
+import React, { useRef, useEffect } from 'react';
+
+import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const ProductNav = () => {
-  const [categorySelect, setCategorySelect] =
-    useRecoilState(categorySelectState);
+  const pathname = usePathname();
+  const activeItemRef = useRef<HTMLButtonElement | null>(null);
+
+  const handleScrollToActiveItem = () => {
+    if (activeItemRef.current) {
+      activeItemRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  useEffect(() => {
+    handleScrollToActiveItem();
+  }, [pathname]);
 
   return (
     <StProductNav>
-      {CATEGORY_LIST.map(({ id, categoryName }) => (
+      {CATEGORY_LIST.map(({ id, categoryName, categoryPath }) => (
         <StProductItem
           key={id}
-          $active={categoryName === categorySelect}
-          onClick={() => setCategorySelect(categoryName)}
+          $active={pathname.includes(categoryPath)}
+          ref={(el) => {
+            if (pathname.includes(categoryPath)) {
+              activeItemRef.current = el;
+            }
+          }}
         >
-          {categoryName}
+          <Link href={categoryPath}>{categoryName}</Link>
         </StProductItem>
       ))}
     </StProductNav>
