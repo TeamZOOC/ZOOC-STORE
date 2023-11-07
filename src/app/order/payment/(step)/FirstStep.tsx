@@ -60,7 +60,6 @@ export const StUnSelected = styled.div`
   gap: 1rem;
 
   height: 7rem;
-  margin: 0 2.8rem;
   padding: 2.3rem 2.4rem;
   box-sizing: border-box;
 
@@ -83,7 +82,6 @@ export const StStepBox = styled.div`
   gap: 2.5rem;
 
   height: 22.1rem;
-  margin: 0 2.8rem;
   padding: 2.4rem;
   box-sizing: border-box;
 
