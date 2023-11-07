@@ -7,20 +7,12 @@ const PostcodeModal = () => {
   const { closeModal } = useModal();
 
   const handleComplete = (data: any) => {
-    let fullAddress = data.address;
-    let extraAddress = '';
-
-    if (data.addressType === 'R') {
-      if (data.bname !== '') {
-        extraAddress += data.bname;
-      }
-      if (data.buildingName !== '') {
-        extraAddress +=
-          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
-      }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
-    }
-    console.log(fullAddress);
+    const address = {
+      postcode: data.zonecode,
+      address: data.address,
+    };
+    console.log(data);
+    console.log(address);
 
     closeModal('postcode');
   };
