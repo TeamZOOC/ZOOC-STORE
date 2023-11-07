@@ -5,13 +5,16 @@ import { styled } from 'styled-components';
 import { BottomButton } from '@/components/button';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 
-import ProductInfo from './ProductInfo/ProductInfo';
+import CustomerInfo from './customerInfo/CustomerInfo';
+import ProductInfo from './productInfo/ProductInfo';
 
 const Order = () => {
   console.log('주문하기');
   return (
     <StOrder>
       <ProductInfo products={ORDER_DETAIL.products} />
+      <StHr />
+      <CustomerInfo />
       <StHr />
       <BottomButton
         btnType="button"

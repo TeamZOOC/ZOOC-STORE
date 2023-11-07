@@ -24,7 +24,7 @@ const StInfoSection = styled.div`
   padding: 1.6rem 2.8rem 4rem 2.8rem;
 `;
 
-const StInfoTitle = styled.h2`
+export const StInfoTitle = styled.h2`
   margin-bottom: 2.4rem;
 
   color: ${({ theme }) => theme.colors.zw_black};
