@@ -1,3 +1,5 @@
+'use client';
+
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 import { styled } from 'styled-components';
