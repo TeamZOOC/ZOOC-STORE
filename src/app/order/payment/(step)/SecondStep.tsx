@@ -10,7 +10,7 @@ import {
   IcKakaoPay,
   IcSecondStep,
   IcToss,
-} from '../../../../public/icons';
+} from '../../../../../public/icons';
 import { StStepBox, StTitle, StUnSelected } from './FirstStep';
 
 interface SecondStepProps {
