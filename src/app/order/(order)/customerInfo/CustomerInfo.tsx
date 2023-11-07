@@ -41,7 +41,7 @@ const CustomerInfo = () => {
 export default CustomerInfo;
 
 const StCustomerInfoSection = styled.div`
-  padding: 4rem 2.8rem;
+  padding: 4rem 2.8rem 2rem 2.8rem;
 `;
 
 const StCustomerTitle = styled(StInfoTitle)``;

@@ -6,6 +6,7 @@ import { BottomButton } from '@/components/button';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 
 import CustomerInfo from './customerInfo/CustomerInfo';
+import DeliveryInfo from './deliveryInfo/DeliveryInfo';
 import ProductInfo from './productInfo/ProductInfo';
 
 const Order = () => {
@@ -15,6 +16,7 @@ const Order = () => {
       <ProductInfo products={ORDER_DETAIL.products} />
       <StHr />
       <CustomerInfo />
+      <DeliveryInfo />
       <StHr />
       <BottomButton
         btnType="button"
@@ -30,7 +32,9 @@ const Order = () => {
 
 export default Order;
 
-const StOrder = styled.div``;
+const StOrder = styled.div`
+  margin-bottom: 7.7rem;
+`;
 
 const StHr = styled.hr`
   height: 0.1rem;
