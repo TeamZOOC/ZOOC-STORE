@@ -45,7 +45,7 @@ const StHeader = styled.header`
   justify-content: space-between;
   align-items: center;
   position: sticky;
-  top: -1px;
+  top: 0;
 
   padding: 1.6rem 2.8rem;
 

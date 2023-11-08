@@ -21,8 +21,8 @@ export const CATEGORY_LIST = [
   },
   {
     id: 5,
-    categoryName: '테스트0',
-    categoryPath: 'test0',
+    categoryName: '스티커',
+    categoryPath: 'sticker',
   },
   {
     id: 6,

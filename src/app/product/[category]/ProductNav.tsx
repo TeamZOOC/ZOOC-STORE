@@ -2,7 +2,7 @@
 
 import { CATEGORY_LIST } from '@/constants/category';
 import { css, styled } from 'styled-components';
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
@@ -11,14 +11,14 @@ const ProductNav = () => {
   const pathname = usePathname();
   const activeItemRef = useRef<HTMLButtonElement | null>(null);
 
-  const handleScrollToActiveItem = () => {
+  const scrollToActiveItem = () => {
     if (activeItemRef.current) {
       activeItemRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
   useEffect(() => {
-    handleScrollToActiveItem();
+    scrollToActiveItem();
   }, [pathname]);
 
   return (
@@ -33,7 +33,9 @@ const ProductNav = () => {
             }
           }}
         >
-          <Link href={categoryPath}>{categoryName}</Link>
+          <Link href={categoryPath} scroll={false}>
+            {categoryName}
+          </Link>
         </StProductItem>
       ))}
     </StProductNav>
@@ -62,7 +64,7 @@ const StProductNav = styled.nav`
 `;
 
 const StProductItem = styled.button<{ $active: boolean }>`
-  padding: 0 1rem 1.2rem 1rem;
+  padding: 0 1.4rem 1.2rem 1.4rem;
 
   color: ${({ theme }) => theme.colors.zw_lightgray};
 

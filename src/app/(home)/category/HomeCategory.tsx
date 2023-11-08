@@ -10,7 +10,9 @@ const HomeCategory = () => (
     <StHomeCategoryTop>
       <h2>카테고리</h2>
       <StHomeCategoryViewAllButton type="button">
-        <Link href="/product/all">상품 전체보기</Link>
+        <Link href="/product/all" scroll={false}>
+          상품 전체보기
+        </Link>
       </StHomeCategoryViewAllButton>
     </StHomeCategoryTop>
     <StHomeCatoryList>
