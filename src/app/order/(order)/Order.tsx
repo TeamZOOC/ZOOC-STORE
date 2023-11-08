@@ -3,7 +3,7 @@
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
-import { PaymentInfo } from '@/components/order';
+import { BillingInfo } from '@/components/order';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 
 import Agreement from './agreement/Agreement';
@@ -23,13 +23,9 @@ const Order = () => {
       <StHr />
       <PaymentMethod />
       <StHr />
-      <StPaymentInfoWrapper>
-        <PaymentInfo
-          productPrice={payment.productPrice}
-          deliveryFee={payment.deliveryFee}
-          totalPrice={payment.totalPrice}
-        />
-      </StPaymentInfoWrapper>
+      <StBillingInfoWrapper>
+        <BillingInfo payment={payment} />
+      </StBillingInfoWrapper>
       <StHr />
       <Agreement />
       <BottomButton
@@ -58,6 +54,6 @@ const StHr = styled.hr`
   background-color: ${({ theme }) => theme.colors.zw_brightgray};
 `;
 
-const StPaymentInfoWrapper = styled.div`
+const StBillingInfoWrapper = styled.div`
   padding: 4rem 2.8rem;
 `;

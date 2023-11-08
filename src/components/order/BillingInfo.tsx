@@ -1,46 +1,47 @@
 import { styled } from 'styled-components';
 
+import { PaymentInfo } from '@/types/order';
 import { formatPrice } from '@/utils/formatPrice';
 
 import DetailInfo from './DetailInfo';
 
 interface PaymentInfoProps {
-  productPrice: number;
-  deliveryFee: number;
-  totalPrice: number;
+  payment: PaymentInfo;
 }
 
-const PaymentInfo = ({
-  productPrice,
-  deliveryFee,
-  totalPrice,
-}: PaymentInfoProps) => (
-  <StPaymentInfo>
-    <StPaymentTitle> 결제 정보</StPaymentTitle>
-    <StPayment>
-      <DetailInfo label="상품 금액" value={`${formatPrice(productPrice)} 원`} />
-      <DetailInfo label="배송비" value={`${formatPrice(deliveryFee)} 원`} />
-    </StPayment>
-    <StTotalPrice>
-      <strong>총 결제금액</strong>
-      <p>
-        <span>{formatPrice(totalPrice)}</span> 원
-      </p>
-    </StTotalPrice>
-  </StPaymentInfo>
-);
+const BillingInfo = ({ payment }: PaymentInfoProps) => {
+  const { productPrice, deliveryFee, totalPrice } = payment;
+  return (
+    <StBillingInfo>
+      <StBillingTitle> 결제 정보</StBillingTitle>
+      <StBilling>
+        <DetailInfo
+          label="상품 금액"
+          value={`${formatPrice(productPrice)} 원`}
+        />
+        <DetailInfo label="배송비" value={`${formatPrice(deliveryFee)} 원`} />
+      </StBilling>
+      <StTotalPrice>
+        <strong>총 결제금액</strong>
+        <p>
+          <span>{formatPrice(totalPrice)}</span> 원
+        </p>
+      </StTotalPrice>
+    </StBillingInfo>
+  );
+};
 
-export default PaymentInfo;
+export default BillingInfo;
 
-const StPaymentInfo = styled.div``;
+const StBillingInfo = styled.div``;
 
-const StPaymentTitle = styled.h2`
+const StBillingTitle = styled.h2`
   margin-bottom: 2.4rem;
   color: ${({ theme }) => theme.colors.zw_black};
   ${({ theme }) => theme.fonts.zw_Subhead1};
 `;
 
-const StPayment = styled.div`
+const StBilling = styled.div`
   & > p {
     display: flex;
     justify-content: space-between;
