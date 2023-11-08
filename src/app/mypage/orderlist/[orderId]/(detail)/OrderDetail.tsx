@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 
 import OrderItem from '../../(order)/OrderItem';
-import { DetailInfo, PaymentInfo } from '../../../../../components/order';
+import { BillingInfo, DetailInfo } from '../../../../../components/order';
 
 const OrderDetail = () => {
   const { date, products, delivery, payment } = ORDER_DETAIL;
@@ -28,11 +28,7 @@ const OrderDetail = () => {
       <StHr />
       {payment && (
         <StDetailSection>
-          <PaymentInfo
-            productPrice={payment.productPrice}
-            deliveryFee={payment.deliveryFee}
-            totalPrice={payment.totalPrice}
-          />
+          <BillingInfo payment={payment} />
         </StDetailSection>
       )}
     </StDetailWrapper>

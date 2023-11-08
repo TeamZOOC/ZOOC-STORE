@@ -5,11 +5,11 @@ import { formatPrice } from '@/utils/formatPrice';
 
 import DetailInfo from './DetailInfo';
 
-interface PaymentInfoProps {
+interface BillingInfoProps {
   payment: PaymentInfo;
 }
 
-const BillingInfo = ({ payment }: PaymentInfoProps) => {
+const BillingInfo = ({ payment }: BillingInfoProps) => {
   const { productPrice, deliveryFee, totalPrice } = payment;
   return (
     <StBillingInfo>
