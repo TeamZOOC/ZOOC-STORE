@@ -77,8 +77,6 @@ const StProductInfoNav = styled.nav`
 
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
   background-color: ${({ theme }) => theme.colors.zw_background};
-
-  z-index: 1;
 `;
 
 const StProductInfoNavItem = styled.button<{ $active: boolean }>`

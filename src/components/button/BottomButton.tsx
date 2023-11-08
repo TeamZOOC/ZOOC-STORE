@@ -34,8 +34,6 @@ const StBottomButtonWrapper = styled.div`
   justify-content: center;
 
   width: 100%;
-
-  z-index: 100;
 `;
 
 const StBottomButton = styled.button`
