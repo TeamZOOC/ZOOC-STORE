@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Control, useController } from 'react-hook-form';
 import { styled } from 'styled-components';
 
@@ -11,6 +11,7 @@ interface TextInputProps {
   pattern?: string;
   maxLength?: number;
   isRequired?: boolean;
+  showCount?: boolean;
 }
 
 function TextInput({
@@ -22,6 +23,7 @@ function TextInput({
   pattern,
   maxLength,
   isRequired,
+  showCount,
 }: TextInputProps) {
   const { field } = useController({
     name,
@@ -29,6 +31,11 @@ function TextInput({
     defaultValue: '',
     rules,
   });
+  const [inputLength, setInputLength] = useState(0);
+
+  useEffect(() => {
+    setInputLength(field.value.length);
+  }, [field.value]);
 
   return (
     <StTextInput>
@@ -36,14 +43,25 @@ function TextInput({
         {label}
         {isRequired && <StRequired />}
       </StInputLabel>
-      <input
-        type="text"
-        id={name}
-        placeholder={placeholder}
-        pattern={pattern}
-        maxLength={maxLength}
-        {...field}
-      />
+      <StInputWrapper>
+        <input
+          type="text"
+          id={name}
+          placeholder={placeholder}
+          pattern={pattern}
+          maxLength={maxLength}
+          {...field}
+          onChange={(e) => {
+            field.onChange(e);
+            setInputLength(e.target.value.length);
+          }}
+        />
+        {showCount && (
+          <StLengthCounter>
+            {inputLength}/{maxLength}
+          </StLengthCounter>
+        )}
+      </StInputWrapper>
     </StTextInput>
   );
 }
@@ -53,22 +71,6 @@ export default TextInput;
 const StTextInput = styled.div`
   display: flex;
   flex-direction: column;
-
-  & > input {
-    margin: 1rem 0 2.4rem 0;
-    padding: 1.5rem 2rem;
-
-    border-radius: 0.2rem;
-    border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
-    background: ${({ theme }) => theme.colors.zw_background};
-    color: ${({ theme }) => theme.colors.zw_black};
-    ${({ theme }) => theme.fonts.zw_Body1};
-
-    &::placeholder {
-      color: ${({ theme }) => theme.colors.zw_lightgray};
-      ${({ theme }) => theme.fonts.zw_Body1};
-    }
-  }
 `;
 
 export const StInputLabel = styled.label`
@@ -86,4 +88,36 @@ export const StRequired = styled.div`
 
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.zw_point};
+`;
+
+const StInputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+
+  & > input {
+    width: 100%;
+    margin: 1rem 0 2.4rem 0;
+    padding: 1.5rem 2rem;
+    box-sizing: border-box;
+
+    border-radius: 0.2rem;
+    border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
+    background: ${({ theme }) => theme.colors.zw_background};
+    color: ${({ theme }) => theme.colors.zw_black};
+    ${({ theme }) => theme.fonts.zw_Body1};
+
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.zw_lightgray};
+      ${({ theme }) => theme.fonts.zw_Body1};
+    }
+  }
+`;
+
+const StLengthCounter = styled.div`
+  position: absolute;
+  right: 2rem;
+  bottom: 4.3rem;
+
+  color: ${({ theme }) => theme.colors.zw_lightgray};
+  ${({ theme }) => theme.fonts.zw_price_small};
 `;

@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 
 import { Input } from '@/components/form';
 
-interface DeliveryInfoFormData {
+interface PetRegistrationFormData {
   petName: string;
   breed: string;
 }
@@ -14,7 +14,7 @@ const PetRegistration = () => {
   const {
     control,
     formState: { errors },
-  } = useForm<DeliveryInfoFormData>();
+  } = useForm<PetRegistrationFormData>();
 
   return (
     <StRegistration>
@@ -26,7 +26,9 @@ const PetRegistration = () => {
           label="이름"
           placeholder="사랑이"
           control={control}
+          maxLength={5}
           isRequired
+          showCount
         />
         <Input
           name="breed"
@@ -34,6 +36,7 @@ const PetRegistration = () => {
           placeholder="포메라니안"
           control={control}
           maxLength={20}
+          showCount
         />
       </StRegistrationForm>
     </StRegistration>
