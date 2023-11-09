@@ -14,7 +14,6 @@ interface TextInputProps {
   rules?: Record<string, any>;
   pattern?: string;
   maxLength?: number;
-  isRequired?: boolean;
   showCount?: boolean;
 }
 
@@ -26,7 +25,6 @@ function TextInput({
   rules,
   pattern,
   maxLength,
-  isRequired,
   showCount,
 }: TextInputProps) {
   const { field } = useController({
@@ -37,6 +35,7 @@ function TextInput({
   });
   const [inputLength, setInputLength] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
+  const isRequired = rules?.required !== undefined;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;

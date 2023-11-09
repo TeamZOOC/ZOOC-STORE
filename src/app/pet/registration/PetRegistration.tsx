@@ -35,7 +35,7 @@ const PetRegistration = () => {
             placeholder="사랑이"
             control={control}
             maxLength={5}
-            isRequired
+            rules={{ required: true }}
             showCount
           />
           <Input
