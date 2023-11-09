@@ -4,26 +4,26 @@
 
 import { BottomButton } from '@/components/button';
 import { MainLayout } from '@/components/layout';
-import { TAP_LIST } from '@/constants/productTap';
+import { TAB_LIST } from '@/constants/productTab';
 import useTab from '@/hooks/tab/useTab';
 import { css, styled } from 'styled-components';
 
 const ProductInfoNav = () => {
   const { activeTab, setActiveTab } = useTab({
-    tabList: TAP_LIST,
+    tabList: TAB_LIST,
     defaultTabIndex: 0,
   });
 
   return (
     <>
       <StProductInfoNav>
-        {TAP_LIST.map((tap, index) => (
+        {TAB_LIST.map((tab, index) => (
           <StProductInfoNavItem
             key={index}
-            $active={activeTab === tap}
+            $active={activeTab === tab}
             onClick={() => setActiveTab(index)}
           >
-            {tap}
+            {tab}
           </StProductInfoNavItem>
         ))}
       </StProductInfoNav>
