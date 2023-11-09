@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import { Control, useController } from 'react-hook-form';
 import { styled } from 'styled-components';
@@ -11,6 +10,7 @@ interface TextInputProps {
   rules?: Record<string, any>;
   pattern?: string;
   maxLength?: number;
+  isRequired?: boolean;
 }
 
 function TextInput({
@@ -21,6 +21,7 @@ function TextInput({
   rules,
   pattern,
   maxLength,
+  isRequired,
 }: TextInputProps) {
   const { field } = useController({
     name,
@@ -31,7 +32,10 @@ function TextInput({
 
   return (
     <StTextInput>
-      <label htmlFor={name}>{label}</label>
+      <StInputLabel htmlFor={name}>
+        {label}
+        {isRequired && <StRequired />}
+      </StInputLabel>
       <input
         type="text"
         id={name}
@@ -50,10 +54,6 @@ const StTextInput = styled.div`
   display: flex;
   flex-direction: column;
 
-  & > label {
-    color: ${({ theme }) => theme.colors.zw_darkgray};
-    ${({ theme }) => theme.fonts.zw_Subhead4};
-  }
   & > input {
     margin: 1rem 0 2.4rem 0;
     padding: 1.5rem 2rem;
@@ -64,9 +64,26 @@ const StTextInput = styled.div`
     color: ${({ theme }) => theme.colors.zw_black};
     ${({ theme }) => theme.fonts.zw_Body1};
 
-    ::placeholder {
-      color: ${({ theme }) => theme.colors.zw_black};
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.zw_lightgray};
       ${({ theme }) => theme.fonts.zw_Body1};
     }
   }
+`;
+
+export const StInputLabel = styled.label`
+  display: flex;
+  gap: 0.4rem;
+
+  color: ${({ theme }) => theme.colors.zw_darkgray};
+  ${({ theme }) => theme.fonts.zw_Subhead4};
+`;
+
+export const StRequired = styled.div`
+  width: 0.6rem;
+  height: 0.6rem;
+  margin-top: 0.25rem;
+
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.zw_point};
 `;
