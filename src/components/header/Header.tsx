@@ -51,7 +51,7 @@ const StHeader = styled.header`
 
   background-color: ${({ theme }) => theme.colors.zw_background};
 
-  z-index: 10;
+  z-index: ${({ theme }) => theme.zIndex.zw_header};
 `;
 
 const StHeaderTitle = styled.h1`
