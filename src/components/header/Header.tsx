@@ -2,34 +2,40 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import {
   IcBack,
   IcZooc,
-  IcOrderList,
   IcCart,
   IcExit,
+  IcMyPage,
 } from '../../../public/icons';
 
 interface HeaderProps {
   headerTitle?: string;
   exit?: boolean;
   sideMenu?: boolean;
+  backFunc?: React.MouseEventHandler;
   exitFunc?: React.MouseEventHandler;
 }
 
-const Header = ({ headerTitle, exit, sideMenu, exitFunc }: HeaderProps) => {
-  const router = useRouter();
+const Header = ({
+  headerTitle,
+  exit,
+  sideMenu,
+  backFunc,
+  exitFunc,
+}: HeaderProps) => {
   const pathname = usePathname();
 
   return (
     <StHeader>
-      {pathname === '/' ? <IcZooc /> : <IcBack onClick={() => router.back()} />}
+      {pathname === '/' ? <IcZooc /> : <IcBack onClick={backFunc} />}
       <StHeaderTitle>{headerTitle}</StHeaderTitle>
       {sideMenu && (
         <StHeaderRight>
-          <IcOrderList />
           <IcCart />
+          <IcMyPage />
         </StHeaderRight>
       )}
       {exit && <IcExit onClick={exitFunc} />}
