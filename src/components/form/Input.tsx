@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useEffect, useState } from 'react';
 import { Control, useController } from 'react-hook-form';
 import { styled } from 'styled-components';
@@ -32,6 +33,15 @@ function TextInput({
     rules,
   });
   const [inputLength, setInputLength] = useState(0);
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    const newValue =
+      maxLength && value.length > maxLength ? value.slice(0, maxLength) : value;
+    field.onChange(newValue);
+    setInputLength(newValue.length);
+  };
 
   useEffect(() => {
     setInputLength(field.value.length);
@@ -43,7 +53,7 @@ function TextInput({
         {label}
         {isRequired && <StRequired />}
       </StInputLabel>
-      <StInputWrapper>
+      <StInputWrapper $isFocused={isFocused}>
         <input
           type="text"
           id={name}
@@ -51,14 +61,16 @@ function TextInput({
           pattern={pattern}
           maxLength={maxLength}
           {...field}
-          onChange={(e) => {
-            field.onChange(e);
-            setInputLength(e.target.value.length);
-          }}
+          onFocus={() => setIsFocused(true)}
+          onBlur={() => setIsFocused(false)}
+          onChange={handleInputChange}
         />
-        {showCount && (
-          <StLengthCounter>
-            {inputLength}/{maxLength}
+        {showCount && maxLength && (
+          <StLengthCounter
+            $isMaxLength={inputLength >= maxLength}
+            $isFocused={isFocused}
+          >
+            <span>{inputLength}</span>/{maxLength}
           </StLengthCounter>
         )}
       </StInputWrapper>
@@ -90,7 +102,7 @@ export const StRequired = styled.div`
   background-color: ${({ theme }) => theme.colors.zw_point};
 `;
 
-const StInputWrapper = styled.div`
+const StInputWrapper = styled.div<{ $isFocused: boolean }>`
   position: relative;
   width: 100%;
 
@@ -101,10 +113,13 @@ const StInputWrapper = styled.div`
     box-sizing: border-box;
 
     border-radius: 0.2rem;
-    border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
+    border: 0.15rem solid
+      ${({ $isFocused, theme }) =>
+        $isFocused ? theme.colors.zw_point : theme.colors.zw_brightgray};
     background: ${({ theme }) => theme.colors.zw_background};
     color: ${({ theme }) => theme.colors.zw_black};
     ${({ theme }) => theme.fonts.zw_Body1};
+    outline: none;
 
     &::placeholder {
       color: ${({ theme }) => theme.colors.zw_lightgray};
@@ -113,11 +128,24 @@ const StInputWrapper = styled.div`
   }
 `;
 
-const StLengthCounter = styled.div`
+const StLengthCounter = styled.div<{
+  $isFocused: boolean;
+  $isMaxLength: boolean;
+}>`
   position: absolute;
   right: 2rem;
   bottom: 4.3rem;
 
-  color: ${({ theme }) => theme.colors.zw_lightgray};
+  color: ${({ $isMaxLength, theme }) =>
+    $isMaxLength ? theme.colors.zw_point : theme.colors.zw_lightgray};
   ${({ theme }) => theme.fonts.zw_price_small};
+
+  & > span {
+    color: ${({ $isFocused, $isMaxLength, theme }) =>
+      $isMaxLength
+        ? theme.colors.zw_point
+        : $isFocused
+        ? theme.colors.zw_point
+        : theme.colors.zw_lightgray};
+  }
 `;
