@@ -3,6 +3,7 @@
 import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
+import { BottomButton } from '@/components/button';
 import { Input } from '@/components/form';
 
 interface PetRegistrationFormData {
@@ -11,35 +12,49 @@ interface PetRegistrationFormData {
 }
 
 const PetRegistration = () => {
-  const {
-    control,
-    formState: { errors },
-  } = useForm<PetRegistrationFormData>();
+  const { control, watch, handleSubmit } = useForm<PetRegistrationFormData>({
+    mode: 'onChange',
+  });
+
+  const petName = watch('petName');
+  const isFormFilled = petName?.trim().length > 0;
+
+  const onSubmit = (data: PetRegistrationFormData) => {
+    console.log(data);
+  };
 
   return (
-    <StRegistration>
-      <h2>반려동물의 정보를 입력해주세요</h2>
-      <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
-      <StRegistrationForm>
-        <Input
-          name="petName"
-          label="이름"
-          placeholder="사랑이"
-          control={control}
-          maxLength={5}
-          isRequired
-          showCount
-        />
-        <Input
-          name="breed"
-          label="종"
-          placeholder="포메라니안"
-          control={control}
-          maxLength={20}
-          showCount
-        />
-      </StRegistrationForm>
-    </StRegistration>
+    <>
+      <StRegistration>
+        <h2>반려동물의 정보를 입력해주세요</h2>
+        <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
+        <StRegistrationForm onSubmit={handleSubmit(onSubmit)}>
+          <Input
+            name="petName"
+            label="이름"
+            placeholder="사랑이"
+            control={control}
+            maxLength={5}
+            isRequired
+            showCount
+          />
+          <Input
+            name="breed"
+            label="종"
+            placeholder="포메라니안"
+            control={control}
+            maxLength={20}
+            showCount
+          />
+        </StRegistrationForm>
+      </StRegistration>
+      <BottomButton
+        btnName="반려동물 AI 모델 생성하기"
+        btnType="button"
+        disabled={!isFormFilled}
+        activeFunc={handleSubmit(onSubmit)}
+      />
+    </>
   );
 };
 
