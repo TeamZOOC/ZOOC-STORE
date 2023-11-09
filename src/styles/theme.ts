@@ -90,7 +90,15 @@ export const colors = {
   zw_background: '#F5F5F7',
 };
 
+export const zIndex = {
+  zw_header: 100,
+  zw_tab: 150,
+  zw_modal: 200,
+  zw_toast: 200,
+};
+
 export const theme = {
   colors,
   fonts,
+  zIndex,
 };

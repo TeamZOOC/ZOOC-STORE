@@ -50,10 +50,14 @@ const StHeader = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: sticky;
+  top: 0;
 
   padding: 1.6rem 2.8rem;
 
   background-color: ${({ theme }) => theme.colors.zw_background};
+
+  z-index: ${({ theme }) => theme.zIndex.zw_header};
 `;
 
 const StHeaderTitle = styled.h1`

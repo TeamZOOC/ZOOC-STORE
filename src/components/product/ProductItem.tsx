@@ -1,7 +1,7 @@
 'use client';
 
-import Image, { StaticImageData } from 'next/image';
 import { styled } from 'styled-components';
+import Image, { StaticImageData } from 'next/image';
 
 interface ProductInfo {
   newProduct: boolean;
@@ -12,7 +12,7 @@ interface ProductInfo {
   productPrice: string;
 }
 
-const HomeProductItem = ({ product }: { product: ProductInfo }) => {
+const ProductItem = ({ product }: { product: ProductInfo }) => {
   const {
     newProduct,
     imgSrc,
@@ -22,32 +22,30 @@ const HomeProductItem = ({ product }: { product: ProductInfo }) => {
     productPrice,
   } = product;
   return (
-    <StHomeProductItem>
-      <StHomeProductImage>
+    <StProductItem>
+      <StProductImage>
         <Image src={imgSrc} alt={imgAlt} fill />
-        {newProduct && <StHomeSaleTicker>NEW</StHomeSaleTicker>}
-      </StHomeProductImage>
-      <StHomeProductTitle>{productTitle}</StHomeProductTitle>
-      <StHomeProductPriceBox>
+        {newProduct && <StSaleTicker>NEW</StSaleTicker>}
+      </StProductImage>
+      <StProductTitle>{productTitle}</StProductTitle>
+      <StProductPriceBox>
         {productSalePercent && (
-          <StHomeProductSalePercent>
-            {productSalePercent}
-          </StHomeProductSalePercent>
+          <StProductSalePercent>{productSalePercent}</StProductSalePercent>
         )}
-        <StHomeProductPrice>{productPrice}</StHomeProductPrice>
-      </StHomeProductPriceBox>
-    </StHomeProductItem>
+        <StProductPrice>{productPrice}</StProductPrice>
+      </StProductPriceBox>
+    </StProductItem>
   );
 };
 
-export default HomeProductItem;
+export default ProductItem;
 
-const StHomeProductItem = styled.button`
+const StProductItem = styled.button`
   width: 100%;
   aspect-ratio: 1/1.35;
 `;
 
-const StHomeProductImage = styled.div`
+const StProductImage = styled.div`
   position: relative;
 
   aspect-ratio: 1/1.35;
@@ -55,7 +53,7 @@ const StHomeProductImage = styled.div`
   background-color: #eaeaea;
 `;
 
-const StHomeSaleTicker = styled.div`
+const StSaleTicker = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -71,7 +69,7 @@ const StHomeSaleTicker = styled.div`
   letter-spacing: -0.314px;
 `;
 
-const StHomeProductTitle = styled.p`
+const StProductTitle = styled.p`
   margin-top: 1rem;
   margin-bottom: 0.4rem;
 
@@ -81,14 +79,14 @@ const StHomeProductTitle = styled.p`
   text-align: left;
 `;
 
-const StHomeProductPriceBox = styled.div`
+const StProductPriceBox = styled.div`
   display: flex;
   gap: 0.4rem;
 `;
-const StHomeProductPrice = styled.span`
+const StProductPrice = styled.span`
   color: ${({ theme }) => theme.colors.zw_darkgray};
   ${({ theme }) => theme.fonts.zw_price_small};
 `;
-const StHomeProductSalePercent = styled(StHomeProductPrice)`
+const StProductSalePercent = styled(StProductPrice)`
   color: ${({ theme }) => theme.colors.zw_point};
 `;

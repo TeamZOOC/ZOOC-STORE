@@ -37,7 +37,7 @@ const ToastComponent = ({ id, message }: ToastComponentProps) => {
 export default React.memo(ToastComponent);
 
 const StToastWrapper = styled.div`
-  z-index: 1;
+  z-index: ${({ theme }) => theme.zIndex.zw_toast};
 
   position: absolute;
   bottom: 9.7rem;
