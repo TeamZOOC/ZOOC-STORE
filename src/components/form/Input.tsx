@@ -70,7 +70,7 @@ function TextInput({
             $isMaxLength={inputLength >= maxLength}
             $isFocused={isFocused}
           >
-            <span>{inputLength}</span>/{maxLength}
+            {inputLength}/<span>{maxLength}</span>
           </StLengthCounter>
         )}
       </StInputWrapper>
@@ -136,16 +136,16 @@ const StLengthCounter = styled.div<{
   right: 2rem;
   bottom: 4.3rem;
 
-  color: ${({ $isMaxLength, theme }) =>
-    $isMaxLength ? theme.colors.zw_point : theme.colors.zw_lightgray};
+  color: ${({ $isFocused, theme }) =>
+    $isFocused ? theme.colors.zw_point : theme.colors.zw_lightgray};
   ${({ theme }) => theme.fonts.zw_price_small};
 
   & > span {
     color: ${({ $isFocused, $isMaxLength, theme }) =>
-      $isMaxLength
-        ? theme.colors.zw_point
-        : $isFocused
-        ? theme.colors.zw_point
+      $isFocused
+        ? $isMaxLength
+          ? theme.colors.zw_point
+          : theme.colors.zw_lightgray
         : theme.colors.zw_lightgray};
   }
 `;
