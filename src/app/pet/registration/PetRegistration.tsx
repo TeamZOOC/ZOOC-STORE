@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
@@ -20,9 +21,11 @@ const PetRegistration = () => {
   const isFormFilled = petName?.trim().length > 0;
 
   const { showToast } = useToast();
+  const router = useRouter();
 
   const onSubmit = (data: PetRegistrationFormData) => {
     console.log(data);
+    router.push('/pet/registration/createmodel');
   };
 
   const onError = (errors: any) => {
