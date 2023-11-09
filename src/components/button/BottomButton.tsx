@@ -15,7 +15,7 @@ const BottomButton = ({
   activeFunc,
 }: BottomButtonProps) => (
   <StBottomButtonWrapper>
-    <StBottomButton type={btnType} disabled={disabled} onClick={activeFunc}>
+    <StBottomButton type={btnType} $disabled={disabled} onClick={activeFunc}>
       {btnName}
     </StBottomButton>
   </StBottomButtonWrapper>
@@ -34,7 +34,7 @@ const StBottomButtonWrapper = styled.div`
   width: 100%;
 `;
 
-const StBottomButton = styled.button`
+const StBottomButton = styled.button<{ $disabled: boolean }>`
   width: 100%;
   max-width: 43rem;
   height: 7.7rem;
@@ -42,6 +42,6 @@ const StBottomButton = styled.button`
   color: ${({ theme }) => theme.colors.zw_white};
   ${({ theme }) => theme.fonts.zw_Subhead1};
 
-  background-color: ${({ theme, disabled }) =>
-    disabled ? theme.colors.zw_lightgray : theme.colors.zw_black};
+  background-color: ${({ theme, $disabled }) =>
+    $disabled ? theme.colors.zw_lightgray : theme.colors.zw_black};
 `;

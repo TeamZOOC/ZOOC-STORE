@@ -1,12 +1,13 @@
 import { atom, atomFamily } from 'recoil';
 
-const TOAST_KEY = ['delivery', 'agreement'] as const;
+const TOAST_KEY = ['delivery', 'agreement', 'required'] as const;
 
 export type ToastKey = (typeof TOAST_KEY)[number];
 
 export const TOAST_MESSAGES: Record<ToastKey, string> = {
   delivery: '배송 정보를 모두 입력해주세요',
   agreement: '필수 동의 항목을 확인해주세요',
+  required: '필수 정보를 입력해주세요',
 };
 
 export type Toast = {

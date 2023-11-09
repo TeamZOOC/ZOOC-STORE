@@ -5,6 +5,7 @@ import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
 import { Input } from '@/components/form';
+import { useToast } from '@/hooks/toast';
 
 interface PetRegistrationFormData {
   petName: string;
@@ -15,12 +16,19 @@ const PetRegistration = () => {
   const { control, watch, handleSubmit } = useForm<PetRegistrationFormData>({
     mode: 'onChange',
   });
-
   const petName = watch('petName');
   const isFormFilled = petName?.trim().length > 0;
 
+  const { showToast } = useToast();
+
   const onSubmit = (data: PetRegistrationFormData) => {
     console.log(data);
+  };
+
+  const onError = (errors: any) => {
+    if (errors.petName) {
+      showToast('required');
+    }
   };
 
   return (
@@ -34,8 +42,7 @@ const PetRegistration = () => {
             label="이름"
             placeholder="사랑이"
             control={control}
-            maxLength={5}
-            rules={{ required: true }}
+            rules={{ required: true, maxLength: 5 }}
             showCount
           />
           <Input
@@ -43,7 +50,7 @@ const PetRegistration = () => {
             label="종"
             placeholder="포메라니안"
             control={control}
-            maxLength={20}
+            rules={{ maxLength: 20 }}
             showCount
           />
         </StRegistrationForm>
@@ -52,7 +59,7 @@ const PetRegistration = () => {
         btnName="반려동물 AI 모델 생성하기"
         btnType="button"
         disabled={!isFormFilled}
-        activeFunc={handleSubmit(onSubmit)}
+        activeFunc={handleSubmit(onSubmit, onError)}
       />
     </>
   );

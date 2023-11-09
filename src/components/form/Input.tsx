@@ -12,8 +12,6 @@ interface TextInputProps {
   placeholder: string;
   control: Control<any>;
   rules?: Record<string, any>;
-  pattern?: string;
-  maxLength?: number;
   showCount?: boolean;
 }
 
@@ -23,8 +21,6 @@ function TextInput({
   placeholder,
   control,
   rules,
-  pattern,
-  maxLength,
   showCount,
 }: TextInputProps) {
   const { field } = useController({
@@ -36,6 +32,7 @@ function TextInput({
   const [inputLength, setInputLength] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
   const isRequired = rules?.required !== undefined;
+  const maxLength = rules?.maxLength ?? undefined;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -60,8 +57,6 @@ function TextInput({
           type="text"
           id={name}
           placeholder={placeholder}
-          pattern={pattern}
-          maxLength={maxLength}
           {...field}
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
