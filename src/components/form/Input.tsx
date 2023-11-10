@@ -29,10 +29,12 @@ function TextInput({
     defaultValue: '',
     rules,
   });
+
   const [inputLength, setInputLength] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
-  const isRequired = rules?.required !== undefined;
-  const maxLength = rules?.maxLength ?? undefined;
+
+  const isRequired = Boolean(rules?.required);
+  const maxLength = rules?.maxLength;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
