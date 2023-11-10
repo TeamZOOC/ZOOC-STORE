@@ -1,14 +1,14 @@
 import { styled } from 'styled-components';
 
+import { Radio } from '@/components/radio';
+
 import { StInfoTitle } from '../productInfo/ProductInfo';
 
 const PaymentMethod = () => (
   <StPaymentInfoSection>
     <StPaymentTitle>결제 수단</StPaymentTitle>
     <StPaymentMethod>
-      <StRadioBtn>
-        <div className="inner-circle" />
-      </StRadioBtn>
+      <Radio />
       <StRadioInput htmlFor="noAccount">
         무통장 입금
         <input type="radio" name="noAccount" value="noAccount" checked />
@@ -37,25 +37,6 @@ const StPaymentMethod = styled.div`
 
   color: ${({ theme }) => theme.colors.zw_black};
   ${({ theme }) => theme.fonts.zw_Body1};
-`;
-
-const StRadioBtn = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 2rem;
-  height: 2rem;
-
-  background-color: ${({ theme }) => theme.colors.zw_point};
-  border-radius: 50%;
-
-  .inner-circle {
-    width: 1rem;
-    height: 1rem;
-    background-color: ${({ theme }) => theme.colors.zw_white};
-    border-radius: 50%;
-  }
 `;
 
 const StRadioInput = styled.label`

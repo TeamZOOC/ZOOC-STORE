@@ -4,6 +4,7 @@ import { useTab } from '@/hooks/tab';
 
 import { StInfoTitle } from '../productInfo/ProductInfo';
 import DeliveryForm from './DeliveryForm';
+import ExistingAddress from './ExistingAddress';
 
 const DeliveryInfo = () => {
   const DELIVERY_TAB = ['기존 배송지', '신규입력'];
@@ -35,6 +36,7 @@ const DeliveryInfo = () => {
       </StDeliveryTabs>
       <StAddressForm>
         {activeTab === '신규입력' && <DeliveryForm />}
+        {activeTab === '기존 배송지' && <ExistingAddress />}
       </StAddressForm>
     </StDeliveryInfoSection>
   );
