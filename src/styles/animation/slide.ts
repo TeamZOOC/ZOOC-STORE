@@ -10,9 +10,9 @@ export const slideInFromBottom = keyframes`
 `;
 export const slideInFromTop = keyframes`
   from {
-    transform: translateY(-100%);
+    transform: translateY(0);
   }
   to {
-    transform: translateY(0);
+    transform: translateY(100%);
   }
 `;
