@@ -30,7 +30,7 @@ const PetRegistration = () => {
 
   const onError = (errors: any) => {
     if (errors.petName) {
-      showToast('required');
+      showToast('pet_required');
     }
   };
 
