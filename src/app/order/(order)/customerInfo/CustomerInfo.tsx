@@ -19,21 +19,22 @@ const CustomerInfo = () => {
   return (
     <StCustomerInfoSection>
       <StCustomerTitle>구매자 정보</StCustomerTitle>
-      <Input
-        name="name"
-        label="이름"
-        placeholder="홍길동"
-        control={control}
-        isRequired
-      />
-      <Input
-        name="phone"
-        label="연락처"
-        placeholder="010-1234-5678"
-        control={control}
-        maxLength={13}
-        isRequired
-      />
+      <StCustomerInput>
+        <Input
+          name="name"
+          label="이름"
+          placeholder="홍길동"
+          control={control}
+          rules={{ required: true }}
+        />
+        <Input
+          name="phone"
+          label="연락처"
+          placeholder="010-1234-5678"
+          control={control}
+          rules={{ required: true, maxLength: 13 }}
+        />
+      </StCustomerInput>
     </StCustomerInfoSection>
   );
 };
@@ -45,3 +46,9 @@ const StCustomerInfoSection = styled.div`
 `;
 
 const StCustomerTitle = styled(StInfoTitle)``;
+
+const StCustomerInput = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+`;

@@ -5,47 +5,52 @@ import { Input } from '@/components/form';
 
 import AddressInput from './AddressInput';
 
-interface DeliveryInfoFormData {
+interface NewDeliveryInfoFormData {
   receiver: string;
   receiver_phone: string;
   address: string;
   request?: string;
 }
-const DeliveryForm = () => {
+const NewDeliveryForm = () => {
   const {
     control,
     formState: { errors },
-  } = useForm<DeliveryInfoFormData>();
+  } = useForm<NewDeliveryInfoFormData>();
 
   return (
-    <StDeliveryForm>
+    <StNewDeliveryForm>
       <Input
         name="receiver"
         label="수령인"
         placeholder="홍길동"
         control={control}
-        isRequired
+        rules={{ required: true }}
       />
       <Input
         name="receiver_phone"
         label="연락처"
         placeholder="010-1234-5678"
         control={control}
-        maxLength={13}
-        isRequired
+        rules={{ required: true, maxLength: 13 }}
       />
-      <AddressInput control={control} />
+      <AddressInput />
       <Input
         name="request"
         label="요청사항"
         placeholder="안전한 배송 부탁드립니다."
         control={control}
-        maxLength={30}
+        rules={{ maxLength: 13 }}
       />
-    </StDeliveryForm>
+    </StNewDeliveryForm>
   );
 };
 
-export default DeliveryForm;
+export default NewDeliveryForm;
 
-const StDeliveryForm = styled.form``;
+const StNewDeliveryForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+
+  margin-bottom: 2rem;
+`;

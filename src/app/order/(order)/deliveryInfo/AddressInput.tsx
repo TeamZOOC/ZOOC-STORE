@@ -53,9 +53,7 @@ const AddressInput = () => {
 
 export default AddressInput;
 
-const SrAddressForm = styled.div`
-  margin-bottom: 2.4rem;
-`;
+const SrAddressForm = styled.div``;
 
 const StLabel = styled(StInputLabel)``;
 

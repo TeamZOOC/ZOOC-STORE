@@ -1,14 +1,13 @@
 import { styled } from 'styled-components';
 
-import { Radio } from '@/components/radio';
-
+import { IcRadioBefore } from '../../../../../public/icons';
 import { StInfoTitle } from '../productInfo/ProductInfo';
 
 const PaymentMethod = () => (
   <StPaymentInfoSection>
     <StPaymentTitle>결제 수단</StPaymentTitle>
     <StPaymentMethod>
-      <Radio />
+      <IcRadioBefore />
       <StRadioInput htmlFor="noAccount">
         무통장 입금
         <input type="radio" name="noAccount" value="noAccount" checked />
