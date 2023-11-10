@@ -12,6 +12,10 @@ import IcThirdStep from './ic_third_step.svg';
 import IcToss from './ic_toss.svg';
 import IcZooc from './ic_zooc.svg';
 import IcMyPage from './ic_mypage.svg';
+import IcDropDown from './ic_dropdown.svg';
+import IcProductDelete from './ic_product_delete.svg';
+import IcMinus from './ic_minus.svg';
+import IcPlus from './ic_plus.svg';
 
 export {
   IcBack,
@@ -28,4 +32,8 @@ export {
   IcCart,
   IcExit,
   IcMyPage,
+  IcDropDown,
+  IcProductDelete,
+  IcMinus,
+  IcPlus,
 };
