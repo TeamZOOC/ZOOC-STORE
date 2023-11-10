@@ -19,13 +19,17 @@ const StOptionBottomButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
   padding: 2.2rem 0 2.4rem 0;
+
   border-radius: 0.2rem;
   ${({ theme }) => theme.fonts.zw_Subhead1};
+
   box-shadow: 0 0 1.5rem 0px rgba(0, 0, 0, 0.06);
 `;
 const StOptionBasketButton = styled(StOptionBottomButton)`
   border: 0.1rem solid ${({ theme }) => theme.colors.zw_lightgray};
+
   background-color: ${({ theme }) => theme.colors.zw_background};
   color: ${({ theme }) => theme.colors.zw_lightgray};
 `;

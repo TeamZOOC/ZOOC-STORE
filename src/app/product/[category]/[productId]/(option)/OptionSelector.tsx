@@ -21,13 +21,16 @@ const StOptionSelector = styled.div`
   justify-content: space-between;
   align-items: center;
   position: relative;
+
   width: 100%;
   height: 5rem;
   margin-bottom: 4rem;
   padding: 0 1.2rem 0 2rem;
+
   border: 0.1rem solid ${({ theme }) => theme.colors.zw_lightgray};
   border-radius: 0.2rem;
   background-color: ${({ theme }) => theme.colors.zw_background};
+
   span {
     color: ${({ theme }) => theme.colors.zw_lightgray};
     ${({ theme }) => theme.fonts.zw_Body1};

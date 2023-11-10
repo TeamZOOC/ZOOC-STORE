@@ -19,8 +19,19 @@ const ProductInfoNav = () => {
   });
   const bottomSheetRef = useRef<HTMLDivElement | null>(null);
   const [isOptionToggle, setIsOptionToggle] = useState(false);
+  const [isUnMount, setIsUnMount] = useState(false);
+
   const handleToggleOption = () => {
+    if (isOptionToggle) {
+      setIsUnMount(!isUnMount);
+      setTimeout(() => {
+        setIsOptionToggle(!isOptionToggle);
+      }, 500);
+      return;
+    }
+
     setIsOptionToggle(!isOptionToggle);
+    setIsUnMount(!isUnMount);
   };
   useOutSideClick({ ref: bottomSheetRef, callback: handleToggleOption });
   return (
@@ -71,9 +82,14 @@ const ProductInfoNav = () => {
         disabled={false}
         activeFunc={handleToggleOption}
       />
-      <OptionBottomSheetContainer>
-        <OptionBottomSheet bottomSheetRef={bottomSheetRef} />
-      </OptionBottomSheetContainer>
+      {isOptionToggle && (
+        <OptionBottomSheetContainer>
+          <OptionBottomSheet
+            isUnMount={isUnMount}
+            bottomSheetRef={bottomSheetRef}
+          />
+        </OptionBottomSheetContainer>
+      )}
     </>
   );
 };
@@ -81,13 +97,16 @@ export default ProductInfoNav;
 const StProductInfoNav = styled.nav`
   position: sticky;
   top: 6.8rem;
+
   margin-top: 4.5rem;
   margin-left: 2.8rem;
+
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
   background-color: ${({ theme }) => theme.colors.zw_background};
 `;
 const StProductInfoNavItem = styled.button<{ $active: boolean }>`
   padding-bottom: 1.2rem;
+
   color: ${({ theme }) => theme.colors.zw_lightgray};
   ${({ theme }) => theme.fonts.zw_Subhead3};
   ${({ $active }) =>
@@ -102,11 +121,14 @@ const StProductInfoNavItem = styled.button<{ $active: boolean }>`
 `;
 const StProductInfoEmptySpace = styled.div`
   height: 1.4rem;
+
   background-color: transparent;
 `;
 const StProductInfoImage = styled.div`
   height: 24rem;
+
   background-color: #efefef;
+
   & + & {
     margin-top: 1rem;
   }
@@ -117,6 +139,7 @@ const StProductShippingInfoWrapper = styled.div`
 const StProductShippingInfo = styled.div`
   display: grid;
   grid-template-columns: 2fr 8fr;
+
   ${({ theme }) => theme.fonts.zw_Body2};
   & > span {
     color: ${({ theme }) => theme.colors.zw_gray};
