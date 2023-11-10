@@ -2,22 +2,24 @@
 
 import React from 'react';
 import { styled, css } from 'styled-components';
-import { slideInFromBottom } from '@/styles/animation/slide';
+import { slideInFromBottom, slideInFromTop } from '@/styles/animation/slide';
 import OptionSelector from './OptionSelector';
 import OptionBottomButton from './OptionBottomButton';
 import OptionSelectItem from './OptionSelectItem';
 import OptionTotalPrice from './OptionTotalPrice';
 
 interface OptionBottomSheetProps {
+  isUnMount: boolean;
   bottomSheetRef: React.RefObject<HTMLDivElement>;
 }
-const OptionBottomSheet = ({ bottomSheetRef }: OptionBottomSheetProps) => (
-  <StOptionBottomSheet ref={bottomSheetRef}>
+const OptionBottomSheet = ({
+  isUnMount,
+  bottomSheetRef,
+}: OptionBottomSheetProps) => (
+  <StOptionBottomSheet ref={bottomSheetRef} isUnMount={isUnMount}>
     <StOptionBottomSheetInner $position="top">
       <OptionSelector />
       <OptionSelectItem />
-      {/* <OptionSelectItem />
-        <OptionSelectItem /> */}
     </StOptionBottomSheetInner>
     <StHr />
     <StOptionBottomSheetInner $position="bottom">
@@ -28,15 +30,24 @@ const OptionBottomSheet = ({ bottomSheetRef }: OptionBottomSheetProps) => (
 );
 export default OptionBottomSheet;
 
-const StOptionBottomSheet = styled.div`
+const StOptionBottomSheet = styled.div<{ isUnMount: boolean }>`
   position: absolute;
   bottom: 0;
   left: 0;
+
   width: 100%;
+
   border-radius: 0.6rem 0.6rem 0 0;
   background-color: ${({ theme }) => theme.colors.zw_background};
 
-  animation: ${slideInFromBottom} 0.5s ease-in-out;
+  ${({ isUnMount }) =>
+    isUnMount
+      ? css`
+          animation: ${slideInFromBottom} 0.5s ease-in-out;
+        `
+      : css`
+          animation: ${slideInFromTop} 0.5s ease-in-out;
+        `}
 `;
 const StOptionBottomSheetInner = styled.div<{ $position: string }>`
   width: 100%;

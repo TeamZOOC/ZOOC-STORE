@@ -27,6 +27,7 @@ const StProductList = styled.div`
   grid-template-columns: repeat(2, 1fr);
   row-gap: 2.8rem;
   column-gap: 1.1rem;
+
   width: 100%;
   margin-top: 2rem;
 `;
