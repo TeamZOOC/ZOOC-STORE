@@ -23,7 +23,7 @@ function TextInput({
   rules,
   showCount,
 }: TextInputProps) {
-  const { field } = useController({
+  const { field, fieldState } = useController({
     name,
     control,
     defaultValue: '',
@@ -54,7 +54,7 @@ function TextInput({
         {label}
         {isRequired && <StRequired />}
       </StInputLabel>
-      <StInputWrapper $isFocused={isFocused}>
+      <StInputWrapper $isFocused={isFocused} $isError={!!fieldState.error}>
         <input
           type="text"
           id={name}
@@ -101,7 +101,7 @@ export const StRequired = styled.div`
   background-color: ${({ theme }) => theme.colors.zw_point};
 `;
 
-const StInputWrapper = styled.div<{ $isFocused: boolean }>`
+const StInputWrapper = styled.div<{ $isFocused: boolean; $isError: boolean }>`
   position: relative;
   width: 100%;
 
@@ -112,9 +112,13 @@ const StInputWrapper = styled.div<{ $isFocused: boolean }>`
     box-sizing: border-box;
 
     border-radius: 0.2rem;
-    border: 0.15rem solid
-      ${({ $isFocused, theme }) =>
-        $isFocused ? theme.colors.zw_point : theme.colors.zw_brightgray};
+    border: 0.1rem solid
+      ${({ $isFocused, $isError, theme }) =>
+        $isError
+          ? '#FF453A'
+          : $isFocused
+          ? theme.colors.zw_point
+          : theme.colors.zw_brightgray};
     background: ${({ theme }) => theme.colors.zw_background};
     color: ${({ theme }) => theme.colors.zw_black};
     ${({ theme }) => theme.fonts.zw_Body1};
