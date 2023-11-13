@@ -9,7 +9,7 @@ import {
   IcKakaoBank,
   IcKakaoPay,
   IcSecondStep,
-  IcToss
+  IcToss,
 } from '../../../../../public/icons';
 import { StStepBox, StTitle, StUnSelected } from './FirstStep';
 

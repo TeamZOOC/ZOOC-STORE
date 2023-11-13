@@ -8,6 +8,7 @@ import IcFirstStep from './ic_first_step.svg';
 import IcKakaoBank from './ic_kakaobank.svg';
 import IcKakaoPay from './ic_kakaopay.svg';
 import IcKey from './ic_key.svg';
+import IcMyPage from './ic_mypage.svg';
 import IcOrderList from './ic_orderlist.svg';
 import IcRadioAfter from './ic_radio_after.svg';
 import IcRadioBefore from './ic_radio_before.svg';
@@ -34,4 +35,5 @@ export {
   IcExit,
   IcCheckboxAfter,
   IcCheckboxBefore,
+  IcMyPage,
 };

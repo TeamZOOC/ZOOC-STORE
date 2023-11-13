@@ -7,12 +7,12 @@ export const CAROUSEL_LIST = [
     imgAlt: '캐러셀 이미지',
   },
   {
-    id: 1,
+    id: 2,
     imgSrc: ImageCarousel,
     imgAlt: '캐러셀 이미지',
   },
   {
-    id: 1,
+    id: 3,
     imgSrc: ImageCarousel,
     imgAlt: '캐러셀 이미지',
   },

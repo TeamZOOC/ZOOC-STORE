@@ -1,7 +1,4 @@
 /* eslint-disable no-nested-ternary */
-
-'use client';
-
 import React, { useEffect, useState } from 'react';
 import { Control, useController } from 'react-hook-form';
 import { styled } from 'styled-components';
