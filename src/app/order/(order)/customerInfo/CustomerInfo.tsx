@@ -1,7 +1,9 @@
 import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { Input } from '@/components/form';
+import { buyerState } from '@/recoil/order/atom';
 
 import { StInfoTitle } from '../productInfo/ProductInfo';
 
@@ -15,6 +17,7 @@ const CustomerInfo = () => {
     control,
     formState: { errors },
   } = useForm<CustomerInfoFormData>();
+  const [buyerInfo, setBuyerInfo] = useRecoilState(buyerState);
 
   return (
     <StCustomerInfoSection>

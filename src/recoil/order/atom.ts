@@ -15,3 +15,11 @@ export const addressState = atom<AddressInfo>({
     postcode: '',
   },
 });
+
+export const buyerState = atom({
+  key: 'buyerState',
+  default: {
+    buyerName: '',
+    buyerPhone: '',
+  },
+});
