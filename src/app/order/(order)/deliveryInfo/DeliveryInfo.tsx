@@ -1,7 +1,10 @@
+import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 /* eslint-disable react/no-array-index-key */
 import { styled } from 'styled-components';
 
 import { useTab } from '@/hooks/tab';
+import { buyerState } from '@/recoil/order/atom';
 
 import { StInfoTitle } from '../productInfo/ProductInfo';
 import ExistingAddressList from './ExistingAddressList';
@@ -13,8 +16,18 @@ const DeliveryInfo = () => {
     tabList: DELIVERY_TAB,
     defaultTabIndex: 1,
   });
+  const buyerInfo = useRecoilValue(buyerState);
+  const [sameAsBuyerSelected, setSameAsBuyerSelected] = useState(false);
 
-  const handleSameAsBuyer = () => {};
+  const handleSameAsBuyer = () => {
+    setSameAsBuyerSelected(true);
+  };
+
+  useEffect(() => {
+    if (sameAsBuyerSelected) {
+      setSameAsBuyerSelected(false);
+    }
+  }, [sameAsBuyerSelected]);
 
   return (
     <StDeliveryInfoSection>
@@ -37,7 +50,12 @@ const DeliveryInfo = () => {
         ))}
       </StDeliveryTabs>
       <StAddressForm>
-        {activeTab === '신규입력' && <NewDeliveryForm />}
+        {activeTab === '신규입력' && (
+          <NewDeliveryForm
+            buyerName={sameAsBuyerSelected ? buyerInfo.buyerName : undefined}
+            buyerPhone={sameAsBuyerSelected ? buyerInfo.buyerPhone : undefined}
+          />
+        )}
         {activeTab === '기존 배송지' && <ExistingAddressList />}
       </StAddressForm>
     </StDeliveryInfoSection>
