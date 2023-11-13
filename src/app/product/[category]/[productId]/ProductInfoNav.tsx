@@ -22,16 +22,16 @@ const ProductInfoNav = () => {
   const [isUnMount, setIsUnMount] = useState(false);
 
   const handleToggleOption = () => {
-    if (isOptionToggle) {
-      setIsUnMount(!isUnMount);
-      setTimeout(() => {
-        setIsOptionToggle(!isOptionToggle);
-      }, 500);
+    setIsOptionToggle(true);
+    setIsUnMount((prev) => !prev);
+  };
+
+  const handleAnimationEnd = () => {
+    if (isUnMount) {
       return;
     }
 
-    setIsOptionToggle(!isOptionToggle);
-    setIsUnMount(!isUnMount);
+    setIsOptionToggle(false);
   };
   useOutSideClick({ ref: bottomSheetRef, callback: handleToggleOption });
   return (
@@ -86,6 +86,8 @@ const ProductInfoNav = () => {
         <OptionBottomSheetContainer>
           <OptionBottomSheet
             isUnMount={isUnMount}
+            handleAnimationEnd={handleAnimationEnd}
+            isOptionToggle={isOptionToggle}
             bottomSheetRef={bottomSheetRef}
           />
         </OptionBottomSheetContainer>
