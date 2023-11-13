@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
@@ -14,6 +15,7 @@ import ProductInfo from './productInfo/ProductInfo';
 
 const Order = () => {
   const { products, payment } = ORDER_DETAIL;
+  const router = useRouter();
   return (
     <StOrder>
       <ProductInfo products={products} />
@@ -31,9 +33,9 @@ const Order = () => {
       <BottomButton
         btnType="button"
         btnName="38,000원 결제하기"
-        disabled
+        disabled={false}
         activeFunc={() => {
-          console.log('무통장입금 페이지 라우팅');
+          router.push('/order/payment');
         }}
       />
     </StOrder>

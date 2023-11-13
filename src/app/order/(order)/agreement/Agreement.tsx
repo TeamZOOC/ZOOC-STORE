@@ -28,7 +28,7 @@ const Agreement = () => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           {ORDER_AGREEMENT.map(({ id, label }) => (
-            <Checkbox id={id} label={label} />
+            <Checkbox id={id} key={id} label={label} />
           ))}
         </form>
       </FormProvider>

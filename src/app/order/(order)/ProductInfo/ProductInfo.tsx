@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { styled } from 'styled-components';
 
 import OrderProduct from '@/app/mypage/orderlist/(order)/OrderProduct';
@@ -11,8 +12,8 @@ const ProductInfo = ({ products }: ProductInfoProps) => (
   <StInfoSection>
     <StInfoTitle>상품 정보</StInfoTitle>
     <StProducts>
-      {products.map((product) => (
-        <OrderProduct key={product.id} order={product} />
+      {products.map((product, index) => (
+        <OrderProduct key={index} order={product} />
       ))}
     </StProducts>
   </StInfoSection>

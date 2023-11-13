@@ -25,14 +25,14 @@ const CustomerInfo = () => {
           label="이름"
           placeholder="홍길동"
           control={control}
-          rules={{ required: true }}
+          rules={{ required: true, maxLength: 7 }}
         />
         <Input
           name="phone"
           label="연락처"
           placeholder="010-1234-5678"
           control={control}
-          rules={{ required: true, maxLength: 13 }}
+          rules={{ required: true, maxLength: 15 }}
         />
       </StCustomerInput>
     </StCustomerInfoSection>

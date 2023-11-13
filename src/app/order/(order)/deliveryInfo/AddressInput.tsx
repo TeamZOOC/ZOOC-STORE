@@ -21,7 +21,7 @@ const AddressInput = () => {
           id="zip_code"
           value={address.postcode}
           placeholder="우편번호"
-          maxLength={5}
+          maxLength={8}
           readOnly
         />
         <StAddressSearchBtn

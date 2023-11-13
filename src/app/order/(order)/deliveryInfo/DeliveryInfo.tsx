@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { styled } from 'styled-components';
 
 import { useTab } from '@/hooks/tab';
@@ -26,6 +27,7 @@ const DeliveryInfo = () => {
       <StDeliveryTabs>
         {DELIVERY_TAB.map((addressTab, index) => (
           <StDeliveryTab
+            key={index}
             type="button"
             onClick={() => setActiveTab(index)}
             $isActiveTab={activeTab === addressTab}

@@ -39,7 +39,7 @@ const NewDeliveryForm = () => {
         label="요청사항"
         placeholder="안전한 배송 부탁드립니다."
         control={control}
-        rules={{ maxLength: 13 }}
+        rules={{ maxLength: 30 }}
       />
     </StNewDeliveryForm>
   );
