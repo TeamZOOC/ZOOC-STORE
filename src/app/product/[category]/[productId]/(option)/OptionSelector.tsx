@@ -8,7 +8,7 @@ import OptionDropdown from './OptionDropdown';
 const OptionSelector = () => {
   const [isDropdownToggle, setIsDropdownToggle] = useState(false);
   return (
-    <StOptionSelector onClick={() => setIsDropdownToggle(!isDropdownToggle)}>
+    <StOptionSelector onClick={() => setIsDropdownToggle((prev) => !prev)}>
       {isDropdownToggle && <OptionDropdown />}
       <span>기종 선택</span>
       <IcDropDown />
