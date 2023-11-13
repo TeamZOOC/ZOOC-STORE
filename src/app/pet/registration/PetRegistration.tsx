@@ -86,5 +86,9 @@ const StRegistration = styled.div`
 `;
 
 const StRegistrationForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+
   margin-top: 6rem;
 `;

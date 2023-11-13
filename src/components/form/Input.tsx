@@ -136,7 +136,7 @@ const StLengthCounter = styled.div<{
 }>`
   position: absolute;
   right: 2rem;
-  bottom: 4.3rem;
+  bottom: 2rem;
 
   color: ${({ $isFocused, theme }) =>
     $isFocused ? theme.colors.zw_point : theme.colors.zw_lightgray};
