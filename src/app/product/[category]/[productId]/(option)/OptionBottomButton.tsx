@@ -25,7 +25,7 @@ const StOptionBottomButton = styled.button`
   border-radius: 0.2rem;
   ${({ theme }) => theme.fonts.zw_Subhead1};
 
-  box-shadow: 0 0 1.5rem 0px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.06);
 `;
 const StOptionBasketButton = styled(StOptionBottomButton)`
   border: 0.1rem solid ${({ theme }) => theme.colors.zw_lightgray};
