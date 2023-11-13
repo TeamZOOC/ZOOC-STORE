@@ -7,13 +7,33 @@ import { MainLayout } from '@/components/layout';
 import { TAB_LIST } from '@/constants/productTab';
 import useTab from '@/hooks/tab/useTab';
 import { css, styled } from 'styled-components';
+import { useRef, useState } from 'react';
+import useOutSideClick from '@/hooks/outside/useOutsideClick';
+import OptionBottomSheetContainer from './(option)/OptionBottomSheetContainer';
+import OptionBottomSheet from './(option)/OptionBottomSheet';
 
 const ProductInfoNav = () => {
   const { activeTab, setActiveTab } = useTab({
     tabList: TAB_LIST,
     defaultTabIndex: 0,
   });
+  const bottomSheetRef = useRef<HTMLDivElement | null>(null);
+  const [isOptionToggle, setIsOptionToggle] = useState(false);
+  const [isUnMount, setIsUnMount] = useState(false);
 
+  const handleToggleOption = () => {
+    setIsOptionToggle(true);
+    setIsUnMount((prev) => !prev);
+  };
+
+  const handleAnimationEnd = () => {
+    if (isUnMount) {
+      return;
+    }
+
+    setIsOptionToggle(false);
+  };
+  useOutSideClick({ ref: bottomSheetRef, callback: handleToggleOption });
   return (
     <>
       <StProductInfoNav>
@@ -60,14 +80,22 @@ const ProductInfoNav = () => {
         btnType="button"
         btnName="구매하기"
         disabled={false}
-        activeFunc={() => {}}
+        activeFunc={handleToggleOption}
       />
+      {isOptionToggle && (
+        <OptionBottomSheetContainer>
+          <OptionBottomSheet
+            isUnMount={isUnMount}
+            handleAnimationEnd={handleAnimationEnd}
+            isOptionToggle={isOptionToggle}
+            bottomSheetRef={bottomSheetRef}
+          />
+        </OptionBottomSheetContainer>
+      )}
     </>
   );
 };
-
 export default ProductInfoNav;
-
 const StProductInfoNav = styled.nav`
   position: sticky;
   top: 6.8rem;
@@ -78,13 +106,11 @@ const StProductInfoNav = styled.nav`
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
   background-color: ${({ theme }) => theme.colors.zw_background};
 `;
-
 const StProductInfoNavItem = styled.button<{ $active: boolean }>`
   padding-bottom: 1.2rem;
 
   color: ${({ theme }) => theme.colors.zw_lightgray};
   ${({ theme }) => theme.fonts.zw_Subhead3};
-
   ${({ $active }) =>
     $active &&
     css`
@@ -95,20 +121,20 @@ const StProductInfoNavItem = styled.button<{ $active: boolean }>`
     margin-left: 3.2rem;
   }
 `;
-
 const StProductInfoEmptySpace = styled.div`
   height: 1.4rem;
+
   background-color: transparent;
 `;
 const StProductInfoImage = styled.div`
   height: 24rem;
+
   background-color: #efefef;
 
   & + & {
     margin-top: 1rem;
   }
 `;
-
 const StProductShippingInfoWrapper = styled.div`
   height: 26.2rem;
 `;
@@ -117,15 +143,12 @@ const StProductShippingInfo = styled.div`
   grid-template-columns: 2fr 8fr;
 
   ${({ theme }) => theme.fonts.zw_Body2};
-
   & > span {
     color: ${({ theme }) => theme.colors.zw_gray};
   }
-
   & > p {
     color: ${({ theme }) => theme.colors.zw_black};
   }
-
   & + & {
     margin-top: 1.8rem;
   }
