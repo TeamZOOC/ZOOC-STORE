@@ -11,10 +11,7 @@ const ProductList = () => {
   return (
     <StProductList>
       {PRODUCT_LIST.map((product) => (
-        <Link
-          href={`/product/${pathname.slice(9)}/${product.id}`}
-          key={product.id}
-        >
+        <Link href={`${pathname}/${product.id}`} key={product.id}>
           <ProductItem product={product} />
         </Link>
       ))}
