@@ -10,7 +10,7 @@ const PaymentMethod = () => (
       <IcRadioAfter />
       <StRadioInput htmlFor="noAccount">
         무통장 입금
-        <input type="radio" name="noAccount" value="noAccount" checked />
+        <input type="radio" name="noAccount" value="noAccount" defaultChecked />
       </StRadioInput>
     </StPaymentMethod>
     <StDescription>현재 결제 수단은 무통장 입금만 가능합니다.</StDescription>

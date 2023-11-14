@@ -18,11 +18,18 @@ const CheckBox = ({ name, label, control }: CheckBoxProps) => {
     rules: { required: true },
     defaultValue: false,
   });
+  const { onChange, ...restField } = field;
   const isError = formState.isSubmitted && fieldState.invalid;
 
   return (
     <StCheckboxLabel htmlFor={name}>
-      <StCheckbox id={name} checked={field.value} type="checkbox" {...field} />
+      <StCheckbox
+        id={name}
+        checked={field.value}
+        onChange={onChange}
+        type="checkbox"
+        {...restField}
+      />
       <StCheckIconWrapper $isError={isError}>
         {field.value ? (
           <IcCheckboxAfter className="checkAfter" />
