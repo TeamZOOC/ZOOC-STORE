@@ -3,6 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import { TextInput } from '@/components/form';
+import { NewDeliveryFormData } from '@/types/form';
 
 import AddressInput from './AddressInput';
 
@@ -11,21 +12,8 @@ interface NewDeliveryFormProps {
   buyerPhone?: string;
 }
 
-interface NewDeliveryInfoFormData {
-  receiver: {
-    name: string;
-    phone: string;
-  };
-  address: {
-    address: string;
-    postcode: string;
-    detailAddress: string;
-    request?: string;
-  };
-}
-
 const NewDeliveryForm = ({ buyerName, buyerPhone }: NewDeliveryFormProps) => {
-  const { control, setValue } = useFormContext<NewDeliveryInfoFormData>();
+  const { control, setValue } = useFormContext<NewDeliveryFormData>();
 
   useEffect(() => {
     if (buyerName) {

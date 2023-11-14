@@ -5,18 +5,12 @@ import { styled } from 'styled-components';
 
 import { TextInput } from '@/components/form';
 import { buyerState } from '@/recoil/order/atom';
+import { CustomerFormData } from '@/types/form';
 
 import { StInfoTitle } from '../productInfo/ProductInfo';
 
-interface CustomerInfoFormData {
-  orderer: {
-    name: string;
-    phone: string;
-  };
-}
-
 const CustomerInfo = () => {
-  const { control, watch } = useFormContext<CustomerInfoFormData>();
+  const { control, watch } = useFormContext<CustomerFormData>();
   const [, setBuyerInfo] = useRecoilState(buyerState);
   const buyerName = watch('orderer.name');
   const buyerPhone = watch('orderer.phone');

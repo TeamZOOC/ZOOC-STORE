@@ -37,28 +37,6 @@ export interface OrderDetailInfo {
   payment: PaymentInfo;
 }
 
-export interface OrderFormInfo {
-  orderer: {
-    name: string;
-    phone: string;
-  };
-  receiver: {
-    name: string;
-    phone: string;
-  };
-  address: {
-    address: string;
-    postcode: string;
-    detailAddress: string;
-    request: string;
-  };
-  agreement: {
-    checkOrder: boolean;
-    privacyPolicy: boolean;
-    thirdParty: boolean;
-  };
-}
-
 export interface AddressInfo {
   address: string;
   postcode: string;

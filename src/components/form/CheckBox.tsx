@@ -9,6 +9,7 @@ interface CheckBoxProps {
   label: string;
   control: Control<any>;
 }
+
 const CheckBox = ({ name, label, control }: CheckBoxProps) => {
   const { formState } = useFormContext();
   const { field, fieldState } = useController({

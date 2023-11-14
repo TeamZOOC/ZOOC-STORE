@@ -1,22 +1,15 @@
-import { FormProvider, useFormContext } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import { ADDRESS_LIST } from '../../../../mocks/addressData';
 import ExistingAddress from './ExistingAddress';
 
-const ExistingAddressList = () => {
-  const methods = useFormContext();
-
-  return (
-    <FormProvider {...methods}>
-      <StExistingAddressList>
-        {ADDRESS_LIST.map((address) => (
-          <ExistingAddress addressId={address.id} />
-        ))}
-      </StExistingAddressList>
-    </FormProvider>
-  );
-};
+const ExistingAddressList = () => (
+  <StExistingAddressList>
+    {ADDRESS_LIST.map((address) => (
+      <ExistingAddress addressId={address.id} />
+    ))}
+  </StExistingAddressList>
+);
 
 export default ExistingAddressList;
 
