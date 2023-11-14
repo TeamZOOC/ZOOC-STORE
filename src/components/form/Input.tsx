@@ -23,8 +23,8 @@ function TextInput({
   const { field, fieldState } = useController({
     name,
     control,
-    defaultValue: '',
     rules,
+    defaultValue: '',
   });
 
   const [inputLength, setInputLength] = useState(0);

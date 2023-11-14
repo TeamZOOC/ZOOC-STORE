@@ -52,20 +52,15 @@ const Order = () => {
     formState: { isValid },
   } = methods;
 
-  const { orderer, receiver, address, agreement } = useGetOrderForms({
-    control: methods.control,
-  });
-
   const onSubmit = (data: OrderFormInfo) => {
     console.log(data);
-    // router.push('/order/payment');
+    router.push('/order/payment');
   };
 
   const onError = () => {
     showToast('order_required');
   };
 
-  console.log(orderer, receiver, address, agreement);
   return (
     <FormProvider {...methods}>
       <StOrder>

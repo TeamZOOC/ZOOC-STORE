@@ -1,57 +1,36 @@
-import { useState } from 'react';
-import { Control, useController } from 'react-hook-form';
+import { Control, useController, useFormContext } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { IcCheckboxAfter, IcCheckboxBefore } from '../../../public/icons';
 import React from '../modal/ImageValidateModal';
 
 interface CheckBoxProps {
-  options: string[];
-  control: Control<any>;
   name: string;
+  label: string;
+  control: Control<any>;
 }
-const CheckBox = ({ options, control, name }: CheckBoxProps) => {
-  const { field } = useController({
-    control,
+const CheckBox = ({ name, label, control }: CheckBoxProps) => {
+  const { formState } = useFormContext();
+  const { field, fieldState } = useController({
     name,
-    defaultValue: [],
+    control,
+    rules: { required: true },
+    defaultValue: false,
   });
-  const [value, setValue] = useState<string[]>(
-    Array.isArray(field.value) ? field.value : [],
-  );
-
-  const handleChange = (option: string, isChecked: boolean) => {
-    const newValue = isChecked
-      ? [...value, option]
-      : value.filter((item) => item !== option);
-
-    field.onChange(newValue);
-    setValue(newValue);
-  };
+  const isError = formState.isSubmitted && fieldState.invalid;
 
   return (
-    <>
-      {options.map((option) => (
-        <StCheckboxLabel htmlFor={option} key={option}>
-          <StCheckbox
-            id={option}
-            key={option}
-            onChange={(e) => handleChange(option, e.target.checked)}
-            checked={value.includes(option)}
-            type="checkbox"
-            value={option}
-          />
-          <StCheckIconWrapper>
-            {value.includes(option) ? (
-              <IcCheckboxAfter />
-            ) : (
-              <IcCheckboxBefore />
-            )}
-          </StCheckIconWrapper>
-          <span>{option}</span>
-        </StCheckboxLabel>
-      ))}
-    </>
+    <StCheckboxLabel htmlFor={name}>
+      <StCheckbox id={name} checked={field.value} type="checkbox" {...field} />
+      <StCheckIconWrapper $isError={isError}>
+        {field.value ? (
+          <IcCheckboxAfter className="checkAfter" />
+        ) : (
+          <IcCheckboxBefore className="checkBefore" />
+        )}
+      </StCheckIconWrapper>
+      <span>{label}</span>
+    </StCheckboxLabel>
   );
 };
 
@@ -68,14 +47,17 @@ const StCheckboxLabel = styled.label`
   }
 `;
 
-const StCheckIconWrapper = styled.div`
+const StCheckIconWrapper = styled.div<{ $isError: boolean }>`
   position: relative;
 
+  width: 3.6rem;
+  height: 3.6rem;
+
   & > .checkBefore {
-    display: block;
-  }
-  & > .checkAfter {
-    display: none;
+    & > rect {
+      stroke: ${({ $isError, theme }) =>
+        $isError ? '#FF453A' : theme.colors.zw_lightgray};
+    }
   }
 `;
 
