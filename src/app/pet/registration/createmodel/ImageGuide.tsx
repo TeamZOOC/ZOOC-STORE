@@ -8,7 +8,7 @@ import {
   ImageWrong1,
   ImageWrong2,
   ImageWrong3,
-} from '../../../public/images';
+} from '../../../../../public/images';
 
 const ImageGuide = () => (
   <StImageGuide>
