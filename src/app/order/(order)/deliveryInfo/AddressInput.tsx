@@ -3,7 +3,7 @@ import { useController, useFormContext } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
-import { StInputLabel, StRequired } from '@/components/form/Input';
+import { StInputLabel, StRequired } from '@/components/form/TextInput';
 import { useModal } from '@/hooks/modal';
 import { addressState } from '@/recoil/order/atom';
 

@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
-import { Input } from '@/components/form';
+import { TextInput } from '@/components/form';
 import { buyerState } from '@/recoil/order/atom';
 
 import { StInfoTitle } from '../productInfo/ProductInfo';
@@ -29,14 +29,14 @@ const CustomerInfo = () => {
     <StCustomerInfoSection>
       <StCustomerTitle>구매자 정보</StCustomerTitle>
       <StCustomerInput>
-        <Input
+        <TextInput
           name="orderer.name"
           label="이름"
           placeholder="홍길동"
           control={control}
           rules={{ required: true, maxLength: 7 }}
         />
-        <Input
+        <TextInput
           name="orderer.phone"
           label="연락처"
           placeholder="010-1234-5678"

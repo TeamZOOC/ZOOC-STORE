@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { styled } from 'styled-components';
 
-import { CheckBox } from '@/components/checkbox';
+import { CheckBox } from '@/components/form';
 
 const ORDER_AGREEMENT = [
   { id: 'checkOrder', label: '주문 내역을 모두 확인했으며, 동의합니다.' },

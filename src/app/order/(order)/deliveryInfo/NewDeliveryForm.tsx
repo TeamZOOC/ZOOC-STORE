@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { styled } from 'styled-components';
 
-import { Input } from '@/components/form';
+import { TextInput } from '@/components/form';
 
 import AddressInput from './AddressInput';
 
@@ -38,14 +38,14 @@ const NewDeliveryForm = ({ buyerName, buyerPhone }: NewDeliveryFormProps) => {
 
   return (
     <StNewDeliveryForm>
-      <Input
+      <TextInput
         name="receiver.name"
         label="수령인"
         placeholder="홍길동"
         control={control}
         rules={{ required: true }}
       />
-      <Input
+      <TextInput
         name="receiver.phone"
         label="연락처"
         placeholder="010-1234-5678"
@@ -53,7 +53,7 @@ const NewDeliveryForm = ({ buyerName, buyerPhone }: NewDeliveryFormProps) => {
         rules={{ required: true, maxLength: 13 }}
       />
       <AddressInput />
-      <Input
+      <TextInput
         name="address.request"
         label="요청사항"
         placeholder="안전한 배송 부탁드립니다."

@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { styled } from 'styled-components';
 
-import { Input } from '@/components/form';
+import { TextInput } from '@/components/form';
 import { DetailInfo } from '@/components/order';
 
 import { IcRadioAfter, IcRadioBefore } from '../../../../../public/icons';
@@ -42,7 +42,7 @@ const ExistingAddress = ({ addressId }: ExistingAddressProps) => {
       {selectedAddress === addressId && (
         <StRequest>
           <StLabel htmlFor="request">요청사항</StLabel>
-          <Input
+          <TextInput
             name="request"
             placeholder="안전한 배송 부탁드립니다."
             control={control}

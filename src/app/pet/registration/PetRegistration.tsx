@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
-import { Input } from '@/components/form';
+import { TextInput } from '@/components/form';
 import { useToast } from '@/hooks/toast';
 
 interface PetRegistrationFormData {
@@ -40,7 +40,7 @@ const PetRegistration = () => {
         <h2>반려동물의 정보를 입력해주세요</h2>
         <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
         <StRegistrationForm onSubmit={handleSubmit(onSubmit)}>
-          <Input
+          <TextInput
             name="petName"
             label="이름"
             placeholder="사랑이"
@@ -48,7 +48,7 @@ const PetRegistration = () => {
             rules={{ required: true, maxLength: 5 }}
             showCount
           />
-          <Input
+          <TextInput
             name="breed"
             label="종"
             placeholder="포메라니안"
