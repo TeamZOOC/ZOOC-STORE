@@ -8,7 +8,7 @@ import { BottomButton } from '@/components/button';
 import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
-import { OrderFormInfo } from '@/types/order';
+import { OrderFormData } from '@/types/form';
 
 import Agreement from './agreement/Agreement';
 import CustomerInfo from './customerInfo/CustomerInfo';
@@ -21,7 +21,7 @@ const Order = () => {
   const { showToast } = useToast();
   const router = useRouter();
 
-  const methods = useForm<OrderFormInfo>({
+  const methods = useForm<OrderFormData>({
     defaultValues: {
       orderer: {
         name: '',
@@ -51,7 +51,7 @@ const Order = () => {
     formState: { isValid },
   } = methods;
 
-  const onSubmit = (data: OrderFormInfo) => {
+  const onSubmit = (data: OrderFormData) => {
     console.log(data);
     router.push('/order/payment');
   };
