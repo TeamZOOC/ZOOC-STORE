@@ -1,12 +1,15 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/navigation';
+import { FormProvider, useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
 import { BillingInfo } from '@/components/order';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
+import { OrderFormInfo } from '@/types/order';
 
+import useGetOrderForms from '../(hooks)/useGetOrderForms';
 import Agreement from './agreement/Agreement';
 import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
@@ -15,30 +18,58 @@ import ProductInfo from './productInfo/ProductInfo';
 
 const Order = () => {
   const { products, payment } = ORDER_DETAIL;
-  const router = useRouter();
+  // const router = useRouter();
+
+  const methods = useForm<OrderFormInfo>({
+    defaultValues: {
+      orderer: {
+        name: '',
+        phone: '',
+      },
+      receiver: {
+        name: '',
+        phone: '',
+      },
+      address: {
+        address: '',
+        postcode: '',
+        detailAddress: '',
+        request: '',
+      },
+    },
+  });
+
+  const { orderer, receiver, address } = useGetOrderForms({
+    control: methods.control,
+  });
+
+  console.log(orderer, receiver, address);
   return (
-    <StOrder>
-      <ProductInfo products={products} />
-      <StHr />
-      <CustomerInfo />
-      <DeliveryInfo />
-      <StHr />
-      <PaymentMethod />
-      <StHr />
-      <StBillingInfoWrapper>
-        <BillingInfo payment={payment} />
-      </StBillingInfoWrapper>
-      <StHr />
-      <Agreement />
-      <BottomButton
-        btnType="button"
-        btnName="38,000원 결제하기"
-        disabled={false}
-        activeFunc={() => {
-          router.push('/order/payment');
-        }}
-      />
-    </StOrder>
+    <FormProvider {...methods}>
+      <StOrder>
+        <ProductInfo products={products} />
+        <StHr />
+        <CustomerInfo />
+        <DeliveryInfo />
+        <StHr />
+        <PaymentMethod />
+        <StHr />
+        <StBillingInfoWrapper>
+          <BillingInfo payment={payment} />
+        </StBillingInfoWrapper>
+        <StHr />
+        <Agreement />
+        <BottomButton
+          btnType="button"
+          btnName="38,000원 결제하기"
+          disabled={false}
+          activeFunc={() => {
+            methods.handleSubmit((data) => console.log(data))();
+            // router.push('/order/payment');
+          }}
+        />
+      </StOrder>
+    </FormProvider>
   );
 };
 

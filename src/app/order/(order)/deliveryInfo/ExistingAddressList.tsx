@@ -1,11 +1,11 @@
-import { FormProvider, useForm } from 'react-hook-form';
+import { FormProvider, useFormContext } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import { ADDRESS_LIST } from '../../../../mocks/addressData';
 import ExistingAddress from './ExistingAddress';
 
 const ExistingAddressList = () => {
-  const methods = useForm();
+  const methods = useFormContext();
 
   return (
     <FormProvider {...methods}>

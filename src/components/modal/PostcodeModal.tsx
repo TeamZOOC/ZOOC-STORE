@@ -16,7 +16,6 @@ const PostcodeModal = () => {
       postcode: data.zonecode,
       address: data.address,
     };
-    console.log(address);
     setResAddress({ address: address.address, postcode: address.postcode });
     closeModal('postcode');
   };
@@ -34,6 +33,7 @@ const PostcodeModal = () => {
 export default PostcodeModal;
 
 const StPostcodeModal = styled.div`
+  width: 90%;
   padding: 1.5rem;
 
   border-radius: 2rem;

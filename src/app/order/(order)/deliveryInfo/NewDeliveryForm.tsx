@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import { Input } from '@/components/form';
@@ -12,39 +12,41 @@ interface NewDeliveryFormProps {
 }
 
 interface NewDeliveryInfoFormData {
-  receiverName: string;
-  receiverPhone: string;
-  address: string;
-  request?: string;
+  receiver: {
+    name: string;
+    phone: string;
+  };
+  address: {
+    address: string;
+    postcode: string;
+    detailAddress: string;
+    request?: string;
+  };
 }
 
 const NewDeliveryForm = ({ buyerName, buyerPhone }: NewDeliveryFormProps) => {
-  const {
-    control,
-    setValue,
-    formState: { errors },
-  } = useForm<NewDeliveryInfoFormData>();
+  const { control, setValue } = useFormContext<NewDeliveryInfoFormData>();
 
   useEffect(() => {
     if (buyerName) {
-      setValue('receiverName', buyerName);
+      setValue('receiver.name', buyerName);
     }
     if (buyerPhone) {
-      setValue('receiverPhone', buyerPhone);
+      setValue('receiver.phone', buyerPhone);
     }
   }, [buyerName, buyerPhone]);
 
   return (
     <StNewDeliveryForm>
       <Input
-        name="receiverName"
+        name="receiver.name"
         label="수령인"
         placeholder="홍길동"
         control={control}
         rules={{ required: true }}
       />
       <Input
-        name="receiverPhone"
+        name="receiver.phone"
         label="연락처"
         placeholder="010-1234-5678"
         control={control}
@@ -52,7 +54,7 @@ const NewDeliveryForm = ({ buyerName, buyerPhone }: NewDeliveryFormProps) => {
       />
       <AddressInput />
       <Input
-        name="request"
+        name="address.request"
         label="요청사항"
         placeholder="안전한 배송 부탁드립니다."
         control={control}

@@ -36,3 +36,47 @@ export interface OrderDetailInfo {
   delivery: DeliveryInfo;
   payment: PaymentInfo;
 }
+
+export interface OrderFormInfo {
+  orderer: {
+    name: string;
+    phone: string;
+  };
+  receiver: {
+    name: string;
+    phone: string;
+  };
+  address: {
+    address: string;
+    postcode: string;
+    detailAddress: string;
+    request: string;
+  };
+}
+
+export interface AddressInfo {
+  address: string;
+  postcode: string;
+  detailAddress?: string;
+  request?: string;
+}
+
+export interface OrderPostInfo {
+  petId: number;
+  orderer: {
+    name: string;
+    phone: string;
+  };
+  receiver: {
+    name: string;
+    phone: string;
+  };
+  address: AddressInfo;
+  products: [
+    {
+      productId: number;
+      optionIds: number[];
+      pieces: number;
+    },
+  ];
+}

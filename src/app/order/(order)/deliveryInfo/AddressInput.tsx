@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import { useController, useFormContext } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
@@ -6,8 +8,36 @@ import { useModal } from '@/hooks/modal';
 import { addressState } from '@/recoil/order/atom';
 
 const AddressInput = () => {
-  const [address, setAddress] = useRecoilState(addressState);
+  const [savedAddress, setSavedAddress] = useRecoilState(addressState);
+  const { control, setValue } = useFormContext();
   const { openModal } = useModal();
+
+  const { field: postcodeField, fieldState: postcodeFieldState } =
+    useController({
+      name: 'address.postcode',
+      control,
+      rules: { required: true, maxLength: 8 },
+      defaultValue: savedAddress.postcode,
+    });
+
+  const { field: addressField, fieldState: addressFieldState } = useController({
+    name: 'address.address',
+    control,
+    rules: { required: true, maxLength: 30 },
+    defaultValue: savedAddress.address,
+  });
+
+  const { field: detailAddressField } = useController({
+    name: 'address.detailAddress',
+    control,
+    defaultValue: savedAddress.detailAddress,
+  });
+
+  useEffect(() => {
+    setValue('address.postcode', savedAddress.postcode);
+    setValue('address.address', savedAddress.address);
+    setValue('address.detailAddress', savedAddress.detailAddress);
+  }, [savedAddress, control]);
 
   return (
     <SrAddressForm>
@@ -17,12 +47,15 @@ const AddressInput = () => {
       </StLabel>
       <StAddress>
         <StZipCodeInput
+          {...postcodeField}
           type="number"
-          id="zip_code"
-          value={address.postcode}
           placeholder="우편번호"
-          maxLength={8}
           readOnly
+          onChange={(e) => {
+            postcodeField.onChange(e);
+            setSavedAddress({ ...savedAddress, postcode: e.target.value });
+          }}
+          $isError={!!postcodeFieldState.error}
         />
         <StAddressSearchBtn
           type="button"
@@ -34,18 +67,25 @@ const AddressInput = () => {
         </StAddressSearchBtn>
       </StAddress>
       <StAddressInput
+        {...addressField}
         type="text"
-        id="address"
-        value={address.address}
         placeholder="주소"
-        maxLength={30}
         readOnly
+        onChange={(e) => {
+          addressField.onChange(e);
+          setSavedAddress({ ...savedAddress, address: e.target.value });
+        }}
+        $isError={!!addressFieldState.error}
       />
       <StDetailAddressInput
+        {...detailAddressField}
         type="text"
-        id="addressDetail"
         placeholder="상세주소"
-        maxLength={30}
+        readOnly
+        onChange={(e) => {
+          detailAddressField.onChange(e);
+          setSavedAddress({ ...savedAddress, detailAddress: e.target.value });
+        }}
       />
     </SrAddressForm>
   );
@@ -65,14 +105,16 @@ const StAddress = styled.div`
   gap: 1rem;
 `;
 
-const StAddressInput = styled.input`
+const StAddressInput = styled.input<{ $isError?: boolean }>`
   width: 100%;
   margin-top: 1rem;
   padding: 1.5rem 2rem;
   box-sizing: border-box;
 
   border-radius: 0.2rem;
-  border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
+  border: 0.1rem solid
+    ${({ $isError, theme }) =>
+      $isError ? '#FF453A' : theme.colors.zw_brightgray};
   background: ${({ theme }) => theme.colors.zw_background};
   color: ${({ theme }) => theme.colors.zw_black};
   ${({ theme }) => theme.fonts.zw_Body1};
