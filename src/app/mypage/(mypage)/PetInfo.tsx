@@ -17,7 +17,7 @@ const PetInfo = () => (
 
 export default PetInfo;
 
-const StPetInfo = styled.div`
+export const StPetInfo = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -61,13 +61,13 @@ const StProfileImage = styled.div`
   background-color: ${({ theme }) => theme.colors.zw_darkgray};
 `;
 
-const StEditProfileButton = styled.button`
+export const StEditProfileButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
 
   width: 100%;
-  height: 4.4rem;
+  min-height: 4.4rem;
 
   border-radius: 0.4rem;
   border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};

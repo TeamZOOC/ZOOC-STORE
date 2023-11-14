@@ -52,7 +52,9 @@ const MyPageMenu = () => {
 
 export default MyPageMenu;
 
-const StMyPageMenu = styled.div``;
+const StMyPageMenu = styled.div`
+  margin-top: 2.8rem;
+`;
 
 const StMenuItem = styled.div`
   display: flex;
