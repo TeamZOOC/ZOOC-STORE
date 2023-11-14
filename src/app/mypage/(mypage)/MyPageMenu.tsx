@@ -7,7 +7,7 @@ import {
   IcInquiry,
   IcLogout,
   IcMyOrderList,
-  IcNotice
+  IcNotice,
 } from '../../../../public/icons';
 
 const MyPageMenu = () => {
@@ -45,6 +45,7 @@ const MyPageMenu = () => {
           </Link>
         </StMenuItem>
       ))}
+      <StWithdrawalButton type="button">회원탈퇴</StWithdrawalButton>
     </StMyPageMenu>
   );
 };
@@ -78,4 +79,13 @@ const StMenuButton = styled.button`
     width: 2.4rem;
     height: 2.4rem;
   }
+`;
+
+const StWithdrawalButton = styled.button`
+  margin-top: 2.4rem;
+  padding-bottom: 0.2rem;
+
+  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_lightgray};
+  color: ${({ theme }) => theme.colors.zw_lightgray};
+  ${({ theme }) => theme.fonts.zw_caption};
 `;
