@@ -1,10 +1,14 @@
 import { Header } from '@/components/header';
 import { MainLayout } from '@/components/layout';
 
+import MyPageMenu from './(mypage)/MyPageMenu';
+
 const page = () => (
   <>
     <Header headerTitle="MY" />
-    <MainLayout>ddd</MainLayout>
+    <MainLayout>
+      <MyPageMenu />
+    </MainLayout>
   </>
 );
 

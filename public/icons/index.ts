@@ -12,6 +12,7 @@ import IcKakaoPay from './ic_kakaopay.svg';
 import IcKey from './ic_key.svg';
 import IcLogout from './ic_logout.svg';
 import IcMinus from './ic_minus.svg';
+import IcMyOrderList from './ic_myorderlist.svg';
 import IcMyPage from './ic_mypage.svg';
 import IcNotice from './ic_notice.svg';
 import IcOrderList from './ic_orderlist.svg';
@@ -34,6 +35,7 @@ export {
   IcKakaoPay,
   IcToss,
   IcOrderList,
+  IcMyOrderList,
   IcCart,
   IcExit,
   IcMyPage,
