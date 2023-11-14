@@ -81,7 +81,6 @@ const AddressInput = () => {
         {...detailAddressField}
         type="text"
         placeholder="상세주소"
-        readOnly
         onChange={(e) => {
           detailAddressField.onChange(e);
           setSavedAddress({ ...savedAddress, detailAddress: e.target.value });

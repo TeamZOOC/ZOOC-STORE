@@ -1,11 +1,12 @@
 'use client';
 
-// import { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
 import { BillingInfo } from '@/components/order';
+import { useToast } from '@/hooks/toast';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 import { OrderFormInfo } from '@/types/order';
 
@@ -18,7 +19,8 @@ import ProductInfo from './productInfo/ProductInfo';
 
 const Order = () => {
   const { products, payment } = ORDER_DETAIL;
-  // const router = useRouter();
+  const { showToast } = useToast();
+  const router = useRouter();
 
   const methods = useForm<OrderFormInfo>({
     defaultValues: {
@@ -37,11 +39,26 @@ const Order = () => {
         request: '',
       },
     },
+    mode: 'onChange',
   });
+
+  const {
+    handleSubmit,
+    formState: { isValid },
+  } = methods;
 
   const { orderer, receiver, address } = useGetOrderForms({
     control: methods.control,
   });
+
+  const onSubmit = (data: OrderFormInfo) => {
+    console.log(data);
+    // router.push('/order/payment');
+  };
+
+  const onError = () => {
+    showToast('order_required');
+  };
 
   console.log(orderer, receiver, address);
   return (
@@ -62,11 +79,8 @@ const Order = () => {
         <BottomButton
           btnType="button"
           btnName="38,000원 결제하기"
-          disabled={false}
-          activeFunc={() => {
-            methods.handleSubmit((data) => console.log(data))();
-            // router.push('/order/payment');
-          }}
+          disabled={!isValid}
+          activeFunc={handleSubmit(onSubmit, onError)}
         />
       </StOrder>
     </FormProvider>
