@@ -16,6 +16,8 @@ import IcDropDown from './ic_dropdown.svg';
 import IcProductDelete from './ic_product_delete.svg';
 import IcMinus from './ic_minus.svg';
 import IcPlus from './ic_plus.svg';
+import IcApple from './ic_apple.svg';
+import IcKakao from './ic_kakao.svg';
 
 export {
   IcBack,
@@ -36,4 +38,6 @@ export {
   IcProductDelete,
   IcMinus,
   IcPlus,
+  IcApple,
+  IcKakao,
 };
