@@ -4,15 +4,15 @@ import { styled } from 'styled-components';
 import { BottomButton } from '@/components/button';
 import AgreementCheckContent from './AgreementCheckContent';
 
-const RegisterTermsAgreement = () => (
-  <StRegisterTermsAgreement>
+const SignUpTermsAgreement = () => (
+  <StSignUpTermsAgreement>
     <div>
-      <StRegisterTermsAgreementTitle>
+      <StSignUpTermsAgreementTitle>
         더 나은 서비스 제공을 위해
-      </StRegisterTermsAgreementTitle>
-      <StRegisterTermsAgreementTitle>
+      </StSignUpTermsAgreementTitle>
+      <StSignUpTermsAgreementTitle>
         <span>약관 동의</span>가 필요해요
-      </StRegisterTermsAgreementTitle>
+      </StSignUpTermsAgreementTitle>
     </div>
     <AgreementCheckContent />
     <BottomButton
@@ -21,12 +21,12 @@ const RegisterTermsAgreement = () => (
       disabled
       activeFunc={() => {}}
     />
-  </StRegisterTermsAgreement>
+  </StSignUpTermsAgreement>
 );
 
-export default RegisterTermsAgreement;
+export default SignUpTermsAgreement;
 
-const StRegisterTermsAgreement = styled.div`
+const StSignUpTermsAgreement = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4.4rem;
@@ -34,7 +34,7 @@ const StRegisterTermsAgreement = styled.div`
   margin-top: 2.4rem;
 `;
 
-const StRegisterTermsAgreementTitle = styled.p`
+const StSignUpTermsAgreementTitle = styled.p`
   color: ${({ theme }) => theme.colors.zw_black};
   font-family: Pretendard;
   font-size: 2.4rem;
