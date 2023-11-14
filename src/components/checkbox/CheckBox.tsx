@@ -1,29 +1,61 @@
-import { useFormContext } from 'react-hook-form';
+import { useState } from 'react';
+import { Control, useController } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { IcCheckboxAfter, IcCheckboxBefore } from '../../../public/icons';
 import React from '../modal/ImageValidateModal';
 
-interface CheckboxProps {
-  id: string;
-  label: string;
+interface CheckBoxProps {
+  options: string[];
+  control: Control<any>;
+  name: string;
 }
-const Checkbox = ({ id, label }: CheckboxProps) => {
-  const { register, watch } = useFormContext();
-  const isChecked = watch(id);
+const CheckBox = ({ options, control, name }: CheckBoxProps) => {
+  const { field } = useController({
+    control,
+    name,
+    defaultValue: [],
+  });
+  const [value, setValue] = useState<string[]>(
+    Array.isArray(field.value) ? field.value : [],
+  );
+
+  const handleChange = (option: string, isChecked: boolean) => {
+    const newValue = isChecked
+      ? [...value, option]
+      : value.filter((item) => item !== option);
+
+    field.onChange(newValue);
+    setValue(newValue);
+  };
 
   return (
-    <StCheckboxLabel htmlFor={id}>
-      <StCheckbox {...register(id)} type="checkbox" id={id} />
-      <StCheckIconWrapper>
-        {isChecked ? <IcCheckboxAfter /> : <IcCheckboxBefore />}
-      </StCheckIconWrapper>
-      <span>{label}</span>
-    </StCheckboxLabel>
+    <>
+      {options.map((option) => (
+        <StCheckboxLabel htmlFor={option} key={option}>
+          <StCheckbox
+            id={option}
+            key={option}
+            onChange={(e) => handleChange(option, e.target.checked)}
+            checked={value.includes(option)}
+            type="checkbox"
+            value={option}
+          />
+          <StCheckIconWrapper>
+            {value.includes(option) ? (
+              <IcCheckboxAfter />
+            ) : (
+              <IcCheckboxBefore />
+            )}
+          </StCheckIconWrapper>
+          <span>{option}</span>
+        </StCheckboxLabel>
+      ))}
+    </>
   );
 };
 
-export default Checkbox;
+export default CheckBox;
 
 const StCheckboxLabel = styled.label`
   display: flex;

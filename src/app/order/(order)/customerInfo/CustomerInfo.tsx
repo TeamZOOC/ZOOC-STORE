@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { FormProvider, useForm, useFormContext } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
@@ -20,34 +20,31 @@ const CustomerInfo = () => {
   const [, setBuyerInfo] = useRecoilState(buyerState);
   const buyerName = watch('orderer.name');
   const buyerPhone = watch('orderer.phone');
-  const methods = useForm();
 
   useEffect(() => {
     setBuyerInfo({ buyerName, buyerPhone });
   }, [buyerName, buyerPhone, setBuyerInfo]);
 
   return (
-    <FormProvider {...methods}>
-      <StCustomerInfoSection>
-        <StCustomerTitle>구매자 정보</StCustomerTitle>
-        <StCustomerInput>
-          <Input
-            name="orderer.name"
-            label="이름"
-            placeholder="홍길동"
-            control={control}
-            rules={{ required: true, maxLength: 7 }}
-          />
-          <Input
-            name="orderer.phone"
-            label="연락처"
-            placeholder="010-1234-5678"
-            control={control}
-            rules={{ required: true, maxLength: 15 }}
-          />
-        </StCustomerInput>
-      </StCustomerInfoSection>
-    </FormProvider>
+    <StCustomerInfoSection>
+      <StCustomerTitle>구매자 정보</StCustomerTitle>
+      <StCustomerInput>
+        <Input
+          name="orderer.name"
+          label="이름"
+          placeholder="홍길동"
+          control={control}
+          rules={{ required: true, maxLength: 7 }}
+        />
+        <Input
+          name="orderer.phone"
+          label="연락처"
+          placeholder="010-1234-5678"
+          control={control}
+          rules={{ required: true, maxLength: 15 }}
+        />
+      </StCustomerInput>
+    </StCustomerInfoSection>
   );
 };
 

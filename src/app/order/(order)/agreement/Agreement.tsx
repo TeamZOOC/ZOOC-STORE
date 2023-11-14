@@ -1,37 +1,42 @@
-import { FormProvider, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
-import Checkbox from '@/components/checkbox/CheckBox';
+import { CheckBox } from '@/components/checkbox';
 
 const ORDER_AGREEMENT = [
-  {
-    id: 'order-confirmation',
-    label: '주문 내역을 모두 확인했으며, 동의합니다.',
-  },
-  {
-    id: 'privacy-policy-agreement',
-    label: '개인정보 이용약관 동의 (필수)',
-  },
-  {
-    id: 'third-party-consent',
-    label: '제3자 정보제공 동의 (필수)',
-  },
+  '주문 내역을 모두 확인했으며, 동의합니다.',
+  '개인정보 이용약관 동의 (필수)',
+  '제3자 정보제공 동의 (필수)',
 ];
 
-const Agreement = () => {
-  const methods = useForm({});
+interface AgreementFormData {
+  agreement: {
+    checkOrder: boolean;
+    privacyPolicy: boolean;
+    thirdParty: boolean;
+  };
+}
 
-  const onSubmit = () => {};
+const Agreement = () => {
+  const { control } = useForm<AgreementFormData>({
+    defaultValues: {
+      agreement: {
+        checkOrder: false,
+        privacyPolicy: false,
+        thirdParty: false,
+      },
+    },
+  });
 
   return (
     <StAgreementSection>
-      <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-          {ORDER_AGREEMENT.map(({ id, label }) => (
-            <Checkbox id={id} key={id} label={label} />
-          ))}
-        </form>
-      </FormProvider>
+      <form>
+        <CheckBox
+          options={ORDER_AGREEMENT}
+          name="agreement"
+          control={control}
+        />
+      </form>
     </StAgreementSection>
   );
 };

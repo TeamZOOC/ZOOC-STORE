@@ -22,5 +22,10 @@ export default function useGetOrderForms({
     control,
   }).field;
 
-  return { orderer, receiver, address };
+  const agreement = useController({
+    name: 'agreement',
+    control,
+  }).field;
+
+  return { orderer, receiver, address, agreement };
 }

@@ -52,6 +52,11 @@ export interface OrderFormInfo {
     detailAddress: string;
     request: string;
   };
+  agreement: {
+    checkOrder: boolean;
+    privacyPolicy: boolean;
+    thirdParty: boolean;
+  };
 }
 
 export interface AddressInfo {

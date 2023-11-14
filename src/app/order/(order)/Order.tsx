@@ -38,6 +38,11 @@ const Order = () => {
         detailAddress: '',
         request: '',
       },
+      agreement: {
+        checkOrder: false,
+        privacyPolicy: false,
+        thirdParty: false,
+      },
     },
     mode: 'onChange',
   });
@@ -47,7 +52,7 @@ const Order = () => {
     formState: { isValid },
   } = methods;
 
-  const { orderer, receiver, address } = useGetOrderForms({
+  const { orderer, receiver, address, agreement } = useGetOrderForms({
     control: methods.control,
   });
 
@@ -60,7 +65,7 @@ const Order = () => {
     showToast('order_required');
   };
 
-  console.log(orderer, receiver, address);
+  console.log(orderer, receiver, address, agreement);
   return (
     <FormProvider {...methods}>
       <StOrder>
