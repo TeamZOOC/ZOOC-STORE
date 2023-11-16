@@ -18,6 +18,7 @@ import IcMinus from './ic_minus.svg';
 import IcPlus from './ic_plus.svg';
 import IcApple from './ic_apple.svg';
 import IcKakao from './ic_kakao.svg';
+import IcCheck from './ic_check.svg';
 
 export {
   IcBack,
@@ -40,4 +41,5 @@ export {
   IcPlus,
   IcApple,
   IcKakao,
+  IcCheck,
 };
