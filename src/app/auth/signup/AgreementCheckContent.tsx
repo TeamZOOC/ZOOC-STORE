@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { css, styled } from 'styled-components';
 import { BottomButton } from '@/components/button';
 import { useToast } from '@/hooks/toast';
+import { useRouter } from 'next/navigation';
 import useCheckAgreement from '../hooks/useCheckAgreement';
 import { IcCheck } from '../../../../public/icons';
 
@@ -16,12 +17,15 @@ const AgreementCheckContent = () => {
     handleCheckAllAgreement,
   } = useCheckAgreement();
 
+  const router = useRouter();
   const { showToast } = useToast();
 
   const handleCheckAgreementToast = () => {
     if (!isAllAgreement) {
       showToast('agreement');
+      return;
     }
+    router.push('/auth/complete');
   };
 
   return (
@@ -54,7 +58,7 @@ const AgreementCheckContent = () => {
       <BottomButton
         btnType="button"
         btnName="회원가입"
-        disabled
+        disabled={!isAllAgreement}
         activeFunc={handleCheckAgreementToast}
       />
     </StAgreementCheckContent>
