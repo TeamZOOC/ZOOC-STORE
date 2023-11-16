@@ -1,11 +1,18 @@
-import axios from 'axios';
+import axios, { AxiosInstance } from 'axios';
 
-const client = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_BASE_URL,
-  headers: {
-    'Content-type': 'application/json',
-    'Access-Control-Allow-Origin': process.env.NEXT_PUBLIC_BASE_URL,
-  },
-});
+export const createAxios = (baseURL: string): AxiosInstance =>
+  axios.create({
+    baseURL,
+    headers: {
+      'Content-type': 'application/json',
+      'Access-Control-Allow-Origin': baseURL,
+    },
+  });
 
-export default client;
+export const shoppingMallAxios = createAxios(
+  process.env.NEXT_PUBLIC_SHOPPINGMALL_BASE_URL!,
+);
+
+export const generalAxios = createAxios(
+  process.env.NEXT_PUBLIC_GENERAL_BASE_URL!,
+);
