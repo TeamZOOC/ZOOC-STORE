@@ -4,6 +4,7 @@ import { AGREEMENT } from '@/constants/agreement';
 import Link from 'next/link';
 import { css, styled } from 'styled-components';
 import { BottomButton } from '@/components/button';
+import { useToast } from '@/hooks/toast';
 import useCheckAgreement from '../hooks/useCheckAgreement';
 import { IcCheck } from '../../../../public/icons';
 
@@ -14,6 +15,14 @@ const AgreementCheckContent = () => {
     handleCheckAgreement,
     handleCheckAllAgreement,
   } = useCheckAgreement();
+
+  const { showToast } = useToast();
+
+  const handleCheckAgreementToast = () => {
+    if (!isAllAgreement) {
+      showToast('agreement');
+    }
+  };
 
   return (
     <StAgreementCheckContent>
@@ -46,7 +55,7 @@ const AgreementCheckContent = () => {
         btnType="button"
         btnName="회원가입"
         disabled
-        activeFunc={() => {}}
+        activeFunc={handleCheckAgreementToast}
       />
     </StAgreementCheckContent>
   );
