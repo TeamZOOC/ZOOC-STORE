@@ -8,14 +8,18 @@ export async function useKakaoLogin() {
   const { data: session } = useSession();
 
   if (session?.accessToken) {
-    const response = await kakaoSignIn(session.accessToken);
-    if (response) {
-      setCookie('accessToken', response.data.accessToken);
-      if (response.data.isExistedUser) {
-        router.push('/');
-      } else {
-        router.push('/auth/signup');
+    if (session.provider === 'kakao') {
+      const response = await kakaoSignIn(session.accessToken);
+      if (response) {
+        setCookie('accessToken', response.data.accessToken);
+        if (response.data.isExistedUser) {
+          router.push('/');
+        } else {
+          router.push('/auth/signup');
+        }
       }
+    } else {
+      // session.provider === "apple" 일 때
     }
   }
 }

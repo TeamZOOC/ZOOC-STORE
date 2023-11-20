@@ -14,11 +14,17 @@ export const authOptions: any = {
     async jwt({ token, account }: any) {
       if (account) {
         token.accessToken = account.access_token;
+        if (account.provider === 'kakao') {
+          token.provider = 'kakao';
+        } else if (account.provider === 'apple') {
+          token.provider = 'google';
+        }
       }
       return token;
     },
     async session({ session, token }: any) {
       session.accessToken = token.accessToken;
+      session.provider = token.provider;
 
       return session;
     },
