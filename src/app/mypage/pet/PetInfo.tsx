@@ -3,39 +3,31 @@
 import { styled } from 'styled-components';
 
 import useGetPet from '../hooks/useGetPetInfo';
+import PetEmpty, { StPetEmpty, StRegisterPetButton } from './PetEmpty';
 
 const PetInfo = () => {
   const { petInfo } = useGetPet();
 
-  return (
+  return petInfo ? (
     <StPetInfo>
       <StProfile>
         <StProfileImage />
         <StPetProfile>
-          <h2>{petInfo?.name}</h2>
-          <p>{petInfo?.breed}</p>
+          <h2>{petInfo.name}</h2>
+          <p>{petInfo.breed}</p>
         </StPetProfile>
       </StProfile>
       <StEditProfileButton type="button">프로필 수정</StEditProfileButton>
     </StPetInfo>
+  ) : (
+    <PetEmpty />
   );
 };
 
 export default PetInfo;
 
-export const StPetInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  width: 100%;
+const StPetInfo = styled(StPetEmpty)`
   height: 18.2rem;
-  padding: 2.4rem;
-
-  border-radius: 0.4rem;
-  border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
-  background-color: ${({ theme }) => theme.colors.zw_background};
-  box-shadow: 0 0 3rem 0 rgba(0, 0, 0, 0.03);
 `;
 
 const StProfile = styled.div`
@@ -67,16 +59,4 @@ const StProfileImage = styled.div`
   background-color: ${({ theme }) => theme.colors.zw_darkgray};
 `;
 
-export const StEditProfileButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  min-height: 4.4rem;
-
-  border-radius: 0.4rem;
-  border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
-  color: ${({ theme }) => theme.colors.zw_gray};
-  ${({ theme }) => theme.fonts.zw_Body2};
-`;
+const StEditProfileButton = styled(StRegisterPetButton)``;
