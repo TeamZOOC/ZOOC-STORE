@@ -12,8 +12,10 @@ import useEditPet from '@/app/mypage/hooks/useEditPet';
 import useGetPet from '@/app/mypage/hooks/useGetPetInfo';
 import { BottomButton } from '@/components/button';
 import { Input } from '@/components/form';
+import { Thumbnail } from '@/components/image';
 import { useToast } from '@/hooks/toast';
 import { PetEditInfo } from '@/types/pet';
+import { createImageURL } from '@/utils/createImageURL';
 
 import { IcBtnPicture } from '../../../../public/icons';
 import { ImgProfileEmpty } from '../../../../public/images';
@@ -34,7 +36,6 @@ const PetEdit = () => {
   const isFormFilled = petName && petName.trim().length > 0;
 
   const [uploadImage, setUploadImage] = useState<File>();
-  const [imageThumbnail, setImageThumbnail] = useState<string>();
   const imageInputRef = useRef<HTMLInputElement>(null);
 
   const { editPet } = useEditPet();
@@ -47,18 +48,11 @@ const PetEdit = () => {
     imageInputRef.current?.click();
   };
 
-  const createThumbnail = (file: File) => {
-    const reader = new FileReader();
-    reader.onloadend = () => setImageThumbnail(reader.result as string);
-    reader.onerror = () => console.error('썸네일 생성 실패');
-    reader.readAsDataURL(file);
-  };
-
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setUploadImage(file);
-      createThumbnail(file);
+      createImageURL(file);
     }
   };
 
@@ -97,8 +91,8 @@ const PetEdit = () => {
       <StEdit>
         <StEditForm onSubmit={handleSubmit(onSubmit)}>
           <StUploadProfileImage>
-            {imageThumbnail ? (
-              <StThumbnail src={imageThumbnail} alt="썸네일 이미지" />
+            {uploadImage ? (
+              <Thumbnail file={uploadImage} />
             ) : petInfo?.photo ? (
               <StProfileImage src={petInfo?.photo} alt="프로필 이미지" />
             ) : (
@@ -173,26 +167,19 @@ const StImageInput = styled.input`
 const StUploadProfileImage = styled.div`
   position: relative;
   margin-bottom: 3.6rem;
+
+  & > img {
+    width: 9rem;
+    height: 9rem;
+
+    border-radius: 50%;
+    border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
+    object-fit: cover;
+  }
 `;
 
 const StProfileImage = styled.img`
-  min-width: 9rem;
-  min-height: 9rem;
-  width: 9rem;
-  height: 9rem;
-
-  object-fit: cover;
-  border-radius: 50%;
-  border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
   background: ${({ theme }) => theme.colors.zw_brightgray};
-`;
-
-const StThumbnail = styled.img`
-  width: 9rem;
-  height: 9rem;
-
-  border-radius: 50%;
-  object-fit: cover;
 `;
 
 const StUploadBtn = styled.button`

@@ -1,6 +1,6 @@
 'use client';
 
-import useImageThumbnail from '@/hooks/image/useImageThumbnail';
+import { useImageThumbnail } from '@/hooks/image';
 
 interface ThumbnailProps {
   file: File;
