@@ -6,6 +6,7 @@ export const createAxios = (baseURL: string): AxiosInstance =>
     headers: {
       'Content-type': 'application/json',
       'Access-Control-Allow-Origin': baseURL,
+      Authorization: `Bearer ${process.env.TEST_ACCESS_TOKEN}`,
     },
   });
 
