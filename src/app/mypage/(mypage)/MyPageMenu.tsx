@@ -3,52 +3,23 @@
 import Link from 'next/link';
 import { styled } from 'styled-components';
 
-import {
-  IcInquiry,
-  IcLogout,
-  IcMyOrderList,
-  IcNotice,
-} from '../../../../public/icons';
+import { MYPAGE_MENU } from '@/constants/mypage';
 
-const MyPageMenu = () => {
-  const menuItems = [
-    {
-      id: 1,
-      name: '주문내역',
-      icon: <IcMyOrderList />,
-      path: '/mypage/orderlist',
-    },
-    { id: 2, name: '공지사항', icon: <IcNotice />, path: '/notice' },
-    {
-      id: 3,
-      name: '문의하기',
-      icon: <IcInquiry />,
-      path: 'https://www.naver.com/',
-    },
-    {
-      id: 4,
-      name: '로그아웃',
-      icon: <IcLogout />,
-      path: '/logout',
-    },
-  ];
-
-  return (
-    <StMyPageMenu>
-      {menuItems.map((item) => (
-        <StMenuItem key={item.id}>
-          <Link href={item.path}>
-            <StMenuButton type="button">
-              {item.icon}
-              {item.name}
-            </StMenuButton>
-          </Link>
-        </StMenuItem>
-      ))}
-      <StWithdrawalButton type="button">회원탈퇴</StWithdrawalButton>
-    </StMyPageMenu>
-  );
-};
+const MyPageMenu = () => (
+  <StMyPageMenu>
+    {MYPAGE_MENU.map((item) => (
+      <StMenuItem key={item.id}>
+        <Link href={item.path}>
+          <StMenuButton type="button">
+            {item.icon}
+            {item.name}
+          </StMenuButton>
+        </Link>
+      </StMenuItem>
+    ))}
+    <StWithdrawalButton type="button">회원탈퇴</StWithdrawalButton>
+  </StMyPageMenu>
+);
 
 export default MyPageMenu;
 
