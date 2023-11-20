@@ -1,8 +1,8 @@
 import { Header } from '@/components/header';
 import { MainLayout } from '@/components/layout';
 
-import MyPageMenu from './(mypage)/MyPageMenu';
-import PetInfo from './(mypage)/PetInfo';
+import MyPageMenu from './MyPageMenu';
+import PetInfo from './pet/PetInfo';
 
 const page = () => (
   <>
