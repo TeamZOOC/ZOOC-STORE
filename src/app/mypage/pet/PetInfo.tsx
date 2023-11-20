@@ -12,8 +12,8 @@ const PetInfo = () => {
       <StProfile>
         <StProfileImage />
         <StPetProfile>
-          <h2>{petInfo.name}</h2>
-          <p>{petInfo.breed}</p>
+          <h2>{petInfo?.name}</h2>
+          <p>{petInfo?.breed}</p>
         </StPetProfile>
       </StProfile>
       <StEditProfileButton type="button">프로필 수정</StEditProfileButton>
