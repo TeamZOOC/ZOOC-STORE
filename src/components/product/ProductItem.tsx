@@ -1,38 +1,25 @@
 'use client';
 
 import { styled } from 'styled-components';
-import Image, { StaticImageData } from 'next/image';
+import { ProductInfoResponse } from '@/types/product';
+import { formatPrice } from '@/utils/formatPrice';
 
-interface ProductInfo {
-  newProduct: boolean;
-  imgSrc: StaticImageData;
-  imgAlt: string;
-  productTitle: string;
-  productSalePercent?: string;
-  productPrice: string;
+interface ProductItemProps {
+  product: ProductInfoResponse;
 }
 
-const ProductItem = ({ product }: { product: ProductInfo }) => {
-  const {
-    newProduct,
-    imgSrc,
-    imgAlt,
-    productTitle,
-    productSalePercent,
-    productPrice,
-  } = product;
+const ProductItem = ({ product }: ProductItemProps) => {
+  const { name, sale, price } = product;
+
   return (
     <StProductItem>
       <StProductImage>
-        <Image src={imgSrc} alt={imgAlt} fill />
-        {newProduct && <StSaleTicker>NEW</StSaleTicker>}
+        {/* <Image src={imgSrc} alt={imgAlt} fill /> */}
       </StProductImage>
-      <StProductTitle>{productTitle}</StProductTitle>
+      <StProductTitle>{name}</StProductTitle>
       <StProductPriceBox>
-        {productSalePercent && (
-          <StProductSalePercent>{productSalePercent}</StProductSalePercent>
-        )}
-        <StProductPrice>{productPrice}</StProductPrice>
+        {sale && <StProductSalePercent>{sale}</StProductSalePercent>}
+        <StProductPrice>{formatPrice(price)}</StProductPrice>
       </StProductPriceBox>
     </StProductItem>
   );
@@ -51,22 +38,6 @@ const StProductImage = styled.div`
   aspect-ratio: 1/1.35;
 
   background-color: #eaeaea;
-`;
-
-const StSaleTicker = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0.5rem 0.8rem;
-
-  background-color: ${({ theme }) => theme.colors.zw_point};
-  color: ${({ theme }) => theme.colors.zw_white};
-  font-family: NanumGothic;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  letter-spacing: -0.314px;
 `;
 
 const StProductTitle = styled.p`
