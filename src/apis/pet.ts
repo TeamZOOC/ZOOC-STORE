@@ -24,7 +24,21 @@ export const registerPet = async (postPetInfo: PetDataInfo) => {
 
 export const editPet = async (petId: number, editPetInfo: PetEditInfo) => {
   try {
-    const { data } = await generalAxios.patch(`/pet/${petId}`, editPetInfo);
+    const formData = new FormData();
+    if (editPetInfo.file) {
+      formData.append('file', editPetInfo.file);
+    }
+    if (editPetInfo.nickName) {
+      formData.append('nickName', editPetInfo.nickName);
+    }
+    if (editPetInfo.breed) {
+      formData.append('breed', editPetInfo.breed);
+    }
+    const { data } = await generalAxios.patch(`/pet/${petId}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return data;
   } catch (error) {
     console.error(error);

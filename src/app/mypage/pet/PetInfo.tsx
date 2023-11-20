@@ -12,8 +12,6 @@ const PetInfo = () => {
   const { petInfo } = useGetPet();
   const router = useRouter();
 
-  console.log(petInfo);
-
   return petInfo ? (
     <StPetInfo>
       <StProfile>

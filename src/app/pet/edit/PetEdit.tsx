@@ -5,7 +5,7 @@
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { useController, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import useEditPet from '@/app/mypage/hooks/useEditPet';
@@ -21,14 +21,15 @@ import React from '../../../components/modal/ImageValidateModal';
 
 const PetEdit = () => {
   const { petInfo } = useGetPet();
-  const { control, watch, handleSubmit, reset } = useForm<PetEditInfo>({
-    mode: 'onChange',
-    defaultValues: {
-      nickName: '',
-      file: undefined,
-      breed: '',
-    },
-  });
+  const { control, watch, handleSubmit, reset, setValue } =
+    useForm<PetEditInfo>({
+      mode: 'onChange',
+      defaultValues: {
+        nickName: '',
+        file: undefined,
+        breed: '',
+      },
+    });
   const petName = watch('nickName');
   const isFormFilled = petName && petName.trim().length > 0;
 
@@ -40,7 +41,7 @@ const PetEdit = () => {
   const { showToast } = useToast();
   const router = useRouter();
   const params = useSearchParams();
-  const petId = params.get('id');
+  const petId = Number(params.get('id'));
 
   const handleUploadImage = () => {
     imageInputRef.current?.click();
@@ -63,7 +64,6 @@ const PetEdit = () => {
 
   const onSubmit = async (editData: PetEditInfo) => {
     try {
-      console.log(editData);
       await editPet({ petId, editPetInfo: editData });
       router.push('/mypage');
     } catch (error) {
@@ -85,6 +85,12 @@ const PetEdit = () => {
       });
     }
   }, [petInfo, reset]);
+
+  useEffect(() => {
+    if (uploadImage) {
+      setValue('file', uploadImage);
+    }
+  }, [uploadImage]);
 
   return (
     <>
@@ -172,6 +178,8 @@ const StUploadProfileImage = styled.div`
 const StProfileImage = styled.img`
   min-width: 9rem;
   min-height: 9rem;
+  width: 9rem;
+  height: 9rem;
 
   object-fit: cover;
   border-radius: 50%;
