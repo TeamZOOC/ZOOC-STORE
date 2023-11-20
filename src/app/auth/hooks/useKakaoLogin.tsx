@@ -3,7 +3,7 @@ import { setCookie } from 'cookies-next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-export async function useLogin() {
+export async function useKakaoLogin() {
   const router = useRouter();
   const { data: session } = useSession();
 

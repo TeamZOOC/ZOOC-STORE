@@ -3,10 +3,10 @@
 import { styled } from 'styled-components';
 import { signIn } from 'next-auth/react';
 import { IcApple, IcKakao } from '../../../../public/icons';
-import { useLogin } from '../hooks/useLogin';
+import { useKakaoLogin } from '../hooks/useKakaoLogin';
 
 const LoginContent = () => {
-  useLogin();
+  useKakaoLogin();
   return (
     <>
       <StLoginContent>
