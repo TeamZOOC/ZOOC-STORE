@@ -22,8 +22,8 @@ const OptionBottomSheet = ({
 }: OptionBottomSheetProps) => (
   <StOptionBottomSheet
     ref={bottomSheetRef}
-    animationUp={isOptionToggle}
-    isUnMount={isUnMount}
+    $animationUp={isOptionToggle}
+    $isUnMount={isUnMount}
     onAnimationEnd={handleAnimationEnd}
   >
     <StOptionBottomSheetInner $position="top">
@@ -40,8 +40,8 @@ const OptionBottomSheet = ({
 export default OptionBottomSheet;
 
 const StOptionBottomSheet = styled.div<{
-  isUnMount: boolean;
-  animationUp: boolean;
+  $isUnMount: boolean;
+  $animationUp: boolean;
 }>`
   position: absolute;
   bottom: 0;
@@ -52,14 +52,14 @@ const StOptionBottomSheet = styled.div<{
   border-radius: 0.6rem 0.6rem 0 0;
   background-color: ${({ theme }) => theme.colors.zw_background};
 
-  ${({ animationUp }) =>
-    animationUp &&
+  ${({ $animationUp }) =>
+    $animationUp &&
     css`
       animation: ${slideInFromBottom} 0.5s ease-in-out;
     `};
 
-  ${({ isUnMount }) =>
-    !isUnMount &&
+  ${({ $isUnMount }) =>
+    !$isUnMount &&
     css`
       animation: ${slideInFromTop} 0.5s ease-in-out;
     `};
