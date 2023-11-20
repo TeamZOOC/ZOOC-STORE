@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -11,6 +12,9 @@ import { BottomButton } from '@/components/button';
 import { Input } from '@/components/form';
 import { useToast } from '@/hooks/toast';
 import { EditPetFormData, PetEditInfo } from '@/types/pet';
+
+import { IcBtnPicture } from '../../../../public/icons';
+import { ImgProfileEmpty } from '../../../../public/images';
 
 const PetEdit = () => {
   const { petInfo } = useGetPet();
@@ -57,9 +61,20 @@ const PetEdit = () => {
   return (
     <>
       <StEdit>
-        <h2>반려동물의 정보를 입력해주세요</h2>
-        <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
-        <StRegistrationForm onSubmit={handleSubmit(onSubmit)}>
+        <StEditForm onSubmit={handleSubmit(onSubmit)}>
+          <StUploadProfileImage>
+            {petInfo?.photo ? (
+              <StProfileImage src={petInfo?.photo} alt="프로필 이미지" />
+            ) : (
+              <Image
+                src={ImgProfileEmpty}
+                width={90}
+                height={90}
+                alt="프로필 이미지"
+              />
+            )}
+            <IcBtnPicture />
+          </StUploadProfileImage>
           <Input
             name="nickName"
             label="이름"
@@ -76,7 +91,7 @@ const PetEdit = () => {
             rules={{ maxLength: 20 }}
             showCount
           />
-        </StRegistrationForm>
+        </StEditForm>
       </StEdit>
       <BottomButton
         btnName="반려동물 AI 모델 생성하기"
@@ -91,7 +106,7 @@ const PetEdit = () => {
 export default PetEdit;
 
 const StEdit = styled.div`
-  padding-top: 3.8rem;
+  padding-top: 2.8rem;
 
   & > h2 {
     margin-bottom: 0.8rem;
@@ -105,6 +120,24 @@ const StEdit = styled.div`
   }
 `;
 
-const StRegistrationForm = styled.form`
-  margin-top: 6rem;
+const StEditForm = styled.form``;
+
+const StUploadProfileImage = styled.div`
+  position: relative;
+  margin-bottom: 3.6rem;
+
+  & > svg {
+    position: absolute;
+    bottom: 0;
+    left: 6.8rem;
+  }
+`;
+
+const StProfileImage = styled.img`
+  min-width: 9rem;
+  min-height: 9rem;
+
+  border-radius: 5rem;
+  border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
+  background: ${({ theme }) => theme.colors.zw_brightgray};
 `;

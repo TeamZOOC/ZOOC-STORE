@@ -1,6 +1,7 @@
 import IcApple from './ic_apple.svg';
 import IcArrowRight from './ic_arrow_right.svg';
 import IcBack from './ic_back.svg';
+import IcBtnPicture from './ic_btn_picture.svg';
 import IcCart from './ic_cart.svg';
 import IcDropDown from './ic_dropdown.svg';
 import IcExit from './ic_exit.svg';
@@ -50,4 +51,5 @@ export {
   IcNotice,
   IcLogout,
   IcInquiry,
+  IcBtnPicture,
 };

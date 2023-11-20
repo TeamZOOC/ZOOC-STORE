@@ -1,8 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
+import { ImgProfileEmpty } from '../../../../public/images';
 import useGetPet from '../hooks/useGetPetInfo';
 import PetEmpty, { StPetEmpty, StRegisterPetButton } from './PetEmpty';
 
@@ -10,10 +12,21 @@ const PetInfo = () => {
   const { petInfo } = useGetPet();
   const router = useRouter();
 
+  console.log(petInfo);
+
   return petInfo ? (
     <StPetInfo>
       <StProfile>
-        <StProfileImage />
+        {petInfo.photo ? (
+          <StProfileImage src={petInfo.photo} alt="프로필 이미지" />
+        ) : (
+          <Image
+            src={ImgProfileEmpty}
+            width={70}
+            height={70}
+            alt="프로필 이미지"
+          />
+        )}
         <StPetProfile>
           <h2>{petInfo.name}</h2>
           <p>{petInfo.breed}</p>
@@ -60,7 +73,7 @@ const StPetProfile = styled.div`
   }
 `;
 
-const StProfileImage = styled.div`
+const StProfileImage = styled.img`
   width: 7rem;
   height: 7rem;
 

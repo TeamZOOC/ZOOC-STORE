@@ -2,6 +2,7 @@ export interface PetDataInfo {
   id?: number;
   name: string;
   breed: string;
+  photo?: string;
 }
 
 export interface EditPetFormData {
