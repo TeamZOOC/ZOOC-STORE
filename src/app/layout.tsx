@@ -6,9 +6,7 @@ import { ToastContainer } from '@/components/toast';
 import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
-import { getServerSession } from 'next-auth';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { SessionProvider } from '@/components/provider';
+import ReactQueryProvider from '@/lib/ReactQueryProvider';
 
 const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -35,28 +33,23 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
-  const queryClient = new QueryClient();
-
   return (
     <html
       lang="ko"
       className={`${Pretendard.variable} ${GmarketSansBold.variable} ${GmarketSansMedium.variable}`}
     >
       <body>
-        <QueryClientProvider client={queryClient}>
-          <SessionProvider session={session}>
-            <Providers>
-              <RecoilRootProvider>
-                <GlobalStyles />
-                {children}
-                <div id="portal" />
-                <ModalContainer />
-                <ToastContainer />
-              </RecoilRootProvider>
-            </Providers>
-          </SessionProvider>
-        </QueryClientProvider>
+        <ReactQueryProvider>
+          <Providers>
+            <RecoilRootProvider>
+              <GlobalStyles />
+              {children}
+              <div id="portal" />
+              <ModalContainer />
+              <ToastContainer />
+            </RecoilRootProvider>
+          </Providers>
+        </ReactQueryProvider>
       </body>
     </html>
   );
