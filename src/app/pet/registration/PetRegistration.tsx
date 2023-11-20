@@ -4,32 +4,34 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
+import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
 import { Input } from '@/components/form';
 import { useToast } from '@/hooks/toast';
-
-interface PetRegistrationFormData {
-  petName: string;
-  breed: string;
-}
+import { PetDataInfo } from '@/types/pet';
 
 const PetRegistration = () => {
-  const { control, watch, handleSubmit } = useForm<PetRegistrationFormData>({
+  const { control, watch, handleSubmit } = useForm<PetDataInfo>({
     mode: 'onChange',
   });
-  const petName = watch('petName');
+  const petName = watch('name');
   const isFormFilled = petName?.trim().length > 0;
 
+  const { registerPet } = useRegisterPet();
   const { showToast } = useToast();
   const router = useRouter();
 
-  const onSubmit = (data: PetRegistrationFormData) => {
-    console.log(data);
-    router.push('/pet/registration/createmodel');
+  const onSubmit = async (data: PetDataInfo) => {
+    try {
+      await registerPet(data);
+      router.push('/pet/registration/createmodel');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onError = (errors: any) => {
-    if (errors.petName) {
+    if (errors.name) {
       showToast('pet_required');
     }
   };
@@ -41,7 +43,7 @@ const PetRegistration = () => {
         <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
         <StRegistrationForm onSubmit={handleSubmit(onSubmit)}>
           <Input
-            name="petName"
+            name="name"
             label="이름"
             placeholder="사랑이"
             control={control}
