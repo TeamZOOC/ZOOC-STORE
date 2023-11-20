@@ -6,7 +6,6 @@ import { styled } from 'styled-components';
 import { PopupButton } from '@/components/button';
 import { ACCOUNT_NUMBER } from '@/constants/payment';
 
-import { ACCOUNT_NUMBER } from '@/constants/payment';
 import { IcFirstStep } from '../../../../public/icons';
 
 interface FirstStepProps {
