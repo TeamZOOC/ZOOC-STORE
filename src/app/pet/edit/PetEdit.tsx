@@ -1,5 +1,3 @@
-/* eslint-disable no-nested-ternary */
-
 'use client';
 
 import Image from 'next/image';
@@ -65,6 +63,23 @@ const PetEdit = () => {
     }
   };
 
+  const displayImage = () => {
+    if (uploadImage) {
+      return <Thumbnail file={uploadImage} />;
+    }
+    if (petInfo?.photo) {
+      return <StProfileImage src={petInfo.photo} alt="프로필 이미지" />;
+    }
+    return (
+      <Image
+        src={ImgProfileEmpty}
+        width={90}
+        height={90}
+        alt="프로필 이미지 없음"
+      />
+    );
+  };
+
   useEffect(() => {
     if (petInfo) {
       reset({
@@ -85,18 +100,7 @@ const PetEdit = () => {
       <StEdit>
         <StEditForm onSubmit={handleSubmit(onSubmit, onError)}>
           <StUploadProfileImage>
-            {uploadImage ? (
-              <Thumbnail file={uploadImage} />
-            ) : petInfo?.photo ? (
-              <StProfileImage src={petInfo?.photo} alt="프로필 이미지" />
-            ) : (
-              <Image
-                src={ImgProfileEmpty}
-                width={90}
-                height={90}
-                alt="프로필 이미지 없음"
-              />
-            )}
+            {displayImage()}
             <StImageInput
               type="file"
               ref={imageInputRef}
