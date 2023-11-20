@@ -1,4 +1,5 @@
 #!/bin/node
+/* eslint-disable camelcase */
 
 import { SignJWT } from 'jose';
 import { createPrivateKey } from 'crypto';
