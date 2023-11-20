@@ -1,8 +1,9 @@
 /* eslint-disable no-param-reassign */
+import { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth/next';
 import KakaoProvider from 'next-auth/providers/kakao';
 
-export const authOptions: any = {
+export const authOptions: NextAuthOptions = {
   providers: [
     KakaoProvider({
       clientId: process.env.KAKAO_CLIENT_ID!,
@@ -31,6 +32,6 @@ export const authOptions: any = {
   },
 };
 
-export const handler = NextAuth(authOptions);
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
