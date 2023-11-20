@@ -16,6 +16,8 @@ const getAppleToken = async () => {
     throw new Error('Apple 환경변수가 존재하지 않습니다.');
   }
 
+  const applePrivateKey = `-----BEGIN PRIVATE KEY-----\n${process.env.APPLE_PRIVATE_KEY}\n-----END PRIVATE KEY-----\n`;
+
   const appleToken = await new SignJWT({})
     .setAudience('https://appleid.apple.com')
     .setIssuer(process.env.APPLE_TEAM_ID)
@@ -26,9 +28,7 @@ const getAppleToken = async () => {
       alg: 'ES256',
       kid: process.env.APPLE_KEY_ID,
     })
-    .sign(
-      createPrivateKey(process.env.APPLE_PRIVATE_KEY.replace(/\\n/g, '\n')),
-    );
+    .sign(createPrivateKey(applePrivateKey));
 
   return appleToken;
 };
@@ -64,7 +64,6 @@ const initAuthOptions = async () => {
     },
   };
 };
-
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const authOptions = await initAuthOptions();
   return NextAuth(req, res, authOptions);
