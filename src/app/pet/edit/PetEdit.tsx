@@ -4,7 +4,7 @@
 
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
@@ -13,9 +13,9 @@ import useGetPet from '@/app/mypage/hooks/useGetPetInfo';
 import { BottomButton } from '@/components/button';
 import { Input } from '@/components/form';
 import { Thumbnail } from '@/components/image';
+import { useImageUpload } from '@/hooks/image';
 import { useToast } from '@/hooks/toast';
 import { PetEditInfo } from '@/types/pet';
-import { createImageURL } from '@/utils/createImageURL';
 
 import { IcBtnPicture } from '../../../../public/icons';
 import { ImgProfileEmpty } from '../../../../public/images';
@@ -23,40 +23,34 @@ import React from '../../../components/modal/ImageValidateModal';
 
 const PetEdit = () => {
   const { petInfo } = useGetPet();
-  const { control, watch, handleSubmit, reset, setValue } =
-    useForm<PetEditInfo>({
-      mode: 'onChange',
-      defaultValues: {
-        nickName: '',
-        file: undefined,
-        breed: '',
-      },
-    });
-  const petName = watch('nickName');
-  const isFormFilled = petName && petName.trim().length > 0;
-
-  const [uploadImage, setUploadImage] = useState<File>();
+  const {
+    control,
+    handleSubmit,
+    reset,
+    setValue,
+    formState: { isValid },
+  } = useForm<PetEditInfo>({
+    mode: 'onSubmit',
+    defaultValues: {
+      nickName: '',
+      file: undefined,
+      breed: '',
+    },
+  });
+  const { uploadImage, handleImageChange } = useImageUpload();
   const imageInputRef = useRef<HTMLInputElement>(null);
-
   const { editPet } = useEditPet();
   const { showToast } = useToast();
+
   const router = useRouter();
   const params = useSearchParams();
-  const petId = Number(params.get('id'));
 
   const handleUploadImage = () => {
     imageInputRef.current?.click();
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setUploadImage(file);
-      createImageURL(file);
-    }
-  };
-
   const onSubmit = async (editData: PetEditInfo) => {
+    const petId = Number(params.get('id'));
     try {
       await editPet({ petId, editPetInfo: editData });
       router.push('/mypage');
@@ -84,12 +78,12 @@ const PetEdit = () => {
     if (uploadImage) {
       setValue('file', uploadImage);
     }
-  }, [uploadImage]);
+  }, [uploadImage, setValue]);
 
   return (
     <>
       <StEdit>
-        <StEditForm onSubmit={handleSubmit(onSubmit)}>
+        <StEditForm onSubmit={handleSubmit(onSubmit, onError)}>
           <StUploadProfileImage>
             {uploadImage ? (
               <Thumbnail file={uploadImage} />
@@ -134,7 +128,7 @@ const PetEdit = () => {
       <BottomButton
         btnName="반려동물 AI 모델 생성하기"
         btnType="button"
-        disabled={!isFormFilled}
+        disabled={!isValid}
         activeFunc={handleSubmit(onSubmit, onError)}
       />
     </>

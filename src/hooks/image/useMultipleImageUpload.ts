@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 
-const useImageUpload = () => {
-  const [uploadImage, setUploadImage] = useState<File | null>(null);
+const useMultipleImageUpload = () => {
+  const [multipleUploadImages, setMultipleUploadImages] = useState<File[]>([]);
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { files } = event.target;
     if (!files) return;
-    setUploadImage(files[0]);
+    setMultipleUploadImages(Array.from(files));
   };
 
   const handleResetImage = () => {
-    setUploadImage(null);
+    setMultipleUploadImages([]);
   };
 
   return {
-    uploadImage,
+    uploadImages: multipleUploadImages,
     handleImageChange,
     handleResetImage,
   };
 };
 
-export default useImageUpload;
+export default useMultipleImageUpload;

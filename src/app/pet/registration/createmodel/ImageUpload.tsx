@@ -1,10 +1,11 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
+import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { uploadImagesState } from '@/recoil/createmodel/atom';
 
@@ -12,27 +13,15 @@ import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
 
 const ImageUpload = () => {
-  const [uploadImages, setUploadImages] =
+  const { uploadImages, handleImageChange, handleResetImage } =
+    useMultipleImageUpload();
+  const [validatedImages, setValidatedImages] =
     useRecoilState<File[]>(uploadImagesState);
   const imageInputRef = useRef<HTMLInputElement>(null);
   const { openModal, closeModal } = useModal();
 
-  const [isValidated, setIsValidated] = useState(false);
-
   const handleUploadImage = () => {
     imageInputRef.current?.click();
-  };
-
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { files } = e.target;
-    if (files && files.length > 0) {
-      const selectFiles = Array.from(files);
-      setUploadImages(selectFiles);
-    }
-  };
-
-  const handleResetImage = () => {
-    setUploadImages([]);
   };
 
   const handleOpenValidateModal = (modalTitle: string) => {
@@ -60,7 +49,7 @@ const ImageUpload = () => {
       handleOpenValidateModal(title);
       return;
     }
-    setIsValidated(true);
+    setValidatedImages(uploadImages);
   };
 
   useEffect(() => {
@@ -78,7 +67,7 @@ const ImageUpload = () => {
         onChange={handleImageChange}
         accept="image/*"
       />
-      {!isValidated ? (
+      {validatedImages.length === 0 ? (
         <>
           <ImageGuide />
           <BottomButton
