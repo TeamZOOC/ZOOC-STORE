@@ -22,7 +22,7 @@ const PetInfo = () => {
             src={ImgProfileEmpty}
             width={70}
             height={70}
-            alt="프로필 이미지"
+            alt="프로필 이미지 없음"
           />
         )}
         <StPetProfile>

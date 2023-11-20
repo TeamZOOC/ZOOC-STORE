@@ -11,11 +11,13 @@ import { useToast } from '@/hooks/toast';
 import { PetDataInfo } from '@/types/pet';
 
 const PetRegistration = () => {
-  const { control, watch, handleSubmit } = useForm<PetDataInfo>({
-    mode: 'onChange',
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<PetDataInfo>({
+    mode: 'onSubmit',
   });
-  const petName = watch('name');
-  const isFormFilled = petName?.trim().length > 0;
 
   const { registerPet } = useRegisterPet();
   const { showToast } = useToast();
@@ -63,7 +65,7 @@ const PetRegistration = () => {
       <BottomButton
         btnName="반려동물 AI 모델 생성하기"
         btnType="button"
-        disabled={!isFormFilled}
+        disabled={!isValid}
         activeFunc={handleSubmit(onSubmit, onError)}
       />
     </>
