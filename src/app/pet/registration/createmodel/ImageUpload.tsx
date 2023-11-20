@@ -1,15 +1,12 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
 import { useModal } from '@/hooks/modal';
-import {
-  imageThumbnailsState,
-  uploadImagesState,
-} from '@/recoil/createmodel/atom';
+import { uploadImagesState } from '@/recoil/createmodel/atom';
 
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
@@ -17,36 +14,13 @@ import ImageGuide from './ImageGuide';
 const ImageUpload = () => {
   const [uploadImages, setUploadImages] =
     useRecoilState<File[]>(uploadImagesState);
-  const [imageThumbnails, setImageThumbnails] =
-    useRecoilState<string[]>(imageThumbnailsState);
   const imageInputRef = useRef<HTMLInputElement>(null);
   const { openModal, closeModal } = useModal();
 
+  const [isValidated, setIsValidated] = useState(false);
+
   const handleUploadImage = () => {
     imageInputRef.current?.click();
-  };
-
-  const createImageURL = (file: File): Promise<string> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        resolve(event.target?.result as string);
-      };
-      reader.onerror = (event) => {
-        reject(event.target?.error);
-      };
-      reader.readAsDataURL(file);
-    });
-
-  const createThumbnails = async () => {
-    try {
-      const urls = await Promise.all(
-        uploadImages.map((file) => createImageURL(file)),
-      );
-      setImageThumbnails(urls);
-    } catch (error) {
-      console.error('썸네일 생성 실패', error);
-    }
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -59,7 +33,6 @@ const ImageUpload = () => {
 
   const handleResetImage = () => {
     setUploadImages([]);
-    setImageThumbnails([]);
   };
 
   const handleOpenValidateModal = (modalTitle: string) => {
@@ -87,7 +60,7 @@ const ImageUpload = () => {
       handleOpenValidateModal(title);
       return;
     }
-    createThumbnails();
+    setIsValidated(true);
   };
 
   useEffect(() => {
@@ -105,7 +78,7 @@ const ImageUpload = () => {
         onChange={handleImageChange}
         accept="image/*"
       />
-      {imageThumbnails.length === 0 ? (
+      {!isValidated ? (
         <>
           <ImageGuide />
           <BottomButton
