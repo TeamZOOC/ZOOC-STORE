@@ -1,9 +1,11 @@
+/* eslint-disable no-nested-ternary */
+
 'use client';
 
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useEffect, useRef, useState } from 'react';
+import { useController, useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 import useEditPet from '@/app/mypage/hooks/useEditPet';
@@ -11,22 +13,28 @@ import useGetPet from '@/app/mypage/hooks/useGetPetInfo';
 import { BottomButton } from '@/components/button';
 import { Input } from '@/components/form';
 import { useToast } from '@/hooks/toast';
-import { EditPetFormData, PetEditInfo } from '@/types/pet';
+import { PetEditInfo } from '@/types/pet';
 
 import { IcBtnPicture } from '../../../../public/icons';
 import { ImgProfileEmpty } from '../../../../public/images';
+import React from '../../../components/modal/ImageValidateModal';
 
 const PetEdit = () => {
   const { petInfo } = useGetPet();
-  const { control, watch, handleSubmit, reset } = useForm<EditPetFormData>({
+  const { control, watch, handleSubmit, reset } = useForm<PetEditInfo>({
     mode: 'onChange',
     defaultValues: {
       nickName: '',
+      file: undefined,
       breed: '',
     },
   });
   const petName = watch('nickName');
-  const isFormFilled = petName?.trim().length > 0;
+  const isFormFilled = petName && petName.trim().length > 0;
+
+  const [uploadImage, setUploadImage] = useState<File>();
+  const [imageThumbnail, setImageThumbnail] = useState<string>();
+  const imageInputRef = useRef<HTMLInputElement>(null);
 
   const { editPet } = useEditPet();
   const { showToast } = useToast();
@@ -34,8 +42,28 @@ const PetEdit = () => {
   const params = useSearchParams();
   const petId = params.get('id');
 
+  const handleUploadImage = () => {
+    imageInputRef.current?.click();
+  };
+
+  const createThumbnail = (file: File) => {
+    const reader = new FileReader();
+    reader.onloadend = () => setImageThumbnail(reader.result as string);
+    reader.onerror = () => console.error('썸네일 생성 실패');
+    reader.readAsDataURL(file);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setUploadImage(file);
+      createThumbnail(file);
+    }
+  };
+
   const onSubmit = async (editData: PetEditInfo) => {
     try {
+      console.log(editData);
       await editPet({ petId, editPetInfo: editData });
       router.push('/mypage');
     } catch (error) {
@@ -63,17 +91,27 @@ const PetEdit = () => {
       <StEdit>
         <StEditForm onSubmit={handleSubmit(onSubmit)}>
           <StUploadProfileImage>
-            {petInfo?.photo ? (
+            {imageThumbnail ? (
+              <StThumbnail src={imageThumbnail} alt="썸네일 이미지" />
+            ) : petInfo?.photo ? (
               <StProfileImage src={petInfo?.photo} alt="프로필 이미지" />
             ) : (
               <Image
                 src={ImgProfileEmpty}
                 width={90}
                 height={90}
-                alt="프로필 이미지"
+                alt="프로필 이미지 없음"
               />
             )}
-            <IcBtnPicture />
+            <StImageInput
+              type="file"
+              ref={imageInputRef}
+              onChange={handleImageChange}
+              accept="image/*"
+            />
+            <StUploadBtn type="button" onClick={handleUploadImage}>
+              <IcBtnPicture />
+            </StUploadBtn>
           </StUploadProfileImage>
           <Input
             name="nickName"
@@ -122,22 +160,37 @@ const StEdit = styled.div`
 
 const StEditForm = styled.form``;
 
+const StImageInput = styled.input`
+  display: none;
+`;
+
 const StUploadProfileImage = styled.div`
   position: relative;
   margin-bottom: 3.6rem;
-
-  & > svg {
-    position: absolute;
-    bottom: 0;
-    left: 6.8rem;
-  }
 `;
 
 const StProfileImage = styled.img`
   min-width: 9rem;
   min-height: 9rem;
 
-  border-radius: 5rem;
+  object-fit: cover;
+  border-radius: 50%;
   border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
   background: ${({ theme }) => theme.colors.zw_brightgray};
+`;
+
+const StThumbnail = styled.img`
+  width: 9rem;
+  height: 9rem;
+
+  border-radius: 50%;
+  object-fit: cover;
+`;
+
+const StUploadBtn = styled.button`
+  & > svg {
+    position: absolute;
+    bottom: 0;
+    left: 6.8rem;
+  }
 `;

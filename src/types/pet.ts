@@ -5,11 +5,6 @@ export interface PetDataInfo {
   photo?: string;
 }
 
-export interface EditPetFormData {
-  nickName: string;
-  breed: string;
-}
-
 export interface PetEditInfo {
   nickName?: string;
   file?: File;
