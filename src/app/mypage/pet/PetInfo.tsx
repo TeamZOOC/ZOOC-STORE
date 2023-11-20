@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
 import useGetPet from '../hooks/useGetPetInfo';
@@ -7,6 +8,7 @@ import PetEmpty, { StPetEmpty, StRegisterPetButton } from './PetEmpty';
 
 const PetInfo = () => {
   const { petInfo } = useGetPet();
+  const router = useRouter();
 
   return petInfo ? (
     <StPetInfo>
@@ -17,7 +19,14 @@ const PetInfo = () => {
           <p>{petInfo.breed}</p>
         </StPetProfile>
       </StProfile>
-      <StEditProfileButton type="button">프로필 수정</StEditProfileButton>
+      <StEditProfileButton
+        type="button"
+        onClick={() => {
+          router.push(`/pet/edit?id=${petInfo.id}`);
+        }}
+      >
+        프로필 수정
+      </StEditProfileButton>
     </StPetInfo>
   ) : (
     <PetEmpty />
