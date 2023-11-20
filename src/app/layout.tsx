@@ -6,6 +6,7 @@ import { ToastContainer } from '@/components/toast';
 import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
+import ReactQueryProvider from '@/lib/ReactQueryProvider';
 import { getServerSession } from 'next-auth';
 import { SessionProvider } from '@/components/provider';
 
@@ -42,17 +43,19 @@ export default async function RootLayout({
       className={`${Pretendard.variable} ${GmarketSansBold.variable} ${GmarketSansMedium.variable}`}
     >
       <body>
-        <SessionProvider session={session}>
-          <Providers>
-            <RecoilRootProvider>
-              <GlobalStyles />
-              {children}
-              <div id="portal" />
-              <ModalContainer />
-              <ToastContainer />
-            </RecoilRootProvider>
-          </Providers>
-        </SessionProvider>
+        <ReactQueryProvider>
+          <SessionProvider session={session}>
+            <Providers>
+              <RecoilRootProvider>
+                <GlobalStyles />
+                {children}
+                <div id="portal" />
+                <ModalContainer />
+                <ToastContainer />
+              </RecoilRootProvider>
+            </Providers>
+          </SessionProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

@@ -7,6 +7,7 @@ import { PopupButton } from '@/components/button';
 import { ACCOUNT_NUMBER } from '@/constants/payment';
 
 import { IcFirstStep } from '../../../../public/icons';
+import { ACCOUNT_NUMBER } from '../../../constants/payment';
 
 interface FirstStepProps {
   currentStep: number;
