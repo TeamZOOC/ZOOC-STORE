@@ -2,18 +2,24 @@
 
 import { styled } from 'styled-components';
 
-const PetInfo = () => (
-  <StPetInfo>
-    <StProfile>
-      <StProfileImage />
-      <StPetProfile>
-        <h2>사랑이</h2>
-        <p>포메라니안</p>
-      </StPetProfile>
-    </StProfile>
-    <StEditProfileButton type="button">프로필 수정</StEditProfileButton>
-  </StPetInfo>
-);
+import useGetPet from '../hooks/useGetPetInfo';
+
+const PetInfo = () => {
+  const { petInfo } = useGetPet();
+
+  return (
+    <StPetInfo>
+      <StProfile>
+        <StProfileImage />
+        <StPetProfile>
+          <h2>{petInfo.name}</h2>
+          <p>{petInfo.breed}</p>
+        </StPetProfile>
+      </StProfile>
+      <StEditProfileButton type="button">프로필 수정</StEditProfileButton>
+    </StPetInfo>
+  );
+};
 
 export default PetInfo;
 
