@@ -1,7 +1,7 @@
 import { Header } from '@/components/header';
 import { MainLayout } from '@/components/layout';
 
-import AllStep from './(step)/AllStep';
+import AllStep from './AllStep';
 
 const page = () => (
   <>
