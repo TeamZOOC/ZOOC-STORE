@@ -16,11 +16,12 @@ const useCheckAgreement = () => {
 
   const handleCheckAllAgreement = () => {
     const newAgreement = [...agreement];
-    if (isAllAgreement) {
-      setAgreement(newAgreement.map(() => false));
-    } else {
-      setAgreement(newAgreement.map(() => true));
-    }
+    // if (isAllAgreement) {
+    //   setAgreement(newAgreement.map(() => false));
+    // } else {
+    //   setAgreement(newAgreement.map(() => true));
+    // }
+    setAgreement(newAgreement.map(() => !isAllAgreement));
   };
 
   return {
