@@ -7,6 +7,8 @@ import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
 import ReactQueryProvider from '@/lib/ReactQueryProvider';
+import { getServerSession } from 'next-auth';
+import { SessionProvider } from '@/components/provider';
 
 const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -33,6 +35,8 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession();
+
   return (
     <html
       lang="ko"
@@ -40,15 +44,17 @@ export default async function RootLayout({
     >
       <body>
         <ReactQueryProvider>
-          <Providers>
-            <RecoilRootProvider>
-              <GlobalStyles />
-              {children}
-              <div id="portal" />
-              <ModalContainer />
-              <ToastContainer />
-            </RecoilRootProvider>
-          </Providers>
+          <SessionProvider session={session}>
+            <Providers>
+              <RecoilRootProvider>
+                <GlobalStyles />
+                {children}
+                <div id="portal" />
+                <ModalContainer />
+                <ToastContainer />
+              </RecoilRootProvider>
+            </Providers>
+          </SessionProvider>
         </ReactQueryProvider>
       </body>
     </html>
