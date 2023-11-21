@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable no-param-reassign */
 import { createPrivateKey } from 'crypto';
 import { SignJWT } from 'jose';
@@ -42,7 +43,7 @@ const initAuthOptions = async () => {
         name: `__Secure-next-auth.callback-url`,
         options: {
           httpOnly: false,
-          sameSite: true,
+          sameSite: 'none' as 'none',
           path: '/',
           secure: true,
         },
