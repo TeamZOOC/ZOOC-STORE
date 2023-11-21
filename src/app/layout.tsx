@@ -1,13 +1,13 @@
+import { getServerSession } from 'next-auth';
 import localFont from 'next/font/local';
 import React from 'react';
 
 import { ModalContainer } from '@/components/modal';
+import { SessionProvider } from '@/components/provider';
 import { ToastContainer } from '@/components/toast';
 import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
-import { getServerSession } from 'next-auth';
-import { SessionProvider } from '@/components/provider';
 
 const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -25,7 +25,7 @@ const GmarketSansMedium = localFont({
 });
 
 export const metadata = {
-  title: 'ZOOC',
+  title: 'fitapat',
   description: '내가 상상하는 반려동물과의 모든 이야기를 만날 수 있는 곳',
 };
 
@@ -41,6 +41,9 @@ export default async function RootLayout({
       lang="ko"
       className={`${Pretendard.variable} ${GmarketSansBold.variable} ${GmarketSansMedium.variable}`}
     >
+      <head>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </head>
       <body>
         <SessionProvider session={session}>
           <Providers>
