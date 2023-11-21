@@ -9,6 +9,7 @@ export async function useKakaoLogin() {
   const { data: session } = useSession();
 
   if (session?.accessToken) {
+    console.log('session', session);
     if (session.provider === 'kakao') {
       console.log('카카오 로그인', session.accessToken);
       // const response = await kakaoSignIn(session.accessToken);
