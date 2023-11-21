@@ -45,9 +45,9 @@ const StOptionBottomSheet = styled.div<{
 }>`
   position: absolute;
   bottom: 0;
-  left: 0;
 
   width: 100%;
+  max-width: 43rem;
 
   border-radius: 0.6rem 0.6rem 0 0;
   background-color: ${({ theme }) => theme.colors.zw_background};
