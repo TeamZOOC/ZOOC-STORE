@@ -1,19 +1,15 @@
 export interface OrderInfo {
-  id?: number;
-  pieces: number;
   product: string;
-  createdAt?: Date;
-  price: number;
   image: string;
-  optionCategory: string;
+  options: string[];
+  pieces: number;
+  price: number;
+  id: string;
   deliveryState?: string;
-  petName: string;
-  optionDetail: string;
-  optionAdditionalPrice: number;
 }
 
 export interface OrderListInfo {
-  id: number;
+  createdAt: string;
   data: OrderInfo[];
 }
 
