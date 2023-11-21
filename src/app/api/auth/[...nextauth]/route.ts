@@ -74,6 +74,7 @@ const initAuthOptions = async () => {
         return session;
       },
     },
+    debug: true,
   };
 };
 const handler = async (req: any, res: any) => {
