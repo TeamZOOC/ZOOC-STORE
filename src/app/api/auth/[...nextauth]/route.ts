@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { createPrivateKey } from 'crypto';
 import { SignJWT } from 'jose';
-import { NextApiRequest, NextApiResponse } from 'next';
+// import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth from 'next-auth/next';
 import AppleProvider from 'next-auth/providers/apple';
 import KakaoProvider from 'next-auth/providers/kakao';
@@ -75,7 +75,7 @@ const initAuthOptions = async () => {
     },
   };
 };
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
+const handler = async (req: any, res: any) => {
   const authOptions = await initAuthOptions();
   return NextAuth(req, res, authOptions);
 };
