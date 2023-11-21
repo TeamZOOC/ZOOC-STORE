@@ -1,16 +1,18 @@
 'use client';
 
 import { ProductItem } from '@/components/product';
-import { PRODUCT_LIST } from '@/mocks/productListData';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { styled } from 'styled-components';
+import useGetProduct from '../hooks/useGetProduct';
 
 const ProductList = () => {
   const pathname = usePathname();
+  const { productList } = useGetProduct();
+
   return (
     <StProductList>
-      {PRODUCT_LIST.map((product) => (
+      {productList?.map((product) => (
         <Link href={`${pathname}/${product.id}`} key={product.id}>
           <ProductItem product={product} />
         </Link>

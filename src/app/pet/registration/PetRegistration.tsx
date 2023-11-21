@@ -4,32 +4,36 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { styled } from 'styled-components';
 
+import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
-import { Input } from '@/components/form';
+import { TextInput } from '@/components/form';
 import { useToast } from '@/hooks/toast';
-
-interface PetRegistrationFormData {
-  petName: string;
-  breed: string;
-}
+import { PetDataInfo } from '@/types/pet';
 
 const PetRegistration = () => {
-  const { control, watch, handleSubmit } = useForm<PetRegistrationFormData>({
-    mode: 'onChange',
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm<PetDataInfo>({
+    mode: 'onSubmit',
   });
-  const petName = watch('petName');
-  const isFormFilled = petName?.trim().length > 0;
 
+  const { registerPet } = useRegisterPet();
   const { showToast } = useToast();
   const router = useRouter();
 
-  const onSubmit = (data: PetRegistrationFormData) => {
-    console.log(data);
-    router.push('/pet/registration/createmodel');
+  const onSubmit = async (data: PetDataInfo) => {
+    try {
+      await registerPet(data);
+      router.push('/pet/registration/createmodel');
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onError = (errors: any) => {
-    if (errors.petName) {
+    if (errors.name) {
       showToast('pet_required');
     }
   };
@@ -40,7 +44,7 @@ const PetRegistration = () => {
         <h2>반려동물의 정보를 입력해주세요</h2>
         <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
         <StRegistrationForm onSubmit={handleSubmit(onSubmit)}>
-          <Input
+          <TextInput
             name="petName"
             label="이름"
             placeholder="사랑이"
@@ -48,7 +52,7 @@ const PetRegistration = () => {
             rules={{ required: true, maxLength: 5 }}
             showCount
           />
-          <Input
+          <TextInput
             name="breed"
             label="종"
             placeholder="포메라니안"
@@ -61,7 +65,7 @@ const PetRegistration = () => {
       <BottomButton
         btnName="반려동물 AI 모델 생성하기"
         btnType="button"
-        disabled={!isFormFilled}
+        disabled={!isValid}
         activeFunc={handleSubmit(onSubmit, onError)}
       />
     </>
@@ -86,5 +90,9 @@ const StRegistration = styled.div`
 `;
 
 const StRegistrationForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+
   margin-top: 6rem;
 `;

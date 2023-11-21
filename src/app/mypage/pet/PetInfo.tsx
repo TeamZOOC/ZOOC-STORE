@@ -1,35 +1,53 @@
 'use client';
 
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
-const PetInfo = () => (
-  <StPetInfo>
-    <StProfile>
-      <StProfileImage />
-      <StPetProfile>
-        <h2>사랑이</h2>
-        <p>포메라니안</p>
-      </StPetProfile>
-    </StProfile>
-    <StEditProfileButton type="button">프로필 수정</StEditProfileButton>
-  </StPetInfo>
-);
+import { ImgProfileEmpty } from '../../../../public/images';
+import useGetPet from '../hooks/useGetPetInfo';
+import PetEmpty, { StPetEmpty, StRegisterPetButton } from './PetEmpty';
+
+const PetInfo = () => {
+  const { petInfo } = useGetPet();
+  const router = useRouter();
+
+  return petInfo ? (
+    <StPetInfo>
+      <StProfile>
+        {petInfo.photo ? (
+          <StProfileImage src={petInfo.photo} alt="프로필 이미지" />
+        ) : (
+          <Image
+            src={ImgProfileEmpty}
+            width={70}
+            height={70}
+            alt="프로필 이미지 없음"
+          />
+        )}
+        <StPetProfile>
+          <h2>{petInfo.name}</h2>
+          <p>{petInfo.breed}</p>
+        </StPetProfile>
+      </StProfile>
+      <StEditProfileButton
+        type="button"
+        onClick={() => {
+          router.push(`/pet/edit?id=${petInfo.id}`);
+        }}
+      >
+        프로필 수정
+      </StEditProfileButton>
+    </StPetInfo>
+  ) : (
+    <PetEmpty />
+  );
+};
 
 export default PetInfo;
 
-export const StPetInfo = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-
-  width: 100%;
+const StPetInfo = styled(StPetEmpty)`
   height: 18.2rem;
-  padding: 2.4rem;
-
-  border-radius: 0.4rem;
-  border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
-  background-color: ${({ theme }) => theme.colors.zw_background};
-  box-shadow: 0 0 3rem 0 rgba(0, 0, 0, 0.03);
 `;
 
 const StProfile = styled.div`
@@ -53,7 +71,7 @@ const StPetProfile = styled.div`
   }
 `;
 
-const StProfileImage = styled.div`
+const StProfileImage = styled.img`
   width: 7rem;
   height: 7rem;
 
@@ -61,16 +79,4 @@ const StProfileImage = styled.div`
   background-color: ${({ theme }) => theme.colors.zw_darkgray};
 `;
 
-export const StEditProfileButton = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  width: 100%;
-  min-height: 4.4rem;
-
-  border-radius: 0.4rem;
-  border: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
-  color: ${({ theme }) => theme.colors.zw_gray};
-  ${({ theme }) => theme.fonts.zw_Body2};
-`;
+const StEditProfileButton = styled(StRegisterPetButton)``;

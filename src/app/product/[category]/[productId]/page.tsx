@@ -1,17 +1,10 @@
 import { Header } from '@/components/header';
-import { MainLayout } from '@/components/layout';
-import ProductImage from './ProductImage';
-import ProductDetail from './ProductDetail';
-import ProductInfoNav from './ProductInfoNav';
+import ProductDetailContainer from './ProductDetailContainer';
 
-const page = () => (
+const page = ({ params }: { params: { productId: number } }) => (
   <>
     <Header sideMenu />
-    <ProductImage />
-    <MainLayout>
-      <ProductDetail />
-    </MainLayout>
-    <ProductInfoNav />
+    <ProductDetailContainer pageParams={params.productId} />
   </>
 );
 

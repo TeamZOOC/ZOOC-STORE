@@ -9,6 +9,10 @@ import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
 
+import ReactQueryProvider from '@/lib/ReactQueryProvider';
+import { getServerSession } from 'next-auth';
+import { SessionProvider } from '@/components/provider';
+
 const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
   variable: '--font-pretendard',
@@ -45,17 +49,19 @@ export default async function RootLayout({
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </head>
       <body>
-        <SessionProvider session={session}>
-          <Providers>
-            <RecoilRootProvider>
-              <GlobalStyles />
-              {children}
-              <div id="portal" />
-              <ModalContainer />
-              <ToastContainer />
-            </RecoilRootProvider>
-          </Providers>
-        </SessionProvider>
+        <ReactQueryProvider>
+          <SessionProvider session={session}>
+            <Providers>
+              <RecoilRootProvider>
+                <GlobalStyles />
+                {children}
+                <div id="portal" />
+                <ModalContainer />
+                <ToastContainer />
+              </RecoilRootProvider>
+            </Providers>
+          </SessionProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

@@ -28,9 +28,11 @@ const OrderItem = ({ order, date, onDetailClick }: OrderItemProps) => {
     <StOrderItem>
       <StOrderTitle>
         {date ? (
-          <p>{formatDate(date)}</p>
+          <time>{formatDate(date)}</time>
         ) : (
-          <p>{orderData[0]?.createdAt && formatDate(orderData[0].createdAt)}</p>
+          <time>
+            {orderData[0]?.createdAt && formatDate(orderData[0].createdAt)}
+          </time>
         )}
         {onDetailClick && (
           <button type="button" onClick={() => onDetailClick(orderId)}>
@@ -39,9 +41,11 @@ const OrderItem = ({ order, date, onDetailClick }: OrderItemProps) => {
           </button>
         )}
       </StOrderTitle>
-      {orderData.map((orderItem) => (
-        <OrderProduct key={orderItem.id} order={orderItem} />
-      ))}
+      <StProducts>
+        {orderData.map((orderItem) => (
+          <OrderProduct key={orderItem.id} order={orderItem} />
+        ))}
+      </StProducts>
     </StOrderItem>
   );
 };
@@ -49,9 +53,7 @@ const OrderItem = ({ order, date, onDetailClick }: OrderItemProps) => {
 export default OrderItem;
 
 const StOrderItem = styled.article`
-  & > :last-child {
-    padding-bottom: 3.6rem;
-  }
+  padding: 1.6rem 2.8rem 3.6rem 2.8rem;
 `;
 
 const StOrderTitle = styled.div`
@@ -59,9 +61,10 @@ const StOrderTitle = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 0rem 2.8rem;
+  margin-bottom: 1.6rem;
+  height: 3.6rem;
 
-  & > p {
+  & > time {
     color: ${({ theme }) => theme.colors.zw_black};
     ${({ theme }) => theme.fonts.zw_price_middle};
   }
@@ -70,9 +73,13 @@ const StOrderTitle = styled.div`
     align-items: center;
     gap: 1rem;
 
-    height: 3.6rem;
-
     color: ${({ theme }) => theme.colors.zw_gray};
     ${({ theme }) => theme.fonts.zw_caption};
   }
+`;
+
+const StProducts = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
 `;

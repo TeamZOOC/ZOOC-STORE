@@ -1,7 +1,6 @@
 'use client';
 
 import { styled } from 'styled-components';
-import { BottomButton } from '@/components/button';
 import AgreementCheckContent from './AgreementCheckContent';
 
 const SignUpTermsAgreement = () => (
@@ -15,12 +14,6 @@ const SignUpTermsAgreement = () => (
       </StSignUpTermsAgreementTitle>
     </div>
     <AgreementCheckContent />
-    <BottomButton
-      btnType="button"
-      btnName="회원가입"
-      disabled
-      activeFunc={() => {}}
-    />
   </StSignUpTermsAgreement>
 );
 
