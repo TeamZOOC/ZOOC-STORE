@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
@@ -10,6 +11,7 @@ import { useModal } from '@/hooks/modal';
 import { uploadImagesState } from '@/recoil/createmodel/atom';
 
 import useCreateDataset from '../hooks/useCreateDataset';
+import useUploadDatasetImages from '../hooks/useUploadDatasetImages';
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
 
@@ -20,8 +22,10 @@ const ImageUpload = () => {
     useRecoilState<File[]>(uploadImagesState);
   const imageInputRef = useRef<HTMLInputElement>(null);
   const { openModal, closeModal } = useModal();
+  const params = useSearchParams();
 
-  const { createDataset } = useCreateDataset();
+  const { createDataset, datasetId } = useCreateDataset();
+  const { uploadDatasetImages, isLoading } = useUploadDatasetImages();
 
   const handleUploadImage = () => {
     imageInputRef.current?.click();
@@ -55,8 +59,22 @@ const ImageUpload = () => {
     setValidatedImages(uploadImages);
   };
 
+  const handleDatasetUpload = async () => {
+    try {
+      await uploadDatasetImages({ datasetId, files: validatedImages });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    createDataset(523);
+    console.log(isLoading);
+  }, [isLoading]);
+
+  useEffect(() => {
+    // TODO : petId 바꾸기
+    const petId = Number(params.get('petId'));
+    createDataset(petId);
   }, []);
 
   useEffect(() => {
@@ -92,8 +110,7 @@ const ImageUpload = () => {
             btnName="사진 업로드 완료"
             disabled={false}
             activeFunc={() => {
-              console.log('다음페이지');
-              // createDataset(523);
+              handleDatasetUpload();
             }}
           />
         </>
