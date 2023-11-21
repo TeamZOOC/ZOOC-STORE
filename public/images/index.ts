@@ -7,6 +7,7 @@ import ImageProduct from './image_product.png';
 import ImageWrong1 from './image_wrong_1.png';
 import ImageWrong2 from './image_wrong_2.png';
 import ImageWrong3 from './image_wrong_3.png';
+import ImgProfileEmpty from './img_profile_empty.png';
 
 export {
   ImageArticle,
@@ -18,4 +19,5 @@ export {
   ImageWrong1,
   ImageWrong2,
   ImageWrong3,
+  ImgProfileEmpty,
 };
