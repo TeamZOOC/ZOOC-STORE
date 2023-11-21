@@ -37,17 +37,17 @@ const initAuthOptions = async () => {
   const appleToken = await getAppleToken();
 
   return {
-    // cookies: {
-    //   callbackUrl: {
-    //     name: `__Secure-next-auth.callback-url`,
-    //     options: {
-    //       httpOnly: false,
-    //       sameSite: `"none`,
-    //       path: '/',
-    //       secure: true,
-    //     },
-    //   },
-    // },
+    cookies: {
+      callbackUrl: {
+        name: `__Secure-next-auth.callback-url`,
+        options: {
+          httpOnly: false,
+          sameSite: `"none"`,
+          path: '/',
+          secure: true,
+        },
+      },
+    },
     providers: [
       KakaoProvider({
         clientId: process.env.KAKAO_CLIENT_ID!,
