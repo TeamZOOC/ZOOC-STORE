@@ -6,6 +6,9 @@ import { ToastContainer } from '@/components/toast';
 import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
+import ReactQueryProvider from '@/lib/ReactQueryProvider';
+import { getServerSession } from 'next-auth';
+import { SessionProvider } from '@/components/provider';
 
 const Pretendard = localFont({
   src: './fonts/PretendardVariable.woff2',
@@ -27,26 +30,32 @@ export const metadata = {
   description: '내가 상상하는 반려동물과의 모든 이야기를 만날 수 있는 곳',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getServerSession();
+
   return (
     <html
       lang="ko"
       className={`${Pretendard.variable} ${GmarketSansBold.variable} ${GmarketSansMedium.variable}`}
     >
       <body>
-        <Providers>
-          <RecoilRootProvider>
-            <GlobalStyles />
-            {children}
-            <div id="portal" />
-            <ModalContainer />
-            <ToastContainer />
-          </RecoilRootProvider>
-        </Providers>
+        <ReactQueryProvider>
+          <SessionProvider session={session}>
+            <Providers>
+              <RecoilRootProvider>
+                <GlobalStyles />
+                {children}
+                <div id="portal" />
+                <ModalContainer />
+                <ToastContainer />
+              </RecoilRootProvider>
+            </Providers>
+          </SessionProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

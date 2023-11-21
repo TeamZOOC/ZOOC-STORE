@@ -5,7 +5,7 @@ import { styled } from 'styled-components';
 
 import { PopupButton } from '@/components/button';
 
-import { IcThirdStep } from '../../../../../public/icons';
+import { IcThirdStep } from '../../../../public/icons';
 import { StStepBox, StTitle, StUnSelected } from './FirstStep';
 
 interface ThirdStepProps {

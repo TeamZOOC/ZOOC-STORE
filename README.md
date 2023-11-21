@@ -1,6 +1,6 @@
 # ZOOC-Shopping
 
-쭉핑몰 🛒 🐾 🐶 💚 🛍️
+쭉핑몰~ 🛒 🐾 🐶 💚 🛍️
 
 ### ✨ Feature
 

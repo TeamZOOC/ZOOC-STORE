@@ -4,9 +4,9 @@ import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
 
 import { PopupButton } from '@/components/button';
+import { ACCOUNT_NUMBER } from '@/constants/payment';
 
-import { IcFirstStep } from '../../../../../public/icons';
-import { ACCOUNT_NUMBER } from '../../../../constants/payment';
+import { IcFirstStep } from '../../../../public/icons';
 
 interface FirstStepProps {
   currentStep: number;
