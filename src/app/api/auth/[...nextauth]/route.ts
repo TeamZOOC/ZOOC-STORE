@@ -42,7 +42,7 @@ const initAuthOptions = async () => {
         name: `__Secure-next-auth.callback-url`,
         options: {
           httpOnly: false,
-          sameSite: `"none"`,
+          sameSite: true,
           path: '/',
           secure: true,
         },
