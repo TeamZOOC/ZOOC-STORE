@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 import { IcRadioAfter } from '../../../../../public/icons';
-import { StInfoTitle } from '../productInfo/ProductInfo';
+import { StInfoTitle } from '../productsInfo/ProductsInfo';
 
 const PaymentMethod = () => (
   <StPaymentInfoSection>

@@ -14,7 +14,7 @@ import Agreement from './agreement/Agreement';
 import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
 import PaymentMethod from './paymentMethod/PaymentMethod';
-import ProductInfo from './productInfo/ProductInfo';
+import ProductInfo from './productsInfo/ProductsInfo';
 
 const Order = () => {
   const { products, payment } = ORDER_DETAIL;
