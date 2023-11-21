@@ -36,13 +36,11 @@ export default OrderList;
 const StOrderListWrapper = styled.section`
   display: flex;
   flex-direction: column;
-
-  margin-top: 2rem;
 `;
 
 const StHr = styled.hr`
   height: 0.1rem;
-  margin: 0 0 2.8rem 2.8rem;
+  margin: 0 0 1.2rem 2.8rem;
 
   border: none;
   background-color: ${({ theme }) => theme.colors.zw_brightgray};

@@ -6,7 +6,7 @@ import { styled } from 'styled-components';
 
 import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
-import { Input } from '@/components/form';
+import { TextInput } from '@/components/form';
 import { useToast } from '@/hooks/toast';
 import { PetDataInfo } from '@/types/pet';
 
@@ -44,15 +44,15 @@ const PetRegistration = () => {
         <h2>반려동물의 정보를 입력해주세요</h2>
         <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
         <StRegistrationForm onSubmit={handleSubmit(onSubmit)}>
-          <Input
-            name="name"
+          <TextInput
+            name="petName"
             label="이름"
             placeholder="사랑이"
             control={control}
             rules={{ required: true, maxLength: 5 }}
             showCount
           />
-          <Input
+          <TextInput
             name="breed"
             label="종"
             placeholder="포메라니안"
@@ -90,5 +90,9 @@ const StRegistration = styled.div`
 `;
 
 const StRegistrationForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+
   margin-top: 6rem;
 `;
