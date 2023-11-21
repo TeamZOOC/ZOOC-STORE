@@ -1,17 +1,25 @@
 'use client';
 
+import { formatPrice } from '@/utils/formatPrice';
 import { styled } from 'styled-components';
 
-const ProductDetail = () => (
+interface ProductDetailProps {
+  productName: string;
+  productPrice: number;
+  productDesc: string;
+}
+
+const ProductDetail = ({
+  productName,
+  productPrice,
+  productDesc,
+}: ProductDetailProps) => (
   <StProductDetail>
-    <StProductDetailTitle>커스텀 젤리 폰케이스</StProductDetailTitle>
+    <StProductDetailTitle>{productName}</StProductDetailTitle>
     <StProductDetailPrice>
-      15,000 <span>원</span>
+      {formatPrice(productPrice)} <span>원</span>
     </StProductDetailPrice>
-    <StProductDetailDesc>
-      항상 주머니 속에 넣어 다닐 수 있는 우리 집 강아지 고양이 맞춤 핸드폰
-      케이스
-    </StProductDetailDesc>
+    <StProductDetailDesc>{productDesc}</StProductDetailDesc>
   </StProductDetail>
 );
 

@@ -2,15 +2,18 @@
 
 import { styled } from 'styled-components';
 
-const OptionDropdown = () => (
+interface OptionDropdownProps {
+  productOptionList: {
+    id: number;
+    name: string;
+  }[];
+}
+
+const OptionDropdown = ({ productOptionList }: OptionDropdownProps) => (
   <StOptionDropdown>
-    <StOptionDropdownItem>아이폰 13</StOptionDropdownItem>
-    <StOptionDropdownItem>아이폰 13</StOptionDropdownItem>
-    <StOptionDropdownItem>아이폰 13</StOptionDropdownItem>
-    <StOptionDropdownItem>아이폰 13</StOptionDropdownItem>
-    <StOptionDropdownItem>아이폰 13</StOptionDropdownItem>
-    <StOptionDropdownItem>아이폰 13</StOptionDropdownItem>
-    <StOptionDropdownItem>아이폰 13</StOptionDropdownItem>
+    {productOptionList.map(({ id, name }) => (
+      <StOptionDropdownItem key={id}>{name}</StOptionDropdownItem>
+    ))}
   </StOptionDropdown>
 );
 export default OptionDropdown;

@@ -6,7 +6,7 @@ import { ProductItem } from '@/components/product';
 
 const HomeProduct = () => (
   <StHomeProduct>
-    {PRODUCT_LIST.slice(0, 3).map((product) => (
+    {PRODUCT_LIST.map((product) => (
       <ProductItem key={product.id} product={product} />
     ))}
   </StHomeProduct>
