@@ -9,6 +9,7 @@ import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { uploadImagesState } from '@/recoil/createmodel/atom';
 
+import useCreateDataset from '../hooks/useCreateDataset';
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
 
@@ -19,6 +20,8 @@ const ImageUpload = () => {
     useRecoilState<File[]>(uploadImagesState);
   const imageInputRef = useRef<HTMLInputElement>(null);
   const { openModal, closeModal } = useModal();
+
+  const { createDataset } = useCreateDataset();
 
   const handleUploadImage = () => {
     imageInputRef.current?.click();
@@ -53,6 +56,10 @@ const ImageUpload = () => {
   };
 
   useEffect(() => {
+    createDataset(523);
+  }, []);
+
+  useEffect(() => {
     if (uploadImages.length > 0) {
       handleImageValidate(uploadImages.length);
     }
@@ -85,7 +92,8 @@ const ImageUpload = () => {
             btnName="사진 업로드 완료"
             disabled={false}
             activeFunc={() => {
-              console.log('다음 페이지 라우팅');
+              console.log('다음페이지');
+              // createDataset(523);
             }}
           />
         </>

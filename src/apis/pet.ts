@@ -45,3 +45,14 @@ export const editPet = async (petId: number, editPetInfo: PetEditInfo) => {
     throw error;
   }
 };
+
+export const createDataset = async (petId: number) => {
+  try {
+    const { data } = await generalAxios.post(`/ai/dataset`, petId);
+    console.log(createDataset);
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
