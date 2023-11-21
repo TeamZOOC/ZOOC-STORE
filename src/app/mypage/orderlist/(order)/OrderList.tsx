@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+
 'use client';
 
 import { useRouter } from 'next/navigation';
@@ -17,10 +19,10 @@ const OrderList = () => {
 
   return (
     <StOrderListWrapper>
-      {orderList.map((orderInfo) => (
+      {orderList.map((orderInfo, index) => (
         <>
           <OrderItem
-            key={orderInfo.id}
+            key={index}
             order={orderInfo}
             onDetailClick={handleOrderDetail}
           />

@@ -15,6 +15,29 @@ export const ORDER_LIST: OrderListInfo[] = [
       },
     ],
   },
+  {
+    createdAt: '2023-11-20T07:13:49.981Z',
+    data: [
+      {
+        product: '긴팔 티셔츠',
+        image: 'testUrl',
+        options: ['우비', '2x'],
+        pieces: 2,
+        price: 4000,
+        id: 'string',
+        deliveryState: 'string',
+      },
+      {
+        product: '긴팔 티셔츠',
+        image: 'testUrl',
+        options: ['해리포터', '2x'],
+        pieces: 4,
+        price: 4000,
+        id: 'string',
+        deliveryState: 'string',
+      },
+    ],
+  },
 ];
 
 // export const ORDER_LIST: OrderListInfo[] = [
