@@ -26,21 +26,19 @@ const ProductDetailContainer = ({
   }, [productDetail]);
 
   return (
-    productDetail && (
-      <>
-        <ProductImage />
-        <MainLayout>
-          {productDetail && (
-            <ProductDetail
-              productName={productDetail.name}
-              productPrice={productDetail.price}
-              productDesc={productDetail.description}
-            />
-          )}
-        </MainLayout>
-        <ProductInfoNav />
-      </>
-    )
+    <>
+      <ProductImage />
+      <MainLayout>
+        {productDetail && (
+          <ProductDetail
+            productName={productDetail.name}
+            productPrice={productDetail.price}
+            productDesc={productDetail.description}
+          />
+        )}
+      </MainLayout>
+      <ProductInfoNav />
+    </>
   );
 };
 export default ProductDetailContainer;

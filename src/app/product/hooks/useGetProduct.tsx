@@ -1,11 +1,15 @@
 import { getProduct } from '@/apis/product';
+import { ProductInfoResponse } from '@/types/product';
 import { useQuery } from '@tanstack/react-query';
 
 const useGetProduct = () => {
-  const { data } = useQuery(['product'], getProduct);
+  const { data: productList } = useQuery<ProductInfoResponse[]>(
+    ['product'],
+    getProduct,
+  );
 
   return {
-    productList: data,
+    productList,
   };
 };
 
