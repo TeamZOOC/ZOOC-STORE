@@ -1,7 +1,8 @@
-import { kakaoSignIn } from '@/apis/auth';
 import { setCookie } from 'cookies-next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+
+import { kakaoSignIn } from '@/apis/auth';
 
 export async function useKakaoLogin() {
   const router = useRouter();
@@ -18,8 +19,9 @@ export async function useKakaoLogin() {
           router.push('/auth/signup');
         }
       }
-    } else {
+    } else if (session.provider === 'apple') {
       // session.provider === "apple" 일 때
+      console.log('애플 로그인', session.accessToken);
     }
   }
 }

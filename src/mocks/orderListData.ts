@@ -7,7 +7,7 @@ export const ORDER_LIST: OrderListInfo[] = [
       {
         id: 105,
         pieces: 1,
-        product: '핸드폰 케이스',
+        product: '핸드폰 케이스.',
         createdAt: new Date('2023-09-21 07:34:45.315'),
         price: 24500,
         image: 'https://i.ibb.co/Q7gCtbJ/4.png',

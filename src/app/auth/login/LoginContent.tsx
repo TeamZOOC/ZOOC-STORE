@@ -1,7 +1,8 @@
 'use client';
 
-import { styled } from 'styled-components';
 import { signIn } from 'next-auth/react';
+import { styled } from 'styled-components';
+
 import { IcApple, IcKakao } from '../../../../public/icons';
 import { useKakaoLogin } from '../hooks/useKakaoLogin';
 
@@ -27,11 +28,11 @@ const LoginContent = () => {
         </div>
       </StLoginContent>
       <StBottomButtonWrapper>
-        <StAppleLoginButton>
+        <StAppleLoginButton type="button" onClick={() => signIn('apple')}>
           <IcApple />
           Apple로 로그인
         </StAppleLoginButton>
-        <StKakaoLoginButton onClick={() => signIn('kakao')}>
+        <StKakaoLoginButton type="button" onClick={() => signIn('kakao')}>
           <IcKakao />
           Kakao로 로그인
         </StKakaoLoginButton>
