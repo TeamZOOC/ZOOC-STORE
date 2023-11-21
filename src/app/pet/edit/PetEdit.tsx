@@ -9,7 +9,7 @@ import { styled } from 'styled-components';
 import useEditPet from '@/app/mypage/hooks/useEditPet';
 import useGetPet from '@/app/mypage/hooks/useGetPetInfo';
 import { BottomButton } from '@/components/button';
-import { Input } from '@/components/form';
+import { TextInput } from '@/components/form';
 import { Thumbnail } from '@/components/image';
 import { useImageUpload } from '@/hooks/image';
 import { useToast } from '@/hooks/toast';
@@ -111,7 +111,7 @@ const PetEdit = () => {
               <IcBtnPicture />
             </StUploadBtn>
           </StUploadProfileImage>
-          <Input
+          <TextInput
             name="nickName"
             label="이름"
             placeholder="사랑이"
@@ -119,7 +119,7 @@ const PetEdit = () => {
             rules={{ required: true, maxLength: 5 }}
             showCount
           />
-          <Input
+          <TextInput
             name="breed"
             label="종"
             placeholder="포메라니안"

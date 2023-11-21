@@ -45,7 +45,7 @@ const PetRegistration = () => {
         <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
         <StRegistrationForm onSubmit={handleSubmit(onSubmit)}>
           <TextInput
-            name="petName"
+            name="name"
             label="이름"
             placeholder="사랑이"
             control={control}
