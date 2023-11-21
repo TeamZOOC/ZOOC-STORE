@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter, useSearchParams } from 'next/navigation';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
@@ -27,9 +27,11 @@ const ImageUpload = () => {
 
   const router = useRouter();
   const params = useSearchParams();
+  const petId = Number(params.get('petId'));
 
   const { createDataset, datasetId } = useCreateDataset();
   const { uploadDatasetImages, isLoading } = useUploadDatasetImages();
+  const [isMount, setIsMount] = useState(false);
 
   const handleUploadImage = () => {
     imageInputRef.current?.click();
@@ -75,20 +77,23 @@ const ImageUpload = () => {
   };
 
   useEffect(() => {
-    // TODO : 로딩뷰 추가
-    console.log(isLoading);
-  }, [isLoading]);
+    setIsMount(true);
+  }, []);
 
   useEffect(() => {
-    const petId = Number(params.get('petId'));
-    createDataset(petId);
-  }, []);
+    if (isMount) {
+      console.log('마운트');
+      createDataset(petId);
+    }
+  }, [isMount]);
 
   useEffect(() => {
     if (uploadImages.length > 0) {
       handleImageValidate(uploadImages.length);
     }
   }, [uploadImages]);
+
+  if (isLoading) return <div>로딩중</div>;
 
   return (
     <StImageUpload>

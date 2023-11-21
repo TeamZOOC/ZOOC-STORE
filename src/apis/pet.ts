@@ -60,9 +60,6 @@ export const uploadDatasetImages = async (datasetId: number, files: File[]) => {
   try {
     const formData = new FormData();
     files.forEach((file) => formData.append('files', file));
-    for (let i = 0; i < files.length; i += 1) {
-      formData.append(`files`, files[i]);
-    }
     const { data } = await generalAxios.patch(
       `/ai/images/${datasetId}`,
       formData,
