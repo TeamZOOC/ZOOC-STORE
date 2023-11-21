@@ -1,6 +1,6 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
@@ -8,6 +8,7 @@ import { styled } from 'styled-components';
 import { BottomButton } from '@/components/button';
 import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
+import { useToast } from '@/hooks/toast';
 import { uploadImagesState } from '@/recoil/createmodel/atom';
 
 import useCreateDataset from '../hooks/useCreateDataset';
@@ -22,6 +23,9 @@ const ImageUpload = () => {
     useRecoilState<File[]>(uploadImagesState);
   const imageInputRef = useRef<HTMLInputElement>(null);
   const { openModal, closeModal } = useModal();
+  const { showToast } = useToast();
+
+  const router = useRouter();
   const params = useSearchParams();
 
   const { createDataset, datasetId } = useCreateDataset();
@@ -62,17 +66,20 @@ const ImageUpload = () => {
   const handleDatasetUpload = async () => {
     try {
       await uploadDatasetImages({ datasetId, files: validatedImages });
+      // TODO : 완료됐을때 라우팅 처리 필요 (마이페이지 / 주문하기)
+      router.push('/mypage');
     } catch (error) {
-      console.error(error);
+      showToast('dataset_upload_error');
+      console.error('이미지 업로드 실패', error);
     }
   };
 
   useEffect(() => {
+    // TODO : 로딩뷰 추가
     console.log(isLoading);
   }, [isLoading]);
 
   useEffect(() => {
-    // TODO : petId 바꾸기
     const petId = Number(params.get('petId'));
     createDataset(petId);
   }, []);

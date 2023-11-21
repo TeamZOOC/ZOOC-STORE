@@ -61,7 +61,6 @@ export const uploadDatasetImages = async (datasetId: number, files: File[]) => {
     const formData = new FormData();
     files.forEach((file) => formData.append('files', file));
     for (let i = 0; i < files.length; i += 1) {
-      console.log(files[i]);
       formData.append(`files`, files[i]);
     }
     const { data } = await generalAxios.patch(
@@ -73,9 +72,7 @@ export const uploadDatasetImages = async (datasetId: number, files: File[]) => {
         },
       },
     );
-
-    console.log(data);
-    return data.data;
+    return data;
   } catch (error) {
     console.error(error);
     throw error;
