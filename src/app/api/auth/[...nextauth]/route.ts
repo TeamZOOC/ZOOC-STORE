@@ -6,6 +6,7 @@ import { createPrivateKey } from 'crypto';
 import { JWTPayload, SignJWT } from 'jose';
 import jwt from 'jsonwebtoken';
 import { SessionStrategy } from 'next-auth';
+import { JWT } from 'next-auth/jwt';
 // import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth from 'next-auth/next';
 import AppleProvider from 'next-auth/providers/apple';
@@ -60,13 +61,13 @@ const initAuthOptions = async () => {
     },
     jwt: {
       maxAge: 60 * 60 * 24,
-      async encode({ secret, token, maxAge }: any) {
+      async encode({ token, secret, maxAge }: any) {
         return await jwt.sign(token, secret, { algorithm: 'ES256' });
       },
-      async decode({ secret, token, maxAge }: any) {
+      async decode({ token, secret, maxAge }: any) {
         return (await jwt.verify(token, secret, {
           algorithms: ['ES256'],
-        })) as JWTPayload;
+        })) as JWT;
       },
     },
     secret: applePrivateKey,
