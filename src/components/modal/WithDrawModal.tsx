@@ -1,5 +1,6 @@
 'use client';
 
+import { deleteCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 import { styled } from 'styled-components';
@@ -14,6 +15,7 @@ const WithDrawModal = () => {
 
   const handleQuit = useCallback(() => {
     withdraw();
+    deleteCookie('accessToken');
     router.push('/');
   }, [router]);
 
