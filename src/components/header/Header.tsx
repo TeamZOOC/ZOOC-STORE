@@ -9,7 +9,7 @@ import {
   IcCart,
   IcExit,
   IcMyPage,
-  IcZooc,
+  IcZooc
 } from '../../../public/icons';
 
 interface HeaderProps {
@@ -29,9 +29,19 @@ const Header = ({
 }: HeaderProps) => {
   const pathname = usePathname();
 
+  const showIcon = () => {
+    if (pathname === '/') {
+      return <IcZooc />;
+    }
+    if (pathname !== '/order/payment') {
+      return <IcBack onClick={backFunc} />;
+    }
+    return <StEmpty />;
+  };
+
   return (
     <StHeader>
-      {pathname === '/' ? <IcZooc /> : <IcBack onClick={backFunc} />}
+      {showIcon()}
       <StHeaderTitle>{headerTitle}</StHeaderTitle>
       {sideMenu && (
         <StHeaderRight>
