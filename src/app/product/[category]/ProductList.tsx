@@ -2,13 +2,14 @@
 
 import { ProductItem } from '@/components/product';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { styled } from 'styled-components';
 import useGetProduct from '../hooks/useGetProduct';
 
 const ProductList = () => {
   const pathname = usePathname();
-  const { productList } = useGetProduct();
+  const { category } = useParams();
+  const { productList } = useGetProduct(category as string);
 
   return (
     <StProductList>
