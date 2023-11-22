@@ -19,14 +19,19 @@ const PetRegistration = () => {
     mode: 'onSubmit',
   });
 
-  const { registerPet, petId } = useRegisterPet();
+  const { registerPet } = useRegisterPet();
   const { showToast } = useToast();
   const router = useRouter();
 
   const onSubmit = async (data: PetDataInfo) => {
     try {
-      await registerPet(data);
-      router.push(`/pet/registration/createmodel?petId=${petId}`);
+      const response = await registerPet(data);
+      if (response.id) {
+        router.push(`/pet/registration/createmodel?petId=${response.id}`);
+      } else {
+        showToast('pet_register_error');
+      }
+      router.push(`/pet/registration/createmodel?petId=${response.id}`);
     } catch (error) {
       console.error(error);
     }

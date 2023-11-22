@@ -5,21 +5,34 @@ import { styled } from 'styled-components';
 
 import { MYPAGE_MENU } from '@/constants/mypage';
 
-const MyPageMenu = () => (
-  <StMyPageMenu>
-    {MYPAGE_MENU.map((item) => (
-      <StMenuItem key={item.id}>
-        <Link href={item.path}>
-          <StMenuButton type="button">
-            {item.icon}
-            {item.name}
-          </StMenuButton>
-        </Link>
-      </StMenuItem>
-    ))}
-    <StWithdrawalButton type="button">회원탈퇴</StWithdrawalButton>
-  </StMyPageMenu>
-);
+import { useWithdraw } from './hooks/useWithdraw';
+
+const MyPageMenu = () => {
+  const { mutate: withdraw } = useWithdraw();
+
+  return (
+    <StMyPageMenu>
+      {MYPAGE_MENU.map((item) => (
+        <StMenuItem key={item.id}>
+          <Link href={item.path}>
+            <StMenuButton type="button">
+              {item.icon}
+              {item.name}
+            </StMenuButton>
+          </Link>
+        </StMenuItem>
+      ))}
+      <StWithdrawalButton
+        type="button"
+        onClick={() => {
+          withdraw();
+        }}
+      >
+        회원탈퇴
+      </StWithdrawalButton>
+    </StMyPageMenu>
+  );
+};
 
 export default MyPageMenu;
 
