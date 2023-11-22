@@ -17,7 +17,7 @@ const OrderProduct = ({ order }: OrderProductProps) => {
       <StOrderContent>
         <StProductImage src={image} alt={product} />
         <StOrderDetail>
-          <DeliveryLabel deliveryState={deliveryState} />
+          {deliveryState && <DeliveryLabel deliveryState={deliveryState} />}
           <StProductTitle>
             {product} <span>{pieces}개</span>
           </StProductTitle>
@@ -37,9 +37,7 @@ const OrderProduct = ({ order }: OrderProductProps) => {
 
 export default OrderProduct;
 
-const StOrderProductWrapper = styled.div`
-  padding: 1.6rem 2.8rem;
-`;
+const StOrderProductWrapper = styled.div``;
 
 const StOrderContent = styled.div`
   display: flex;

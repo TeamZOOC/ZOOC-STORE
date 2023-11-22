@@ -5,19 +5,15 @@
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
-import {
-  imageThumbnailsState,
-  uploadImagesState,
-} from '@/recoil/createmodel/atom';
+import { Thumbnail } from '@/components/image';
+import { uploadImagesState } from '@/recoil/createmodel/atom';
 
 const ImageConfirm = () => {
-  const [, setUploadImages] = useRecoilState<File[]>(uploadImagesState);
-  const [imageThumbnails, setImageThumbnails] =
-    useRecoilState<string[]>(imageThumbnailsState);
+  const [uploadImages, setUploadImages] =
+    useRecoilState<File[]>(uploadImagesState);
 
   const handleResetImage = () => {
     setUploadImages([]);
-    setImageThumbnails([]);
   };
 
   return (
@@ -25,8 +21,8 @@ const ImageConfirm = () => {
       <h2>아래 사진으로 확정하시나요?</h2>
       <p>선택한 사진으로 AI 모델 생성이 진행돼요</p>
       <StThumbnailContainer>
-        {imageThumbnails.map((url, id) => (
-          <StThumbnail key={id} src={url} alt="업로드한 이미지" />
+        {uploadImages.map((uploadImage, index) => (
+          <Thumbnail key={index} file={uploadImage} />
         ))}
       </StThumbnailContainer>
       <StResetButton type="button" onClick={handleResetImage}>
@@ -71,12 +67,12 @@ const StThumbnailContainer = styled.div`
   padding: 0.8rem 1.4rem;
   margin: auto;
   box-sizing: border-box;
-`;
 
-const StThumbnail = styled.img`
-  width: 9rem;
-  height: 9rem;
-  object-fit: cover;
+  & > img {
+    width: 9rem;
+    height: 9rem;
+    object-fit: cover;
+  }
 `;
 
 const StResetButton = styled.button`

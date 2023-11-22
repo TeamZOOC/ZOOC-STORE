@@ -1,14 +1,11 @@
 /* eslint-disable no-nested-ternary */
-
-'use client';
-
 import React, { useEffect, useState } from 'react';
 import { Control, useController } from 'react-hook-form';
 import { styled } from 'styled-components';
 
 interface TextInputProps {
   name: string;
-  label: string;
+  label?: string;
   placeholder: string;
   control: Control<any>;
   rules?: Record<string, any>;
@@ -26,8 +23,8 @@ function TextInput({
   const { field, fieldState } = useController({
     name,
     control,
-    defaultValue: '',
     rules,
+    defaultValue: '',
   });
 
   const [inputLength, setInputLength] = useState(0);
@@ -50,10 +47,12 @@ function TextInput({
 
   return (
     <StTextInput>
-      <StInputLabel htmlFor={name}>
-        {label}
-        {isRequired && <StRequired />}
-      </StInputLabel>
+      {label && (
+        <StInputLabel htmlFor={name}>
+          {label}
+          {isRequired && <StRequired />}
+        </StInputLabel>
+      )}
       <StInputWrapper $isFocused={isFocused} $isError={!!fieldState.error}>
         <input
           type="text"
@@ -107,7 +106,7 @@ const StInputWrapper = styled.div<{ $isFocused: boolean; $isError: boolean }>`
 
   & > input {
     width: 100%;
-    margin: 1rem 0 2.4rem 0;
+    margin: 1rem 0 0rem 0;
     padding: 1.5rem 2rem;
     box-sizing: border-box;
 
@@ -137,7 +136,7 @@ const StLengthCounter = styled.div<{
 }>`
   position: absolute;
   right: 2rem;
-  bottom: 4.3rem;
+  bottom: 2rem;
 
   color: ${({ $isFocused, theme }) =>
     $isFocused ? theme.colors.zw_point : theme.colors.zw_lightgray};
