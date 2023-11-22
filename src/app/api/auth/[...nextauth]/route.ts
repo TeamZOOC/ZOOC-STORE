@@ -99,32 +99,33 @@ const initAuthOptions = async () => {
     ],
 
     callbacks: {
-      async jwt({ token, account, user }: any) {
-        console.log('USER in JWT:', user);
-        console.log('token JWT:', token);
-        if (account) {
-          token.accessToken = account.access_token;
-          token.provider = account.provider;
-        }
-        return token;
-      },
       // async jwt({ token, account, user }: any) {
+      //   console.log('USER in JWT:', user);
+      //   console.log('token JWT:', token);
       //   if (account) {
       //     token.accessToken = account.access_token;
       //     token.provider = account.provider;
       //   }
-      //   console.log('JWT function Invoked');
-      //   console.log('USER in JWT:', user);
-      //   console.log('token JWT:', token);
-      //   if (user && user.id) {
-      //     token['https://hasura.io/jwt/claims'] = {
-      //       'x-hasura-allowed-roles': ['commercial', 'admin'],
-      //       'x-hasura-default-role': 'admin',
-      //       'x-hasura-user-id': user.id.toString(),
-      //     };
-      //   }
       //   return token;
       // },
+      async jwt({ token, account, user }: any) {
+        if (account) {
+          token.accessToken = account.access_token;
+          token.provider = account.provider;
+        }
+        console.log('JWT function Invoked');
+        console.log('Account:', account);
+        console.log('USER in JWT:', user);
+        console.log('token JWT:', token);
+        if (user && user.id) {
+          token['https://hasura.io/jwt/claims'] = {
+            'x-hasura-allowed-roles': ['commercial', 'admin'],
+            'x-hasura-default-role': 'admin',
+            'x-hasura-user-id': user.id.toString(),
+          };
+        }
+        return token;
+      },
 
       async session({ session, token }: any) {
         session.id_token = token.id_token;
