@@ -1,14 +1,15 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import React from 'react';
 import styled from 'styled-components';
-import { usePathname } from 'next/navigation';
+
 import {
   IcBack,
-  IcZooc,
   IcCart,
   IcExit,
   IcMyPage,
+  IcZooc
 } from '../../../public/icons';
 
 interface HeaderProps {
@@ -58,6 +59,10 @@ const StHeader = styled.header`
   background-color: ${({ theme }) => theme.colors.zw_background};
 
   z-index: ${({ theme }) => theme.zIndex.zw_header};
+
+  & > svg {
+    cursor: pointer;
+  }
 `;
 
 const StHeaderTitle = styled.h1`

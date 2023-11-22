@@ -14,7 +14,7 @@ const OrderDetailHeader = () => {
         router.back();
       }}
       exitFunc={() => {
-        router.back();
+        router.push('/mypage');
       }}
     />
   );
