@@ -1,10 +1,9 @@
-import { Header } from '@/components/header';
-
 import OrderDetail from './(detail)/OrderDetail';
+import OrderDetailHeader from './OrderDetailHeader';
 
 const page = () => (
   <>
-    <Header headerTitle="주문상세" exit />
+    <OrderDetailHeader />
     <OrderDetail />
   </>
 );
