@@ -53,22 +53,22 @@ const initAuthOptions = async () => {
         },
       },
     },
-    // session: {
-    //   strategy: 'jwt' as SessionStrategy,
-    //   maxAge: 60 * 60 * 24,
-    //   updateAge: 60 * 60 * 4,
-    // },
-    // jwt: {
-    //   maxAge: 60 * 60 * 24,
-    //   async encode({ secret, token, maxAge }: any) {
-    //     return await jwt.sign(token, secret, { algorithm: 'ES256' });
-    //   },
-    //   async decode({ secret, token, maxAge }: any) {
-    //     return (await jwt.verify(token, secret, {
-    //       algorithms: ['ES256'],
-    //     })) as JWTPayload;
-    //   },
-    // },
+    session: {
+      strategy: 'jwt' as SessionStrategy,
+      maxAge: 60 * 60 * 24,
+      updateAge: 60 * 60 * 4,
+    },
+    jwt: {
+      maxAge: 60 * 60 * 24,
+      async encode({ secret, token, maxAge }: any) {
+        return await jwt.sign(token, secret, { algorithm: 'ES256' });
+      },
+      async decode({ secret, token, maxAge }: any) {
+        return (await jwt.verify(token, secret, {
+          algorithms: ['ES256'],
+        })) as JWTPayload;
+      },
+    },
     secret: applePrivateKey,
     providers: [
       KakaoProvider({
