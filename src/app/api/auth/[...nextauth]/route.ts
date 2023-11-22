@@ -59,18 +59,19 @@ const initAuthOptions = async () => {
       maxAge: 60 * 60 * 24,
       updateAge: 60 * 60 * 4,
     },
-    jwt: {
-      maxAge: 60 * 60 * 24,
-      async encode({ token, secret, maxAge }: any) {
-        return await jwt.sign(token, secret, { algorithm: 'ES256' });
-      },
-      async decode({ token, secret, maxAge }: any) {
-        return (await jwt.verify(token, secret, {
-          algorithms: ['ES256'],
-        })) as JWT;
-      },
-    },
-    secret: process.env.NEXTAUTH_SECRET,
+    // jwt: {
+    //   maxAge: 60 * 60 * 24,
+    //   async encode({ token, secret, maxAge }: any) {
+    //     return await jwt.sign(token, secret, { algorithm: 'ES256' });
+    //   },
+    //   async decode({ token, secret, maxAge }: any) {
+    //     return (await jwt.verify(token, secret, {
+    //       algorithms: ['ES256'],
+    //     })) as JWT;
+    //   },
+    // },
+    // secret: process.env.NEXTAUTH_SECRET,
+    secret: applePrivateKey,
     providers: [
       KakaoProvider({
         clientId: process.env.KAKAO_CLIENT_ID!,
