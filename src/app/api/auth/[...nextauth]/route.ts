@@ -61,7 +61,7 @@ const initAuthOptions = async () => {
     jwt: {
       maxAge: 60 * 60 * 24,
       async encode({ secret, token, maxAge }: any) {
-        return await jwt.sign(token, secret, { algorithm: 'RS256' });
+        return await jwt.sign(token, secret, { algorithm: 'ES256' });
       },
       async decode({ secret, token, maxAge }: any) {
         return (await jwt.verify(token, secret, {
