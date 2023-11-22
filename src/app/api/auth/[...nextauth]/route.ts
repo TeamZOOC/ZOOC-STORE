@@ -39,16 +39,17 @@ const initAuthOptions = async () => {
 
   return {
     cookies: {
-      callbackUrl: {
-        name: `__Secure-next-auth.callback-url`,
+      pkceCodeVerifier: {
+        name: 'next-auth.pkce.code_verifier',
         options: {
-          httpOnly: false,
+          httpOnly: true,
           sameSite: 'none' as 'none',
           path: '/',
           secure: true,
         },
       },
     },
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
       KakaoProvider({
         clientId: process.env.KAKAO_CLIENT_ID!,
@@ -57,6 +58,23 @@ const initAuthOptions = async () => {
       AppleProvider({
         clientId: process.env.APPLE_ID!,
         clientSecret: appleToken,
+        checks: 'pkce' as 'pkce',
+        wellKnown: 'https://appleid.apple.com/.well-known/openid-configuration',
+        token: {
+          url: `https://appleid.apple.com/auth/token`,
+        },
+        authorization: {
+          url: 'https://appleid.apple.com/auth/authorize',
+          params: {
+            scope: '',
+            response_type: 'code',
+            response_mode: 'query',
+            state: crypto.randomUUID(),
+          },
+        },
+        client: {
+          token_endpoint_auth_method: 'client_secret_post',
+        },
       }),
     ],
     callbacks: {
@@ -74,7 +92,6 @@ const initAuthOptions = async () => {
         return session;
       },
     },
-    debug: true,
   };
 };
 const handler = async (req: any, res: any) => {
