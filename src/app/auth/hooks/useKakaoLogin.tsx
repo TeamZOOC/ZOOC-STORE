@@ -26,7 +26,7 @@ export async function useKakaoLogin() {
       if (response) {
         setCookie('accessToken', response.data.accessToken);
         if (response.data.isExistedUser) {
-          router.push('/');
+          router.push('/home');
         } else {
           router.push('/auth/signup');
         }
