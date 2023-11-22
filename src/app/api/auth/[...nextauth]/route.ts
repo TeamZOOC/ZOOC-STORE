@@ -86,7 +86,6 @@ const initAuthOptions = async () => {
         return token;
       },
       async session({ session, token }: any) {
-        session.idToken = token.id_token;
         session.accessToken = token.accessToken;
         session.provider = token.provider;
 
