@@ -48,7 +48,7 @@ const Order = () => {
         thirdParty: false,
       },
     },
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
 
   const {
