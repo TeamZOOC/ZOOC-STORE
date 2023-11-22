@@ -24,8 +24,8 @@ export const getOrderDetail = async (id: string) => {
 
 export const postOrder = async (orderData: OrderPostInfo) => {
   try {
-    const response = await shoppingMallAxios.post(`/order/v1`, { orderData });
-    return response.data;
+    const response = await shoppingMallAxios.post(`/order/v1`, orderData);
+    return response;
   } catch (e) {
     console.error(e);
     throw e;

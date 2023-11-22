@@ -9,8 +9,10 @@ import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 import { OrderFormData } from '@/types/form';
+import { OrderPostInfo } from '@/types/order';
 import { formatPrice } from '@/utils/formatPrice';
 
+import usePostOrder from '../hooks/usePostOrder';
 import Agreement from './agreement/Agreement';
 import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
@@ -21,6 +23,8 @@ const Order = () => {
   const { products, payment } = ORDER_DETAIL;
   const { showToast } = useToast();
   const router = useRouter();
+
+  const { orderPost } = usePostOrder();
 
   const totalPrice = formatPrice(
     payment.totalProductPrice + payment.deliveryFee,
@@ -56,9 +60,32 @@ const Order = () => {
     formState: { isValid },
   } = methods;
 
-  const onSubmit = (data: OrderFormData) => {
-    console.log(data);
-    router.push('/order/payment');
+  const onSubmit = async (formdata: OrderFormData) => {
+    console.log(formdata);
+
+    const postData: OrderPostInfo = {
+      ...formdata,
+      petId: 523, // TODO: petId 받아오기
+      products: [
+        // TODO: 주문할상품, 옵션 받아오기
+        {
+          productId: 2,
+          optionIds: [1],
+          pieces: 3,
+        },
+      ],
+    };
+
+    try {
+      await orderPost(postData);
+      router.push(`/order/payment?totalPrice=${totalPrice}`);
+    } catch (error) {
+      showToast('order_error');
+      console.error('주문 실패', error);
+    }
+
+    // orderPost(postData);
+    // router.push('/order/payment');
   };
 
   const onError = () => {

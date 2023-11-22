@@ -1,11 +1,11 @@
-import { Header } from '@/components/header';
 import { MainLayout } from '@/components/layout';
 
 import AllStep from './AllStep';
+import PaymentHeader from './PaymentHeader';
 
 const page = () => (
   <>
-    <Header headerTitle="입금하기" exit />
+    <PaymentHeader />
     <MainLayout>
       <AllStep />
     </MainLayout>
