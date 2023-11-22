@@ -19,14 +19,14 @@ const PetRegistration = () => {
     mode: 'onSubmit',
   });
 
-  const { registerPet } = useRegisterPet();
+  const { registerPet, petId } = useRegisterPet();
   const { showToast } = useToast();
   const router = useRouter();
 
   const onSubmit = async (data: PetDataInfo) => {
     try {
       await registerPet(data);
-      router.push('/pet/registration/createmodel');
+      router.push(`/pet/registration/createmodel?petId=${petId}`);
     } catch (error) {
       console.error(error);
     }
@@ -45,7 +45,7 @@ const PetRegistration = () => {
         <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
         <StRegistrationForm onSubmit={handleSubmit(onSubmit)}>
           <TextInput
-            name="petName"
+            name="name"
             label="이름"
             placeholder="사랑이"
             control={control}
