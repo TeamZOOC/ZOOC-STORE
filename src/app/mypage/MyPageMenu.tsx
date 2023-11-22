@@ -4,11 +4,10 @@ import Link from 'next/link';
 import { styled } from 'styled-components';
 
 import { MYPAGE_MENU } from '@/constants/mypage';
-
-import { useWithdraw } from './hooks/useWithdraw';
+import { useModal } from '@/hooks/modal';
 
 const MyPageMenu = () => {
-  const { mutate: withdraw } = useWithdraw();
+  const { openModal } = useModal();
 
   return (
     <StMyPageMenu>
@@ -25,7 +24,7 @@ const MyPageMenu = () => {
       <StWithdrawalButton
         type="button"
         onClick={() => {
-          withdraw();
+          openModal('withdraw');
         }}
       >
         회원탈퇴
