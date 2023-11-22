@@ -28,14 +28,7 @@ const LoginContent = () => {
         </div>
       </StLoginContent>
       <StBottomButtonWrapper>
-        <StAppleLoginButton
-          type="button"
-          onClick={() =>
-            signIn('apple', {
-              callbackUrl: '/auth/signup',
-            })
-          }
-        >
+        <StAppleLoginButton type="button" onClick={() => signIn('apple')}>
           <IcApple />
           Apple로 로그인
         </StAppleLoginButton>

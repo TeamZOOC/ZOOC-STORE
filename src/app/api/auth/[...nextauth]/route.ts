@@ -54,9 +54,30 @@ const initAuthOptions = async () => {
         clientId: process.env.KAKAO_CLIENT_ID!,
         clientSecret: process.env.KAKAO_CLIENT_SECRET!,
       }),
+      // AppleProvider({
+      //   clientId: process.env.APPLE_ID!,
+      //   clientSecret: appleToken,
+      // }),
       AppleProvider({
         clientId: process.env.APPLE_ID!,
         clientSecret: appleToken,
+        wellKnown: 'https://appleid.apple.com/.well-known/openid-configuration',
+        checks: ['pkce'],
+        token: {
+          url: `https://appleid.apple.com/auth/token`,
+        },
+        authorization: {
+          url: 'https://appleid.apple.com/auth/authorize',
+          params: {
+            scope: '',
+            response_type: 'code',
+            response_mode: 'query',
+            state: crypto.randomUUID(),
+          },
+        },
+        client: {
+          token_endpoint_auth_method: 'client_secret_post',
+        },
       }),
     ],
     callbacks: {
@@ -68,13 +89,13 @@ const initAuthOptions = async () => {
         return token;
       },
       async session({ session, token }: any) {
+        session.idToken = token.id_token;
         session.accessToken = token.accessToken;
         session.provider = token.provider;
 
         return session;
       },
     },
-    debug: true,
   };
 };
 const handler = async (req: any, res: any) => {
