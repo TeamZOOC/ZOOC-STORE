@@ -16,6 +16,7 @@ const WithDrawModal = () => {
   const handleQuit = useCallback(() => {
     withdraw();
     deleteCookie('accessToken');
+    closeModal('withdraw');
     router.push('/');
   }, [router]);
 
