@@ -49,20 +49,17 @@ const initAuthOptions = async () => {
         },
       },
     },
+    secret: process.env.NEXTAUTH_SECRET,
     providers: [
       KakaoProvider({
         clientId: process.env.KAKAO_CLIENT_ID!,
         clientSecret: process.env.KAKAO_CLIENT_SECRET!,
       }),
-      // AppleProvider({
-      //   clientId: process.env.APPLE_ID!,
-      //   clientSecret: appleToken,
-      // }),
       AppleProvider({
         clientId: process.env.APPLE_ID!,
         clientSecret: appleToken,
         wellKnown: 'https://appleid.apple.com/.well-known/openid-configuration',
-        checks: ['pkce'],
+        checks: ['pkce' as 'pkce'],
         token: {
           url: `https://appleid.apple.com/auth/token`,
         },
