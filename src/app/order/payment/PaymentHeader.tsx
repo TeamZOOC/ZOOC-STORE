@@ -10,7 +10,7 @@ const PaymentHeader = () => {
       headerTitle="입금하기"
       exit
       exitFunc={() => {
-        openModal('quit');
+        openModal('paymentQuit');
       }}
     />
   );

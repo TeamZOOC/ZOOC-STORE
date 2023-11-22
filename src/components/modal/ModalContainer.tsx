@@ -12,6 +12,7 @@ import { ModalKey, modalListState } from '@/recoil/modal/atom';
 
 import ImageValidateModal from './ImageValidateModal';
 import ModalBackground from './ModalBackground';
+import PaymentQuitModal from './PaymentQuitModal';
 import PetRegisterQuitModal from './PetRegisterQuitModal';
 import PostcodeModal from './PostcodeModal';
 import QuitModal from './QuitModal';
@@ -21,6 +22,7 @@ const MODAL_COMPONENTS: Record<ModalKey, (props: any) => React.ReactElement> = {
   imageValidate: (props) => <ImageValidateModal {...props} />,
   postcode: () => <PostcodeModal />,
   petRegisterQuit: () => <PetRegisterQuitModal />,
+  paymentQuit: () => <PaymentQuitModal />,
 };
 
 const ModalContainer = () => {

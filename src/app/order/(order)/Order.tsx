@@ -61,13 +61,11 @@ const Order = () => {
   } = methods;
 
   const onSubmit = async (formdata: OrderFormData) => {
-    console.log(formdata);
-
     const postData: OrderPostInfo = {
       ...formdata,
       petId: 523, // TODO: petId 받아오기
       products: [
-        // TODO: 주문할상품, 옵션 받아오기
+        // TODO: 주문할 상품, 옵션 받아오기
         {
           productId: 2,
           optionIds: [1],
@@ -75,7 +73,6 @@ const Order = () => {
         },
       ],
     };
-
     try {
       await orderPost(postData);
       router.push(`/order/payment?totalPrice=${totalPrice}`);
@@ -83,9 +80,6 @@ const Order = () => {
       showToast('order_error');
       console.error('주문 실패', error);
     }
-
-    // orderPost(postData);
-    // router.push('/order/payment');
   };
 
   const onError = () => {
