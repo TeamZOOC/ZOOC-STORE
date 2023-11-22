@@ -10,7 +10,8 @@ interface OrderProductProps {
 }
 
 const OrderProduct = ({ order }: OrderProductProps) => {
-  const { pieces, product, price, image, deliveryState, optionDetail } = order;
+  const { pieces, product, price, image, deliveryState, options } = order;
+  const optionsString = options.join(' | ');
 
   return (
     <StOrderProductWrapper>
@@ -21,13 +22,9 @@ const OrderProduct = ({ order }: OrderProductProps) => {
           <StProductTitle>
             {product} <span>{pieces}개</span>
           </StProductTitle>
-          <StProductPrice>
-            <span>33%</span>
-            {formatPrice(price)}
-          </StProductPrice>
+          <StProductPrice>{formatPrice(price)}</StProductPrice>
           <StProductOptions>
-            <span>경찰관 | </span>
-            <span>{optionDetail}</span>
+            <span>{optionsString}</span>
           </StProductOptions>
         </StOrderDetail>
       </StOrderContent>
