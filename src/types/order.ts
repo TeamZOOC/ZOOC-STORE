@@ -1,7 +1,7 @@
 export interface ProductInfo {
   name: string;
   image: string;
-  optionDetail: string[];
+  optionDetails: string[];
   pieces: number;
   price: number;
   id?: string;

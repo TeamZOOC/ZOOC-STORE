@@ -10,8 +10,8 @@ interface OrderProductProps {
 }
 
 const OrderProduct = ({ order }: OrderProductProps) => {
-  const { pieces, name, price, image, deliveryState, optionDetail } = order;
-  const optionsString = optionDetail.join(' | ');
+  const { pieces, name, price, image, deliveryState, optionDetails } = order;
+  const optionsString = optionDetails.join(' | ');
 
   return (
     <StOrderProductWrapper>
