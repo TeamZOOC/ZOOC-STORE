@@ -9,6 +9,7 @@ import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 import { OrderFormData } from '@/types/form';
+import { formatPrice } from '@/utils/formatPrice';
 
 import Agreement from './agreement/Agreement';
 import CustomerInfo from './customerInfo/CustomerInfo';
@@ -20,6 +21,10 @@ const Order = () => {
   const { products, payment } = ORDER_DETAIL;
   const { showToast } = useToast();
   const router = useRouter();
+
+  const totalPrice = formatPrice(
+    payment.totalProductPrice + payment.deliveryFee,
+  );
 
   const methods = useForm<OrderFormData>({
     defaultValues: {
@@ -77,7 +82,7 @@ const Order = () => {
         <Agreement />
         <BottomButton
           btnType="button"
-          btnName="38,000원 결제하기"
+          btnName={`${totalPrice}원 결제하기`}
           disabled={!isValid}
           activeFunc={handleSubmit(onSubmit, onError)}
         />
