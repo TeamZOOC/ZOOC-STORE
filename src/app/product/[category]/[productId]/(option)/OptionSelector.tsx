@@ -42,11 +42,7 @@ const OptionSelector = () => {
     if (tempOption) {
       // 첫 번째 선택된 옵션(tempOption)과 두 번째 선택된 옵션(option)을
       // 하나의 배열로 묶어서 selectedOptions 배열에 추가
-      if (tempOption.optionIndex === option.optionIndex) {
-        // 같은 옵션을 클릭했을 때
-        setTempOption(option);
-        return;
-      }
+
       const isDuplicate = selectedOptions.some(
         ([first, second]) =>
           (first.id === tempOption.id && second.id === option.id) ||
@@ -59,12 +55,41 @@ const OptionSelector = () => {
           [tempOption, option],
         ]);
       }
+
       setTempOption(null); // 임시 옵션 초기화
       setSelectedOptionName(['', '']); // 선택된 옵션 이름 초기화
     } else {
       // 첫 번째 옵션을 선택
       setTempOption(option);
     }
+
+    // if (tempOption) {
+    //   // 첫 번째 선택된 옵션(tempOption)과 두 번째 선택된 옵션(option)을
+    //   // 하나의 배열로 묶어서 selectedOptions 배열에 추가
+    //   if (tempOption.optionIndex === option.optionIndex) {
+    //     // 같은 옵션을 클릭했을 때
+    //     setTempOption(option);
+    //     return;
+    //   }
+    //   const isDuplicate = selectedOptions.some(
+    //     ([first, second]) =>
+    //       (first.id === tempOption.id && second.id === option.id) ||
+    //       (first.id === option.id && second.id === tempOption.id),
+    //   );
+
+    //   if (!isDuplicate) {
+    //     setSelectedOptions((prevOptions) => [
+    //       ...prevOptions,
+    //       [tempOption, option],
+    //     ]);
+    //   }
+
+    //   setTempOption(null); // 임시 옵션 초기화
+    //   setSelectedOptionName(['', '']); // 선택된 옵션 이름 초기화
+    // } else {
+    //   // 첫 번째 옵션을 선택
+    //   setTempOption(option);
+    // }
   };
 
   return productOption.map(({ name, optionDetails }, index) => (
