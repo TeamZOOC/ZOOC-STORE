@@ -9,7 +9,7 @@ import {
   IcCart,
   IcExit,
   IcMyPage,
-  IcZooc
+  IcZooc,
 } from '../../../public/icons';
 
 interface HeaderProps {
