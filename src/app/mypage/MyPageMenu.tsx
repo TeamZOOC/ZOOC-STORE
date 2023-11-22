@@ -1,10 +1,13 @@
 'use client';
 
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { styled } from 'styled-components';
 
 import { MYPAGE_MENU } from '@/constants/mypage';
 import { useModal } from '@/hooks/modal';
+
+import { IcLogout } from '../../../public/icons';
 
 const MyPageMenu = () => {
   const { openModal } = useModal();
@@ -21,6 +24,15 @@ const MyPageMenu = () => {
           </Link>
         </StMenuItem>
       ))}
+      <StMenuItem className="logout">
+        <StMenuButton
+          type="button"
+          onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
+        >
+          <IcLogout />
+          로그아웃
+        </StMenuButton>
+      </StMenuItem>
       <StWithdrawalButton
         type="button"
         onClick={() => {
@@ -37,6 +49,10 @@ export default MyPageMenu;
 
 const StMyPageMenu = styled.div`
   margin-top: 2.8rem;
+
+  & > .logout {
+    border-bottom: 0;
+  }
 `;
 
 const StMenuItem = styled.div`
@@ -47,9 +63,7 @@ const StMenuItem = styled.div`
 
   height: 6.4rem;
 
-  &:not(:last-child) {
-    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
-  }
+  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
 `;
 
 const StMenuButton = styled.button`
