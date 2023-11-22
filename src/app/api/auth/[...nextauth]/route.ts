@@ -1,7 +1,11 @@
+/* eslint-disable no-return-await */
+/* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable no-param-reassign */
 import { createPrivateKey } from 'crypto';
-import { SignJWT } from 'jose';
+import { JWTPayload, SignJWT } from 'jose';
+import jwt from 'jsonwebtoken';
+import { SessionStrategy } from 'next-auth';
 // import { NextApiRequest, NextApiResponse } from 'next';
 import NextAuth from 'next-auth/next';
 import AppleProvider from 'next-auth/providers/apple';
@@ -49,6 +53,22 @@ const initAuthOptions = async () => {
         },
       },
     },
+    session: {
+      strategy: 'jwt' as SessionStrategy,
+      maxAge: 60 * 60 * 24,
+      updateAge: 60 * 60 * 4,
+    },
+    jwt: {
+      maxAge: 60 * 60 * 24,
+      async encode({ secret, token, maxAge }: any) {
+        return await jwt.sign(token, secret, { algorithm: 'RS256' });
+      },
+      async decode({ secret, token, maxAge }: any) {
+        return (await jwt.verify(token, secret, {
+          algorithms: ['RS256'],
+        })) as JWTPayload;
+      },
+    },
     secret: process.env.NEXTAUTH_SECRET,
     providers: [
       KakaoProvider({
@@ -77,6 +97,7 @@ const initAuthOptions = async () => {
         },
       }),
     ],
+
     callbacks: {
       async jwt({ token, account }: any) {
         if (account) {
@@ -85,6 +106,20 @@ const initAuthOptions = async () => {
         }
         return token;
       },
+      // async jwt({ token, user }) {
+      //   console.log('JWT function Invoked');
+      //   console.log('USER in JWT:', user);
+      //   console.log('token JWT:', token);
+      //   if (user && user.id) {
+      //     token['https://hasura.io/jwt/claims'] = {
+      //       'x-hasura-allowed-roles': ['commercial', 'admin'],
+      //       'x-hasura-default-role': 'admin',
+      //       'x-hasura-user-id': user.id.toString(),
+      //     };
+      //   }
+      //   return token;
+      // },
+
       async session({ session, token }: any) {
         session.id_token = token.id_token;
         session.accessToken = token.accessToken;
