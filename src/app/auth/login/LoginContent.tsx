@@ -13,7 +13,7 @@ const LoginContent = () => {
   return (
     <>
       <StLoginContent>
-        <Lottie className="lottie" animationData={AiLoading} loop />
+        {/* <Lottie className="lottie" animationData={AiLoading} loop /> */}
         <div>
           <StLoginContentTextWrapper>
             반려동물과의 <StSpace /> <p>일상</p>을
