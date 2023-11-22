@@ -130,7 +130,7 @@ const initAuthOptions = async () => {
       },
 
       async session({ session, token }: any) {
-        session.id_token = token.id_token;
+        // session.id_token = token.id_token;
         session.accessToken = token.accessToken;
         session.provider = token.provider;
 
