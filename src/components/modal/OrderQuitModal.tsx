@@ -6,16 +6,16 @@ import { styled } from 'styled-components';
 
 import { useModal } from '@/hooks/modal';
 
-const QuitModal = () => {
+const OrderQuitModal = () => {
   const { closeModal } = useModal();
   const router = useRouter();
 
   const handleQuit = useCallback(() => {
-    router.push('/home');
+    router.back();
   }, [router]);
 
   const handleCancel = useCallback(() => {
-    closeModal('quit');
+    closeModal('orderQuit');
   }, [closeModal]);
 
   return (
@@ -34,7 +34,7 @@ const QuitModal = () => {
   );
 };
 
-export default React.memo(QuitModal);
+export default React.memo(OrderQuitModal);
 
 const StQuitModal = styled.div`
   display: flex;
