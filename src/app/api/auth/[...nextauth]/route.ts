@@ -43,7 +43,7 @@ const initAuthOptions = async () => {
         name: 'next-auth.pkce.code_verifier',
         options: {
           httpOnly: true,
-          sameSite: 'none',
+          sameSite: 'none' as 'none',
           path: '/',
           secure: true,
         },
