@@ -1,6 +1,11 @@
 import { atom, atomFamily } from 'recoil';
 
-const MODAL_KEY = ['quit', 'imageValidate', 'postcode'] as const;
+const MODAL_KEY = [
+  'quit',
+  'imageValidate',
+  'postcode',
+  'petRegisterQuit',
+] as const;
 
 export type ModalKey = (typeof MODAL_KEY)[number];
 export type ModalProps = Record<string, unknown> | null;
