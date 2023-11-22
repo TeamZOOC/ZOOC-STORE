@@ -1,7 +1,7 @@
 export interface OrderInfo {
   product: string;
   image: string;
-  options: string[];
+  optionDetail: string[];
   pieces: number;
   price: number;
   id: string;
@@ -16,20 +16,28 @@ export interface OrderListInfo {
 export interface DeliveryInfo {
   receiverName: string;
   receiverPhone: string;
+  postcode: string;
   address: string;
   request?: string;
 }
+export interface ProductInfo {
+  product: string;
+  image: string;
+  pieces: number;
+  optionDetail: string[];
+  price: number;
+  deliveryState: string;
+}
 
 export interface PaymentInfo {
-  productPrice: number;
+  totalProductPrice: number;
   deliveryFee: number;
-  totalPrice: number;
 }
 
 export interface OrderDetailInfo {
-  date: Date;
-  products: OrderInfo[];
-  delivery: DeliveryInfo;
+  createdAt: Date | string;
+  address: DeliveryInfo;
+  products: ProductInfo[];
   payment: PaymentInfo;
 }
 
