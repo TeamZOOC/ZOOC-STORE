@@ -31,7 +31,6 @@ const PetRegistration = () => {
       } else {
         showToast('pet_register_error');
       }
-      router.push(`/pet/registration/createmodel?petId=${response.id}`);
     } catch (error) {
       console.error(error);
     }

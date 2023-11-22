@@ -1,7 +1,5 @@
 'use client';
 
-import { deleteCookie } from 'cookies-next';
-import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
 import { styled } from 'styled-components';
 
@@ -11,14 +9,10 @@ import { useModal } from '@/hooks/modal';
 const WithDrawModal = () => {
   const { mutate: withdraw } = useWithdraw();
   const { closeModal } = useModal();
-  const router = useRouter();
 
   const handleQuit = useCallback(() => {
     withdraw();
-    deleteCookie('accessToken');
-    closeModal('withdraw');
-    router.push('/');
-  }, [router]);
+  }, [withdraw]);
 
   const handleCancel = useCallback(() => {
     closeModal('withdraw');
