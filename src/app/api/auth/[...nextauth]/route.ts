@@ -11,6 +11,8 @@ import NextAuth from 'next-auth/next';
 import AppleProvider from 'next-auth/providers/apple';
 import KakaoProvider from 'next-auth/providers/kakao';
 
+const applePrivateKey = `-----BEGIN PRIVATE KEY-----\n${process.env.APPLE_PRIVATE_KEY}\n-----END PRIVATE KEY-----\n`;
+
 const getAppleToken = async () => {
   if (
     !process.env.APPLE_TEAM_ID ||
@@ -20,8 +22,6 @@ const getAppleToken = async () => {
   ) {
     throw new Error('Apple 환경변수가 존재하지 않습니다.');
   }
-
-  const applePrivateKey = `-----BEGIN PRIVATE KEY-----\n${process.env.APPLE_PRIVATE_KEY}\n-----END PRIVATE KEY-----\n`;
 
   const appleToken = await new SignJWT({})
     .setAudience('https://appleid.apple.com')
@@ -69,7 +69,7 @@ const initAuthOptions = async () => {
         })) as JWTPayload;
       },
     },
-    secret: process.env.NEXTAUTH_SECRET,
+    secret: applePrivateKey,
     providers: [
       KakaoProvider({
         clientId: process.env.KAKAO_CLIENT_ID!,
