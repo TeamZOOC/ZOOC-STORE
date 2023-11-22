@@ -9,7 +9,6 @@ export async function useKakaoLogin() {
   const { data: session } = useSession();
 
   if (session?.accessToken) {
-    console.log('session', session);
     if (session.provider === 'kakao') {
       console.log('카카오 로그인', session.accessToken);
       const response = await kakaoSignIn(session.accessToken);
@@ -22,7 +21,6 @@ export async function useKakaoLogin() {
         }
       }
     } else if (session.provider === 'apple') {
-      // session.provider === "apple" 일 때
       console.log('애플 로그인', session.accessToken);
       const response = await appleSignIn(session.accessToken);
       if (response) {
