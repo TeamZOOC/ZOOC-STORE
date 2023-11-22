@@ -1,5 +1,8 @@
+/* eslint-disable no-unused-vars */
+
 'use client';
 
+import { OptionInfo } from '@/recoil/option/atom';
 import { styled } from 'styled-components';
 
 interface OptionDropdownProps {
@@ -7,12 +10,25 @@ interface OptionDropdownProps {
     id: number;
     name: string;
   }[];
+  optionIndex: number;
+  handleOptionSelect: (option: OptionInfo) => void;
 }
 
-const OptionDropdown = ({ productOptionList }: OptionDropdownProps) => (
+const OptionDropdown = ({
+  optionIndex,
+  productOptionList,
+  handleOptionSelect,
+}: OptionDropdownProps) => (
   <StOptionDropdown>
-    {productOptionList.map(({ id, name }) => (
-      <StOptionDropdownItem key={id}>{name}</StOptionDropdownItem>
+    {productOptionList.map((option) => (
+      <StOptionDropdownItem
+        key={option.id}
+        onClick={() =>
+          handleOptionSelect({ ...option, optionIndex, quantity: 1 })
+        }
+      >
+        {option.name}
+      </StOptionDropdownItem>
     ))}
   </StOptionDropdown>
 );
@@ -41,4 +57,6 @@ const StOptionDropdownItem = styled.li`
   & + & {
     margin-top: 2.2rem;
   }
+
+  cursor: pointer;
 `;

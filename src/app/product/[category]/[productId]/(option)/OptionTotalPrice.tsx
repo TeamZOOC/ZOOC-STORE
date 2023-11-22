@@ -1,16 +1,26 @@
 'use client';
 
+import { selectedOptionsSelector } from '@/recoil/option/selector';
+import { useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
-const OptionTotalPrice = () => (
-  <StOptionTotalPrice>
-    <span>총 상품 금액</span>
-    <div>
-      <span>23,000</span>
-      <span> 원</span>
-    </div>
-  </StOptionTotalPrice>
-);
+interface OptionTotalPriceProps {
+  productPrice: number;
+}
+
+const OptionTotalPrice = ({ productPrice }: OptionTotalPriceProps) => {
+  const selectedOptions = useRecoilValue(selectedOptionsSelector);
+
+  return (
+    <StOptionTotalPrice>
+      <span>총 상품 금액</span>
+      <div>
+        <span>{productPrice * selectedOptions}</span>
+        <span> 원</span>
+      </div>
+    </StOptionTotalPrice>
+  );
+};
 export default OptionTotalPrice;
 const StOptionTotalPrice = styled.div`
   display: flex;
