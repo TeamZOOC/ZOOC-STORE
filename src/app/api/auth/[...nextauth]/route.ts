@@ -78,7 +78,7 @@ const initAuthOptions = async () => {
       AppleProvider({
         clientId: process.env.APPLE_ID!,
         clientSecret: appleToken,
-        checks: ['pkce'],
+        checks: ['pkce', 'state'],
         wellKnown: 'https://appleid.apple.com/.well-known/openid-configuration',
         token: {
           url: `https://appleid.apple.com/auth/token`,
