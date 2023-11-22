@@ -16,7 +16,6 @@ import DeliveryInfo from './deliveryInfo/DeliveryInfo';
 import PaymentMethod from './paymentMethod/PaymentMethod';
 import ProductsInfo from './productsInfo/ProductsInfo';
 
-
 const Order = () => {
   const { products, payment } = ORDER_DETAIL;
   const { showToast } = useToast();
