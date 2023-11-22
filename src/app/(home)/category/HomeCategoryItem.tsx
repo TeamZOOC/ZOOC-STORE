@@ -1,16 +1,36 @@
 'use client';
 
 import { styled } from 'styled-components';
+import Link from 'next/link';
+import {
+  IcCategoryAcc,
+  IcCategoryCase,
+  IcCategoryOutfit,
+  IcCategorySeason,
+} from '../../../../public/icons';
 
 interface HomeCategoryItemProps {
   categoryName: string;
+  categoryImageIndex: number;
 }
 
-const HomeCategoryItem = ({ categoryName }: HomeCategoryItemProps) => (
-  <StHomeCategoryItem type="button">
-    <StHomeCategoryMetaItemBox />
-    <span>{categoryName}</span>
-  </StHomeCategoryItem>
+const CATEGORY_IMAGE_LIST = [
+  <IcCategorySeason />,
+  <IcCategoryOutfit />,
+  <IcCategoryCase />,
+  <IcCategoryAcc />,
+];
+
+const HomeCategoryItem = ({
+  categoryName,
+  categoryImageIndex,
+}: HomeCategoryItemProps) => (
+  <Link href={`/product/${categoryName}`} scroll={false}>
+    <StHomeCategoryItem type="button">
+      {CATEGORY_IMAGE_LIST[categoryImageIndex]}
+      <span>{categoryName}</span>
+    </StHomeCategoryItem>
+  </Link>
 );
 
 export default HomeCategoryItem;
@@ -23,15 +43,7 @@ const StHomeCategoryItem = styled.button`
   gap: 1.2rem;
 
   & > span {
-    color: ${({ theme }) => theme.colors.zw_darkgray};
-    ${({ theme }) => theme.fonts.zw_Subhead4};
+    color: ${({ theme }) => theme.colors.zw_gray};
+    ${({ theme }) => theme.fonts.zw_price_small};
   }
-`;
-
-const StHomeCategoryMetaItemBox = styled.div`
-  width: 6.5rem;
-  height: 6.5rem;
-
-  border-radius: 50%;
-  background-color: #eaeaea;
 `;

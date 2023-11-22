@@ -30,6 +30,10 @@ import IcToss from './ic_toss.svg';
 import IcWarning from './ic_warning.svg';
 import IcZooc from './ic_zooc.svg';
 import IcDropDownActive from './ic_dropdown_active.svg';
+import IcCategorySeason from './ic_category_season.svg';
+import IcCategoryOutfit from './ic_category_outfit.svg';
+import IcCategoryCase from './ic_category_case.svg';
+import IcCategoryAcc from './ic_category_acc.svg';
 
 export {
   IcWarning,
@@ -64,4 +68,8 @@ export {
   IcInquiry,
   IcDropDownActive,
   IcBtnPicture,
+  IcCategorySeason,
+  IcCategoryOutfit,
+  IcCategoryCase,
+  IcCategoryAcc,
 };
