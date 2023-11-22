@@ -54,11 +54,11 @@ const initAuthOptions = async () => {
         },
       },
     },
-    session: {
-      strategy: 'jwt' as SessionStrategy,
-      maxAge: 60 * 60 * 24,
-      updateAge: 60 * 60 * 4,
-    },
+    // session: {
+    //   strategy: 'jwt' as SessionStrategy,
+    //   maxAge: 60 * 60 * 24,
+    //   updateAge: 60 * 60 * 4,
+    // },
     // jwt: {
     //   maxAge: 60 * 60 * 24,
     //   async encode({ token, secret, maxAge }: any) {
@@ -119,13 +119,13 @@ const initAuthOptions = async () => {
         console.log('Account:', account);
         console.log('USER in JWT:', user);
         console.log('token JWT:', token);
-        if (user && user.id) {
-          token['https://hasura.io/jwt/claims'] = {
-            'x-hasura-allowed-roles': ['commercial', 'admin'],
-            'x-hasura-default-role': 'admin',
-            'x-hasura-user-id': user.id.toString(),
-          };
-        }
+        // if (user && user.id) {
+        //   token['https://hasura.io/jwt/claims'] = {
+        //     'x-hasura-allowed-roles': ['commercial', 'admin'],
+        //     'x-hasura-default-role': 'admin',
+        //     'x-hasura-user-id': user.id.toString(),
+        //   };
+        // }
         return token;
       },
 
