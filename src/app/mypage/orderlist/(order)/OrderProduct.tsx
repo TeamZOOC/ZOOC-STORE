@@ -10,17 +10,17 @@ interface OrderProductProps {
 }
 
 const OrderProduct = ({ order }: OrderProductProps) => {
-  const { pieces, product, price, image, deliveryState, optionDetail } = order;
+  const { pieces, name, price, image, deliveryState, optionDetail } = order;
   const optionsString = optionDetail.join(' | ');
 
   return (
     <StOrderProductWrapper>
       <StOrderContent>
-        <StProductImage src={image} alt={product} />
+        <StProductImage src={image} alt={name} />
         <StOrderDetail>
           {deliveryState && <DeliveryLabel deliveryState={deliveryState} />}
           <StProductTitle>
-            {product} <span>{pieces}개</span>
+            {name} <span>{pieces}개</span>
           </StProductTitle>
           <StProductPrice>{formatPrice(price)}</StProductPrice>
           <StProductOptions>

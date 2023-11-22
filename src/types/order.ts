@@ -1,5 +1,5 @@
 export interface ProductInfo {
-  product: string;
+  name: string;
   image: string;
   optionDetail: string[];
   pieces: number;
@@ -10,7 +10,7 @@ export interface ProductInfo {
 
 export interface OrderListInfo {
   createdAt: string;
-  data: ProductInfo[];
+  products: ProductInfo[];
 }
 
 export interface DeliveryInfo {

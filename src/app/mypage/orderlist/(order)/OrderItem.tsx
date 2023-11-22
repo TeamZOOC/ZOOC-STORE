@@ -13,8 +13,8 @@ interface OrderItemProps {
 }
 
 const OrderItem = ({ order, onDetailClick }: OrderItemProps) => {
-  const orderData = order.data;
-  const orderId = order.data[0].id;
+  const orderData = order.products;
+  const orderId = order.products[0].id;
 
   return (
     <StOrderItem>

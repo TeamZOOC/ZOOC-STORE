@@ -3,9 +3,9 @@ import { OrderListInfo } from '@/types/order';
 export const ORDER_LIST: OrderListInfo[] = [
   {
     createdAt: '2023-11-21T07:13:49.981Z',
-    data: [
+    products: [
       {
-        product: '커스텀 반팔 티셔츠',
+        name: '커스텀 반팔 티셔츠',
         image: 'testUrl',
         optionDetail: ['축구왕', '2x'],
         pieces: 1,
@@ -17,9 +17,9 @@ export const ORDER_LIST: OrderListInfo[] = [
   },
   {
     createdAt: '2023-11-20T07:13:49.981Z',
-    data: [
+    products: [
       {
-        product: '긴팔 티셔츠',
+        name: '긴팔 티셔츠',
         image: 'testUrl',
         optionDetail: ['우비', '2x'],
         pieces: 2,
@@ -28,7 +28,7 @@ export const ORDER_LIST: OrderListInfo[] = [
         deliveryState: '배송완료',
       },
       {
-        product: '긴팔 티셔츠',
+        name: '긴팔 티셔츠',
         image: 'testUrl',
         optionDetail: ['해리포터', '2x'],
         pieces: 4,
