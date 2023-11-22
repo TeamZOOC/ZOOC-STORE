@@ -1,5 +1,6 @@
 'use client';
 
+import { deleteCookie } from 'cookies-next';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { styled } from 'styled-components';
@@ -11,6 +12,11 @@ import { IcLogout } from '../../../public/icons';
 
 const MyPageMenu = () => {
   const { openModal } = useModal();
+
+  const handleLogout = () => {
+    deleteCookie('accessToken');
+    signOut({ callbackUrl: 'http://localhost:3000/' });
+  };
 
   return (
     <StMyPageMenu>
@@ -25,10 +31,7 @@ const MyPageMenu = () => {
         </StMenuItem>
       ))}
       <StMenuItem className="logout">
-        <StMenuButton
-          type="button"
-          onClick={() => signOut({ callbackUrl: 'http://localhost:3000/' })}
-        >
+        <StMenuButton type="button" onClick={handleLogout}>
           <IcLogout />
           로그아웃
         </StMenuButton>
