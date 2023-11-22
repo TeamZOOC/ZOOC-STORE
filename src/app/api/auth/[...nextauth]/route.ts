@@ -78,7 +78,7 @@ const initAuthOptions = async () => {
       AppleProvider({
         clientId: process.env.APPLE_ID!,
         clientSecret: appleToken,
-        checks: 'pkce' as 'pkce',
+        checks: ['pkce'],
         wellKnown: 'https://appleid.apple.com/.well-known/openid-configuration',
         token: {
           url: `https://appleid.apple.com/auth/token`,
@@ -99,26 +99,30 @@ const initAuthOptions = async () => {
     ],
 
     callbacks: {
-      async jwt({ token, account }: any) {
+      // async jwt({ token, account }: any) {
+      //   if (account) {
+      //     token.accessToken = account.access_token;
+      //     token.provider = account.provider;
+      //   }
+      //   return token;
+      // },
+      async jwt({ token, account, user }: any) {
         if (account) {
           token.accessToken = account.access_token;
           token.provider = account.provider;
         }
+        console.log('JWT function Invoked');
+        console.log('USER in JWT:', user);
+        console.log('token JWT:', token);
+        if (user && user.id) {
+          token['https://hasura.io/jwt/claims'] = {
+            'x-hasura-allowed-roles': ['commercial', 'admin'],
+            'x-hasura-default-role': 'admin',
+            'x-hasura-user-id': user.id.toString(),
+          };
+        }
         return token;
       },
-      // async jwt({ token, user }) {
-      //   console.log('JWT function Invoked');
-      //   console.log('USER in JWT:', user);
-      //   console.log('token JWT:', token);
-      //   if (user && user.id) {
-      //     token['https://hasura.io/jwt/claims'] = {
-      //       'x-hasura-allowed-roles': ['commercial', 'admin'],
-      //       'x-hasura-default-role': 'admin',
-      //       'x-hasura-user-id': user.id.toString(),
-      //     };
-      //   }
-      //   return token;
-      // },
 
       async session({ session, token }: any) {
         session.id_token = token.id_token;
