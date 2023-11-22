@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 
-import { OrderInfo, OrderListInfo } from '@/types/order';
+import { OrderListInfo } from '@/types/order';
 import { formatDate } from '@/utils/formatDate';
 
 import { IcArrowRight } from '../../../../../public/icons';
@@ -9,35 +9,21 @@ import OrderProduct from './OrderProduct';
 
 interface OrderItemProps {
   order: OrderListInfo;
-  date?: Date | string;
-  onDetailClick?: (id: string) => void;
+  onDetailClick: (id: string) => void;
 }
 
-const OrderItem = ({ order, date, onDetailClick }: OrderItemProps) => {
-  let orderData: OrderInfo[];
-  let orderId: string;
-
-  if ('data' in order) {
-    orderData = order.data;
-    orderId = order.data[0].id;
-  } else {
-    orderData = order;
-  }
+const OrderItem = ({ order, onDetailClick }: OrderItemProps) => {
+  const orderData = order.data;
+  const orderId = order.data[0].id;
 
   return (
     <StOrderItem>
       <StOrderTitle>
-        {date ? (
-          <time>{formatDate(date)}</time>
-        ) : (
-          <time>{order.createdAt && formatDate(order.createdAt)}</time>
-        )}
-        {onDetailClick && (
-          <button type="button" onClick={() => onDetailClick(orderId)}>
-            주문상세
-            <IcArrowRight />
-          </button>
-        )}
+        <time>{order.createdAt && formatDate(order.createdAt)}</time>
+        <button type="button" onClick={() => onDetailClick(orderId!)}>
+          주문상세
+          <IcArrowRight />
+        </button>
       </StOrderTitle>
       <StProducts>
         {orderData.map((orderItem) => (

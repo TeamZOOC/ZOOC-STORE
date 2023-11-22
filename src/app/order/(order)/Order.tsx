@@ -14,7 +14,7 @@ import Agreement from './agreement/Agreement';
 import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
 import PaymentMethod from './paymentMethod/PaymentMethod';
-import ProductInfo from './productInfo/ProductInfo';
+import ProductsInfo from './productsInfo/ProductsInfo';
 
 const Order = () => {
   const { products, payment } = ORDER_DETAIL;
@@ -63,7 +63,7 @@ const Order = () => {
   return (
     <FormProvider {...methods}>
       <StOrder>
-        <ProductInfo products={products} />
+        <ProductsInfo products={products} />
         <StHr />
         <CustomerInfo />
         <DeliveryInfo />

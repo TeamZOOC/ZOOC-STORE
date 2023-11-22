@@ -7,7 +7,7 @@ import { TextInput } from '@/components/form';
 import { buyerState } from '@/recoil/order/atom';
 import { CustomerFormData } from '@/types/form';
 
-import { StInfoTitle } from '../productInfo/ProductInfo';
+import { StInfoTitle } from '../productsInfo/ProductsInfo';
 
 const CustomerInfo = () => {
   const { control, watch } = useFormContext<CustomerFormData>();

@@ -6,7 +6,7 @@ import { styled } from 'styled-components';
 import { useTab } from '@/hooks/tab';
 import { buyerState } from '@/recoil/order/atom';
 
-import { StInfoTitle } from '../productInfo/ProductInfo';
+import { StInfoTitle } from '../productsInfo/ProductsInfo';
 import ExistingAddressList from './ExistingAddressList';
 import NewDeliveryForm from './NewDeliveryForm';
 

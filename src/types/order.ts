@@ -1,16 +1,16 @@
-export interface OrderInfo {
+export interface ProductInfo {
   product: string;
   image: string;
   optionDetail: string[];
   pieces: number;
   price: number;
-  id: string;
-  deliveryState?: string;
+  id?: string;
+  deliveryState: string;
 }
 
 export interface OrderListInfo {
   createdAt: string;
-  data: OrderInfo[];
+  data: ProductInfo[];
 }
 
 export interface DeliveryInfo {
@@ -20,14 +20,6 @@ export interface DeliveryInfo {
   address: string;
   request?: string;
 }
-export interface ProductInfo {
-  product: string;
-  image: string;
-  pieces: number;
-  optionDetail: string[];
-  price: number;
-  deliveryState: string;
-}
 
 export interface PaymentInfo {
   totalProductPrice: number;
@@ -35,7 +27,7 @@ export interface PaymentInfo {
 }
 
 export interface OrderDetailInfo {
-  createdAt: Date | string;
+  createdAt: string;
   address: DeliveryInfo;
   products: ProductInfo[];
   payment: PaymentInfo;

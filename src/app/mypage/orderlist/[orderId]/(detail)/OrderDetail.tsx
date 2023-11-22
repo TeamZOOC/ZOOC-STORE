@@ -4,24 +4,24 @@ import { styled } from 'styled-components';
 
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 
-import OrderItem from '../../(order)/OrderItem';
 import { BillingInfo, DetailInfo } from '../../../../../components/order';
+import OrderDetailItem from './OrderDetailItem';
 
 const OrderDetail = () => {
-  const { date, products, delivery, payment } = ORDER_DETAIL;
+  const { createdAt, address, products, payment } = ORDER_DETAIL;
 
   return (
     <StDetailWrapper>
-      <OrderItem date={date} order={products} />
+      <OrderDetailItem date={createdAt} products={products} />
       <StHr />
-      {delivery && (
+      {address && (
         <StDetailSection>
           <StDetailTitle> 배송 정보</StDetailTitle>
           <StDeliveryInfo>
-            <DetailInfo label="수령인" value={delivery.receiverName} />
-            <DetailInfo label="연락처" value={delivery.receiverPhone} />
-            <DetailInfo label="배송지" value={delivery.address} />
-            <DetailInfo label="요청사항" value={delivery.request} />
+            <DetailInfo label="수령인" value={address.receiverName} />
+            <DetailInfo label="연락처" value={address.receiverPhone} />
+            <DetailInfo label="배송지" value={address.address} />
+            <DetailInfo label="요청사항" value={address.request} />
           </StDeliveryInfo>
         </StDetailSection>
       )}

@@ -10,14 +10,15 @@ interface BillingInfoProps {
 }
 
 const BillingInfo = ({ payment }: BillingInfoProps) => {
-  const { productPrice, deliveryFee, totalPrice } = payment;
+  const { totalProductPrice, deliveryFee } = payment;
+  const totalPrice = totalProductPrice + deliveryFee;
   return (
     <StBillingInfo>
       <StBillingTitle> 결제 정보</StBillingTitle>
       <StBilling>
         <DetailInfo
           label="상품 금액"
-          value={`${formatPrice(productPrice)} 원`}
+          value={`${formatPrice(totalProductPrice)} 원`}
         />
         <DetailInfo label="배송비" value={`${formatPrice(deliveryFee)} 원`} />
       </StBilling>

@@ -1,17 +1,17 @@
 import { styled } from 'styled-components';
 
-import { OrderInfo } from '@/types/order';
+import { ProductInfo } from '@/types/order';
 import { formatPrice } from '@/utils/formatPrice';
 
 import DeliveryLabel from './DeliveryLabel';
 
 interface OrderProductProps {
-  order: OrderInfo;
+  order: ProductInfo;
 }
 
 const OrderProduct = ({ order }: OrderProductProps) => {
-  const { pieces, product, price, image, deliveryState, options } = order;
-  const optionsString = options.join(' | ');
+  const { pieces, product, price, image, deliveryState, optionDetail } = order;
+  const optionsString = optionDetail.join(' | ');
 
   return (
     <StOrderProductWrapper>
