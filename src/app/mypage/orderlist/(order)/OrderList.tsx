@@ -13,7 +13,7 @@ const OrderList = () => {
   const orderList = ORDER_LIST;
   const router = useRouter();
 
-  const handleOrderDetail = (orderId: number) => {
+  const handleOrderDetail = (orderId: string) => {
     router.push(`/mypage/orderlist/${orderId}`);
   };
 

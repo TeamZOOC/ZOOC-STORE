@@ -8,18 +8,18 @@ import { IcArrowRight } from '../../../../../public/icons';
 import OrderProduct from './OrderProduct';
 
 interface OrderItemProps {
-  order: OrderListInfo | OrderInfo[];
-  date?: Date;
-  onDetailClick?: (id: number) => void;
+  order: OrderListInfo;
+  date?: Date | string;
+  onDetailClick?: (id: string) => void;
 }
 
 const OrderItem = ({ order, date, onDetailClick }: OrderItemProps) => {
   let orderData: OrderInfo[];
-  let orderId: number;
+  let orderId: string;
 
   if ('data' in order) {
     orderData = order.data;
-    orderId = order.id;
+    orderId = order.data[0].id;
   } else {
     orderData = order;
   }
@@ -30,9 +30,7 @@ const OrderItem = ({ order, date, onDetailClick }: OrderItemProps) => {
         {date ? (
           <time>{formatDate(date)}</time>
         ) : (
-          <time>
-            {orderData[0]?.createdAt && formatDate(orderData[0].createdAt)}
-          </time>
+          <time>{order.createdAt && formatDate(order.createdAt)}</time>
         )}
         {onDetailClick && (
           <button type="button" onClick={() => onDetailClick(orderId)}>
