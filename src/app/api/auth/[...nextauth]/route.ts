@@ -39,11 +39,11 @@ const initAuthOptions = async () => {
 
   return {
     cookies: {
-      callbackUrl: {
-        name: `__Secure-next-auth.callback-url`,
+      pkceCodeVerifier: {
+        name: 'next-auth.pkce.code_verifier',
         options: {
-          httpOnly: false,
-          sameSite: 'none' as 'none',
+          httpOnly: true,
+          sameSite: 'none',
           path: '/',
           secure: true,
         },
