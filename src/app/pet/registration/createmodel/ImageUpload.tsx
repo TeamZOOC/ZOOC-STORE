@@ -1,6 +1,5 @@
 'use client';
 
-import Lottie from 'lottie-react';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
@@ -11,10 +10,10 @@ import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { uploadImagesState } from '@/recoil/createmodel/atom';
 
-import { AiLoading } from '../../../../../public/lottie';
 import useDatasetUpload from '../hooks/useDatasetUpload';
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
+import ImageUploadLoading from './ImageUploadLoading';
 
 const ImageUpload = () => {
   const { uploadImages, handleImageChange, handleResetImage } =
@@ -70,8 +69,7 @@ const ImageUpload = () => {
     }
   }, [uploadImages]);
 
-  if (isLoading)
-    return <Lottie className="lottie" animationData={AiLoading} loop />;
+  if (isLoading) return <ImageUploadLoading />;
 
   return (
     <StImageUpload>
