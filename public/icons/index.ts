@@ -24,6 +24,7 @@ import IcToss from './ic_toss.svg';
 import IcWarning from './ic_warning.svg';
 import IcZooc from './ic_zooc.svg';
 import IcCheck from './ic_check.svg';
+import IcDropDownActive from './ic_dropdown_active.svg';
 
 export {
   IcWarning,
@@ -52,4 +53,5 @@ export {
   IcNotice,
   IcLogout,
   IcInquiry,
+  IcDropDownActive,
 };
