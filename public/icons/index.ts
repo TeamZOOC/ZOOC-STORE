@@ -29,6 +29,7 @@ import IcThirdStep from './ic_third_step.svg';
 import IcToss from './ic_toss.svg';
 import IcWarning from './ic_warning.svg';
 import IcZooc from './ic_zooc.svg';
+import IcDropDownActive from './ic_dropdown_active.svg';
 
 export {
   IcWarning,
@@ -61,5 +62,6 @@ export {
   IcNotice,
   IcLogout,
   IcInquiry,
+  IcDropDownActive,
   IcBtnPicture,
 };

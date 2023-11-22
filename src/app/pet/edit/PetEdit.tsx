@@ -112,7 +112,7 @@ const PetEdit = () => {
             </StUploadBtn>
           </StUploadProfileImage>
           <TextInput
-            name="name"
+            name="nickName"
             label="이름"
             placeholder="사랑이"
             control={control}
