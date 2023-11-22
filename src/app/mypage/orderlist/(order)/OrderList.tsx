@@ -5,13 +5,11 @@
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
-// import { ORDER_LIST } from '@/mocks/orderListData';
 import useGetOrderList from '../hooks/useGetOrderList';
 import OrderItem from './OrderItem';
 
 const OrderList = () => {
   const { orderList } = useGetOrderList();
-  // const orderList = ORDER_LIST;
   const router = useRouter();
 
   const handleOrderDetail = (orderId: string) => {
