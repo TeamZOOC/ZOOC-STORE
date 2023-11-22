@@ -1,11 +1,9 @@
 'use client';
 
-import Lottie from 'lottie-react';
 import { signIn } from 'next-auth/react';
 import { styled } from 'styled-components';
 
 import { IcApple, IcKakao } from '../../../../public/icons';
-import { AiLoading } from '../../../../public/lottie';
 import { useKakaoLogin } from '../hooks/useKakaoLogin';
 
 const LoginContent = () => {
@@ -13,7 +11,6 @@ const LoginContent = () => {
   return (
     <>
       <StLoginContent>
-        {/* <Lottie className="lottie" animationData={AiLoading} loop /> */}
         <div>
           <StLoginContentTextWrapper>
             반려동물과의 <StSpace /> <p>일상</p>을
