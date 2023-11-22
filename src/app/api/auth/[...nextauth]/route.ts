@@ -71,7 +71,7 @@ const initAuthOptions = async () => {
     //   },
     // },
     // secret: process.env.NEXTAUTH_SECRET,
-    secret: applePrivateKey,
+    // secret: applePrivateKey,
     providers: [
       KakaoProvider({
         clientId: process.env.KAKAO_CLIENT_ID!,
