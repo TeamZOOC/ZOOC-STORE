@@ -65,7 +65,7 @@ const initAuthOptions = async () => {
       },
       async decode({ secret, token, maxAge }: any) {
         return (await jwt.verify(token, secret, {
-          algorithms: ['RS256'],
+          algorithms: ['ES256'],
         })) as JWTPayload;
       },
     },
