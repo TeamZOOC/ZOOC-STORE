@@ -1,12 +1,31 @@
 /* eslint-disable consistent-return */
 import { shoppingMallAxios } from './axios';
 
-export const getProduct = async () => {
-  try {
-    const response = await shoppingMallAxios.get('/product/v1');
-    return response.data;
-  } catch (e) {
-    console.error(e);
+const CATEGORY_MAPPING: Record<string, number> = {
+  all: 0,
+  season: 1,
+  outfit: 2,
+  case: 3,
+  acc: 4,
+};
+
+export const getProduct = async (categoryName: string) => {
+  if (categoryName === 'all') {
+    try {
+      const response = await shoppingMallAxios.get('/product/v1');
+      return response.data;
+    } catch (e) {
+      console.error(e);
+    }
+  } else {
+    try {
+      const response = await shoppingMallAxios.get(
+        `/product/v1?categoryId=${CATEGORY_MAPPING[categoryName]}`,
+      );
+      return response.data;
+    } catch (e) {
+      console.error(e);
+    }
   }
 };
 

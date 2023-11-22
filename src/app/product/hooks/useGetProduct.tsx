@@ -2,10 +2,10 @@ import { getProduct } from '@/apis/product';
 import { ProductInfoResponse } from '@/types/product';
 import { useQuery } from '@tanstack/react-query';
 
-const useGetProduct = () => {
+const useGetProduct = (categoryName: string) => {
   const { data: productList } = useQuery<ProductInfoResponse[]>(
-    ['product'],
-    getProduct,
+    ['product', categoryName],
+    () => getProduct(categoryName),
   );
 
   return {
