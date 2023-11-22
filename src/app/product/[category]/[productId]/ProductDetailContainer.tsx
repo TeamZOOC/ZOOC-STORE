@@ -18,7 +18,7 @@ const ProductDetailContainer = ({
   pageParams,
 }: ProductDetailContainerProps) => {
   const [, setProductOption] = useRecoilState(productOptionState);
-  const [, setCart] = useRecoilState(cartState);
+  const [cart, setCart] = useRecoilState(cartState);
   const { productDetail } = useGetProductDetail(pageParams);
 
   useEffect(() => {
@@ -41,6 +41,7 @@ const ProductDetailContainer = ({
               name: productDetail.name,
               price: productDetail.price,
               sale: productDetail.sale,
+              optionList: [],
             },
           ];
         }
@@ -51,6 +52,7 @@ const ProductDetailContainer = ({
     }
   }, [productDetail]);
 
+  console.log(cart);
   return (
     productDetail && (
       <>
