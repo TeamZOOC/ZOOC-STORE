@@ -1,14 +1,14 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
+import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
 import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
-import { uploadImagesState } from '@/recoil/pet/atom';
+import { petRegisterState, uploadImagesState } from '@/recoil/pet/atom';
 
 import useDatasetUpload from '../hooks/useDatasetUpload';
 import ImageConfirm from './ImageConfirm';
@@ -21,11 +21,12 @@ const ImageUpload = () => {
   const [validatedImages, setValidatedImages] =
     useRecoilState<File[]>(uploadImagesState);
   const imageInputRef = useRef<HTMLInputElement>(null);
-
-  const params = useSearchParams();
-  const petId = Number(params.get('petId'));
-
   const { openModal, closeModal } = useModal();
+
+  const petRegisterData = useRecoilValue(petRegisterState);
+  const petId = 1;
+
+  const { registerPet } = useRegisterPet();
   const { handleDatasetUpload, isLoading } = useDatasetUpload({
     petId,
     files: validatedImages,
@@ -63,6 +64,10 @@ const ImageUpload = () => {
     setValidatedImages(uploadImages);
   };
 
+  const handleImageUpload = async () => {
+    await registerPet(petRegisterData);
+  };
+
   useEffect(() => {
     if (uploadImages.length > 0) {
       handleImageValidate(uploadImages.length);
@@ -97,9 +102,7 @@ const ImageUpload = () => {
             btnType="button"
             btnName="사진 업로드 완료"
             disabled={false}
-            activeFunc={() => {
-              handleDatasetUpload();
-            }}
+            activeFunc={handleImageUpload}
           />
         </>
       )}

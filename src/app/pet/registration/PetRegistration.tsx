@@ -2,12 +2,13 @@
 
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
-import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
 import { TextInput } from '@/components/form';
 import { useToast } from '@/hooks/toast';
+import { petRegisterState } from '@/recoil/pet/atom';
 import { PetDataInfo } from '@/types/pet';
 
 const PetRegistration = () => {
@@ -19,17 +20,13 @@ const PetRegistration = () => {
     mode: 'onSubmit',
   });
 
-  const { registerPet, petId } = useRegisterPet();
+  const [, setPetRegisterData] = useRecoilState(petRegisterState);
   const { showToast } = useToast();
   const router = useRouter();
 
-  const onSubmit = async (data: PetDataInfo) => {
-    try {
-      await registerPet(data);
-      router.push(`/pet/registration/createmodel?petId=${petId}`);
-    } catch (error) {
-      console.error(error);
-    }
+  const onSubmit = async (petData: PetDataInfo) => {
+    setPetRegisterData(petData);
+    router.push(`/pet/registration/createmodel`);
   };
 
   const onError = (errors: any) => {
