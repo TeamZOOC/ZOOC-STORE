@@ -1,13 +1,16 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { styled } from 'styled-components';
 
 import { IcApple, IcKakao } from '../../../../public/icons';
-import { useLogin } from '../hooks/useLogin';
+// import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
-  useLogin();
+  const { data: session } = useSession();
+  // useLogin();
+
+  console.log(session);
 
   return (
     <>
