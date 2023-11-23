@@ -3,14 +3,14 @@ import { AxiosResponse } from 'axios';
 /* eslint-disable consistent-return */
 import { KakaoSignInResponse } from '@/types/auth';
 
-import { generalAxios } from './axios';
+import { kakaoInstance } from './axios';
 
 export const kakaoSignIn = async (
   accessToken: string,
 ): Promise<KakaoSignInResponse | undefined> => {
   try {
     const response: AxiosResponse<KakaoSignInResponse> =
-      await generalAxios.post(
+      await kakaoInstance.post(
         '/user/kakao/signin',
         {},
         {

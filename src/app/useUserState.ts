@@ -1,3 +1,4 @@
+import { getCookie } from 'cookies-next';
 import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
@@ -8,32 +9,41 @@ export const useUserState = () => {
   const [userStatus, setUserStatus] = useRecoilState(userState);
 
   const checkPet = async () => {
-    const petRes = await getPet();
-    if (petRes) {
-      return checkPetDataset(petRes.id);
+    try {
+      const petRes = await getPet();
+      if (petRes) {
+        return checkPetDataset(petRes.id);
+      }
+    } catch (e) {
+      return 'NO_PET';
     }
     return 'NO_PET';
   };
 
   const checkPetDataset = async (petId: number) => {
-    const datasetRes = await getPetDataset(petId);
-    if (datasetRes) {
-      return datasetRes.dataset_images.length > 0
-        ? 'IMAGE-EXISTS'
-        : 'DATASET-EXISTS';
+    try {
+      const datasetRes = await getPetDataset(petId);
+      if (datasetRes) {
+        return datasetRes.dataset_images.length > 0
+          ? 'IMAGE-EXISTS'
+          : 'DATASET-EXISTS';
+      }
+    } catch (e) {
+      return 'PET-EXISTS';
     }
     return 'PET-EXISTS';
   };
 
   const checkUserStatus = async () => {
-    if (userStatus === 'GUEST') return;
+    const accessToken = getCookie('accessToken');
+    if (!accessToken) return;
 
     const status = await checkPet();
     setUserStatus(status);
   };
 
   useEffect(() => {
-    checkUserStatus();
+    // checkUserStatus();
     console.log(userStatus);
   }, [userStatus]);
 
