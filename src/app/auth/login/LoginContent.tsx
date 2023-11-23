@@ -5,10 +5,13 @@ import { styled } from 'styled-components';
 
 import { useEffect } from 'react';
 import { IcApple, IcKakao } from '../../../../public/icons';
+import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
+  const { handleLogin } = useLogin();
+
   useEffect(() => {
-    console.log(true);
+    handleLogin();
   }, []);
 
   return (

@@ -9,6 +9,7 @@ export const useLogin = () => {
   const { data: session } = useSession();
 
   const handleLogin = async () => {
+    console.log(true);
     try {
       let response;
 
@@ -27,8 +28,10 @@ export const useLogin = () => {
       }
 
       if (response) {
+        console.log(response);
         setCookie('accessToken', response.data.accessToken);
         const routePath = response.data.isExistedUser ? '/' : '/auth/signup';
+        console.log(routePath);
         router.push(routePath);
       }
     } catch (error) {
