@@ -8,7 +8,7 @@ import { styled } from 'styled-components';
 import { BottomButton } from '@/components/button';
 import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
-import { uploadImagesState } from '@/recoil/createmodel/atom';
+import { uploadImagesState } from '@/recoil/pet/atom';
 
 import useDatasetUpload from '../hooks/useDatasetUpload';
 import ImageConfirm from './ImageConfirm';
