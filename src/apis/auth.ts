@@ -2,7 +2,6 @@ import { AxiosResponse } from 'axios';
 
 /* eslint-disable consistent-return */
 import { KakaoSignInResponse } from '@/types/auth';
-
 import { generalAxios, kakaoInstance } from './axios';
 
 export const kakaoSignIn = async (
@@ -19,6 +18,19 @@ export const kakaoSignIn = async (
           },
         },
       );
+    return response.data;
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const appleSignIn = async (email: string, sub: string) => {
+  try {
+    const response = await generalAxios.post('/user/apple/signin/web', {
+      email,
+      sub,
+    });
+    console.log(response);
     return response.data;
   } catch (e) {
     console.error(e);
