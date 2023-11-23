@@ -92,6 +92,10 @@ const initAuthOptions = async () => {
         session.accessToken = token.accessToken;
         session.provider = token.provider;
 
+        if (token.sub && token.email) {
+          session.user.id = token.sub;
+          session.email = token.email;
+        }
         return session;
       },
     },
