@@ -1,16 +1,21 @@
 'use client';
 
-import { BottomButton } from '@/components/button';
-import { cartState } from '@/recoil/cart/atom';
+import { useRouter } from 'next/navigation';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { styled } from 'styled-components';
-import { formatPrice } from '@/utils/formatPrice';
+
+import { BottomButton } from '@/components/button';
+import { cartState } from '@/recoil/cart/atom';
 import { purchaseState } from '@/recoil/purchase/atom';
+import { userState } from '@/recoil/user/atom';
+import { formatPrice } from '@/utils/formatPrice';
 
 const ShoppingPayment = () => {
   const cart = useRecoilValue(cartState);
   const [purchase, setPurchase] = useRecoilState(purchaseState);
+  const userStatus = useRecoilValue(userState);
   const resetPurchase = useResetRecoilState(purchaseState);
+  const router = useRouter();
 
   const totalSaleQuantity = cart.reduce((total, item) => {
     // 첫 번째 optionList 원소의 quantity와 해당 item의 sale 값을 곱함
@@ -24,8 +29,16 @@ const ShoppingPayment = () => {
   }, 0);
 
   const handleCartToPurchase = () => {
-    resetPurchase();
-    setPurchase(cart);
+    if (userStatus === 'NO_PET') {
+      router.push('/pet/registration');
+    }
+    if (userStatus === 'PET_EXISTS' || userStatus === 'DATASET_EXISTS') {
+      router.push('/pet/registration/createmodel');
+    }
+    if (userStatus === 'IMAGE_EXISTS') {
+      resetPurchase();
+      setPurchase(cart);
+    }
   };
   console.log(purchase);
 

@@ -11,7 +11,7 @@ const PetRegisterQuitModal = () => {
   const router = useRouter();
 
   const handleQuit = useCallback(() => {
-    router.push('/mypage');
+    router.back();
     closeModal('petRegisterQuit');
   }, [router]);
 
