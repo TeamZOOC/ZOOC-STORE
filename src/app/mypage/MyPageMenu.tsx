@@ -19,7 +19,7 @@ const MyPageMenu = () => {
   const handleLogout = () => {
     deleteCookie('accessToken');
     signOut({ callbackUrl: 'http://localhost:3000/' });
-    setUserStatus('NON-MEMBER');
+    setUserStatus('GUEST');
   };
 
   return (

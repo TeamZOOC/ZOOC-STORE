@@ -1,23 +1,23 @@
 import { setCookie } from 'cookies-next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import { useRecoilState } from 'recoil';
 
 import { kakaoSignIn } from '@/apis/auth';
-import { userState } from '@/recoil/user/atom';
+import { useUserState } from '@/app/useUserState';
 
 export async function useKakaoLogin() {
   const router = useRouter();
   const { data: session } = useSession();
-  const [, setUserStatus] = useRecoilState(userState);
+  const { checkUserStatus } = useUserState();
 
   if (session?.accessToken) {
+    // console.log(accessToken);
     if (session.provider === 'kakao') {
       const response = await kakaoSignIn(session.accessToken);
       if (response) {
         setCookie('accessToken', response.data.accessToken);
         if (response.data.isExistedUser) {
-          setUserStatus('MEMBER');
+          checkUserStatus();
           router.push('/');
         } else {
           router.push('/auth/signup');

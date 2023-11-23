@@ -7,41 +7,35 @@ import { userState } from '@/recoil/user/atom';
 export const useUserState = () => {
   const [userStatus, setUserStatus] = useRecoilState(userState);
 
-  const checkUser = async () => {
-    if (userStatus === 'NON-MEMBER') {
-      return;
+  const checkPet = async () => {
+    const petRes = await getPet();
+    if (petRes) {
+      return checkPetDataset(petRes.id);
     }
+    return 'NO_PET';
+  };
 
-    try {
-      const petRes = await getPet();
-      if (petRes) {
-        console.log('PetId', petRes.id);
-        try {
-          const datasetRes = await getPetDataset(petRes.id);
-          if (datasetRes) {
-            console.log('Dataset', datasetRes);
-            setUserStatus(
-              datasetRes.dataset_images.length > 0
-                ? 'IMAGE-EXISTS'
-                : 'DATASET-EXISTS',
-            );
-          } else {
-            setUserStatus('PET-EXISTS');
-          }
-        } catch (datasetError) {
-          setUserStatus('PET-EXISTS');
-        }
-      } else {
-        setUserStatus('MEMBER');
-      }
-    } catch (petError) {
-      setUserStatus('MEMBER');
+  const checkPetDataset = async (petId: number) => {
+    const datasetRes = await getPetDataset(petId);
+    if (datasetRes) {
+      return datasetRes.dataset_images.length > 0
+        ? 'IMAGE-EXISTS'
+        : 'DATASET-EXISTS';
     }
+    return 'PET-EXISTS';
+  };
+
+  const checkUserStatus = async () => {
+    if (userStatus === 'GUEST') return;
+
+    const status = await checkPet();
+    setUserStatus(status);
   };
 
   useEffect(() => {
-    checkUser();
+    checkUserStatus();
+    console.log(userStatus);
   }, [userStatus]);
 
-  return { checkUser, userState };
+  return { checkUserStatus, userState };
 };

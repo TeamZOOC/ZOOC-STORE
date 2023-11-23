@@ -1,6 +1,6 @@
 export type UserState =
-  | 'NON-MEMBER'
-  | 'MEMBER'
+  | 'GUEST'
+  | 'NO_PET'
   | 'PET-EXISTS'
   | 'DATASET-EXISTS'
   | 'IMAGE-EXISTS';

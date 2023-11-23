@@ -12,7 +12,7 @@ import {
   IcCart,
   IcExit,
   IcMyPage,
-  IcZooc
+  IcZooc,
 } from '../../../public/icons';
 
 interface HeaderProps {
@@ -43,9 +43,9 @@ const Header = ({
           <IcCart onClick={() => router.push('/cart')} />
           <IcMyPage
             onClick={() =>
-              userStatus === 'MEMBER'
-                ? router.push('/mypage')
-                : router.push('/auth/login')
+              userStatus === 'GUEST'
+                ? router.push('/auth/login')
+                : router.push('/mypage')
             }
           />
         </StHeaderRight>
