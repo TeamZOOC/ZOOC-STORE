@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
@@ -9,6 +10,7 @@ import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
 import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
+import { useToast } from '@/hooks/toast';
 import { petRegisterState, uploadImagesState } from '@/recoil/pet/atom';
 
 import ImageConfirm from './ImageConfirm';
@@ -22,6 +24,9 @@ const ImageUpload = () => {
     useRecoilState<File[]>(uploadImagesState);
   const imageInputRef = useRef<HTMLInputElement>(null);
   const { openModal, closeModal } = useModal();
+  const { showToast } = useToast();
+
+  const router = useRouter();
 
   const petRegisterData = useRecoilValue(petRegisterState);
   const { registerPet } = useRegisterPet();
@@ -59,51 +64,18 @@ const ImageUpload = () => {
     setValidatedImages(uploadImages);
   };
 
-  const handlePetRegister = async () => {
-    try {
-      const resPetId = await registerPet(petRegisterData);
-      console.log(resPetId);
-      return resPetId;
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
-  };
-
-  const handleCreateDataset = async (petId: number) => {
-    try {
-      const resDatasetId = await createDataset(petId);
-      console.log(resDatasetId);
-      return resDatasetId;
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
-  };
-
-  const handleUploadDatasetImages = async (
-    datasetId: string,
-    files: File[],
-  ) => {
-    try {
-      const res = await uploadDatasetImages(datasetId, files);
-      console.log(res);
-      return res;
-    } catch (e) {
-      console.error(e);
-      throw e;
-    }
-  };
-
-  const handleImageUpload = async () => {
+  const handleCreateModel = async () => {
     setIsLoading(true);
-    const petId = await handlePetRegister();
-    if (petId) {
-      const datasetId = await handleCreateDataset(petId);
-      if (datasetId) {
-        await handleUploadDatasetImages(datasetId, validatedImages);
-        setIsLoading(false);
-      }
+    try {
+      const petId = await registerPet(petRegisterData);
+      const datasetId = await createDataset(petId);
+      await uploadDatasetImages(datasetId, validatedImages);
+      router.push('/mypage');
+    } catch (e) {
+      showToast('dataset_upload_error');
+      console.error(e);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -131,7 +103,7 @@ const ImageUpload = () => {
             btnType="button"
             btnName="8 - 15장의 사진 업로드"
             disabled={false}
-            activeFunc={handleUploadImage}
+            activeFunc={handleCreateModel}
           />
         </>
       ) : (
@@ -141,7 +113,7 @@ const ImageUpload = () => {
             btnType="button"
             btnName="사진 업로드 완료"
             disabled={false}
-            activeFunc={handleImageUpload}
+            activeFunc={handleCreateModel}
           />
         </>
       )}
