@@ -1,8 +1,12 @@
+/* eslint-disable react/no-array-index-key */
+
 'use client';
 
 import React from 'react';
 import { styled, css } from 'styled-components';
 import { slideInFromBottom, slideInFromTop } from '@/styles/animation/slide';
+import { useRecoilValue } from 'recoil';
+import { selectedOptionsState } from '@/recoil/option/atom';
 import OptionSelector from './OptionSelector';
 import OptionBottomButton from './OptionBottomButton';
 import OptionSelectItem from './OptionSelectItem';
@@ -12,31 +16,49 @@ interface OptionBottomSheetProps {
   isUnMount: boolean;
   isOptionToggle: boolean;
   bottomSheetRef: React.RefObject<HTMLDivElement>;
+  productPrice: number;
   handleAnimationEnd: () => void;
+  handleToggleOption: () => void;
 }
 const OptionBottomSheet = ({
   isUnMount,
   isOptionToggle,
   bottomSheetRef,
+  handleToggleOption,
   handleAnimationEnd,
-}: OptionBottomSheetProps) => (
-  <StOptionBottomSheet
-    ref={bottomSheetRef}
-    $animationUp={isOptionToggle}
-    $isUnMount={isUnMount}
-    onAnimationEnd={handleAnimationEnd}
-  >
-    <StOptionBottomSheetInner $position="top">
-      <OptionSelector />
-      <OptionSelectItem />
-    </StOptionBottomSheetInner>
-    <StHr />
-    <StOptionBottomSheetInner $position="bottom">
-      <OptionTotalPrice />
-      <OptionBottomButton />
-    </StOptionBottomSheetInner>
-  </StOptionBottomSheet>
-);
+  productPrice,
+}: OptionBottomSheetProps) => {
+  const selectedOptions = useRecoilValue(selectedOptionsState);
+
+  return (
+    <StOptionBottomSheet
+      ref={bottomSheetRef}
+      $animationUp={isOptionToggle}
+      $isUnMount={isUnMount}
+      onAnimationEnd={handleAnimationEnd}
+    >
+      <StOptionBottomSheetInner $position="top">
+        <OptionSelector />
+        <StOptionSelectedItemWrapper>
+          {selectedOptions.map((selected, index) => (
+            <OptionSelectItem
+              key={index}
+              selectedIndex={index}
+              selected={selected}
+            />
+          ))}
+        </StOptionSelectedItemWrapper>
+      </StOptionBottomSheetInner>
+      <StHr />
+      <StOptionBottomSheetInner $position="bottom">
+        {selectedOptions.length > 0 && (
+          <OptionTotalPrice productPrice={productPrice} />
+        )}
+        <OptionBottomButton handleToggleOption={handleToggleOption} />
+      </StOptionBottomSheetInner>
+    </StOptionBottomSheet>
+  );
+};
 export default OptionBottomSheet;
 
 const StOptionBottomSheet = styled.div<{
@@ -45,9 +67,9 @@ const StOptionBottomSheet = styled.div<{
 }>`
   position: absolute;
   bottom: 0;
-  left: 0;
 
   width: 100%;
+  max-width: 43rem;
 
   border-radius: 0.6rem 0.6rem 0 0;
   background-color: ${({ theme }) => theme.colors.zw_background};
@@ -79,4 +101,7 @@ const StHr = styled.div`
   height: 0.1rem;
   margin: 3.5rem 0 3.1rem 2.8rem;
   background-color: ${({ theme }) => theme.colors.zw_brightgray};
+`;
+const StOptionSelectedItemWrapper = styled.div`
+  margin-top: 4rem;
 `;

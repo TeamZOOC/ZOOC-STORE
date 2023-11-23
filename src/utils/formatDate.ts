@@ -1,4 +1,4 @@
-export const formatDate = (date: Date) => {
+export const formatDate = (date: Date | string) => {
   const currentDate = new Date(date);
 
   const year = currentDate.getFullYear().toString().substr(-2);

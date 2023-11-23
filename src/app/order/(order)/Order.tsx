@@ -9,17 +9,26 @@ import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 import { OrderFormData } from '@/types/form';
+import { OrderPostInfo } from '@/types/order';
+import { formatPrice } from '@/utils/formatPrice';
 
+import usePostOrder from '../hooks/usePostOrder';
 import Agreement from './agreement/Agreement';
 import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
 import PaymentMethod from './paymentMethod/PaymentMethod';
-import ProductInfo from './productsInfo/ProductsInfo';
+import ProductsInfo from './productsInfo/ProductsInfo';
 
 const Order = () => {
   const { products, payment } = ORDER_DETAIL;
   const { showToast } = useToast();
   const router = useRouter();
+
+  const { orderPost } = usePostOrder();
+
+  const totalPrice = formatPrice(
+    payment.totalProductPrice + payment.deliveryFee,
+  );
 
   const methods = useForm<OrderFormData>({
     defaultValues: {
@@ -43,7 +52,7 @@ const Order = () => {
         thirdParty: false,
       },
     },
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
 
   const {
@@ -51,9 +60,26 @@ const Order = () => {
     formState: { isValid },
   } = methods;
 
-  const onSubmit = (data: OrderFormData) => {
-    console.log(data);
-    router.push('/order/payment');
+  const onSubmit = async (formdata: OrderFormData) => {
+    const postData: OrderPostInfo = {
+      ...formdata,
+      petId: 523, // TODO: petId 받아오기
+      products: [
+        // TODO: 주문할 상품, 옵션 받아오기
+        {
+          productId: 2,
+          optionIds: [1],
+          pieces: 3,
+        },
+      ],
+    };
+    try {
+      await orderPost(postData);
+      router.push(`/order/payment?totalPrice=${totalPrice}`);
+    } catch (error) {
+      showToast('order_error');
+      console.error('주문 실패', error);
+    }
   };
 
   const onError = () => {
@@ -63,7 +89,7 @@ const Order = () => {
   return (
     <FormProvider {...methods}>
       <StOrder>
-        <ProductInfo products={products} />
+        <ProductsInfo products={products} />
         <StHr />
         <CustomerInfo />
         <DeliveryInfo />
@@ -77,7 +103,7 @@ const Order = () => {
         <Agreement />
         <BottomButton
           btnType="button"
-          btnName="38,000원 결제하기"
+          btnName={`${totalPrice}원 결제하기`}
           disabled={!isValid}
           activeFunc={handleSubmit(onSubmit, onError)}
         />

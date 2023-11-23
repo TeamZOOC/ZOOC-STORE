@@ -2,12 +2,14 @@
 
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
 import { TextInput } from '@/components/form';
 import { useToast } from '@/hooks/toast';
+import { userState } from '@/recoil/user/atom';
 import { PetDataInfo } from '@/types/pet';
 
 const PetRegistration = () => {
@@ -21,12 +23,18 @@ const PetRegistration = () => {
 
   const { registerPet } = useRegisterPet();
   const { showToast } = useToast();
+  const [, setUserStatus] = useRecoilState(userState);
   const router = useRouter();
 
   const onSubmit = async (data: PetDataInfo) => {
     try {
-      await registerPet(data);
-      router.push('/pet/registration/createmodel');
+      const response = await registerPet(data);
+      if (response.id) {
+        setUserStatus('PET_EXISTS');
+        router.push(`/pet/registration/createmodel?petId=${response.id}`);
+      } else {
+        showToast('pet_register_error');
+      }
     } catch (error) {
       console.error(error);
     }
@@ -45,7 +53,7 @@ const PetRegistration = () => {
         <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
         <StRegistrationForm onSubmit={handleSubmit(onSubmit)}>
           <TextInput
-            name="petName"
+            name="name"
             label="이름"
             placeholder="사랑이"
             control={control}

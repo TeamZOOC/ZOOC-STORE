@@ -1,14 +1,18 @@
 'use client';
 
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
-import { usePathname } from 'next/navigation';
+
+import { userState } from '@/recoil/user/atom';
+
 import {
   IcBack,
-  IcZooc,
   IcCart,
   IcExit,
   IcMyPage,
+  IcZooc,
 } from '../../../public/icons';
 
 interface HeaderProps {
@@ -27,15 +31,33 @@ const Header = ({
   exitFunc,
 }: HeaderProps) => {
   const pathname = usePathname();
+  const router = useRouter();
+  const userStatus = useRecoilValue(userState);
+
+  const showIcon = () => {
+    if (pathname === '/') {
+      return <IcZooc />;
+    }
+    if (pathname !== '/order/payment') {
+      return <IcBack onClick={backFunc} />;
+    }
+    return <StEmpty />;
+  };
 
   return (
     <StHeader>
-      {pathname === '/' ? <IcZooc /> : <IcBack onClick={backFunc} />}
+      {showIcon()}
       <StHeaderTitle>{headerTitle}</StHeaderTitle>
       {sideMenu && (
         <StHeaderRight>
-          <IcCart />
-          <IcMyPage />
+          <IcCart onClick={() => router.push('/cart')} />
+          <IcMyPage
+            onClick={() =>
+              userStatus === 'GUEST'
+                ? router.push('/auth/login')
+                : router.push('/mypage')
+            }
+          />
         </StHeaderRight>
       )}
       {exit && <IcExit onClick={exitFunc} />}
@@ -58,6 +80,10 @@ const StHeader = styled.header`
   background-color: ${({ theme }) => theme.colors.zw_background};
 
   z-index: ${({ theme }) => theme.zIndex.zw_header};
+
+  & > svg {
+    cursor: pointer;
+  }
 `;
 
 const StHeaderTitle = styled.h1`
@@ -65,7 +91,11 @@ const StHeaderTitle = styled.h1`
   ${({ theme }) => theme.fonts.zw_Subhead2};
 `;
 
-const StHeaderRight = styled.div``;
+const StHeaderRight = styled.div`
+  & > svg {
+    cursor: pointer;
+  }
+`;
 
 const StEmpty = styled.div`
   width: 3.6rem;

@@ -12,7 +12,11 @@ import useOutSideClick from '@/hooks/outside/useOutsideClick';
 import OptionBottomSheetContainer from './(option)/OptionBottomSheetContainer';
 import OptionBottomSheet from './(option)/OptionBottomSheet';
 
-const ProductInfoNav = () => {
+interface ProductInfoNavProps {
+  productPrice: number;
+}
+
+const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
   const { activeTab, setActiveTab } = useTab({
     tabList: TAB_LIST,
     defaultTabIndex: 0,
@@ -34,6 +38,7 @@ const ProductInfoNav = () => {
     setIsOptionToggle(false);
   };
   useOutSideClick({ ref: bottomSheetRef, callback: handleToggleOption });
+
   return (
     <>
       <StProductInfoNav>
@@ -89,6 +94,8 @@ const ProductInfoNav = () => {
             handleAnimationEnd={handleAnimationEnd}
             isOptionToggle={isOptionToggle}
             bottomSheetRef={bottomSheetRef}
+            productPrice={productPrice}
+            handleToggleOption={handleToggleOption}
           />
         </OptionBottomSheetContainer>
       )}

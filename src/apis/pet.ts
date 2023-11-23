@@ -15,7 +15,7 @@ export const getPet = async () => {
 export const registerPet = async (postPetInfo: PetDataInfo) => {
   try {
     const { data } = await generalAxios.post(`/pet`, postPetInfo);
-    return data;
+    return data.data;
   } catch (error) {
     console.error(error);
     throw error;
@@ -39,6 +39,46 @@ export const editPet = async (petId: number, editPetInfo: PetEditInfo) => {
         'Content-Type': 'multipart/form-data',
       },
     });
+    return data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const getPetDataset = async (petId: number) => {
+  try {
+    const { data } = await generalAxios.get(`/ai/dataset/${petId}`);
+    return data.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const createDataset = async (petId: number) => {
+  try {
+    const { data } = await generalAxios.post(`/ai/dataset`, { petId });
+    return data.data.datasetId;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const uploadDatasetImages = async (datasetId: string, files: File[]) => {
+  try {
+    const formData = new FormData();
+    files.forEach((file) => formData.append('files', file));
+    const { data } = await generalAxios.patch(
+      `/ai/images/${datasetId}`,
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
     return data;
   } catch (error) {
     console.error(error);
