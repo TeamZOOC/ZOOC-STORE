@@ -46,6 +46,16 @@ export const editPet = async (petId: number, editPetInfo: PetEditInfo) => {
   }
 };
 
+export const getPetDataset = async (petId: number) => {
+  try {
+    const { data } = await generalAxios.get(`/ai/dataset/${petId}`);
+    return data.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const createDataset = async (petId: number) => {
   try {
     const { data } = await generalAxios.post(`/ai/dataset`, { petId });
