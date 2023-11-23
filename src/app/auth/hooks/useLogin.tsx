@@ -12,7 +12,9 @@ export const useLogin = () => {
     try {
       let response;
 
-      console.log(session);
+      if (session) {
+        console.log(session.provider);
+      }
       switch (session?.provider) {
         case 'kakao':
           response = await kakaoSignIn(session.accessToken);
