@@ -12,6 +12,7 @@ import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { useToast } from '@/hooks/toast';
 import { petRegisterState, uploadImagesState } from '@/recoil/pet/atom';
+import { userState } from '@/recoil/user/atom';
 
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
@@ -25,7 +26,7 @@ const ImageUpload = () => {
   const imageInputRef = useRef<HTMLInputElement>(null);
   const { openModal, closeModal } = useModal();
   const { showToast } = useToast();
-
+  const [, setUserStatus] = useRecoilState(userState);
   const router = useRouter();
 
   const petRegisterData = useRecoilValue(petRegisterState);
@@ -70,6 +71,7 @@ const ImageUpload = () => {
       const petId = await registerPet(petRegisterData);
       const datasetId = await createDataset(petId);
       await uploadDatasetImages(datasetId, validatedImages);
+      setUserStatus('IMAGE_EXISTS');
       router.push('/mypage');
     } catch (e) {
       showToast('dataset_upload_error');
@@ -103,7 +105,7 @@ const ImageUpload = () => {
             btnType="button"
             btnName="8 - 15장의 사진 업로드"
             disabled={false}
-            activeFunc={handleCreateModel}
+            activeFunc={handleUploadImage}
           />
         </>
       ) : (

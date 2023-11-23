@@ -3,9 +3,12 @@
 import { useRouter } from 'next/navigation';
 
 import { Header } from '@/components/header';
+import { useModal } from '@/hooks/modal';
 
 const ImageUploadHeader = () => {
   const router = useRouter();
+  const { openModal } = useModal();
+
   return (
     <Header
       headerTitle="AI 모델 생성"
@@ -14,7 +17,7 @@ const ImageUploadHeader = () => {
         router.back();
       }}
       exitFunc={() => {
-        router.push('/mypage');
+        openModal('petRegisterQuit');
       }}
     />
   );
