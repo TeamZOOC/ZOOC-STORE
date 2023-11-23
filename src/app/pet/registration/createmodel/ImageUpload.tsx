@@ -10,10 +10,11 @@ import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { petRegisterState, uploadImagesState } from '@/recoil/pet/atom';
 
-import useDatasetUpload from '../hooks/useDatasetUpload';
+// import useDatasetUpload from '../hooks/useDatasetUpload';
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
-import ImageUploadLoading from './ImageUploadLoading';
+
+// import ImageUploadLoading from './ImageUploadLoading';
 
 const ImageUpload = () => {
   const { uploadImages, handleImageChange, handleResetImage } =
@@ -24,13 +25,13 @@ const ImageUpload = () => {
   const { openModal, closeModal } = useModal();
 
   const petRegisterData = useRecoilValue(petRegisterState);
-  const petId = 1;
+  // const petId = 1;
 
   const { registerPet } = useRegisterPet();
-  const { handleDatasetUpload, isLoading } = useDatasetUpload({
-    petId,
-    files: validatedImages,
-  });
+  // const { handleDatasetUpload, isLoading } = useDatasetUpload({
+  //   petId,
+  //   files: validatedImages,
+  // });
 
   const handleUploadImage = () => {
     imageInputRef.current?.click();
@@ -74,7 +75,7 @@ const ImageUpload = () => {
     }
   }, [uploadImages]);
 
-  if (isLoading) return <ImageUploadLoading />;
+  // if (isLoading) return <ImageUploadLoading />;
 
   return (
     <StImageUpload>
