@@ -47,5 +47,6 @@ const StHomeCaruselItem = styled.div`
 
   width: 100%;
 
+  border: 0.1rem solid #eaeaea;
   aspect-ratio: 1/1.53;
 `;
