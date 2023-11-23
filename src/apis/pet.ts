@@ -59,14 +59,14 @@ export const getPetDataset = async (petId: number) => {
 export const createDataset = async (petId: number) => {
   try {
     const { data } = await generalAxios.post(`/ai/dataset`, { petId });
-    return data.data;
+    return data.data.datasetId;
   } catch (error) {
     console.error(error);
     throw error;
   }
 };
 
-export const uploadDatasetImages = async (datasetId: number, files: File[]) => {
+export const uploadDatasetImages = async (datasetId: string, files: File[]) => {
   try {
     const formData = new FormData();
     files.forEach((file) => formData.append('files', file));

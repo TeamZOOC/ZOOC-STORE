@@ -34,11 +34,16 @@ const useDatasetUpload = ({ petId, files }: useDatasetUploadProps) => {
         }
       })();
     }
-  }, [isMount, datasetId]);
+  }, [isMount]);
 
   const handleDatasetUpload = async () => {
     try {
+      if (!datasetId) {
+        showToast('dataset_upload_error');
+        return;
+      }
       await uploadDatasetImages({ datasetId, files });
+      setUserStatus('IMAGE_EXISTS');
       // TODO: 라우팅 분기처리
       router.push('/mypage');
     } catch (error) {

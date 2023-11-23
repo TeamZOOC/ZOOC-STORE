@@ -2,7 +2,7 @@ import { uploadDatasetImages } from '@/apis/pet';
 import { useMutation } from '@tanstack/react-query';
 
 interface UploadDatasetImagesParams {
-  datasetId: number;
+  datasetId: string;
   files: File[];
 }
 

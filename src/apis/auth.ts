@@ -27,8 +27,7 @@ export const kakaoSignIn = async (
 
 export const withdraw = async () => {
   try {
-    const response = await generalAxios.delete('/user');
-    console.log(response);
+    await generalAxios.delete('/user');
   } catch (e) {
     console.error(e);
   }
