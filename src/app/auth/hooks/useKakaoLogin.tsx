@@ -11,9 +11,9 @@ export async function useKakaoLogin() {
   const { checkUserStatus } = useUserState();
 
   if (session?.accessToken) {
-    console.log(session.accessToken);
     if (session.provider === 'kakao') {
       const response = await kakaoSignIn(session.accessToken);
+      setCookie('kakaoAccessToken', session.accessToken);
       if (response) {
         setCookie('accessToken', response.data.accessToken);
         await checkUserStatus();

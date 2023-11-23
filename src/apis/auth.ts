@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 /* eslint-disable consistent-return */
 import { KakaoSignInResponse } from '@/types/auth';
 
-import { kakaoInstance } from './axios';
+import { generalAxios, kakaoInstance } from './axios';
 
 export const kakaoSignIn = async (
   accessToken: string,

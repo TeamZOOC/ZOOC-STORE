@@ -1,12 +1,11 @@
 import { getCookie } from 'cookies-next';
-import { useEffect } from 'react';
 import { useRecoilState } from 'recoil';
 
 import { getPet, getPetDataset } from '@/apis/pet';
 import { userState } from '@/recoil/user/atom';
 
 export const useUserState = () => {
-  const [userStatus, setUserStatus] = useRecoilState(userState);
+  const [, setUserStatus] = useRecoilState(userState);
 
   const checkPet = async () => {
     try {
@@ -25,13 +24,13 @@ export const useUserState = () => {
       const datasetRes = await getPetDataset(petId);
       if (datasetRes) {
         return datasetRes.dataset_images.length > 0
-          ? 'IMAGE-EXISTS'
-          : 'DATASET-EXISTS';
+          ? 'IMAGE_EXISTS'
+          : 'DATASET_EXISTS';
       }
     } catch (e) {
-      return 'PET-EXISTS';
+      return 'PET_EXISTS';
     }
-    return 'PET-EXISTS';
+    return 'PET_EXISTS';
   };
 
   const checkUserStatus = async () => {
@@ -42,10 +41,5 @@ export const useUserState = () => {
     setUserStatus(status);
   };
 
-  useEffect(() => {
-    // checkUserStatus();
-    console.log(userStatus);
-  }, [userStatus]);
-
-  return { checkUserStatus, userState };
+  return { checkUserStatus };
 };

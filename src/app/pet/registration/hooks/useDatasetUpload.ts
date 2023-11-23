@@ -1,7 +1,9 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { useToast } from '@/hooks/toast';
+import { userState } from '@/recoil/user/atom';
 
 import useCreateDataset from './useCreateDataset';
 import useUploadDatasetImages from './useUploadDatasetImages';
@@ -17,14 +19,22 @@ const useDatasetUpload = ({ petId, files }: useDatasetUploadProps) => {
   const { showToast } = useToast();
   const router = useRouter();
   const [isMount, setIsMount] = useState(false);
+  const [, setUserStatus] = useRecoilState(userState);
 
   useEffect(() => {
     setIsMount(true);
   }, []);
 
   useEffect(() => {
-    if (isMount) createDataset(petId);
-  }, [isMount]);
+    if (isMount) {
+      (async () => {
+        await createDataset(petId);
+        if (datasetId) {
+          setUserStatus('DATASET_EXISTS');
+        }
+      })();
+    }
+  }, [isMount, datasetId]);
 
   const handleDatasetUpload = async () => {
     try {
