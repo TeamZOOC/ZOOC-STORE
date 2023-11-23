@@ -86,6 +86,9 @@ const initAuthOptions = async () => {
         return token;
       },
       async session({ session, token }: any) {
+        console.log('session in session:', session);
+        console.log('token session:', token);
+
         session.accessToken = token.accessToken;
         session.provider = token.provider;
 
