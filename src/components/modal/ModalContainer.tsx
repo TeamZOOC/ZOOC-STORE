@@ -15,12 +15,14 @@ import ModalBackground from './ModalBackground';
 import PetRegisterQuitModal from './PetRegisterQuitModal';
 import PostcodeModal from './PostcodeModal';
 import QuitModal from './QuitModal';
+import WithDrawModal from './WithDrawModal';
 
 const MODAL_COMPONENTS: Record<ModalKey, (props: any) => React.ReactElement> = {
   quit: () => <QuitModal />,
   imageValidate: (props) => <ImageValidateModal {...props} />,
   postcode: () => <PostcodeModal />,
   petRegisterQuit: () => <PetRegisterQuitModal />,
+  withdraw: () => <WithDrawModal />,
 };
 
 const ModalContainer = () => {

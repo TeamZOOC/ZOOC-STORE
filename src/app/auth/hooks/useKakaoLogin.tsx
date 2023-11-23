@@ -1,7 +1,8 @@
-import { kakaoSignIn } from '@/apis/auth';
 import { setCookie } from 'cookies-next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+
+import { kakaoSignIn } from '@/apis/auth';
 
 export async function useKakaoLogin() {
   const router = useRouter();
