@@ -22,7 +22,7 @@ const HomeCarusel = () => (
 export default HomeCarusel;
 
 const StHomeCarusel = styled.div`
-  margin-top: 1.6rem;
+  margin-top: 1.2rem;
   padding-left: 2rem;
 `;
 const StHomeCaruselItem = styled.div`
