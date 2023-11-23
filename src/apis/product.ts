@@ -1,9 +1,22 @@
 /* eslint-disable consistent-return */
 import { shoppingMallAxios } from './axios';
 
-export const getProduct = async () => {
+const CATEGORY_MAPPING: Record<string, number> = {
+  all: 0,
+  season: 1,
+  outfit: 2,
+  case: 3,
+  acc: 4,
+};
+
+export const getProduct = async (categoryName: string) => {
+  const categoryId =
+    categoryName === 'all'
+      ? ''
+      : `?categoryId=${CATEGORY_MAPPING[categoryName]}`;
+
   try {
-    const response = await shoppingMallAxios.get('/product/v1');
+    const response = await shoppingMallAxios.get(`/product/v1${categoryId}`);
     return response.data;
   } catch (e) {
     console.error(e);

@@ -2,61 +2,105 @@
 
 'use client';
 
-import { cartInfo } from '@/types/cart';
-import Image from 'next/image';
 import React from 'react';
 import { styled } from 'styled-components';
+import { cartInfo, cartState } from '@/recoil/cart/atom';
+import { useRecoilState } from 'recoil';
+import { formatPrice } from '@/utils/formatPrice';
+import { useModal } from '@/hooks/modal';
 import { IcMinus, IcPlus, IcProductDelete } from '../../../public/icons';
 
 interface cartItemProps {
-  cart: cartInfo;
+  cartItem: cartInfo;
+  selectedIndex: number;
 }
 
-const ShoppingCartItem = ({ cart }: cartItemProps) => {
-  const {
-    imgSrc,
-    imgAlt,
-    productTitle,
-    productSalePercent,
-    productPrice,
-    option,
-    quantity,
-  } = cart;
+const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
+  const { name, price, sale, optionList } = cartItem;
+  const [cart, setCart] = useRecoilState(cartState);
+  const { openModal } = useModal();
+
+  const handleDeleteCartItem = () => {
+    openModal('cartDelete', {
+      selectedIndex,
+    });
+  };
+
+  const handleIncreaseQuantity = () => {
+    // cart 배열의 복사본을 생성합니다.
+    const updatedCart = [...cart];
+
+    // 첫 번째 원소의 optionList 배열의 첫 번째 원소의 quantity를 1 증가시킵니다.
+
+    updatedCart[selectedIndex] = {
+      ...updatedCart[selectedIndex],
+      optionList: [
+        {
+          ...updatedCart[selectedIndex].optionList[0],
+          quantity: updatedCart[selectedIndex].optionList[0].quantity + 1,
+        },
+        ...updatedCart[selectedIndex].optionList.slice(1), // 나머지 optionList 원소들을 추가합니다.
+      ],
+    };
+
+    setCart(updatedCart);
+  };
+  const handleDecreaseQuantity = () => {
+    if (cart[selectedIndex].optionList[0].quantity === 1) return;
+    // cart 배열의 복사본을 생성합니다.
+    const updatedCart = [...cart];
+
+    // 첫 번째 원소의 optionList 배열의 첫 번째 원소의 quantity를 1 증가시킵니다.
+
+    updatedCart[selectedIndex] = {
+      ...updatedCart[selectedIndex],
+      optionList: [
+        {
+          ...updatedCart[selectedIndex].optionList[0],
+          quantity: updatedCart[selectedIndex].optionList[0].quantity - 1,
+        },
+        ...updatedCart[selectedIndex].optionList.slice(1), // 나머지 optionList 원소들을 추가합니다.
+      ],
+    };
+
+    setCart(updatedCart);
+  };
+
   return (
     <StShoppingCartItem>
       <StShoppingCartMain>
-        <StShoppingCartImage>
-          <Image src={imgSrc} alt={imgAlt} width={100} height={135} />
-        </StShoppingCartImage>
+        <StShoppingCartImage />
         <StShoppingCartInfo>
           <div>
-            <StCartItemTitle>{productTitle}</StCartItemTitle>
+            <StCartItemTitle>{name}</StCartItemTitle>
             <StCartItemPriceBox>
-              {productSalePercent && (
-                <StCartItemSalePercent>
-                  {productSalePercent}
-                </StCartItemSalePercent>
-              )}
-              <StCartItemPrice>{productPrice}</StCartItemPrice>
+              {sale && <StCartItemSalePercent>{sale}</StCartItemSalePercent>}
+              <StCartItemPrice>{formatPrice(price)}</StCartItemPrice>
             </StCartItemPriceBox>
           </div>
           <StShoppingCartOption>
-            {option.map((item, index) => (
-              <span key={index}>{item}</span>
+            {optionList.map((option, index) => (
+              <span key={index}>{option.name}</span>
             ))}
           </StShoppingCartOption>
           <StCartItemQuantity>
-            <StOptionItemQuantityControlButton type="button">
+            <StOptionItemQuantityControlButton
+              type="button"
+              onClick={handleDecreaseQuantity}
+            >
               <IcMinus />
             </StOptionItemQuantityControlButton>
-            <span>{quantity}</span>
-            <StOptionItemQuantityControlButton type="button">
+            <span>{optionList[0].quantity}</span>
+            <StOptionItemQuantityControlButton
+              type="button"
+              onClick={handleIncreaseQuantity}
+            >
               <IcPlus />
             </StOptionItemQuantityControlButton>
           </StCartItemQuantity>
         </StShoppingCartInfo>
       </StShoppingCartMain>
-      <IcProductDelete />
+      <IcProductDelete onClick={handleDeleteCartItem} />
     </StShoppingCartItem>
   );
 };
@@ -84,7 +128,12 @@ const StShoppingCartMain = styled.div`
 const StShoppingCartImage = styled.div`
   position: relative;
 
+  width: 10rem;
+  height: 13rem;
+
   aspect-ratio: 1/1.35;
+
+  background-color: ${({ theme }) => theme.colors.zw_lightgray};
 `;
 
 const StShoppingCartInfo = styled.div`

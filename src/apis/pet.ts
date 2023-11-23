@@ -15,7 +15,7 @@ export const getPet = async () => {
 export const registerPet = async (postPetInfo: PetDataInfo) => {
   try {
     const { data } = await generalAxios.post(`/pet`, postPetInfo);
-    return data.data.id;
+    return data.data;
   } catch (error) {
     console.error(error);
     throw error;
@@ -46,6 +46,16 @@ export const editPet = async (petId: number, editPetInfo: PetEditInfo) => {
   }
 };
 
+export const getPetDataset = async (petId: number) => {
+  try {
+    const { data } = await generalAxios.get(`/ai/dataset/${petId}`);
+    return data.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
 export const createDataset = async (petId: number) => {
   try {
     const { data } = await generalAxios.post(`/ai/dataset`, { petId });
@@ -56,7 +66,7 @@ export const createDataset = async (petId: number) => {
   }
 };
 
-export const uploadDatasetImages = async (datasetId: number, files: File[]) => {
+export const uploadDatasetImages = async (datasetId: string, files: File[]) => {
   try {
     const formData = new FormData();
     files.forEach((file) => formData.append('files', file));
