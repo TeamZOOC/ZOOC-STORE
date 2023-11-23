@@ -25,10 +25,11 @@ export const kakaoSignIn = async (
   }
 };
 
-export const appleSignIn = async (accessToken: string) => {
+export const appleSignIn = async (email: string, sub: string) => {
   try {
-    const response = await generalAxios.post('/user/apple/signin', {
-      identityTokenString: accessToken,
+    const response = await generalAxios.post('/user/apple/signin/web', {
+      email,
+      sub,
     });
     console.log(response);
     return response.data;
