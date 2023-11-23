@@ -5,6 +5,7 @@ const MODAL_KEY = [
   'postcode',
   'orderQuit',
   'petRegisterQuit',
+  'cartDelete',
   'paymentQuit',
   'withdraw',
 ] as const;
