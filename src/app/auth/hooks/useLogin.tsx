@@ -8,32 +8,29 @@ export const useLogin = async () => {
   const router = useRouter();
   const { data: session } = useSession();
 
-  if (session?.accessToken) {
-    if (session.provider === 'kakao') {
-      const response = await kakaoSignIn(session.accessToken);
+  try {
+    let response;
 
-      if (response) {
-        setCookie('accessToken', response.data.accessToken);
-        if (response.data.isExistedUser) {
-          router.push('/');
-        } else {
-          router.push('/auth/signup');
-        }
-      }
+    switch (session?.provider) {
+      case 'kakao':
+        response = await kakaoSignIn(session.accessToken);
+        break;
+
+      case 'apple':
+        if (!session.email || !session.sub) return;
+        response = await appleSignIn(session.email, session.sub);
+        break;
+
+      default:
+        return;
     }
 
-    if (session.provider === 'apple') {
-      if (!session.email || !session.sub) return;
-      const response = await appleSignIn(session.email, session.sub);
-
-      if (response) {
-        setCookie('accessToken', response.data.accessToken);
-        if (response.data.isExistedUser) {
-          router.push('/');
-        } else {
-          router.push('/auth/signup');
-        }
-      }
+    if (response) {
+      setCookie('accessToken', response.data.accessToken);
+      const routePath = response.data.isExistedUser ? '/' : '/auth/signup';
+      router.push(routePath);
     }
+  } catch (error) {
+    console.error('로그인 실패', error);
   }
 };
