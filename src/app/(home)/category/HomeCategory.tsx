@@ -37,7 +37,7 @@ const StHomeCategory = styled.section`
   flex-direction: column;
   gap: 2.1rem;
 
-  margin-top: 3rem;
+  margin-top: 2.4rem;
 `;
 
 const StHomeCategoryTop = styled.div`
