@@ -2,7 +2,11 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+
+import { userState } from '@/recoil/user/atom';
+
 import {
   IcBack,
   IcCart,
@@ -28,6 +32,7 @@ const Header = ({
 }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
+  const userStatus = useRecoilValue(userState);
 
   const showIcon = () => {
     if (pathname === '/') {
@@ -46,7 +51,13 @@ const Header = ({
       {sideMenu && (
         <StHeaderRight>
           <IcCart onClick={() => router.push('/cart')} />
-          <IcMyPage onClick={() => router.push('/mypage')} />
+          <IcMyPage
+            onClick={() =>
+              userStatus === 'GUEST'
+                ? router.push('/auth/login')
+                : router.push('/mypage')
+            }
+          />
         </StHeaderRight>
       )}
       {exit && <IcExit onClick={exitFunc} />}
@@ -80,7 +91,11 @@ const StHeaderTitle = styled.h1`
   ${({ theme }) => theme.fonts.zw_Subhead2};
 `;
 
-const StHeaderRight = styled.div``;
+const StHeaderRight = styled.div`
+  & > svg {
+    cursor: pointer;
+  }
+`;
 
 const StEmpty = styled.div`
   width: 3.6rem;

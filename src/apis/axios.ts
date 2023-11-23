@@ -22,6 +22,14 @@ export const createAxios = (baseURL: string): AxiosInstance => {
   return axiosInstance;
 };
 
+export const kakaoInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_GENERAL_BASE_URL!,
+  headers: {
+    'Content-type': 'application/json',
+    'Access-Control-Allow-Origin': process.env.NEXT_PUBLIC_GENERAL_BASE_URL!,
+  },
+});
+
 export const shoppingMallAxios = createAxios(
   process.env.NEXT_PUBLIC_SHOPPINGMALL_BASE_URL!,
 );

@@ -1,21 +1,29 @@
 'use client';
 
-import { deleteCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { MYPAGE_MENU } from '@/constants/mypage';
 import { useModal } from '@/hooks/modal';
+import { userState } from '@/recoil/user/atom';
 
 import { IcLogout } from '../../../public/icons';
 
 const MyPageMenu = () => {
   const { openModal } = useModal();
+  const [, setUserStatus] = useRecoilState(userState);
+  const kakaoAccessToken = getCookie('kakaoAccessToken');
 
   const handleLogout = () => {
+    if (kakaoAccessToken) {
+      deleteCookie('kakaoAccessToken');
+    }
     deleteCookie('accessToken');
     signOut({ callbackUrl: 'http://localhost:3000/' });
+    setUserStatus('GUEST');
   };
 
   return (
