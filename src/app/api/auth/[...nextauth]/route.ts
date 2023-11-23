@@ -88,12 +88,10 @@ const initAuthOptions = async () => {
       async session({ session, token }: any) {
         console.log('session in session:', session);
         console.log('token session:', token);
-
         session.accessToken = token.accessToken;
         session.provider = token.provider;
-
         if (token.sub && token.email) {
-          session.user.id = token.sub;
+          session.sub = token.sub;
           session.email = token.email;
         }
         return session;

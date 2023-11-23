@@ -2,7 +2,7 @@ import { setCookie } from 'cookies-next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-import { kakaoSignIn } from '@/apis/auth';
+import { appleSignIn, kakaoSignIn } from '@/apis/auth';
 
 export async function useKakaoLogin() {
   const router = useRouter();
@@ -22,15 +22,16 @@ export async function useKakaoLogin() {
       }
     } else if (session.provider === 'apple') {
       console.log('애플 로그인', session);
-      // const response = await appleSignIn(session);
-      // if (response) {
-      //   setCookie('accessToken', response.data.accessToken);
-      //   if (response.data.isExistedUser) {
-      //     router.push('/home');
-      //   } else {
-      //     router.push('/auth/signup');
-      //   }
-      // }
+      if (!session.email || !session.sub) return;
+      const response = await appleSignIn(session.email, session.sub);
+      if (response) {
+        setCookie('accessToken', response.data.accessToken);
+        if (response.data.isExistedUser) {
+          router.push('/');
+        } else {
+          router.push('/auth/signup');
+        }
+      }
     }
   }
 }
