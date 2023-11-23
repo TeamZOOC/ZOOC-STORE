@@ -10,22 +10,16 @@ const CATEGORY_MAPPING: Record<string, number> = {
 };
 
 export const getProduct = async (categoryName: string) => {
-  if (categoryName === 'all') {
-    try {
-      const response = await shoppingMallAxios.get('/product/v1');
-      return response.data;
-    } catch (e) {
-      console.error(e);
-    }
-  } else {
-    try {
-      const response = await shoppingMallAxios.get(
-        `/product/v1?categoryId=${CATEGORY_MAPPING[categoryName]}`,
-      );
-      return response.data;
-    } catch (e) {
-      console.error(e);
-    }
+  const categoryId =
+    categoryName === 'all'
+      ? ''
+      : `?categoryId=${CATEGORY_MAPPING[categoryName]}`;
+
+  try {
+    const response = await shoppingMallAxios.get(`/product/v1${categoryId}`);
+    return response.data;
+  } catch (e) {
+    console.error(e);
   }
 };
 
