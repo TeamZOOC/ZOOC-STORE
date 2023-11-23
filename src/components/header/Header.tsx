@@ -2,14 +2,17 @@
 
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
+import { useRecoilValue } from 'recoil';
 import styled from 'styled-components';
+
+import { userState } from '@/recoil/user/atom';
 
 import {
   IcBack,
   IcCart,
   IcExit,
   IcMyPage,
-  IcZooc,
+  IcZooc
 } from '../../../public/icons';
 
 interface HeaderProps {
@@ -29,6 +32,7 @@ const Header = ({
 }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
+  const userStatus = useRecoilValue(userState);
 
   return (
     <StHeader>
@@ -37,7 +41,13 @@ const Header = ({
       {sideMenu && (
         <StHeaderRight>
           <IcCart onClick={() => router.push('/cart')} />
-          <IcMyPage onClick={() => router.push('/mypage')} />
+          <IcMyPage
+            onClick={() =>
+              userStatus === 'MEMBER'
+                ? router.push('/mypage')
+                : router.push('/auth/login')
+            }
+          />
         </StHeaderRight>
       )}
       {exit && <IcExit onClick={exitFunc} />}
