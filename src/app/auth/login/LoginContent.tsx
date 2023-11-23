@@ -3,16 +3,11 @@
 import { signIn } from 'next-auth/react';
 import { styled } from 'styled-components';
 
-import { useEffect } from 'react';
 import { IcApple, IcKakao } from '../../../../public/icons';
 import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
-  const { handleLogin } = useLogin();
-
-  useEffect(() => {
-    handleLogin();
-  }, []);
+  useLogin();
 
   return (
     <>
