@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
 
@@ -10,7 +11,7 @@ import {
   IcKakaoPay,
   IcSecondStep,
   IcToss,
-} from '../../../../public/icons';
+} from '../../../../../public/icons';
 import { StStepBox, StTitle, StUnSelected } from './FirstStep';
 
 interface SecondStepProps {
@@ -19,6 +20,9 @@ interface SecondStepProps {
 }
 
 const SecondStep = ({ currentStep, handleNextStep }: SecondStepProps) => {
+  const params = useSearchParams();
+  const totalPrice = params.get('totalPrice');
+
   if (currentStep !== 2) {
     return (
       <StUnSelectedSecond>
@@ -37,7 +41,7 @@ const SecondStep = ({ currentStep, handleNextStep }: SecondStepProps) => {
         <StInfo>
           원하시는 금융앱에서
           <br />
-          <span>47,000</span>원을 입금해주세요
+          <span>{totalPrice}</span>원을 입금해주세요
         </StInfo>
         <StImages>
           <IcToss />

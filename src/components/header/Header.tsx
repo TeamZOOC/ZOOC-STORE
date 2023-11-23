@@ -29,9 +29,19 @@ const Header = ({
   const pathname = usePathname();
   const router = useRouter();
 
+  const showIcon = () => {
+    if (pathname === '/') {
+      return <IcZooc />;
+    }
+    if (pathname !== '/order/payment') {
+      return <IcBack onClick={backFunc} />;
+    }
+    return <StEmpty />;
+  };
+
   return (
     <StHeader>
-      {pathname === '/' ? <IcZooc /> : <IcBack onClick={backFunc} />}
+      {showIcon()}
       <StHeaderTitle>{headerTitle}</StHeaderTitle>
       {sideMenu && (
         <StHeaderRight>
