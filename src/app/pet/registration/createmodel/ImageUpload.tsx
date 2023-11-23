@@ -4,13 +4,14 @@ import React, { useEffect, useRef } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
+// import useDatasetUpload from '../hooks/useDatasetUpload';
+import { createDataset, uploadDatasetImages } from '@/apis/pet';
 import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
 import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { petRegisterState, uploadImagesState } from '@/recoil/pet/atom';
 
-// import useDatasetUpload from '../hooks/useDatasetUpload';
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
 
@@ -65,8 +66,50 @@ const ImageUpload = () => {
     setValidatedImages(uploadImages);
   };
 
+  const handlePetRegister = async () => {
+    try {
+      const resPetId = await registerPet(petRegisterData);
+      console.log(resPetId);
+      return resPetId;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  };
+
+  const handleCreateDataset = async (petId: number) => {
+    try {
+      const resDatasetId = await createDataset(petId);
+      console.log(resDatasetId);
+      return resDatasetId;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  };
+
+  const handleUploadDatasetImages = async (
+    datasetId: string,
+    files: File[],
+  ) => {
+    try {
+      const res = await uploadDatasetImages(datasetId, files);
+      console.log(res);
+      return res;
+    } catch (e) {
+      console.error(e);
+      throw e;
+    }
+  };
+
   const handleImageUpload = async () => {
-    await registerPet(petRegisterData);
+    const petId = await handlePetRegister();
+    if (petId) {
+      const datasetId = await handleCreateDataset(petId);
+      if (datasetId) {
+        await handleUploadDatasetImages(datasetId, validatedImages);
+      }
+    }
   };
 
   useEffect(() => {
