@@ -34,6 +34,7 @@ import IcCategorySeason from './ic_category_season.svg';
 import IcCategoryOutfit from './ic_category_outfit.svg';
 import IcCategoryCase from './ic_category_case.svg';
 import IcCategoryAcc from './ic_category_acc.svg';
+import IcLoadingLogo from './ic_loading_logo.svg';
 
 export {
   IcWarning,
@@ -72,4 +73,5 @@ export {
   IcCategoryOutfit,
   IcCategoryCase,
   IcCategoryAcc,
+  IcLoadingLogo,
 };
