@@ -2,7 +2,7 @@ import { setCookie } from 'cookies-next';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-import { appleSignIn, kakaoSignIn } from '@/apis/auth';
+import { kakaoSignIn } from '@/apis/auth';
 
 export async function useKakaoLogin() {
   const router = useRouter();
