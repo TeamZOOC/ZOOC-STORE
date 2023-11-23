@@ -34,6 +34,7 @@ export const useLogin = async () => {
       default:
         return;
     }
+    console.log(session, response);
 
     if (response) {
       setCookie('accessToken', response.data.accessToken);
