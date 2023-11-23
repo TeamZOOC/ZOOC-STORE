@@ -5,6 +5,7 @@ const MODAL_KEY = [
   'imageValidate',
   'postcode',
   'petRegisterQuit',
+  'cartDelete',
 ] as const;
 
 export type ModalKey = (typeof MODAL_KEY)[number];
