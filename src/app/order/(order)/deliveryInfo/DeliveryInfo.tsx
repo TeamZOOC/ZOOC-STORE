@@ -1,21 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useRecoilValue } from 'recoil';
-/* eslint-disable react/no-array-index-key */
 import { styled } from 'styled-components';
 
-import { useTab } from '@/hooks/tab';
 import { buyerState } from '@/recoil/order/atom';
 
 import { StInfoTitle } from '../productsInfo/ProductsInfo';
-import ExistingAddressList from './ExistingAddressList';
 import NewDeliveryForm from './NewDeliveryForm';
 
 const DeliveryInfo = () => {
-  const DELIVERY_TAB = ['기존 배송지', '신규입력'];
-  const { activeTab, setActiveTab } = useTab({
-    tabList: DELIVERY_TAB,
-    defaultTabIndex: 1,
-  });
   const buyerInfo = useRecoilValue(buyerState);
   const [sameAsBuyerSelected, setSameAsBuyerSelected] = useState(false);
 
@@ -37,26 +29,11 @@ const DeliveryInfo = () => {
           구매자와 동일해요
         </StSameAsBuyerBtn>
       </StDeliveryTitle>
-      <StDeliveryTabs>
-        {DELIVERY_TAB.map((addressTab, index) => (
-          <StDeliveryTab
-            key={index}
-            type="button"
-            onClick={() => setActiveTab(index)}
-            $isActiveTab={activeTab === addressTab}
-          >
-            {addressTab}
-          </StDeliveryTab>
-        ))}
-      </StDeliveryTabs>
       <StAddressForm>
-        {activeTab === '신규입력' && (
-          <NewDeliveryForm
-            buyerName={sameAsBuyerSelected ? buyerInfo.buyerName : undefined}
-            buyerPhone={sameAsBuyerSelected ? buyerInfo.buyerPhone : undefined}
-          />
-        )}
-        {activeTab === '기존 배송지' && <ExistingAddressList />}
+        <NewDeliveryForm
+          buyerName={sameAsBuyerSelected ? buyerInfo.buyerName : undefined}
+          buyerPhone={sameAsBuyerSelected ? buyerInfo.buyerPhone : undefined}
+        />
       </StAddressForm>
     </StDeliveryInfoSection>
   );
@@ -78,30 +55,6 @@ const StSameAsBuyerBtn = styled.button`
   ${({ theme }) => theme.fonts.zw_Body2};
 
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_gray};
-`;
-
-const StDeliveryTabs = styled.div`
-  display: flex;
-  gap: 2.3rem;
-
-  margin-bottom: 2rem;
-`;
-
-const StDeliveryTab = styled.button<{ $isActiveTab: boolean }>`
-  height: 3rem;
-
-  ${({ theme, $isActiveTab }) =>
-    $isActiveTab
-      ? `
-    color: ${theme.colors.zw_point};
-    border-bottom: 0.2rem solid ${theme.colors.zw_point};
-    ${theme.fonts.zw_Subhead3};
-  `
-      : `
-    color: ${theme.colors.zw_lightgray};
-    border-bottom: 0.2rem solid transparent;
-    ${theme.fonts.zw_Body1};
-  `}
 `;
 
 const StAddressForm = styled.div``;

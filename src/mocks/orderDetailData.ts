@@ -13,14 +13,14 @@ export const ORDER_DETAIL: OrderDetailInfo = {
     {
       name: 'string',
       image: 'string',
-      pieces: 1,
+      pieces: 2,
       optionDetails: ['string'],
       price: 10000,
       deliveryState: 'string',
     },
   ],
   payment: {
-    totalProductPrice: 1000010000,
+    totalProductPrice: 20000,
     deliveryFee: 4000,
   },
 };
