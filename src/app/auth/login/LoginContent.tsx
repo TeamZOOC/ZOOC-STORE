@@ -1,7 +1,8 @@
 'use client';
 
-import { styled } from 'styled-components';
 import { signIn } from 'next-auth/react';
+import { styled } from 'styled-components';
+
 import { IcApple, IcKakao } from '../../../../public/icons';
 import { useKakaoLogin } from '../hooks/useKakaoLogin';
 

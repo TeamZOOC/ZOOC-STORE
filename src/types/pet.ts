@@ -10,3 +10,7 @@ export interface PetEditInfo {
   file?: File;
   breed?: string;
 }
+
+export interface DatasetInfo {
+  datasetId: string;
+}

@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
@@ -9,8 +10,10 @@ import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { uploadImagesState } from '@/recoil/createmodel/atom';
 
+import useDatasetUpload from '../hooks/useDatasetUpload';
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
+import ImageUploadLoading from './ImageUploadLoading';
 
 const ImageUpload = () => {
   const { uploadImages, handleImageChange, handleResetImage } =
@@ -18,7 +21,15 @@ const ImageUpload = () => {
   const [validatedImages, setValidatedImages] =
     useRecoilState<File[]>(uploadImagesState);
   const imageInputRef = useRef<HTMLInputElement>(null);
+
+  const params = useSearchParams();
+  const petId = Number(params.get('petId'));
+
   const { openModal, closeModal } = useModal();
+  const { handleDatasetUpload, isLoading } = useDatasetUpload({
+    petId,
+    files: validatedImages,
+  });
 
   const handleUploadImage = () => {
     imageInputRef.current?.click();
@@ -58,6 +69,8 @@ const ImageUpload = () => {
     }
   }, [uploadImages]);
 
+  if (isLoading) return <ImageUploadLoading />;
+
   return (
     <StImageUpload>
       <StImageInput
@@ -85,7 +98,7 @@ const ImageUpload = () => {
             btnName="사진 업로드 완료"
             disabled={false}
             activeFunc={() => {
-              console.log('다음 페이지 라우팅');
+              handleDatasetUpload();
             }}
           />
         </>

@@ -1,39 +1,35 @@
-export interface OrderInfo {
-  id?: number;
-  pieces: number;
-  product: string;
-  createdAt?: Date;
-  price: number;
+export interface ProductInfo {
+  name: string;
   image: string;
-  optionCategory: string;
-  deliveryState?: string;
-  petName: string;
-  optionDetail: string;
-  optionAdditionalPrice: number;
+  optionDetails: string[];
+  pieces: number;
+  price: number;
+  id?: string;
+  deliveryState: string;
 }
 
 export interface OrderListInfo {
-  id: number;
-  data: OrderInfo[];
+  createdAt: string;
+  products: ProductInfo[];
 }
 
 export interface DeliveryInfo {
   receiverName: string;
   receiverPhone: string;
+  postcode: string;
   address: string;
   request?: string;
 }
 
 export interface PaymentInfo {
-  productPrice: number;
+  totalProductPrice: number;
   deliveryFee: number;
-  totalPrice: number;
 }
 
 export interface OrderDetailInfo {
-  date: Date;
-  products: OrderInfo[];
-  delivery: DeliveryInfo;
+  createdAt: string;
+  address: DeliveryInfo;
+  products: ProductInfo[];
   payment: PaymentInfo;
 }
 

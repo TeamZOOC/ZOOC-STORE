@@ -1,36 +1,43 @@
 'use client';
 
+import { useParams } from 'next/navigation';
 import { styled } from 'styled-components';
 
-import { ORDER_DETAIL } from '@/mocks/orderDetailData';
-
-import OrderItem from '../../(order)/OrderItem';
 import { BillingInfo, DetailInfo } from '../../../../../components/order';
+import useGetOrderDetail from '../../hooks/useGetOrderDetail';
+import OrderDetailItem from './OrderDetailItem';
 
 const OrderDetail = () => {
-  const { date, products, delivery, payment } = ORDER_DETAIL;
+  const params = useParams();
+  const orderId = params.orderId as string;
+
+  const { orderDetail } = useGetOrderDetail(orderId);
+  const { createdAt, products, payment, address } = orderDetail || {};
+  const { receiverName, receiverPhone, request, postcode } = address || {};
+
+  const addressString = address ? `(${postcode}) ${address.address}` : '';
 
   return (
     <StDetailWrapper>
-      <OrderItem date={date} order={products} />
-      <StHr />
-      {delivery && (
-        <StDetailSection>
-          <StDetailTitle> 배송 정보</StDetailTitle>
-          <StDeliveryInfo>
-            <DetailInfo label="수령인" value={delivery.receiverName} />
-            <DetailInfo label="연락처" value={delivery.receiverPhone} />
-            <DetailInfo label="배송지" value={delivery.address} />
-            <DetailInfo label="요청사항" value={delivery.request} />
-          </StDeliveryInfo>
-        </StDetailSection>
-      )}
-      <StHr />
-      {payment && (
-        <StDetailSection>
-          <BillingInfo payment={payment} />
-        </StDetailSection>
-      )}
+      {orderDetail ? (
+        <>
+          <OrderDetailItem date={createdAt!} products={products!} />
+          <StHr />
+          <StDetailSection>
+            <StDetailTitle>배송 정보</StDetailTitle>
+            <StDeliveryInfo>
+              <DetailInfo label="수령인" value={receiverName} />
+              <DetailInfo label="연락처" value={receiverPhone} />
+              <DetailInfo label="배송지" value={addressString} />
+              <DetailInfo label="요청사항" value={request} />
+            </StDeliveryInfo>
+          </StDetailSection>
+          <StHr />
+          <StDetailSection>
+            <BillingInfo payment={payment!} />
+          </StDetailSection>
+        </>
+      ) : null}
     </StDetailWrapper>
   );
 };

@@ -1,33 +1,31 @@
 import { styled } from 'styled-components';
 
-import { OrderInfo } from '@/types/order';
+import { ProductInfo } from '@/types/order';
 import { formatPrice } from '@/utils/formatPrice';
 
 import DeliveryLabel from './DeliveryLabel';
 
 interface OrderProductProps {
-  order: OrderInfo;
+  order: ProductInfo;
 }
 
 const OrderProduct = ({ order }: OrderProductProps) => {
-  const { pieces, product, price, image, deliveryState, optionDetail } = order;
+  const { pieces, name, price, image, deliveryState, optionDetails } = order;
+  const optionsString =
+    optionDetails && optionDetails.length > 0 ? optionDetails.join(' | ') : '';
 
   return (
     <StOrderProductWrapper>
       <StOrderContent>
-        <StProductImage src={image} alt={product} />
+        <StProductImage src={image} alt={name} />
         <StOrderDetail>
           {deliveryState && <DeliveryLabel deliveryState={deliveryState} />}
           <StProductTitle>
-            {product} <span>{pieces}개</span>
+            {name} <span>{pieces}개</span>
           </StProductTitle>
-          <StProductPrice>
-            <span>33%</span>
-            {formatPrice(price)}
-          </StProductPrice>
+          <StProductPrice>{formatPrice(price)}</StProductPrice>
           <StProductOptions>
-            <span>경찰관 | </span>
-            <span>{optionDetail}</span>
+            <span>{optionsString}</span>
           </StProductOptions>
         </StOrderDetail>
       </StOrderContent>
