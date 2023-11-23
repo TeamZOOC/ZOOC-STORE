@@ -1,11 +1,11 @@
-import { Header } from '@/components/header';
 import { MainLayout } from '@/components/layout';
 
 import ImageUpload from './ImageUpload';
+import ImageUploadHeader from './ImageUploadHeader';
 
 const page = () => (
   <>
-    <Header headerTitle="AI 모델 생성" exit />
+    <ImageUploadHeader />
     <MainLayout>
       <ImageUpload />
     </MainLayout>
