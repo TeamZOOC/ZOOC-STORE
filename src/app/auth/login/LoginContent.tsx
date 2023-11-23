@@ -40,7 +40,7 @@ const LoginContent = () => {
         </StAppleLoginButton>
         <StKakaoLoginButton
           type="button"
-          onClick={() => signIn('kakao', { callbackUrl: '/' })}
+          onClick={() => signIn('kakao', { callbackUrl: '/auth/login' })}
         >
           <IcKakao />
           Kakao로 로그인
