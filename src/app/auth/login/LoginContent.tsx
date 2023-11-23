@@ -8,12 +8,11 @@ import { IcApple, IcKakao } from '../../../../public/icons';
 import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
-  const { data: session } = useSession();
   const { handleLogin } = useLogin();
 
   useEffect(() => {
     handleLogin();
-  }, [session]);
+  }, []);
 
   return (
     <>
@@ -41,7 +40,7 @@ const LoginContent = () => {
         </StAppleLoginButton>
         <StKakaoLoginButton
           type="button"
-          onClick={() => signIn('kakao', { callbackUrl: '/auth/login' })}
+          onClick={() => signIn('kakao', { callbackUrl: '/' })}
         >
           <IcKakao />
           Kakao로 로그인
