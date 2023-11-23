@@ -34,6 +34,12 @@ import IcThirdStep from './ic_third_step.svg';
 import IcToss from './ic_toss.svg';
 import IcWarning from './ic_warning.svg';
 import IcZooc from './ic_zooc.svg';
+import IcDropDownActive from './ic_dropdown_active.svg';
+import IcCategorySeason from './ic_category_season.svg';
+import IcCategoryOutfit from './ic_category_outfit.svg';
+import IcCategoryCase from './ic_category_case.svg';
+import IcCategoryAcc from './ic_category_acc.svg';
+import IcLoadingLogo from './ic_loading_logo.svg';
 
 export {
   IcBtnAppstore,
@@ -72,4 +78,9 @@ export {
   IcDropDownActive,
   IcBtnPicture,
   IcFitapatLogo,
+  IcCategorySeason,
+  IcCategoryOutfit,
+  IcCategoryCase,
+  IcCategoryAcc,
+  IcLoadingLogo,
 };

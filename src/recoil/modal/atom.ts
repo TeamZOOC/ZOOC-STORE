@@ -1,10 +1,12 @@
 import { atom, atomFamily } from 'recoil';
 
 const MODAL_KEY = [
-  'quit',
   'imageValidate',
   'postcode',
+  'orderQuit',
   'petRegisterQuit',
+  'paymentQuit',
+  'withdraw',
 ] as const;
 
 export type ModalKey = (typeof MODAL_KEY)[number];

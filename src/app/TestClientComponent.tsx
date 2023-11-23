@@ -28,7 +28,7 @@ const TestClientComponent = () => {
       <button
         type="button"
         onClick={() => {
-          openModal('quit');
+          openModal('orderQuit');
         }}
       >
         구매 그만두기 모달 열기

@@ -20,10 +20,4 @@ export const MYPAGE_MENU = [
     icon: <IcInquiry />,
     path: `mailto:${FITAPAT_EMAIL}`,
   },
-  {
-    id: 4,
-    name: '로그아웃',
-    icon: <IcLogout />,
-    path: '/logout',
-  },
 ];
