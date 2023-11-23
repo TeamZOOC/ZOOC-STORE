@@ -14,6 +14,7 @@ const LoginContent = () => {
   useEffect(() => {
     handleLogin();
   }, [session]);
+
   return (
     <>
       <StLoginContent>
@@ -38,7 +39,10 @@ const LoginContent = () => {
           <IcApple />
           Apple로 로그인
         </StAppleLoginButton>
-        <StKakaoLoginButton type="button" onClick={() => signIn('kakao')}>
+        <StKakaoLoginButton
+          type="button"
+          onClick={() => signIn('kakao', { callbackUrl: '/auth/login' })}
+        >
           <IcKakao />
           Kakao로 로그인
         </StKakaoLoginButton>
