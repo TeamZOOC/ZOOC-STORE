@@ -46,7 +46,7 @@ const ShoppingPayment = () => {
             <StShoppingPaymentInfoTitle $color="gray">
               배송비
             </StShoppingPaymentInfoTitle>
-            <StShoppingPaymentInfoPrice>35,000 원</StShoppingPaymentInfoPrice>
+            <StShoppingPaymentInfoPrice>3,000 원</StShoppingPaymentInfoPrice>
           </StShoppingPaymentInfo>
         </StShoppingPaymentInfoWrapper>
         <StShoppingPaymentInfo>
@@ -55,7 +55,7 @@ const ShoppingPayment = () => {
           </StShoppingPaymentInfoTitle>
           <div>
             <StShoppingPaymentTotalPrice>
-              {formatPrice(totalSaleQuantity)}
+              {formatPrice(totalSaleQuantity + 3000)}
             </StShoppingPaymentTotalPrice>
             <StShoppingPaymentInfoPrice> 원</StShoppingPaymentInfoPrice>
           </div>
