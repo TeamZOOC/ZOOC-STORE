@@ -10,20 +10,20 @@ import { useRecoilValue } from 'recoil';
 
 import { ModalKey, modalListState } from '@/recoil/modal/atom';
 
+import CartDeleteModal from './CartDeleteModal';
 import ImageValidateModal from './ImageValidateModal';
 import ModalBackground from './ModalBackground';
 import OrderQuitModal from './OrderQuitModal';
 import PaymentQuitModal from './PaymentQuitModal';
 import PetRegisterQuitModal from './PetRegisterQuitModal';
 import PostcodeModal from './PostcodeModal';
-import CartDeleteModal from './CartDeleteModal';
 import WithDrawModal from './WithDrawModal';
 
 const MODAL_COMPONENTS: Record<ModalKey, (props: any) => React.ReactElement> = {
   imageValidate: (props) => <ImageValidateModal {...props} />,
   postcode: () => <PostcodeModal />,
   orderQuit: () => <OrderQuitModal />,
-  petRegisterQuit: () => <PetRegisterQuitModal />,
+  petRegisterQuit: (props) => <PetRegisterQuitModal {...props} />,
   cartDelete: (props) => <CartDeleteModal {...props} />,
   paymentQuit: () => <PaymentQuitModal />,
   withdraw: () => <WithDrawModal />,
