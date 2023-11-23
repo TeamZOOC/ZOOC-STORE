@@ -77,8 +77,6 @@ const initAuthOptions = async () => {
 
     callbacks: {
       async jwt({ token, account }: any) {
-        console.log('account in JWT:', account);
-        console.log('token JWT:', token);
         if (account) {
           token.accessToken = account.access_token;
           token.provider = account.provider;
@@ -86,8 +84,6 @@ const initAuthOptions = async () => {
         return token;
       },
       async session({ session, token }: any) {
-        console.log('session in session:', session);
-        console.log('token session:', token);
         session.accessToken = token.accessToken;
         session.provider = token.provider;
         if (token.sub && token.email) {
