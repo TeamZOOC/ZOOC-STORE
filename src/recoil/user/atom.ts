@@ -10,8 +10,3 @@ export const userState = atom<UserState>({
   default: 'GUEST',
   effects_UNSTABLE: [persistAtom],
 });
-
-export const userProcessCompletedState = atom({
-  key: 'userProcessCompletedState',
-  default: false,
-});
