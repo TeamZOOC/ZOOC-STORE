@@ -18,11 +18,13 @@ interface OptionBottomSheetProps {
   bottomSheetRef: React.RefObject<HTMLDivElement>;
   productPrice: number;
   handleAnimationEnd: () => void;
+  handleToggleOption: () => void;
 }
 const OptionBottomSheet = ({
   isUnMount,
   isOptionToggle,
   bottomSheetRef,
+  handleToggleOption,
   handleAnimationEnd,
   productPrice,
 }: OptionBottomSheetProps) => {
@@ -52,7 +54,7 @@ const OptionBottomSheet = ({
         {selectedOptions.length > 0 && (
           <OptionTotalPrice productPrice={productPrice} />
         )}
-        <OptionBottomButton />
+        <OptionBottomButton handleToggleOption={handleToggleOption} />
       </StOptionBottomSheetInner>
     </StOptionBottomSheet>
   );

@@ -38,6 +38,7 @@ const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
     setIsOptionToggle(false);
   };
   useOutSideClick({ ref: bottomSheetRef, callback: handleToggleOption });
+
   return (
     <>
       <StProductInfoNav>
@@ -94,6 +95,7 @@ const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
             isOptionToggle={isOptionToggle}
             bottomSheetRef={bottomSheetRef}
             productPrice={productPrice}
+            handleToggleOption={handleToggleOption}
           />
         </OptionBottomSheetContainer>
       )}
