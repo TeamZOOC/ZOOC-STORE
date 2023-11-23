@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -9,7 +9,7 @@ import {
   IcCart,
   IcExit,
   IcMyPage,
-  IcZooc,
+  IcZooc
 } from '../../../public/icons';
 
 interface HeaderProps {
@@ -28,6 +28,7 @@ const Header = ({
   exitFunc,
 }: HeaderProps) => {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <StHeader>
@@ -35,8 +36,8 @@ const Header = ({
       <StHeaderTitle>{headerTitle}</StHeaderTitle>
       {sideMenu && (
         <StHeaderRight>
-          <IcCart />
-          <IcMyPage />
+          <IcCart onClick={() => router.push('/cart')} />
+          <IcMyPage onClick={() => router.push('/mypage')} />
         </StHeaderRight>
       )}
       {exit && <IcExit onClick={exitFunc} />}
@@ -70,7 +71,11 @@ const StHeaderTitle = styled.h1`
   ${({ theme }) => theme.fonts.zw_Subhead2};
 `;
 
-const StHeaderRight = styled.div``;
+const StHeaderRight = styled.div`
+  & > svg {
+    cursor: pointer;
+  }
+`;
 
 const StEmpty = styled.div`
   width: 3.6rem;
