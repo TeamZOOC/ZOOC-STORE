@@ -1,6 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
@@ -12,15 +13,18 @@ import { petRegisterState } from '@/recoil/pet/atom';
 import { PetDataInfo } from '@/types/pet';
 
 const PetRegistration = () => {
+  const [petRegisterData, setPetRegisterData] =
+    useRecoilState(petRegisterState);
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { isValid },
   } = useForm<PetDataInfo>({
     mode: 'onSubmit',
+    defaultValues: petRegisterData,
   });
 
-  const [, setPetRegisterData] = useRecoilState(petRegisterState);
   const { showToast } = useToast();
   const router = useRouter();
 
@@ -34,6 +38,13 @@ const PetRegistration = () => {
       showToast('pet_required');
     }
   };
+
+  useEffect(() => {
+    if (petRegisterData) {
+      setValue('name', petRegisterData.name);
+      setValue('breed', petRegisterData.breed);
+    }
+  }, [petRegisterData, setValue]);
 
   return (
     <>
@@ -62,7 +73,7 @@ const PetRegistration = () => {
       <BottomButton
         btnName="반려동물 AI 모델 생성하기"
         btnType="button"
-        disabled={!isValid}
+        disabled={!petRegisterData || !isValid}
         activeFunc={handleSubmit(onSubmit, onError)}
       />
     </>
