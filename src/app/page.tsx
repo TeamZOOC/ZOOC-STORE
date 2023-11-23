@@ -4,6 +4,7 @@ import { ARTICLE_LIST } from '@/mocks/articleData';
 
 import { HomeArticle, HomeCategory, HomeProduct } from './(home)';
 import HomeCarusel from './(home)/carusel/HomeCarusel';
+import HomeFooter from './(home)/footer/HomeFooter';
 
 const page = () => (
   <>
@@ -16,6 +17,7 @@ const page = () => (
       <HomeArticle article={ARTICLE_LIST[1]} />
       <HomeArticle article={ARTICLE_LIST[2]} />
     </MainLayout>
+    <HomeFooter />
   </>
 );
 
