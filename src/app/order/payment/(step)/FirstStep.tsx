@@ -7,6 +7,7 @@ import { PopupButton } from '@/components/button';
 import { ACCOUNT_NUMBER } from '@/constants/payment';
 
 import { IcFirstStep } from '../../../../../public/icons';
+import useToast from '../../../../hooks/toast/useToast';
 
 interface FirstStepProps {
   currentStep: number;
@@ -14,9 +15,10 @@ interface FirstStepProps {
 }
 
 const FirstStep = ({ currentStep, handleNextStep }: FirstStepProps) => {
+  const { showToast } = useToast();
   const handleCopy = () => {
     navigator.clipboard.writeText(ACCOUNT_NUMBER).then(() => {
-      alert('계좌번호를 복사했어요.');
+      showToast('accountnumber_copied');
     });
   };
 
