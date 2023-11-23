@@ -78,14 +78,14 @@ const initAuthOptions = async () => {
     callbacks: {
       async jwt({ token, account }: any) {
         if (account) {
-          token.accessToken = account.access_token;
           token.provider = account.provider;
+          token.accessToken = account.access_token;
         }
         return token;
       },
       async session({ session, token }: any) {
-        session.accessToken = token.accessToken;
         session.provider = token.provider;
+        session.accessToken = token.accessToken;
         if (token.sub && token.email) {
           session.sub = token.sub;
           session.email = token.email;
