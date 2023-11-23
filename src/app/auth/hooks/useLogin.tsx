@@ -9,10 +9,10 @@ export const useLogin = () => {
   const { data: session } = useSession();
 
   const handleLogin = async () => {
-    console.log(true);
     try {
       let response;
 
+      console.log(session);
       switch (session?.provider) {
         case 'kakao':
           response = await kakaoSignIn(session.accessToken);
