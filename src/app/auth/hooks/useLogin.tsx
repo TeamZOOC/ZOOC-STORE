@@ -6,8 +6,9 @@ import { appleSignIn, kakaoSignIn } from '@/apis/auth';
 
 export const useLogin = async () => {
   const router = useRouter();
-  const { data: session } = useSession();
-  console.log(session);
+  const { data: session, update } = useSession();
+
+  update();
   try {
     let response;
     switch (session?.provider) {
