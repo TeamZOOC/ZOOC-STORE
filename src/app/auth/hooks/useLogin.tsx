@@ -14,8 +14,11 @@ export const useLogin = async () => {
 
       if (response) {
         setCookie('accessToken', response.data.accessToken);
-        const routePath = response.data.isExistedUser ? '/' : '/auth/signup';
-        router.push(routePath);
+        if (response.data.isExistedUser) {
+          router.push('/');
+        } else {
+          router.push('/auth/signup');
+        }
       }
     }
 
@@ -25,8 +28,11 @@ export const useLogin = async () => {
 
       if (response) {
         setCookie('accessToken', response.data.accessToken);
-        const routePath = response.data.isExistedUser ? '/' : '/auth/signup';
-        router.push(routePath);
+        if (response.data.isExistedUser) {
+          router.push('/');
+        } else {
+          router.push('/auth/signup');
+        }
       }
     }
   }
