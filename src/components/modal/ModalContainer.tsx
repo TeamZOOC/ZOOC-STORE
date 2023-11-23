@@ -16,7 +16,6 @@ import OrderQuitModal from './OrderQuitModal';
 import PaymentQuitModal from './PaymentQuitModal';
 import PetRegisterQuitModal from './PetRegisterQuitModal';
 import PostcodeModal from './PostcodeModal';
-import QuitModal from './QuitModal';
 import CartDeleteModal from './CartDeleteModal';
 import WithDrawModal from './WithDrawModal';
 
