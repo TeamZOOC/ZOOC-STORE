@@ -1,6 +1,6 @@
 'use client';
 
-import { deleteCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRecoilState } from 'recoil';
@@ -15,8 +15,12 @@ import { IcLogout } from '../../../public/icons';
 const MyPageMenu = () => {
   const { openModal } = useModal();
   const [, setUserStatus] = useRecoilState(userState);
+  const kakaoAccessToken = getCookie('kakaoAccessToken');
 
   const handleLogout = () => {
+    if (kakaoAccessToken) {
+      deleteCookie('kakaoAccessToken');
+    }
     deleteCookie('accessToken');
     signOut({ callbackUrl: 'http://localhost:3000/' });
     setUserStatus('GUEST');
