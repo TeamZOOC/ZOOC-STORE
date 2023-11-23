@@ -15,7 +15,7 @@ export const getPet = async () => {
 export const registerPet = async (postPetInfo: PetDataInfo) => {
   try {
     const { data } = await generalAxios.post(`/pet`, postPetInfo);
-    return data.data.id;
+    return data.data;
   } catch (error) {
     console.error(error);
     throw error;

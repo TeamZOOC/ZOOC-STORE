@@ -1,30 +1,61 @@
 'use client';
 
+import { deleteCookie } from 'cookies-next';
+import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { styled } from 'styled-components';
 
 import { MYPAGE_MENU } from '@/constants/mypage';
+import { useModal } from '@/hooks/modal';
 
-const MyPageMenu = () => (
-  <StMyPageMenu>
-    {MYPAGE_MENU.map((item) => (
-      <StMenuItem key={item.id}>
-        <Link href={item.path}>
-          <StMenuButton type="button">
-            {item.icon}
-            {item.name}
-          </StMenuButton>
-        </Link>
+import { IcLogout } from '../../../public/icons';
+
+const MyPageMenu = () => {
+  const { openModal } = useModal();
+
+  const handleLogout = () => {
+    deleteCookie('accessToken');
+    signOut({ callbackUrl: 'http://localhost:3000/' });
+  };
+
+  return (
+    <StMyPageMenu>
+      {MYPAGE_MENU.map((item) => (
+        <StMenuItem key={item.id}>
+          <Link href={item.path}>
+            <StMenuButton type="button">
+              {item.icon}
+              {item.name}
+            </StMenuButton>
+          </Link>
+        </StMenuItem>
+      ))}
+      <StMenuItem className="logout">
+        <StMenuButton type="button" onClick={handleLogout}>
+          <IcLogout />
+          로그아웃
+        </StMenuButton>
       </StMenuItem>
-    ))}
-    <StWithdrawalButton type="button">회원탈퇴</StWithdrawalButton>
-  </StMyPageMenu>
-);
+      <StWithdrawalButton
+        type="button"
+        onClick={() => {
+          openModal('withdraw');
+        }}
+      >
+        회원탈퇴
+      </StWithdrawalButton>
+    </StMyPageMenu>
+  );
+};
 
 export default MyPageMenu;
 
 const StMyPageMenu = styled.div`
   margin-top: 2.8rem;
+
+  & > .logout {
+    border-bottom: 0;
+  }
 `;
 
 const StMenuItem = styled.div`
@@ -35,9 +66,7 @@ const StMenuItem = styled.div`
 
   height: 6.4rem;
 
-  &:not(:last-child) {
-    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
-  }
+  border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
 `;
 
 const StMenuButton = styled.button`

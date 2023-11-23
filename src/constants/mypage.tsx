@@ -1,9 +1,4 @@
-import {
-  IcInquiry,
-  IcLogout,
-  IcMyOrderList,
-  IcNotice,
-} from '../../public/icons';
+import { IcInquiry, IcMyOrderList, IcNotice } from '../../public/icons';
 
 export const MYPAGE_MENU = [
   {
@@ -18,11 +13,5 @@ export const MYPAGE_MENU = [
     name: '문의하기',
     icon: <IcInquiry />,
     path: 'https://www.naver.com/',
-  },
-  {
-    id: 4,
-    name: '로그아웃',
-    icon: <IcLogout />,
-    path: '/logout',
   },
 ];

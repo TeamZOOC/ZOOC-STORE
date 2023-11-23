@@ -16,6 +16,8 @@ import OrderQuitModal from './OrderQuitModal';
 import PaymentQuitModal from './PaymentQuitModal';
 import PetRegisterQuitModal from './PetRegisterQuitModal';
 import PostcodeModal from './PostcodeModal';
+import QuitModal from './QuitModal';
+import WithDrawModal from './WithDrawModal';
 
 const MODAL_COMPONENTS: Record<ModalKey, (props: any) => React.ReactElement> = {
   imageValidate: (props) => <ImageValidateModal {...props} />,
@@ -23,6 +25,7 @@ const MODAL_COMPONENTS: Record<ModalKey, (props: any) => React.ReactElement> = {
   orderQuit: () => <OrderQuitModal />,
   petRegisterQuit: () => <PetRegisterQuitModal />,
   paymentQuit: () => <PaymentQuitModal />,
+  withdraw: () => <WithDrawModal />,
 };
 
 const ModalContainer = () => {
