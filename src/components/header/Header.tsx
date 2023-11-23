@@ -1,9 +1,8 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import styled from 'styled-components';
-
 import {
   IcBack,
   IcCart,
@@ -28,6 +27,7 @@ const Header = ({
   exitFunc,
 }: HeaderProps) => {
   const pathname = usePathname();
+  const router = useRouter();
 
   return (
     <StHeader>
@@ -35,8 +35,8 @@ const Header = ({
       <StHeaderTitle>{headerTitle}</StHeaderTitle>
       {sideMenu && (
         <StHeaderRight>
-          <IcCart />
-          <IcMyPage />
+          <IcCart onClick={() => router.push('/cart')} />
+          <IcMyPage onClick={() => router.push('/mypage')} />
         </StHeaderRight>
       )}
       {exit && <IcExit onClick={exitFunc} />}

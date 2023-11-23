@@ -1,27 +1,35 @@
 'use client';
 
 import { styled } from 'styled-components';
-import { CATEGORY_LIST } from '@/mocks/categoryListData';
 import Link from 'next/link';
 import HomeCategoryItem from './HomeCategoryItem';
+import useGetCategories from '../hooks/useGetCategories';
 
-const HomeCategory = () => (
-  <StHomeCategory>
-    <StHomeCategoryTop>
-      <h2>카테고리</h2>
-      <StHomeCategoryViewAllButton type="button">
-        <Link href="/product/all" scroll={false}>
-          상품 전체보기
-        </Link>
-      </StHomeCategoryViewAllButton>
-    </StHomeCategoryTop>
-    <StHomeCatoryList>
-      {CATEGORY_LIST.map(({ categoryName, id }) => (
-        <HomeCategoryItem key={id} categoryName={categoryName} />
-      ))}
-    </StHomeCatoryList>
-  </StHomeCategory>
-);
+const HomeCategory = () => {
+  const { categoryList } = useGetCategories();
+
+  return (
+    <StHomeCategory>
+      <StHomeCategoryTop>
+        <h2>카테고리</h2>
+        <StHomeCategoryViewAllButton type="button">
+          <Link href="/product/all" scroll={false}>
+            상품 전체보기
+          </Link>
+        </StHomeCategoryViewAllButton>
+      </StHomeCategoryTop>
+      <StHomeCatoryList>
+        {categoryList?.map(({ name, id }, index) => (
+          <HomeCategoryItem
+            key={id}
+            categoryName={name}
+            categoryImageIndex={index}
+          />
+        ))}
+      </StHomeCatoryList>
+    </StHomeCategory>
+  );
+};
 export default HomeCategory;
 
 const StHomeCategory = styled.section`
