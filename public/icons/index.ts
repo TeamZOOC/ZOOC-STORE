@@ -1,6 +1,9 @@
 import IcApple from './ic_apple.svg';
 import IcArrowRight from './ic_arrow_right.svg';
 import IcBack from './ic_back.svg';
+import IcBtnAppstore from './ic_btn_footer_appstore.svg';
+import IcBtnInsta from './ic_btn_footer_insta.svg';
+import IcBtnPlaystore from './ic_btn_footer_playstore.svg';
 import IcBtnPicture from './ic_btn_picture.svg';
 import IcCart from './ic_cart.svg';
 import IcCheck from './ic_check.svg';
@@ -33,6 +36,9 @@ import IcWarning from './ic_warning.svg';
 import IcZooc from './ic_zooc.svg';
 
 export {
+  IcBtnAppstore,
+  IcBtnInsta,
+  IcBtnPlaystore,
   IcWarning,
   IcRadioAfter,
   IcRadioBefore,
