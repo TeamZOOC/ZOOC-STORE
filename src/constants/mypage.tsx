@@ -1,9 +1,4 @@
-import {
-  IcInquiry,
-  IcLogout,
-  IcMyOrderList,
-  IcNotice,
-} from '../../public/icons';
+import { IcInquiry, IcMyOrderList, IcNotice } from '../../public/icons';
 import { FITAPAT_EMAIL, FITAPAT_INSTAGRAM } from './fitapatUrls';
 
 export const MYPAGE_MENU = [

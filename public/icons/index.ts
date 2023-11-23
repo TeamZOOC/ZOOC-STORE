@@ -6,6 +6,10 @@ import IcBtnInsta from './ic_btn_footer_insta.svg';
 import IcBtnPlaystore from './ic_btn_footer_playstore.svg';
 import IcBtnPicture from './ic_btn_picture.svg';
 import IcCart from './ic_cart.svg';
+import IcCategoryAcc from './ic_category_acc.svg';
+import IcCategoryCase from './ic_category_case.svg';
+import IcCategoryOutfit from './ic_category_outfit.svg';
+import IcCategorySeason from './ic_category_season.svg';
 import IcCheck from './ic_check.svg';
 import IcCheckboxAfter from './ic_checkbox_after.svg';
 import IcCheckboxBefore from './ic_checkbox_before.svg';
@@ -19,6 +23,7 @@ import IcKakao from './ic_kakao.svg';
 import IcKakaoBank from './ic_kakaobank.svg';
 import IcKakaoPay from './ic_kakaopay.svg';
 import IcKey from './ic_key.svg';
+import IcLoadingLogo from './ic_loading_logo.svg';
 import IcLogout from './ic_logout.svg';
 import IcMinus from './ic_minus.svg';
 import IcMyOrderList from './ic_myorderlist.svg';
@@ -34,12 +39,6 @@ import IcThirdStep from './ic_third_step.svg';
 import IcToss from './ic_toss.svg';
 import IcWarning from './ic_warning.svg';
 import IcZooc from './ic_zooc.svg';
-import IcDropDownActive from './ic_dropdown_active.svg';
-import IcCategorySeason from './ic_category_season.svg';
-import IcCategoryOutfit from './ic_category_outfit.svg';
-import IcCategoryCase from './ic_category_case.svg';
-import IcCategoryAcc from './ic_category_acc.svg';
-import IcLoadingLogo from './ic_loading_logo.svg';
 
 export {
   IcBtnAppstore,
