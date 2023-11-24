@@ -1,7 +1,7 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
 
-import { PetDataInfo, UploadInfo } from '@/types/pet';
+import { PetDataInfo } from '@/types/pet';
 
 const { persistAtom } = recoilPersist();
 
@@ -21,14 +21,5 @@ export const petRegisterState = atom<PetDataInfo>({
   default: {
     name: '',
     breed: '',
-  },
-});
-
-export const uploadState = atom<UploadInfo>({
-  key: 'uploadState',
-  default: {
-    isUploading: false,
-    progress: 0,
-    error: null,
   },
 });
