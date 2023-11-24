@@ -43,7 +43,6 @@ const StOptionDropdown = styled.ul`
   width: 100%;
   max-height: 23.6rem;
   height: fit-content;
-  padding: 2.4rem 0 2.4rem 2.4rem;
 
   border: 0.1rem solid ${({ theme }) => theme.colors.zw_lightgray};
   border-radius: 0.6rem 0.6rem 0 0;
@@ -55,8 +54,18 @@ const StOptionDropdownItem = styled.li`
   color: ${({ theme }) => theme.colors.zw_black};
   ${({ theme }) => theme.fonts.zw_Body1};
 
+  padding-left: 2.2rem;
+
   & + & {
-    margin-top: 2.2rem;
+    padding-top: 2.2rem;
+  }
+
+  &:first-child {
+    padding-top: 2.4rem;
+  }
+
+  &:last-child {
+    padding-bottom: 2.4rem;
   }
 
   cursor: pointer;

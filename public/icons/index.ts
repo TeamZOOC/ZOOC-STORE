@@ -6,10 +6,6 @@ import IcBtnInsta from './ic_btn_footer_insta.svg';
 import IcBtnPlaystore from './ic_btn_footer_playstore.svg';
 import IcBtnPicture from './ic_btn_picture.svg';
 import IcCart from './ic_cart.svg';
-import IcCategoryAcc from './ic_category_acc.svg';
-import IcCategoryCase from './ic_category_case.svg';
-import IcCategoryOutfit from './ic_category_outfit.svg';
-import IcCategorySeason from './ic_category_season.svg';
 import IcCheck from './ic_check.svg';
 import IcCheckboxAfter from './ic_checkbox_after.svg';
 import IcCheckboxBefore from './ic_checkbox_before.svg';
@@ -38,7 +34,6 @@ import IcSecondStep from './ic_second_step.svg';
 import IcThirdStep from './ic_third_step.svg';
 import IcToss from './ic_toss.svg';
 import IcWarning from './ic_warning.svg';
-import IcZooc from './ic_zooc.svg';
 
 export {
   IcBtnAppstore,
@@ -48,7 +43,6 @@ export {
   IcRadioAfter,
   IcRadioBefore,
   IcBack,
-  IcZooc,
   IcKey,
   IcArrowRight,
   IcFirstStep,
@@ -77,9 +71,5 @@ export {
   IcDropDownActive,
   IcBtnPicture,
   IcFitapatLogo,
-  IcCategorySeason,
-  IcCategoryOutfit,
-  IcCategoryCase,
-  IcCategoryAcc,
   IcLoadingLogo,
 };
