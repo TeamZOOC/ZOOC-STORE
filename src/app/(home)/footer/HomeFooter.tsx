@@ -55,6 +55,7 @@ const HomeFooter = () => (
 export default HomeFooter;
 
 const StHomeFooter = styled.footer`
+  margin-top: 7rem;
   padding: 3rem 0 2.8rem 3rem;
 `;
 

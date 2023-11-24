@@ -11,6 +11,10 @@ import ImageWrong3 from './image_wrong_3.png';
 import ImgProfileEmpty from './img_profile_empty.png';
 import ImageCarouselSecond from './gif_carousel.gif';
 import ImageCarouselText from './image_carousel_text.png';
+import ImageCategorySeason from './image_category_season.png';
+import ImageCategoryOutfit from './image_category_outfit.png';
+import ImageCategoryCase from './image_category_case.png';
+import ImageCategoryAcc from './image_category_acc.png';
 
 export {
   ImageArticle,
@@ -26,4 +30,8 @@ export {
   ImageWrong3,
   ImgProfileEmpty,
   ImageCarouselText,
+  ImageCategorySeason,
+  ImageCategoryOutfit,
+  ImageCategoryCase,
+  ImageCategoryAcc,
 };
