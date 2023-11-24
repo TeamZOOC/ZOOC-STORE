@@ -14,10 +14,12 @@ import { userState } from '@/recoil/user/atom';
 
 export interface OptionBottomButtonProps {
   handleToggleOption: () => void;
+  handleCartToast: () => void;
 }
 
 const OptionBottomButton = ({
   handleToggleOption,
+  handleCartToast,
 }: OptionBottomButtonProps) => {
   const { productId } = useParams();
   const [, setCart] = useRecoilState(cartState);
@@ -148,7 +150,10 @@ const OptionBottomButton = ({
       <StOptionBasketButton
         type="button"
         $active={selectedOption.length > 0}
-        onClick={handleSaveCart}
+        onClick={() => {
+          handleSaveCart();
+          handleCartToast();
+        }}
       >
         장바구니
       </StOptionBasketButton>

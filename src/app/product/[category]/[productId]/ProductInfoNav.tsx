@@ -9,6 +9,7 @@ import useTab from '@/hooks/tab/useTab';
 import { css, styled } from 'styled-components';
 import { useRef, useState } from 'react';
 import useOutSideClick from '@/hooks/outside/useOutsideClick';
+import CartToast from '@/components/toast/CartToast';
 import OptionBottomSheetContainer from './(option)/OptionBottomSheetContainer';
 import OptionBottomSheet from './(option)/OptionBottomSheet';
 
@@ -24,6 +25,7 @@ const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
   const bottomSheetRef = useRef<HTMLDivElement | null>(null);
   const [isOptionToggle, setIsOptionToggle] = useState(false);
   const [isUnMount, setIsUnMount] = useState(false);
+  const [isOpenCartToast, setIsOpenCartToast] = useState(false);
 
   const handleToggleOption = () => {
     setIsOptionToggle(true);
@@ -37,10 +39,21 @@ const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
 
     setIsOptionToggle(false);
   };
+
+  const handleCartToast = () => {
+    setIsOpenCartToast((prev) => !prev);
+  };
+
   useOutSideClick({ ref: bottomSheetRef, callback: handleToggleOption });
 
   return (
     <>
+      {isOpenCartToast && (
+        <CartToast
+          handleCartToast={handleCartToast}
+          isOpenCartToast={isOpenCartToast}
+        />
+      )}
       <StProductInfoNav>
         {TAB_LIST.map((tab, index) => (
           <StProductInfoNavItem
@@ -96,6 +109,7 @@ const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
             bottomSheetRef={bottomSheetRef}
             productPrice={productPrice}
             handleToggleOption={handleToggleOption}
+            handleCartToast={handleCartToast}
           />
         </OptionBottomSheetContainer>
       )}
