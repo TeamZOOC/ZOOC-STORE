@@ -1,3 +1,5 @@
+'use client';
+
 import { Header } from '@/components/header';
 import { MainLayout } from '@/components/layout';
 import LoginContent from './LoginContent';
