@@ -61,7 +61,7 @@ const StThumbnailContainer = styled.div`
   align-content: start;
 
   width: 100%;
-  max-height: 52rem;
+  max-height: 45rem;
   overflow-y: auto;
 
   padding: 0.8rem 1.4rem;
