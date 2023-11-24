@@ -5,10 +5,16 @@ import { useRouter } from 'next/navigation';
 import { Header } from '@/components/header';
 import useProgress from '@/hooks/progress/useProgress';
 
-const ProductDetailHeaderContainer = () => {
+const LoginHeader = () => {
   const router = useRouter();
   useProgress();
-  return <Header sideMenu backFunc={() => router.back()} />;
+  return (
+    <Header
+      backFunc={() => {
+        router.back();
+      }}
+    />
+  );
 };
 
-export default ProductDetailHeaderContainer;
+export default LoginHeader;
