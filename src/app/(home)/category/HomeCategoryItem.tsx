@@ -2,12 +2,14 @@
 
 import { styled } from 'styled-components';
 import Link from 'next/link';
+
+import Image from 'next/image';
 import {
-  IcCategoryAcc,
-  IcCategoryCase,
-  IcCategoryOutfit,
-  IcCategorySeason,
-} from '../../../../public/icons';
+  ImageCategoryAcc,
+  ImageCategoryCase,
+  ImageCategoryOutfit,
+  ImageCategorySeason,
+} from '../../../../public/images';
 
 interface HomeCategoryItemProps {
   categoryName: string;
@@ -15,10 +17,10 @@ interface HomeCategoryItemProps {
 }
 
 const CATEGORY_IMAGE_LIST = [
-  <IcCategorySeason />,
-  <IcCategoryOutfit />,
-  <IcCategoryCase />,
-  <IcCategoryAcc />,
+  ImageCategorySeason,
+  ImageCategoryOutfit,
+  ImageCategoryCase,
+  ImageCategoryAcc,
 ];
 
 const HomeCategoryItem = ({
@@ -27,7 +29,12 @@ const HomeCategoryItem = ({
 }: HomeCategoryItemProps) => (
   <Link href={`/product/${categoryName}`} scroll={false}>
     <StHomeCategoryItem type="button">
-      {CATEGORY_IMAGE_LIST[categoryImageIndex]}
+      <Image
+        src={CATEGORY_IMAGE_LIST[categoryImageIndex]}
+        alt="카테고리 이미지"
+        width={70}
+        height={70}
+      />
       <span>{categoryName}</span>
     </StHomeCategoryItem>
   </Link>

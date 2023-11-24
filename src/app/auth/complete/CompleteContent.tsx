@@ -13,16 +13,16 @@ const CompleteContent = () => {
       <StCompleteContent>
         <div>
           <StCompleteContentText>
-            <span>쭉</span>에 오신 것을
+            <span>핏어팻</span> 회원가입을
           </StCompleteContentText>
-          <StCompleteContentText>진심으로 환영해요</StCompleteContentText>
+          <StCompleteContentText>진심으로 환영해요!</StCompleteContentText>
         </div>
         <div>
           <StCompleteContentDesc>
-            사랑하는 반려동물과의 일상이
+            사랑하는 반려동물과 회원님만을 위한
           </StCompleteContentDesc>
           <StCompleteContentDesc>
-            특별하게 간직되도록 함께 할게요
+            특별한 설렘을 선물할게요
           </StCompleteContentDesc>
         </div>
       </StCompleteContent>

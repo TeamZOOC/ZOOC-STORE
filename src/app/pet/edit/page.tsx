@@ -1,11 +1,11 @@
-import { Header } from '@/components/header';
 import { MainLayout } from '@/components/layout';
 
 import PetEdit from './PetEdit';
+import PetEditHeaderContainer from './PetEditHeaderContainer';
 
 const page = () => (
   <>
-    <Header headerTitle="프로필 수정" exit />
+    <PetEditHeaderContainer />
     <MainLayout>
       <PetEdit />
     </MainLayout>
