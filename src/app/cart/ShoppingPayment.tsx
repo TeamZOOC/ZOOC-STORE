@@ -9,6 +9,7 @@ import { cartState } from '@/recoil/cart/atom';
 import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
 import { userState } from '@/recoil/user/atom';
 import { formatPrice } from '@/utils/formatPrice';
+import { useEffect } from 'react';
 
 const ShoppingPayment = () => {
   const cart = useRecoilValue(cartState);
@@ -23,7 +24,6 @@ const ShoppingPayment = () => {
       ? item.optionList[0].pieces
       : 0;
     const itemTotal = item.price * firstOptionQuantity;
-    setPurchasePrice({ totalProductPrice: total + itemTotal, deliveryFee: 0 });
 
     // 누적 합계를 계산
     return total + itemTotal;
@@ -43,6 +43,10 @@ const ShoppingPayment = () => {
     }
   };
 
+  useEffect(() => {
+    setPurchasePrice({ totalProductPrice: totalSaleQuantity, deliveryFee: 0 });
+  }, [totalSaleQuantity]);
+
   return (
     <>
       <StShoppingPayment>
@@ -53,7 +57,7 @@ const ShoppingPayment = () => {
               상품 금액
             </StShoppingPaymentInfoTitle>
             <StShoppingPaymentInfoPrice>
-              {formatPrice(purchasePrice.totalProductPrice)} 원
+              {formatPrice(totalSaleQuantity)} 원
             </StShoppingPaymentInfoPrice>
           </StShoppingPaymentInfo>
           <StShoppingPaymentInfo>
@@ -69,9 +73,7 @@ const ShoppingPayment = () => {
           </StShoppingPaymentInfoTitle>
           <div>
             <StShoppingPaymentTotalPrice>
-              {formatPrice(
-                purchasePrice.totalProductPrice + purchasePrice.deliveryFee,
-              )}
+              {formatPrice(totalSaleQuantity)}
             </StShoppingPaymentTotalPrice>
             <StShoppingPaymentInfoPrice> 원</StShoppingPaymentInfoPrice>
           </div>
