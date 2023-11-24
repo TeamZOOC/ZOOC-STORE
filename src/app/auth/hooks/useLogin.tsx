@@ -19,10 +19,12 @@ export const useLogin = async () => {
     };
 
     refreshSession();
-    console.log(session);
   }, [status]);
 
   console.log(readyToLogin);
+  if (session) {
+    console.log(session.provider);
+  }
 
   useEffect(() => {
     if (readyToLogin) {
