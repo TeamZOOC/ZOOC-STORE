@@ -72,8 +72,8 @@ const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
   };
 
   return (
-    <StShoppingCartItem onClick={() => router.push(`/product/all/${id}`)}>
-      <StShoppingCartMain>
+    <StShoppingCartItem>
+      <StShoppingCartMain onClick={() => router.push(`/product/all/${id}`)}>
         <StShoppingCartImage />
         <StShoppingCartInfo>
           <div>
