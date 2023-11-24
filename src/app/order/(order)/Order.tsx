@@ -1,14 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
 import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
-import { cartState } from '@/recoil/cart/atom';
 import { petIdState } from '@/recoil/pet/atom';
 import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
 import { CartInfo } from '@/types/cart';
@@ -28,10 +28,7 @@ const Order = () => {
   const router = useRouter();
   const petId = useRecoilValue(petIdState);
   const purchase = useRecoilValue(purchaseState);
-  const purchasePrice = useRecoilValue(purchasePriceState);
-  const resetPurchase = useResetRecoilState(purchaseState);
-  const resetPurchasePrice = useResetRecoilState(purchasePriceState);
-  const resetCart = useResetRecoilState(cartState);
+  const [purchasePrice, setPurchasePrice] = useRecoilState(purchasePriceState);
   const { orderPost } = usePostOrder();
 
   const methods = useForm<OrderFormData>({
@@ -80,9 +77,15 @@ const Order = () => {
 
   const transformedProducts = purchase.map(transformProduct);
 
-  const totalPrice = formatPrice(
-    purchasePrice.totalProductPrice + purchasePrice.deliveryFee,
-  );
+  const totalSaleQuantity = purchase.reduce((total, item) => {
+    const firstOptionQuantity = item.optionList[0]
+      ? item.optionList[0].pieces
+      : 0;
+    const itemTotal = item.price * firstOptionQuantity;
+    return total + itemTotal;
+  }, 0);
+
+  const totalPrice = formatPrice(totalSaleQuantity + 0);
 
   const purchaseData = (purchases: CartInfo[]) =>
     purchases.map((product) => ({
@@ -105,9 +108,6 @@ const Order = () => {
     try {
       await orderPost(postData);
       router.push(`/order/payment?totalPrice=${totalPrice}`);
-      resetPurchase();
-      resetPurchasePrice();
-      resetCart();
     } catch (error) {
       showToast('order_error');
       console.error('주문 실패', error);
@@ -117,6 +117,10 @@ const Order = () => {
   const onError = () => {
     showToast('order_required');
   };
+
+  useEffect(() => {
+    setPurchasePrice({ totalProductPrice: totalSaleQuantity, deliveryFee: 0 });
+  }, [totalSaleQuantity]);
 
   return (
     <FormProvider {...methods}>

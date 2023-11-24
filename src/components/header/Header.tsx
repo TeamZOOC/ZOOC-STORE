@@ -11,8 +11,8 @@ import {
   IcBack,
   IcCart,
   IcExit,
+  IcFitapatLogo,
   IcMyPage,
-  IcZooc,
 } from '../../../public/icons';
 
 interface HeaderProps {
@@ -36,7 +36,7 @@ const Header = ({
 
   const showIcon = () => {
     if (pathname === '/') {
-      return <IcZooc />;
+      return <IcFitapatLogo />;
     }
     if (pathname !== '/order/payment') {
       return <IcBack onClick={backFunc} />;

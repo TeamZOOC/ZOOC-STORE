@@ -1,13 +1,17 @@
 'use client';
 
-import { AGREEMENT } from '@/constants/agreement';
 import Link from 'next/link';
-import { css, styled } from 'styled-components';
-import { BottomButton } from '@/components/button';
-import { useToast } from '@/hooks/toast';
 import { useRouter } from 'next/navigation';
-import useCheckAgreement from '../hooks/useCheckAgreement';
+import { useRecoilState } from 'recoil';
+import { css, styled } from 'styled-components';
+
+import { BottomButton } from '@/components/button';
+import { AGREEMENT } from '@/constants/agreement';
+import { useToast } from '@/hooks/toast';
+
 import { IcCheck } from '../../../../public/icons';
+import { returnPathState } from '../../../recoil/order/atom';
+import useCheckAgreement from '../hooks/useCheckAgreement';
 
 const AgreementCheckContent = () => {
   const {
@@ -20,13 +24,17 @@ const AgreementCheckContent = () => {
 
   const router = useRouter();
   const { showToast } = useToast();
+  const [returnPath, setReturnPath] = useRecoilState(returnPathState);
 
   const handleCheckAgreementToast = () => {
     if (!isAllAgreement && !isAgreement) {
       showToast('agreement');
       return;
     }
-    router.push('/auth/complete');
+    if (returnPath) {
+      router.push(returnPath);
+      setReturnPath(undefined);
+    } else router.push('/auth/complete');
   };
 
   return (

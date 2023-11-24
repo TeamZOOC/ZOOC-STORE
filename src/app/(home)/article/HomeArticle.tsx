@@ -1,23 +1,28 @@
 'use client';
 
 import { styled } from 'styled-components';
-import Image from 'next/image';
-import { ImageArticle } from '../../../../public/images';
+import { ArticleResponse } from '@/types/article';
+import { ProductItem } from '@/components/product';
 
-interface ArticleInfo {
-  articleTitle: string;
-  articleDesc: string;
+interface HomeArticleProps {
+  article: ArticleResponse;
 }
 
-const HomeArticle = ({ article }: { article: ArticleInfo }) => {
-  const { articleTitle, articleDesc } = article;
+const HomeArticle = ({ article }: HomeArticleProps) => {
+  const { title, detail, image, products } = article;
   return (
     <StHomeArticle>
       <StHomeArticleImage>
-        <Image src={ImageArticle} alt="아티클" fill />
+        {/* <Image src={image} alt="아티클" fill /> */}
+        <img src={image} alt="테스트 이미지" />
       </StHomeArticleImage>
-      <StHomeArticleTitle>{articleTitle}</StHomeArticleTitle>
-      <StHomeArticleDesc>{articleDesc}</StHomeArticleDesc>
+      <StHomeArticleTitle>{title}</StHomeArticleTitle>
+      <StHomeArticleDesc>{detail}</StHomeArticleDesc>
+      <StHomeProduct>
+        {products?.map((product) => (
+          <ProductItem key={product.id} product={product} />
+        ))}
+      </StHomeProduct>
     </StHomeArticle>
   );
 };
@@ -56,4 +61,13 @@ const StHomeArticleDesc = styled.div`
   display: -webkit-box;
   -webkit-line-clamp: 2; // 원하는 라인수
   -webkit-box-orient: vertical;
+`;
+
+const StHomeProduct = styled.section`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 0.9rem;
+
+  width: 100%;
+  margin-top: 2rem;
 `;
