@@ -47,6 +47,7 @@ const initAuthOptions = async () => {
         },
       },
     },
+    site: 'https://fitapet-test.shop' || 'http://localhost:3000',
     providers: [
       KakaoProvider({
         clientId: process.env.KAKAO_CLIENT_ID!,
