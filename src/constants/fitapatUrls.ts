@@ -15,3 +15,4 @@ export const FITAPAT_APPSTORE_LINK =
   'https://apps.apple.com/kr/app/zooc/id1669547675';
 export const FITAPAT_PLAYSTOME_LINK =
   'https://play.google.com/store/apps/details?id=org.sopt.zooczoocbbangbbang';
+export const FITAPAT_KAKAO_LINK = 'https://pf.kakao.com/_xbkhlG';

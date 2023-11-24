@@ -1,42 +1,44 @@
 'use client';
 
+import { withdraw } from '@/apis/auth';
 import { useModal } from '@/hooks/modal';
-import { cartState } from '@/recoil/cart/atom';
-import { useRecoilState } from 'recoil';
+import { deleteCookie } from 'cookies-next';
+import { signOut } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
-interface CartDeleteModalProps {
-  selectedIndex: number;
-}
-
-const CartDeleteModal = ({ selectedIndex }: CartDeleteModalProps) => {
-  const [cart, setCart] = useRecoilState(cartState);
+const SignUpModal = () => {
+  const router = useRouter();
   const { closeModal } = useModal();
 
-  const handleDelete = () => {
-    setCart(cart.filter((_, index) => index !== selectedIndex));
-    closeModal('cartDelete');
+  const handleWithdraw = async () => {
+    await withdraw();
+    await signOut({ callbackUrl: '/auth/login' });
+    closeModal('signUp');
+    router.push('/auth/login');
+    deleteCookie('accessToken');
+    deleteCookie('kakaoAccessToken');
   };
 
   return (
-    <StCartDeleteModal>
-      <strong>선택한 상품을 삭제하시나요?</strong>
-      <p>결제 대상에서 해당 상품이 제외 돼요</p>
+    <StSignUpModal>
+      <strong>회원가입을 그만두시나요?</strong>
+      <p>지금 떠나면 가입 과정이 저장되지 않아요</p>
       <StButtonWrapper>
-        <StCartDeleteButton type="button" onClick={handleDelete}>
+        <StSignUpButton type="button" onClick={handleWithdraw}>
           삭제하기
-        </StCartDeleteButton>
-        <StCancelButton type="button" onClick={() => closeModal('cartDelete')}>
+        </StSignUpButton>
+        <StCancelButton type="button" onClick={() => closeModal('signUp')}>
           취소
         </StCancelButton>
       </StButtonWrapper>
-    </StCartDeleteModal>
+    </StSignUpModal>
   );
 };
 
-export default CartDeleteModal;
+export default SignUpModal;
 
-const StCartDeleteModal = styled.div`
+const StSignUpModal = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,7 +81,7 @@ const StButtonWrapper = styled.div`
   }
 `;
 
-const StCartDeleteButton = styled.button`
+const StSignUpButton = styled.button`
   width: 55%;
 
   background: ${({ theme }) => theme.colors.zw_black};

@@ -13,18 +13,22 @@ const LoginContent = () => {
       <StLoginContent>
         <div>
           <StLoginContentTextWrapper>
-            반려동물과의 <StSpace /> <p>일상</p>을
+            사랑하는 반려동물과
           </StLoginContentTextWrapper>
           <StLoginContentTextWrapper>
-            <p>쭉</p> <StLoginContentHorizontalLine />
+            매순간 <StLoginContentHorizontalLine />
           </StLoginContentTextWrapper>
           <StLoginContentTextWrapper>
-            <p>간직</p>하는 특별한 방법
+            <p>함께</p>하는 최고의 방법
           </StLoginContentTextWrapper>
         </div>
         <div>
-          <StLoginContentSubText>1초만에 가입하고 우리집</StLoginContentSubText>
-          <StLoginContentSubText>반려동물 굿즈 만들기</StLoginContentSubText>
+          <StLoginContentSubText>
+            1초만에 가입하고 반려동물 사진 6장만
+          </StLoginContentSubText>
+          <StLoginContentSubText>
+            등록하면 간편하게 주문 완료
+          </StLoginContentSubText>
         </div>
       </StLoginContent>
       <StBottomButtonWrapper>
@@ -34,7 +38,7 @@ const LoginContent = () => {
         </StAppleLoginButton>
         <StKakaoLoginButton type="button" onClick={() => signIn('kakao')}>
           <IcKakao />
-          Kakao로 로그인
+          카카오톡으로 로그인
         </StKakaoLoginButton>
       </StBottomButtonWrapper>
     </>
@@ -47,8 +51,6 @@ const StLoginContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-
-  width: 24.7rem;
 `;
 
 const StLoginContentTextWrapper = styled.div`
@@ -73,15 +75,10 @@ const StLoginContentTextWrapper = styled.div`
   }
 `;
 
-const StSpace = styled.div`
-  width: 1rem;
-  background-color: transparent;
-`;
-
 const StLoginContentHorizontalLine = styled.div`
-  width: 100%;
+  width: 16.7rem;
   height: 0.1rem;
-  margin-left: 1.5rem;
+  margin-left: 0.5rem;
 
   background-color: ${({ theme }) => theme.colors.zw_darkgray};
 `;
