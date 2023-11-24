@@ -1,17 +1,32 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
+import { getSession, signIn, useSession } from 'next-auth/react';
 import { styled } from 'styled-components';
 
 // import { useEffect } from 'react';
 // import { useEffect } from 'react';
+import { useEffect } from 'react';
 import { IcApple, IcKakao } from '../../../../public/icons';
-import { useLogin } from '../hooks/useLogin';
+// import { useLogin } from '../hooks/useLogin';
 // import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
-  useLogin();
+  const { data: session, status } = useSession();
+  // useLogin();
 
+  useEffect(() => {
+    const refreshSession = async () => {
+      if (status === 'authenticated') {
+        await getSession();
+      }
+    };
+
+    refreshSession();
+  }, [status]);
+
+  if (session) {
+    console.log(session.provider);
+  }
   // const handleSignIn = async () => {
   //   await signIn('kakao');
   //   // 세션 갱신
