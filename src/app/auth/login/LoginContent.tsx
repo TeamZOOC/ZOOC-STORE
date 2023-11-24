@@ -1,32 +1,12 @@
 'use client';
 
-import { getSession, signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { styled } from 'styled-components';
-
-// import { useEffect } from 'react';
-// import { useEffect } from 'react';
-import { useEffect } from 'react';
 import { IcApple, IcKakao } from '../../../../public/icons';
-// import { useLogin } from '../hooks/useLogin';
-// import { useLogin } from '../hooks/useLogin';
+import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
-  const { data: session, status } = useSession();
-  // useLogin();
-
-  useEffect(() => {
-    const refreshSession = async () => {
-      if (status === 'authenticated') {
-        await getSession();
-      }
-    };
-
-    refreshSession();
-  }, [status, session]);
-
-  if (session) {
-    console.log(session.provider);
-  }
+  useLogin();
 
   return (
     <>

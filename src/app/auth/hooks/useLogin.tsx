@@ -21,11 +21,6 @@ export const useLogin = async () => {
     refreshSession();
   }, [status]);
 
-  console.log(readyToLogin);
-  if (session) {
-    console.log(session.provider);
-  }
-
   useEffect(() => {
     if (readyToLogin) {
       const performLogin = async () => {
