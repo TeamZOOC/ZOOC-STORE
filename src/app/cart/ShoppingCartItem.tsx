@@ -11,6 +11,7 @@ import { cartState } from '@/recoil/cart/atom';
 import { CartInfo } from '@/types/cart';
 import { formatPrice } from '@/utils/formatPrice';
 
+import { useRouter } from 'next/navigation';
 import { IcMinus, IcPlus, IcProductDelete } from '../../../public/icons';
 
 interface cartItemProps {
@@ -19,7 +20,8 @@ interface cartItemProps {
 }
 
 const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
-  const { name, price, sale, optionList } = cartItem;
+  const router = useRouter();
+  const { id, name, price, sale, optionList } = cartItem;
   const [cart, setCart] = useRecoilState(cartState);
   const { openModal } = useModal();
 
@@ -70,7 +72,7 @@ const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
   };
 
   return (
-    <StShoppingCartItem>
+    <StShoppingCartItem onClick={() => router.push(`/product/all/${id}`)}>
       <StShoppingCartMain>
         <StShoppingCartImage />
         <StShoppingCartInfo>
