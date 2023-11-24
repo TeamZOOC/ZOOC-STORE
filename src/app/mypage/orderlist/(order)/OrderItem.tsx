@@ -1,3 +1,4 @@
+import { useRouter } from 'next/navigation';
 /* eslint-disable no-unused-vars */
 import styled from 'styled-components';
 
@@ -9,18 +10,22 @@ import OrderProduct from './OrderProduct';
 
 interface OrderItemProps {
   order: OrderListInfo;
-  onDetailClick: (id: string) => void;
 }
 
-const OrderItem = ({ order, onDetailClick }: OrderItemProps) => {
+const OrderItem = ({ order }: OrderItemProps) => {
+  const router = useRouter();
   const orderData = order.products;
   const orderId = order.products[0].id;
+
+  const handleOrderDetail = (orderid: string) => {
+    router.push(`/mypage/orderlist/${orderid}`);
+  };
 
   return (
     <StOrderItem>
       <StOrderTitle>
         <time>{order.createdAt && formatDate(order.createdAt)}</time>
-        <button type="button" onClick={() => onDetailClick(orderId!)}>
+        <button type="button" onClick={() => handleOrderDetail(orderId!)}>
           주문상세
           <IcArrowRight />
         </button>

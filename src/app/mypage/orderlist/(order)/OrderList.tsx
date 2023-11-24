@@ -2,32 +2,27 @@
 
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
 import useGetOrderList from '../hooks/useGetOrderList';
 import OrderItem from './OrderItem';
+import OrderListEmpty from './OrderListEmpty';
 
 const OrderList = () => {
   const { orderList } = useGetOrderList();
-  const router = useRouter();
-
-  const handleOrderDetail = (orderId: string) => {
-    router.push(`/mypage/orderlist/${orderId}`);
-  };
 
   return (
     <StOrderListWrapper>
-      {orderList?.map((orderInfo, index) => (
-        <>
-          <OrderItem
-            key={index}
-            order={orderInfo}
-            onDetailClick={handleOrderDetail}
-          />
-          {orderList.indexOf(orderInfo) !== orderList.length - 1 && <StHr />}
-        </>
-      ))}
+      {orderList?.length !== 0 ? (
+        orderList?.map((orderInfo, index) => (
+          <>
+            <OrderItem key={index} order={orderInfo} />
+            {orderList.indexOf(orderInfo) !== orderList.length - 1 && <StHr />}
+          </>
+        ))
+      ) : (
+        <OrderListEmpty />
+      )}
     </StOrderListWrapper>
   );
 };
