@@ -9,14 +9,7 @@ import { IcApple, IcKakao } from '../../../../public/icons';
 
 const LoginContent = () => {
   const { data: session } = useSession();
-
-  // useEffect(() => {
-  //   if (status === 'authenticated') {
-  //     update();
-  //   }
-  // }, []);
   console.log(session);
-  // useLogin();
 
   return (
     <>
@@ -44,7 +37,7 @@ const LoginContent = () => {
         </StAppleLoginButton>
         <StKakaoLoginButton
           type="button"
-          onClick={() => signIn('kakao', { redirect: false })}
+          onClick={() => signIn('kakao', { redirect: true })}
         >
           <IcKakao />
           Kakao로 로그인
