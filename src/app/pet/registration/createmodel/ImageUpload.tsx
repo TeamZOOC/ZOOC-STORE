@@ -11,7 +11,11 @@ import { BottomButton } from '@/components/button';
 import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { useToast } from '@/hooks/toast';
-import { petRegisterState, uploadImagesState } from '@/recoil/pet/atom';
+import {
+  petIdState,
+  petRegisterState,
+  uploadImagesState,
+} from '@/recoil/pet/atom';
 import { userState } from '@/recoil/user/atom';
 
 import ImageConfirm from './ImageConfirm';
@@ -27,6 +31,7 @@ const ImageUpload = () => {
   const { openModal, closeModal } = useModal();
   const { showToast } = useToast();
   const [, setUserStatus] = useRecoilState(userState);
+  const [, setPetIdStatus] = useRecoilState(petIdState);
   const router = useRouter();
 
   const petRegisterData = useRecoilValue(petRegisterState);
@@ -69,6 +74,7 @@ const ImageUpload = () => {
     setIsLoading(true);
     try {
       const petId = await registerPet(petRegisterData);
+      setPetIdStatus(petId);
       const datasetId = await createDataset(petId);
       await uploadDatasetImages(datasetId, validatedImages);
       setUserStatus('IMAGE_EXISTS');
