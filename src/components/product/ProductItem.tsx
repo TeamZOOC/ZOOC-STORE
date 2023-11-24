@@ -3,16 +3,18 @@
 import { styled } from 'styled-components';
 import { ProductInfoResponse } from '@/types/product';
 import { formatPrice } from '@/utils/formatPrice';
+import { useRouter } from 'next/navigation';
 
 interface ProductItemProps {
   product: ProductInfoResponse;
 }
 
 const ProductItem = ({ product }: ProductItemProps) => {
-  const { name, sale, price } = product;
+  const router = useRouter();
+  const { id, name, sale, price } = product;
 
   return (
-    <StProductItem>
+    <StProductItem onClick={() => router.push(`/product/all/${id}`)}>
       <StProductImage>
         {/* <Image src={imgSrc} alt={imgAlt} fill /> */}
       </StProductImage>
