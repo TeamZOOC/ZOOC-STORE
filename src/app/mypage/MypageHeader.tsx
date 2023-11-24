@@ -1,8 +1,9 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+
 /* eslint-disable react/jsx-no-useless-fragment */
 import { Header } from '@/components/header';
-import { useRouter } from 'next/navigation';
 
 const MypageHeader = () => {
   const router = useRouter();
@@ -11,7 +12,7 @@ const MypageHeader = () => {
       <Header
         headerTitle="MY"
         backFunc={() => {
-          router.back();
+          router.push('/');
         }}
       />
     </>
