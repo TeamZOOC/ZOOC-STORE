@@ -8,7 +8,7 @@ import { slideInFromBottom, slideInFromTop } from '@/styles/animation/slide';
 import { useRecoilValue } from 'recoil';
 import { selectedOptionsState } from '@/recoil/option/atom';
 import OptionSelector from './OptionSelector';
-import OptionBottomButton from './OptionBottomButton';
+import OptionBottomButton from './OptionBottomButton.1';
 import OptionSelectItem from './OptionSelectItem';
 import OptionTotalPrice from './OptionTotalPrice';
 

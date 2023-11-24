@@ -30,6 +30,7 @@ const Order = () => {
   const purchase = useRecoilValue(purchaseState);
   const purchasePrice = useRecoilValue(purchasePriceState);
   const resetPurchase = useResetRecoilState(purchaseState);
+  const resetPurchasePrice = useResetRecoilState(purchasePriceState);
   const resetCart = useResetRecoilState(cartState);
   const { orderPost } = usePostOrder();
 
@@ -103,6 +104,7 @@ const Order = () => {
       await orderPost(postData);
       router.push(`/order/payment?totalPrice=${totalPrice}`);
       resetPurchase();
+      resetPurchasePrice();
       resetCart();
     } catch (error) {
       showToast('order_error');
