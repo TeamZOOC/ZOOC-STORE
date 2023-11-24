@@ -27,6 +27,7 @@ const OptionBottomButton = ({
   const [, setPurchasePrice] = useRecoilState(purchasePriceState);
   const resetPurchase = useResetRecoilState(purchaseState);
   const selectedOption = useRecoilValue(selectedOptionsState);
+  const resetSelectedOption = useResetRecoilState(selectedOptionsState);
   const { productDetail } = useGetProductDetail(Number(productId));
 
   const userStatus = useRecoilValue(userState);
@@ -69,6 +70,7 @@ const OptionBottomButton = ({
         // selectedOption의 길이가 1도 2도 아닐 경우, 카트를 변경하지 않음
         return prevCart;
       });
+      resetSelectedOption();
     }
     handleToggleOption();
   };
