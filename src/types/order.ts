@@ -40,6 +40,12 @@ export interface AddressInfo {
   request?: string;
 }
 
+export interface OptionPostInfo {
+  productId: number;
+  optionIds: number[];
+  pieces: number;
+}
+
 export interface OrderPostInfo {
   petId: number;
   orderer: {
@@ -51,11 +57,5 @@ export interface OrderPostInfo {
     phone: string;
   };
   address: AddressInfo;
-  products: [
-    {
-      productId: number;
-      optionIds: number[];
-      pieces: number;
-    },
-  ];
+  products: OptionPostInfo[];
 }
