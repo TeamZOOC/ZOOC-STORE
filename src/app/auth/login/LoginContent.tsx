@@ -1,12 +1,23 @@
 'use client';
 
 import { signIn } from 'next-auth/react';
+import { useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
+
+import { LoadingSpinner } from '@/components/loading';
+import { loginLoadingState } from '@/recoil/user/atom';
+
 import { IcApple, IcKakao } from '../../../../public/icons';
 import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
+  const isLoginLoading = useRecoilValue(loginLoadingState);
+
   useLogin();
+
+  if (isLoginLoading === true) {
+    return <LoadingSpinner />;
+  }
 
   return (
     <>
