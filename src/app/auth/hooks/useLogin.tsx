@@ -4,11 +4,13 @@ import { useRouter } from 'next/navigation';
 
 import { appleSignIn, kakaoSignIn } from '@/apis/auth';
 import { useEffect, useState } from 'react';
+import { useUserState } from '@/app/useUserState';
 
 export const useLogin = async () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [readyToLogin, setReadyToLogin] = useState(false);
+  const { checkUserStatus } = useUserState();
 
   useEffect(() => {
     const refreshSession = async () => {
@@ -29,6 +31,7 @@ export const useLogin = async () => {
           switch (session?.provider) {
             case 'kakao':
               response = await kakaoSignIn(session.accessToken);
+              setCookie('kakaoAccessToken', session.accessToken);
               break;
             case 'apple':
               if (!session.email || !session.sub) return;
@@ -39,6 +42,7 @@ export const useLogin = async () => {
           }
           if (response) {
             setCookie('accessToken', response.data.accessToken);
+            await checkUserStatus();
             const routePath = response.data.isExistedUser
               ? '/'
               : '/auth/signup';
