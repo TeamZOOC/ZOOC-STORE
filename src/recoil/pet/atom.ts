@@ -5,7 +5,7 @@ import { PetDataInfo } from '@/types/pet';
 
 const { persistAtom } = recoilPersist();
 
-export const petIdState = atom<number>({
+export const petIdState = atom<number | undefined>({
   key: 'petIdState',
   default: undefined,
   effects_UNSTABLE: [persistAtom],
