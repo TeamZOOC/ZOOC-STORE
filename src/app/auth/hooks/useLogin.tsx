@@ -1,33 +1,59 @@
 import { setCookie } from 'cookies-next';
-import { useSession } from 'next-auth/react';
+import { getSession, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
 import { appleSignIn, kakaoSignIn } from '@/apis/auth';
+import { useEffect, useState } from 'react';
+import { useUserState } from '@/app/useUserState';
 
 export const useLogin = async () => {
   const router = useRouter();
-  const { data: session, update } = useSession();
+  const { data: session, status } = useSession();
+  const [readyToLogin, setReadyToLogin] = useState(false);
+  const { checkUserStatus } = useUserState();
 
-  update();
-  try {
-    let response;
-    switch (session?.provider) {
-      case 'kakao':
-        response = await kakaoSignIn(session.accessToken);
-        break;
-      case 'apple':
-        if (!session.email || !session.sub) return;
-        response = await appleSignIn(session.email, session.sub);
-        break;
-      default:
-        return;
+  useEffect(() => {
+    const refreshSession = async () => {
+      if (status === 'authenticated') {
+        await getSession();
+        setReadyToLogin(true);
+      }
+    };
+
+    refreshSession();
+  }, [status]);
+
+  useEffect(() => {
+    if (readyToLogin) {
+      const performLogin = async () => {
+        try {
+          let response;
+          switch (session?.provider) {
+            case 'kakao':
+              response = await kakaoSignIn(session.accessToken);
+              setCookie('kakaoAccessToken', session.accessToken);
+              break;
+            case 'apple':
+              if (!session.email || !session.sub) return;
+              response = await appleSignIn(session.email, session.sub);
+              break;
+            default:
+              return;
+          }
+          if (response) {
+            setCookie('accessToken', response.data.accessToken);
+            await checkUserStatus();
+            const routePath = response.data.isExistedUser
+              ? '/'
+              : '/auth/signup';
+            router.push(routePath);
+          }
+        } catch (error) {
+          console.error('로그인 실패', error);
+        }
+      };
+
+      performLogin();
     }
-    if (response) {
-      setCookie('accessToken', response.data.accessToken);
-      const routePath = response.data.isExistedUser ? '/' : '/auth/signup';
-      router.push(routePath);
-    }
-  } catch (error) {
-    console.error('로그인 실패', error);
-  }
+  }, [readyToLogin, session, router]);
 };

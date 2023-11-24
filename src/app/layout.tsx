@@ -1,4 +1,3 @@
-import { getServerSession } from 'next-auth';
 import localFont from 'next/font/local';
 import React from 'react';
 
@@ -35,8 +34,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession();
-
   return (
     <html
       lang="ko"
@@ -47,7 +44,7 @@ export default async function RootLayout({
       </head>
       <body>
         <ReactQueryProvider>
-          <SessionProvider session={session}>
+          <SessionProvider>
             <Providers>
               <RecoilRootProvider>
                 <GlobalStyles />
