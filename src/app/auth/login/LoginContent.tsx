@@ -1,13 +1,22 @@
 'use client';
 
-import { signIn } from 'next-auth/react';
+import { signIn, useSession } from 'next-auth/react';
 import { styled } from 'styled-components';
 
+// import { useEffect } from 'react';
 import { IcApple, IcKakao } from '../../../../public/icons';
-import { useLogin } from '../hooks/useLogin';
+// import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
-  useLogin();
+  const { data: session } = useSession();
+
+  // useEffect(() => {
+  //   if (status === 'authenticated') {
+  //     update();
+  //   }
+  // }, []);
+  console.log(session);
+  // useLogin();
 
   return (
     <>
@@ -33,7 +42,10 @@ const LoginContent = () => {
           <IcApple />
           Apple로 로그인
         </StAppleLoginButton>
-        <StKakaoLoginButton type="button" onClick={() => signIn('kakao')}>
+        <StKakaoLoginButton
+          type="button"
+          onClick={() => signIn('kakao', { redirect: false })}
+        >
           <IcKakao />
           Kakao로 로그인
         </StKakaoLoginButton>

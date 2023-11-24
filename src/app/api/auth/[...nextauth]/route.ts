@@ -96,7 +96,7 @@ const initAuthOptions = async () => {
   };
 };
 const handler = async (req: any, res: any) => {
-  const authOptions = await initAuthOptions();
+  const authOptions: any = await initAuthOptions();
   return NextAuth(req, res, authOptions);
 };
 
