@@ -12,6 +12,7 @@ import { IcCheck } from '../../../../public/icons';
 const AgreementCheckContent = () => {
   const {
     agreement,
+    isAgreement,
     isAllAgreement,
     handleCheckAgreement,
     handleCheckAllAgreement,
@@ -21,7 +22,7 @@ const AgreementCheckContent = () => {
   const { showToast } = useToast();
 
   const handleCheckAgreementToast = () => {
-    if (!isAllAgreement) {
+    if (!isAllAgreement && !isAgreement) {
       showToast('agreement');
       return;
     }
@@ -40,7 +41,7 @@ const AgreementCheckContent = () => {
           {isAllAgreement && <IcCheck />}
         </StAgeementCheckBox>
       </StAgreementCheckAll>
-      {AGREEMENT.map(({ id, agreementLink, agreementTitle }) => (
+      {AGREEMENT.map(({ id, agreementLink, agreementTitle, show }) => (
         <StAgreementCheckItem key={id} onClick={() => handleCheckAgreement(id)}>
           <StAgreementCheckItemLeft>
             <StAgeementCheckBox type="button" $check={agreement[id - 1]}>
@@ -48,17 +49,19 @@ const AgreementCheckContent = () => {
             </StAgeementCheckBox>
             {agreementTitle}
           </StAgreementCheckItemLeft>
-          <StAgreementLinkButton>
-            <Link target="_blank" href={agreementLink}>
-              보기
-            </Link>
-          </StAgreementLinkButton>
+          {show && (
+            <StAgreementLinkButton>
+              <Link target="_blank" href={agreementLink}>
+                보기
+              </Link>
+            </StAgreementLinkButton>
+          )}
         </StAgreementCheckItem>
       ))}
       <BottomButton
         btnType="button"
         btnName="회원가입"
-        disabled={!isAllAgreement}
+        disabled={!isAgreement && !isAllAgreement}
         activeFunc={handleCheckAgreementToast}
       />
     </StAgreementCheckContent>
