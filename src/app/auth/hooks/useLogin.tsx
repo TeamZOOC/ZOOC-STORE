@@ -1,16 +1,19 @@
 import { setCookie } from 'cookies-next';
 import { getSession, useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { useRecoilState } from 'recoil';
 
 import { appleSignIn, kakaoSignIn } from '@/apis/auth';
-import { useEffect, useState } from 'react';
 import { useUserState } from '@/app/useUserState';
+import { loginLoadingState } from '@/recoil/user/atom';
 
 export const useLogin = async () => {
   const router = useRouter();
   const { data: session, status } = useSession();
   const [readyToLogin, setReadyToLogin] = useState(false);
   const { checkUserStatus } = useUserState();
+  const [isLoginLoading, setIsLoginLoading] = useRecoilState(loginLoadingState);
 
   useEffect(() => {
     const refreshSession = async () => {
@@ -26,6 +29,7 @@ export const useLogin = async () => {
   useEffect(() => {
     if (readyToLogin) {
       const performLogin = async () => {
+        setIsLoginLoading(true);
         try {
           let response;
           switch (session?.provider) {
@@ -49,11 +53,16 @@ export const useLogin = async () => {
             router.push(routePath);
           }
         } catch (error) {
+          setIsLoginLoading(false);
           console.error('로그인 실패', error);
+        } finally {
+          setIsLoginLoading(false);
         }
       };
 
       performLogin();
     }
   }, [readyToLogin, session, router]);
+
+  return isLoginLoading;
 };
