@@ -3,11 +3,12 @@
 import { deleteCookie, getCookie } from 'cookies-next';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useResetRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { MYPAGE_MENU } from '@/constants/mypage';
 import { useModal } from '@/hooks/modal';
+import { petIdState } from '@/recoil/pet/atom';
 import { userState } from '@/recoil/user/atom';
 
 import { IcLogout } from '../../../public/icons';
@@ -15,6 +16,7 @@ import { IcLogout } from '../../../public/icons';
 const MyPageMenu = () => {
   const { openModal } = useModal();
   const [, setUserStatus] = useRecoilState(userState);
+  const resetPetId = useResetRecoilState(petIdState);
   const kakaoAccessToken = getCookie('kakaoAccessToken');
 
   const handleLogout = () => {
@@ -22,8 +24,9 @@ const MyPageMenu = () => {
       deleteCookie('kakaoAccessToken');
     }
     deleteCookie('accessToken');
-    signOut({ callbackUrl: 'http://localhost:3000/' });
+    signOut({ callbackUrl: 'https://www.fitapat.com/' });
     setUserStatus('GUEST');
+    resetPetId();
   };
 
   return (

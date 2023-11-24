@@ -2,15 +2,18 @@ import { getCookie } from 'cookies-next';
 import { useRecoilState } from 'recoil';
 
 import { getPet, getPetDataset } from '@/apis/pet';
+import { petIdState } from '@/recoil/pet/atom';
 import { userState } from '@/recoil/user/atom';
 
 export const useUserState = () => {
   const [, setUserStatus] = useRecoilState(userState);
+  const [, setPetIdStatus] = useRecoilState(petIdState);
 
   const checkPet = async () => {
     try {
       const petRes = await getPet();
       if (petRes) {
+        setPetIdStatus(petRes.id);
         return checkPetDataset(petRes.id);
       }
     } catch (e) {

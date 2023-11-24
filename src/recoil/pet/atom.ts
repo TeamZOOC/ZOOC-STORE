@@ -1,6 +1,9 @@
 import { atom } from 'recoil';
+import { recoilPersist } from 'recoil-persist';
 
 import { PetDataInfo } from '@/types/pet';
+
+const { persistAtom } = recoilPersist();
 
 export const uploadImagesState = atom<File[]>({
   key: 'uploadImages',
@@ -13,4 +16,10 @@ export const petRegisterState = atom<PetDataInfo>({
     name: '',
     breed: '',
   },
+});
+
+export const petIdState = atom<number>({
+  key: 'petIdAtom',
+  default: undefined,
+  effects_UNSTABLE: [persistAtom],
 });

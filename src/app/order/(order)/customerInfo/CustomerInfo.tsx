@@ -28,7 +28,7 @@ const CustomerInfo = () => {
           label="이름"
           placeholder="홍길동"
           control={control}
-          rules={{ required: true, maxLength: 7 }}
+          rules={{ required: true, maxLength: 20 }}
         />
         <TextInput
           name="orderer.phone"
