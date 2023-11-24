@@ -31,14 +31,14 @@ const NewDeliveryForm = ({ buyerName, buyerPhone }: NewDeliveryFormProps) => {
         label="수령인"
         placeholder="홍길동"
         control={control}
-        rules={{ required: true }}
+        rules={{ required: true, maxLength: 20 }}
       />
       <TextInput
         name="receiver.phone"
         label="연락처"
         placeholder="010-1234-5678"
         control={control}
-        rules={{ required: true, maxLength: 13 }}
+        rules={{ required: true, maxLength: 15 }}
       />
       <AddressInput />
       <TextInput
@@ -46,7 +46,7 @@ const NewDeliveryForm = ({ buyerName, buyerPhone }: NewDeliveryFormProps) => {
         label="요청사항"
         placeholder="안전한 배송 부탁드립니다."
         control={control}
-        rules={{ maxLength: 30 }}
+        rules={{ maxLength: 50 }}
       />
     </StNewDeliveryForm>
   );

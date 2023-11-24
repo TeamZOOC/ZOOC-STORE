@@ -16,20 +16,21 @@ const AddressInput = () => {
     useController({
       name: 'address.postcode',
       control,
-      rules: { required: true, maxLength: 8 },
+      rules: { required: true, maxLength: 10 },
       defaultValue: savedAddress.postcode,
     });
 
   const { field: addressField, fieldState: addressFieldState } = useController({
     name: 'address.address',
     control,
-    rules: { required: true, maxLength: 30 },
+    rules: { required: true, maxLength: 100 },
     defaultValue: savedAddress.address,
   });
 
   const { field: detailAddressField } = useController({
     name: 'address.detailAddress',
     control,
+    rules: { maxLength: 100 },
     defaultValue: savedAddress.detailAddress,
   });
 
