@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { css, styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
@@ -24,16 +24,16 @@ const AgreementCheckContent = () => {
 
   const router = useRouter();
   const { showToast } = useToast();
-  const [returnPath, setReturnPath] = useRecoilState(returnPathState);
+  const returnPath = useRecoilValue(returnPathState);
 
   const handleCheckAgreementToast = () => {
     if (!isAllAgreement && !isAgreement) {
       showToast('agreement');
       return;
     }
+
     if (returnPath) {
-      router.push(returnPath);
-      setReturnPath(undefined);
+      router.push('/pet/registration');
     } else router.push('/auth/complete');
   };
 
