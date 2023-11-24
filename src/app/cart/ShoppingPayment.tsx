@@ -14,7 +14,6 @@ const ShoppingPayment = () => {
   const cart = useRecoilValue(cartState);
   const [purchase, setPurchase] = useRecoilState(purchaseState);
   const userStatus = useRecoilValue(userState);
-  const resetPurchase = useResetRecoilState(purchaseState);
   const router = useRouter();
 
   const totalSaleQuantity = cart.reduce((total, item) => {
@@ -36,7 +35,6 @@ const ShoppingPayment = () => {
     } else if (userStatus === 'IMAGE_EXISTS') {
       setPurchase(cart);
       router.push('/order');
-      // resetPurchase();
     } else {
       setPurchase(cart);
       console.log(purchase);

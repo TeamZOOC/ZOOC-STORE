@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
-import { useRecoilValue } from 'recoil';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
@@ -22,6 +22,7 @@ import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
 import PaymentMethod from './paymentMethod/PaymentMethod';
 import ProductsInfo from './productsInfo/ProductsInfo';
+import { cartState } from '@/recoil/cart/atom';
 
 const Order = () => {
   const { products, payment } = ORDER_DETAIL;
@@ -29,6 +30,8 @@ const Order = () => {
   const router = useRouter();
   const petId = useRecoilValue(petIdState);
   const purchase = useRecoilValue(purchaseState);
+  const resetPurchase = useResetRecoilState(purchaseState);
+  const resetCart = useResetRecoilState(cartState);
 
   const { orderPost } = usePostOrder();
 
@@ -73,7 +76,6 @@ const Order = () => {
       pieces: product.optionList[0].pieces,
     }));
 
-  console.log('purchaseData', purchaseData(purchase));
   const onSubmit = async (formdata: OrderFormData) => {
     if (!petId) {
       showToast('no_pet');
@@ -87,6 +89,8 @@ const Order = () => {
     try {
       await orderPost(postData);
       router.push(`/order/payment?totalPrice=${totalPrice}`);
+      resetPurchase();
+      resetCart();
     } catch (error) {
       showToast('order_error');
       console.error('주문 실패', error);
