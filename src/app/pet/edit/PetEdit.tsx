@@ -17,7 +17,6 @@ import { PetEditInfo } from '@/types/pet';
 
 import { IcBtnPicture } from '../../../../public/icons';
 import { ImgProfileEmpty } from '../../../../public/images';
-import React from '../../../components/modal/ImageValidateModal';
 
 const PetEdit = () => {
   const { petInfo } = useGetPet();

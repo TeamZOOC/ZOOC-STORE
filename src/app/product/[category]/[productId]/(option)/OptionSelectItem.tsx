@@ -1,29 +1,90 @@
 'use client';
 
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
+
+import { selectedOptionsState } from '@/recoil/option/atom';
+import { OptionInfo } from '@/types/cart';
+
 import {
   IcMinus,
   IcPlus,
   IcProductDelete,
 } from '../../../../../../public/icons';
 
-const OptionSelectItem = () => (
-  <StOptionSelectItem>
-    <StOptionSelectItemLeft>
-      <IcProductDelete />
-      <span>아이폰 12 플러스</span>
-    </StOptionSelectItemLeft>
-    <StOptionSelectItemRight>
-      <StOptionItemQuantityControlButton type="button">
-        <IcMinus />
-      </StOptionItemQuantityControlButton>
-      <span>1</span>
-      <StOptionItemQuantityControlButton type="button">
-        <IcPlus />
-      </StOptionItemQuantityControlButton>
-    </StOptionSelectItemRight>
-  </StOptionSelectItem>
-);
+interface OptionSelectItemProps {
+  selected: OptionInfo[];
+  selectedIndex: number;
+}
+
+const OptionSelectItem = ({
+  selected,
+  selectedIndex,
+}: OptionSelectItemProps) => {
+  const [selectedOptions, setSelectedOptions] =
+    useRecoilState(selectedOptionsState);
+
+  const handleDeleteSelectedOption = () => {
+    setSelectedOptions(
+      selectedOptions.filter((_, index) => index !== selectedIndex),
+    );
+  };
+
+  const handleIncreaseQuantity = () => {
+    setSelectedOptions((prevOptions) =>
+      prevOptions.map((optionPair, index) =>
+        index === selectedIndex
+          ? [
+              { ...optionPair[0], pieces: optionPair[0].pieces + 1 },
+              ...optionPair.slice(1),
+            ]
+          : optionPair,
+      ),
+    );
+  };
+
+  const handleDecreaseQuantity = () => {
+    if (selectedOptions[selectedIndex][0].pieces === 1) return;
+    setSelectedOptions((prevOptions) =>
+      prevOptions.map((optionPair, index) =>
+        index === selectedIndex
+          ? [
+              { ...optionPair[0], pieces: optionPair[0].pieces - 1 },
+              ...optionPair.slice(1),
+            ]
+          : optionPair,
+      ),
+    );
+  };
+
+  return (
+    <StOptionSelectItem>
+      <StOptionSelectItemLeft>
+        <IcProductDelete onClick={handleDeleteSelectedOption} />
+        <div>
+          {selected.map(({ id, name }) => (
+            <StOptionSelectItemText key={id}>{name}</StOptionSelectItemText>
+          ))}
+        </div>
+      </StOptionSelectItemLeft>
+      <StOptionSelectItemRight>
+        <StOptionItemQuantityControlButton
+          type="button"
+          onClick={handleDecreaseQuantity}
+        >
+          <IcMinus />
+        </StOptionItemQuantityControlButton>
+        <span>{selectedOptions[selectedIndex][0].pieces}</span>
+        <StOptionItemQuantityControlButton
+          type="button"
+          onClick={handleIncreaseQuantity}
+        >
+          <IcPlus />
+        </StOptionItemQuantityControlButton>
+      </StOptionSelectItemRight>
+    </StOptionSelectItem>
+  );
+};
 export default OptionSelectItem;
 
 const StOptionSelectItem = styled.div`
@@ -33,27 +94,41 @@ const StOptionSelectItem = styled.div`
 
   width: 100%;
   & + & {
-    margin-top: 3.4rem;
+    margin-top: 2.4rem;
   }
 `;
 const StOptionSelectItemLeft = styled.div`
   display: flex;
   align-items: center;
   gap: 0.8rem;
-
-  span {
-    color: ${({ theme }) => theme.colors.zw_black};
-    ${({ theme }) => theme.fonts.zw_Body1};
-  }
 `;
 const StOptionSelectItemRight = styled.div`
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 2.4rem;
+
+  width: 12rem;
 
   span {
     color: ${({ theme }) => theme.colors.zw_black};
     ${({ theme }) => theme.fonts.zw_price_middle};
+  }
+`;
+
+const StOptionSelectItemText = styled.span`
+  color: ${({ theme }) => theme.colors.zw_black};
+  ${({ theme }) => theme.fonts.zw_Body1};
+
+  &::after {
+    content: '/';
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  &:last-child {
+    &::after {
+      content: '';
+    }
   }
 `;
 const StOptionItemQuantityControlButton = styled.button`

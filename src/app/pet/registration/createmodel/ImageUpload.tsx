@@ -1,16 +1,22 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRouter } from 'next/navigation';
+import React, { useEffect, useRef, useState } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
+import { createDataset, uploadDatasetImages } from '@/apis/pet';
+import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
 import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
-import { uploadImagesState } from '@/recoil/createmodel/atom';
+import { useToast } from '@/hooks/toast';
+import { petRegisterState, uploadImagesState } from '@/recoil/pet/atom';
+import { userState } from '@/recoil/user/atom';
 
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
+import ImageUploadLoading from './ImageUploadLoading';
 
 const ImageUpload = () => {
   const { uploadImages, handleImageChange, handleResetImage } =
@@ -19,6 +25,13 @@ const ImageUpload = () => {
     useRecoilState<File[]>(uploadImagesState);
   const imageInputRef = useRef<HTMLInputElement>(null);
   const { openModal, closeModal } = useModal();
+  const { showToast } = useToast();
+  const [, setUserStatus] = useRecoilState(userState);
+  const router = useRouter();
+
+  const petRegisterData = useRecoilValue(petRegisterState);
+  const { registerPet } = useRegisterPet();
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleUploadImage = () => {
     imageInputRef.current?.click();
@@ -52,11 +65,29 @@ const ImageUpload = () => {
     setValidatedImages(uploadImages);
   };
 
+  const handleCreateModel = async () => {
+    setIsLoading(true);
+    try {
+      const petId = await registerPet(petRegisterData);
+      const datasetId = await createDataset(petId);
+      await uploadDatasetImages(datasetId, validatedImages);
+      setUserStatus('IMAGE_EXISTS');
+      router.push('/mypage');
+    } catch (e) {
+      showToast('dataset_upload_error');
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   useEffect(() => {
     if (uploadImages.length > 0) {
       handleImageValidate(uploadImages.length);
     }
   }, [uploadImages]);
+
+  if (isLoading) return <ImageUploadLoading />;
 
   return (
     <StImageUpload>
@@ -84,9 +115,7 @@ const ImageUpload = () => {
             btnType="button"
             btnName="사진 업로드 완료"
             disabled={false}
-            activeFunc={() => {
-              console.log('다음 페이지 라우팅');
-            }}
+            activeFunc={handleCreateModel}
           />
         </>
       )}

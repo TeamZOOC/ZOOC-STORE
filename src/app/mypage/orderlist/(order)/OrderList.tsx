@@ -1,26 +1,27 @@
+/* eslint-disable react/no-array-index-key */
+
 'use client';
 
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
-import { ORDER_LIST } from '@/mocks/orderListData';
-
+import useGetOrderList from '../hooks/useGetOrderList';
 import OrderItem from './OrderItem';
 
 const OrderList = () => {
-  const orderList = ORDER_LIST;
+  const { orderList } = useGetOrderList();
   const router = useRouter();
 
-  const handleOrderDetail = (orderId: number) => {
+  const handleOrderDetail = (orderId: string) => {
     router.push(`/mypage/orderlist/${orderId}`);
   };
 
   return (
     <StOrderListWrapper>
-      {orderList.map((orderInfo) => (
+      {orderList?.map((orderInfo, index) => (
         <>
           <OrderItem
-            key={orderInfo.id}
+            key={index}
             order={orderInfo}
             onDetailClick={handleOrderDetail}
           />

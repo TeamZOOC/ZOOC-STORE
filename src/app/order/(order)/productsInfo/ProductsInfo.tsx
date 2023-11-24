@@ -2,13 +2,13 @@
 import { styled } from 'styled-components';
 
 import OrderProduct from '@/app/mypage/orderlist/(order)/OrderProduct';
-import { OrderInfo } from '@/types/order';
+import { ProductInfo } from '@/types/order';
 
 interface ProductInfoProps {
-  products: OrderInfo[];
+  products: ProductInfo[];
 }
 
-const ProductInfo = ({ products }: ProductInfoProps) => (
+const ProductsInfo = ({ products }: ProductInfoProps) => (
   <StInfoSection>
     <StInfoTitle>상품 정보</StInfoTitle>
     <StProducts>
@@ -19,7 +19,7 @@ const ProductInfo = ({ products }: ProductInfoProps) => (
   </StInfoSection>
 );
 
-export default ProductInfo;
+export default ProductsInfo;
 
 const StInfoSection = styled.div`
   padding: 1.6rem 2.8rem 4rem 2.8rem;

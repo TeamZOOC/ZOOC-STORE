@@ -1,15 +1,16 @@
 'use client';
 
-import { CATEGORY_LIST } from '@/constants/category';
 import { css, styled } from 'styled-components';
 import React, { useEffect, useRef } from 'react';
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import useGetCategories from '@/app/(home)/hooks/useGetCategories';
 
 const ProductNav = () => {
   const pathname = usePathname();
   const activeItemRef = useRef<HTMLButtonElement | null>(null);
+  const { categoryList } = useGetCategories();
 
   const scrollToActiveItem = () => {
     if (activeItemRef.current) {
@@ -23,19 +24,27 @@ const ProductNav = () => {
 
   return (
     <StProductNav>
-      {CATEGORY_LIST.map(({ id, categoryName, categoryPath }) => (
+      <StProductItem
+        $active={pathname.includes('all')}
+        ref={(el) => {
+          if (pathname.includes('all')) {
+            activeItemRef.current = el;
+          }
+        }}
+      >
+        <Link href="/product/all">all</Link>
+      </StProductItem>
+      {categoryList?.map(({ id, name }) => (
         <StProductItem
           key={id}
-          $active={pathname.includes(categoryPath)}
+          $active={pathname.includes(name)}
           ref={(el) => {
-            if (pathname.includes(categoryPath)) {
+            if (pathname.includes(name)) {
               activeItemRef.current = el;
             }
           }}
         >
-          <Link href={categoryPath} scroll={false}>
-            {categoryName}
-          </Link>
+          <Link href={`/product/${name}`}>{name}</Link>
         </StProductItem>
       ))}
     </StProductNav>
@@ -48,8 +57,8 @@ const StProductNav = styled.nav`
   position: sticky;
   top: 6.8rem;
 
-  margin-left: 2.8rem;
-  padding-top: 1.2rem;
+  padding-top: 1.6rem;
+  padding-left: 2.8rem;
 
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
   background-color: ${({ theme }) => theme.colors.zw_background};
@@ -64,7 +73,7 @@ const StProductNav = styled.nav`
 `;
 
 const StProductItem = styled.button<{ $active: boolean }>`
-  padding: 0 1.4rem 1.2rem 1.4rem;
+  padding-bottom: 1.2rem;
 
   color: ${({ theme }) => theme.colors.zw_lightgray};
 
@@ -74,5 +83,9 @@ const StProductItem = styled.button<{ $active: boolean }>`
       color: ${({ theme }) => theme.colors.zw_black};
       border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_black};
     `}
-  ${({ theme }) => theme.fonts.zw_Subhead1};
+  ${({ theme }) => theme.fonts.zw_price_middle};
+
+  & + & {
+    margin-left: 2.8rem;
+  }
 `;
