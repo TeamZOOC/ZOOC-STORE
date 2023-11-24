@@ -73,7 +73,7 @@ const Order = () => {
       pieces: product.optionList[0].pieces,
     }));
 
-  console.log(purchaseData(purchase));
+  console.log('purchaseData', purchaseData(purchase));
   const onSubmit = async (formdata: OrderFormData) => {
     if (!petId) {
       showToast('no_pet');

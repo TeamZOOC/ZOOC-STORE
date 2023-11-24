@@ -7,7 +7,7 @@ const { persistAtom } = recoilPersist();
 
 export const petIdState = atom<number>({
   key: 'petIdState',
-  default: 1,
+  default: 523, // 바꾸기
   effects_UNSTABLE: [persistAtom],
 });
 
