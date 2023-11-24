@@ -19,8 +19,7 @@ const PetRegisterQuitModal = ({ route }: PetRegisterQuitModalProps) => {
       router.back();
     } else if (route === 'home') {
       router.push('/');
-    } 
-
+    }
     closeModal('petRegisterQuit');
   }, [router]);
 

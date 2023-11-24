@@ -31,13 +31,16 @@ const ShoppingPayment = () => {
   const handleCartToPurchase = () => {
     if (userStatus === 'NO_PET') {
       router.push('/pet/registration');
-    }
-    if (userStatus === 'PET_EXISTS' || userStatus === 'DATASET_EXISTS') {
+    } else if (userStatus === 'PET_EXISTS' || userStatus === 'DATASET_EXISTS') {
       router.push('/pet/registration/createmodel');
-    }
-    if (userStatus === 'IMAGE_EXISTS') {
-      resetPurchase();
+    } else if (userStatus === 'IMAGE_EXISTS') {
       setPurchase(cart);
+      router.push('/order');
+      // resetPurchase();
+    } else {
+      setPurchase(cart);
+      router.push('/order');
+      // router.push('/auth/login');
     }
   };
   console.log(purchase);
@@ -59,7 +62,7 @@ const ShoppingPayment = () => {
             <StShoppingPaymentInfoTitle $color="gray">
               배송비
             </StShoppingPaymentInfoTitle>
-            <StShoppingPaymentInfoPrice>3,000 원</StShoppingPaymentInfoPrice>
+            <StShoppingPaymentInfoPrice>0 원</StShoppingPaymentInfoPrice>
           </StShoppingPaymentInfo>
         </StShoppingPaymentInfoWrapper>
         <StShoppingPaymentInfo>
@@ -68,7 +71,7 @@ const ShoppingPayment = () => {
           </StShoppingPaymentInfoTitle>
           <div>
             <StShoppingPaymentTotalPrice>
-              {formatPrice(totalSaleQuantity + 3000)}
+              {formatPrice(totalSaleQuantity)}
             </StShoppingPaymentTotalPrice>
             <StShoppingPaymentInfoPrice> 원</StShoppingPaymentInfoPrice>
           </div>

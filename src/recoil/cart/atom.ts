@@ -1,20 +1,14 @@
 import { atom } from 'recoil';
 import { recoilPersist } from 'recoil-persist';
-import { OptionInfo } from '../option/atom';
 
-export interface cartInfo {
-  id: number;
-  image: string;
-  name: string;
-  price: number;
-  sale: number | null;
-  optionList: OptionInfo[];
-}
+import { CartInfo } from '@/types/cart';
+
 const { persistAtom } = recoilPersist({
   key: 'cart',
   storage: localStorage,
 });
-export const cartState = atom<cartInfo[]>({
+
+export const cartState = atom<CartInfo[]>({
   key: 'cartState',
   default: [],
   effects_UNSTABLE: [persistAtom],

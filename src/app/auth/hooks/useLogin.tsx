@@ -4,13 +4,17 @@ import { useRouter } from 'next/navigation';
 
 import { appleSignIn, kakaoSignIn } from '@/apis/auth';
 
+import { useUserState } from '../../useUserState';
+
 export const useLogin = async () => {
   const router = useRouter();
   const { data: session, update } = useSession();
+  const { checkUserStatus } = useUserState();
 
   update();
   try {
     let response;
+    console.log(session);
     switch (session?.provider) {
       case 'kakao':
         response = await kakaoSignIn(session.accessToken);
@@ -24,6 +28,7 @@ export const useLogin = async () => {
     }
     if (response) {
       setCookie('accessToken', response.data.accessToken);
+      await checkUserStatus();
       const routePath = response.data.isExistedUser ? '/' : '/auth/signup';
       router.push(routePath);
     }

@@ -1,12 +1,15 @@
-import { StaticImageData } from 'next/image';
-
-export interface cartInfo {
+export interface OptionInfo {
   id: number;
-  imgSrc: StaticImageData;
-  imgAlt: string;
-  productTitle: string;
-  productSalePercent?: string;
-  productPrice: string;
-  option: string[];
+  name: string;
+  optionIndex: number;
   quantity: number;
+}
+
+export interface CartInfo {
+  id: number;
+  image: string;
+  name: string;
+  price: number;
+  sale: number | null;
+  optionList: OptionInfo[];
 }

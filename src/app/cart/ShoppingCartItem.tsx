@@ -3,15 +3,18 @@
 'use client';
 
 import React from 'react';
-import { styled } from 'styled-components';
-import { cartInfo, cartState } from '@/recoil/cart/atom';
 import { useRecoilState } from 'recoil';
-import { formatPrice } from '@/utils/formatPrice';
+import { styled } from 'styled-components';
+
 import { useModal } from '@/hooks/modal';
+import { cartState } from '@/recoil/cart/atom';
+import { CartInfo } from '@/types/cart';
+import { formatPrice } from '@/utils/formatPrice';
+
 import { IcMinus, IcPlus, IcProductDelete } from '../../../public/icons';
 
 interface cartItemProps {
-  cartItem: cartInfo;
+  cartItem: CartInfo;
   selectedIndex: number;
 }
 

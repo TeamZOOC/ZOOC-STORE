@@ -2,12 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
 import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
+import { petIdState } from '@/recoil/pet/atom';
+import { purchaseState } from '@/recoil/purchase/atom';
+import { CartInfo } from '@/types/cart';
 import { OrderFormData } from '@/types/form';
 import { OrderPostInfo } from '@/types/order';
 import { formatPrice } from '@/utils/formatPrice';
@@ -23,6 +27,8 @@ const Order = () => {
   const { products, payment } = ORDER_DETAIL;
   const { showToast } = useToast();
   const router = useRouter();
+  const petId = useRecoilValue(petIdState);
+  const purchase = useRecoilValue(purchaseState);
 
   const { orderPost } = usePostOrder();
 
@@ -60,10 +66,22 @@ const Order = () => {
     formState: { isValid },
   } = methods;
 
+  const purchaseData = (purchases: CartInfo[]) =>
+    purchases.map((product) => ({
+      productId: product.id,
+      optionIds: product.optionList.map((option) => option.id),
+      quantity: product.optionList[0].quantity,
+    }));
+
+  console.log(purchaseData(purchase));
   const onSubmit = async (formdata: OrderFormData) => {
+    if (!petId) {
+      showToast('no_pet');
+      return;
+    }
     const postData: OrderPostInfo = {
       ...formdata,
-      petId: 523, // TODO: petId 받아오기
+      petId,
       products: [
         // TODO: 주문할 상품, 옵션 받아오기
         {
