@@ -65,13 +65,15 @@ const Order = () => {
   } = methods;
 
   const transformProduct = (purchases: CartInfo) => {
-    const option = purchases.optionList[0];
+    const firstOption = purchases.optionList[0];
+    const optionDetails = purchases.optionList.map((option) => option.name);
+
     return {
       id: String(purchases.id),
       name: purchases.name,
       image: purchases.image,
-      optionDetails: [option.name],
-      pieces: option.pieces,
+      optionDetails,
+      pieces: firstOption.pieces,
       price: purchases.price,
     };
   };
