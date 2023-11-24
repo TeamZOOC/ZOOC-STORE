@@ -73,17 +73,25 @@ const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
 
   return (
     <StShoppingCartItem>
-      <StShoppingCartMain onClick={() => router.push(`/product/all/${id}`)}>
-        <StShoppingCartImage />
+      <StShoppingCartMain>
+        <StShoppingCartImage
+          onClick={() => router.push(`/product/all/${id}`)}
+        />
         <StShoppingCartInfo>
           <div>
-            <StCartItemTitle>{name}</StCartItemTitle>
-            <StCartItemPriceBox>
+            <StCartItemTitle onClick={() => router.push(`/product/all/${id}`)}>
+              {name}
+            </StCartItemTitle>
+            <StCartItemPriceBox
+              onClick={() => router.push(`/product/all/${id}`)}
+            >
               {sale && <StCartItemSalePercent>{sale}</StCartItemSalePercent>}
               <StCartItemPrice>{formatPrice(price)}</StCartItemPrice>
             </StCartItemPriceBox>
           </div>
-          <StShoppingCartOption>
+          <StShoppingCartOption
+            onClick={() => router.push(`/product/all/${id}`)}
+          >
             {optionList.map((option, index) => (
               <span key={index}>{option.name}</span>
             ))}
