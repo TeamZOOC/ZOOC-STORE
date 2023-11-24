@@ -39,10 +39,7 @@ const ShoppingPayment = () => {
       router.push('/order');
     } else {
       setPurchase(cart);
-      console.log(purchase);
-      router.push('/order');
-      // 로그인으로 이동
-      // router.push('/auth/login');
+      router.push('/auth/login');
     }
   };
 

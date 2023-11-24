@@ -8,17 +8,16 @@ export const createAxios = (baseURL: string): AxiosInstance => {
     headers: {
       'Content-type': 'application/json',
       'Access-Control-Allow-Origin': baseURL,
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_TEST_ACCESS_TOKEN}`,
     },
   });
 
-  // axiosInstance.interceptors.request.use((config) => {
-  //   const accessToken = getCookie('accessToken');
-  //   if (accessToken) {
-  //     config.headers.Authorization = `Bearer ${accessToken}`;
-  //   }
-  //   return config;
-  // });
+  axiosInstance.interceptors.request.use((config) => {
+    const accessToken = getCookie('accessToken');
+    if (accessToken) {
+      config.headers.Authorization = `Bearer ${accessToken}`;
+    }
+    return config;
+  });
 
   return axiosInstance;
 };
