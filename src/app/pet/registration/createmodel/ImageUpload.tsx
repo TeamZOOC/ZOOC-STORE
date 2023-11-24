@@ -14,7 +14,7 @@ import { useToast } from '@/hooks/toast';
 import {
   petIdState,
   petRegisterState,
-  uploadImagesState
+  uploadImagesState,
 } from '@/recoil/pet/atom';
 import { userState } from '@/recoil/user/atom';
 
