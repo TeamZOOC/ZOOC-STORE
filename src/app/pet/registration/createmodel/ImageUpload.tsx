@@ -5,7 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
-import { createDataset, uploadDatasetImages } from '@/apis/pet';
+import { createDataset } from '@/apis/pet';
 import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
 import { useMultipleImageUpload } from '@/hooks/image';
@@ -16,8 +16,10 @@ import {
   petIdState,
   petRegisterState,
   uploadImagesState,
+  uploadState,
 } from '@/recoil/pet/atom';
 import { userState } from '@/recoil/user/atom';
+import { uploadImagesService } from '@/utils/uploadImagesService';
 
 import ImageConfirm from './ImageConfirm';
 import ImageGuide from './ImageGuide';
@@ -38,6 +40,7 @@ const ImageUpload = () => {
 
   const petRegisterData = useRecoilValue(petRegisterState);
   const { registerPet } = useRegisterPet();
+  const [, setUpload] = useRecoilState(uploadState);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleUploadImage = () => {
@@ -78,7 +81,8 @@ const ImageUpload = () => {
       const petId = await registerPet(petRegisterData);
       setPetIdStatus(petId);
       const datasetId = await createDataset(petId);
-      await uploadDatasetImages(datasetId, validatedImages);
+      // await uploadDatasetImages(datasetId, validatedImages);
+      await uploadImagesService(datasetId, validatedImages, setUpload);
       setUserStatus('IMAGE_EXISTS');
 
       if (returnPath) {

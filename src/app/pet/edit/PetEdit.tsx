@@ -129,7 +129,7 @@ const PetEdit = () => {
         </StEditForm>
       </StEdit>
       <BottomButton
-        btnName="반려동물 AI 모델 생성하기"
+        btnName="완료"
         btnType="button"
         disabled={!isValid}
         activeFunc={handleSubmit(onSubmit, onError)}
