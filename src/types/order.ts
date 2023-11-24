@@ -5,7 +5,7 @@ export interface ProductInfo {
   pieces: number;
   price: number;
   id?: string;
-  deliveryState: string;
+  deliveryState?: string;
 }
 
 export interface OrderListInfo {

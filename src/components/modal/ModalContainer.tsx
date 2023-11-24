@@ -22,7 +22,7 @@ import WithDrawModal from './WithDrawModal';
 const MODAL_COMPONENTS: Record<ModalKey, (props: any) => React.ReactElement> = {
   imageValidate: (props) => <ImageValidateModal {...props} />,
   postcode: () => <PostcodeModal />,
-  orderQuit: () => <OrderQuitModal {...props} />,
+  orderQuit: (props) => <OrderQuitModal {...props} />,
   petRegisterQuit: (props) => <PetRegisterQuitModal {...props} />,
   cartDelete: (props) => <CartDeleteModal {...props} />,
   paymentQuit: () => <PaymentQuitModal />,

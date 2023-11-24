@@ -8,10 +8,9 @@ import { styled } from 'styled-components';
 import { BottomButton } from '@/components/button';
 import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
-import { ORDER_DETAIL } from '@/mocks/orderDetailData';
 import { cartState } from '@/recoil/cart/atom';
 import { petIdState } from '@/recoil/pet/atom';
-import { purchaseState } from '@/recoil/purchase/atom';
+import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
 import { CartInfo } from '@/types/cart';
 import { OrderFormData } from '@/types/form';
 import { OrderPostInfo } from '@/types/order';
@@ -25,19 +24,14 @@ import PaymentMethod from './paymentMethod/PaymentMethod';
 import ProductsInfo from './productsInfo/ProductsInfo';
 
 const Order = () => {
-  const { products, payment } = ORDER_DETAIL;
   const { showToast } = useToast();
   const router = useRouter();
   const petId = useRecoilValue(petIdState);
   const purchase = useRecoilValue(purchaseState);
+  const purchasePrice = useRecoilValue(purchasePriceState);
   const resetPurchase = useResetRecoilState(purchaseState);
   const resetCart = useResetRecoilState(cartState);
-
   const { orderPost } = usePostOrder();
-
-  const totalPrice = formatPrice(
-    payment.totalProductPrice + payment.deliveryFee,
-  );
 
   const methods = useForm<OrderFormData>({
     defaultValues: {
@@ -68,6 +62,24 @@ const Order = () => {
     handleSubmit,
     formState: { isValid },
   } = methods;
+
+  const transformProduct = (purchases: CartInfo) => {
+    const option = purchases.optionList[0];
+    return {
+      id: String(purchases.id),
+      name: purchases.name,
+      image: purchases.image,
+      optionDetails: [option.name],
+      pieces: option.pieces,
+      price: purchases.price,
+    };
+  };
+
+  const transformedProducts = purchase.map(transformProduct);
+
+  const totalPrice = formatPrice(
+    purchasePrice.totalProductPrice + purchasePrice.deliveryFee,
+  );
 
   const purchaseData = (purchases: CartInfo[]) =>
     purchases.map((product) => ({
@@ -105,7 +117,7 @@ const Order = () => {
   return (
     <FormProvider {...methods}>
       <StOrder>
-        <ProductsInfo products={products} />
+        <ProductsInfo products={transformedProducts} />
         <StHr />
         <CustomerInfo />
         <DeliveryInfo />
@@ -113,7 +125,7 @@ const Order = () => {
         <PaymentMethod />
         <StHr />
         <StBillingInfoWrapper>
-          <BillingInfo payment={payment} />
+          <BillingInfo payment={purchasePrice} />
         </StBillingInfoWrapper>
         <StHr />
         <Agreement />
