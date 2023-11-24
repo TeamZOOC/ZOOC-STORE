@@ -10,6 +10,22 @@ ${reset}
     box-sizing: border-box;
   }
 
+#nprogress .spinner {
+  display: none;
+}
+#nprogress .bar {
+  background: black;
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
+#nprogress .peg {
+  display:none;
+}
 
 #root, body, html {
   width: 100vw;

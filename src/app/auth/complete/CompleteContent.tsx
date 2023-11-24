@@ -1,12 +1,15 @@
 'use client';
 
-import { BottomButton } from '@/components/button';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import { styled } from 'styled-components';
 
+import { BottomButton } from '@/components/button';
+import useProgress from '@/hooks/progress/useProgress';
+
 const CompleteContent = () => {
   const router = useRouter();
+  useProgress();
 
   return (
     <>

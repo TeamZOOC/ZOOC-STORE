@@ -2,9 +2,11 @@
 
 import { Header } from '@/components/header';
 import { useModal } from '@/hooks/modal';
+import useProgress from '@/hooks/progress/useProgress';
 
 const PetRegistrationHeader = () => {
   const { openModal } = useModal();
+  useProgress();
 
   return (
     <Header
