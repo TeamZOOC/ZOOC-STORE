@@ -149,6 +149,7 @@ const OptionBottomButton = ({
     <StOptionBottomButtonContainer>
       <StOptionBasketButton
         type="button"
+        disabled={selectedOption.length === 0}
         $active={selectedOption.length > 0}
         onClick={() => {
           handleSaveCart();
@@ -159,6 +160,7 @@ const OptionBottomButton = ({
       </StOptionBasketButton>
       <StOptionPurchaseButton
         type="button"
+        disabled={selectedOption.length === 0}
         $active={selectedOption.length > 0}
         onClick={handlePurchaseItem}
       >
