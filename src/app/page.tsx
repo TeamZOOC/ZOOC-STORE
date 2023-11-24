@@ -5,9 +5,11 @@ import { ARTICLE_LIST } from '@/mocks/articleData';
 import { HomeArticle, HomeCategory, HomeProduct } from './(home)';
 import HomeCarusel from './(home)/carusel/HomeCarusel';
 import HomeFooter from './(home)/footer/HomeFooter';
+import ChangeRoute from './ChangeRoute';
 
 const page = () => (
   <>
+    <ChangeRoute />
     <Header sideMenu />
     <HomeCarusel />
     <MainLayout>

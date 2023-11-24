@@ -37,6 +37,7 @@ const ShoppingPayment = () => {
 
     if (userStatus === 'IMAGE_EXISTS') {
       router.push('/order');
+      setReturnPath(undefined);
     } else if (userStatus === 'NO_PET') {
       router.push('/pet/registration');
     } else if (userStatus === 'PET_EXISTS' || userStatus === 'DATASET_EXISTS') {
