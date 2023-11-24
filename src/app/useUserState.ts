@@ -7,13 +7,16 @@ import { userState } from '@/recoil/user/atom';
 
 export const useUserState = () => {
   const [, setUserStatus] = useRecoilState(userState);
-  const [, setPetIdStatus] = useRecoilState(petIdState);
+  const [petId, setPetId] = useRecoilState(petIdState);
 
   const checkPet = async () => {
+    if (petId) {
+      return checkPetDataset(petId);
+    }
     try {
       const petRes = await getPet();
       if (petRes) {
-        setPetIdStatus(petRes.id);
+        setPetId(petRes.id);
         return checkPetDataset(petRes.id);
       }
     } catch (e) {
@@ -22,9 +25,9 @@ export const useUserState = () => {
     return 'NO_PET';
   };
 
-  const checkPetDataset = async (petId: number) => {
+  const checkPetDataset = async (petid: number) => {
     try {
-      const datasetRes = await getPetDataset(petId);
+      const datasetRes = await getPetDataset(petid);
       if (datasetRes) {
         return datasetRes.dataset_images.length > 0
           ? 'IMAGE_EXISTS'

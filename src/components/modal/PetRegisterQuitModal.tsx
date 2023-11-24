@@ -6,12 +6,20 @@ import { styled } from 'styled-components';
 
 import { useModal } from '@/hooks/modal';
 
-const PetRegisterQuitModal = () => {
+interface PetRegisterQuitModalProps {
+  route: 'back' | 'home';
+}
+
+const PetRegisterQuitModal = ({ route }: PetRegisterQuitModalProps) => {
   const { closeModal } = useModal();
   const router = useRouter();
 
   const handleQuit = useCallback(() => {
-    router.push('/mypage');
+    if (route === 'back') {
+      router.back();
+    } else if (route === 'home') {
+      router.push('/');
+    }
     closeModal('petRegisterQuit');
   }, [router]);
 

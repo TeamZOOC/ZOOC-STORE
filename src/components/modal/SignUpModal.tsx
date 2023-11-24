@@ -1,51 +1,44 @@
 'use client';
 
+import { withdraw } from '@/apis/auth';
+import { useModal } from '@/hooks/modal';
+import { deleteCookie } from 'cookies-next';
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
-import React, { useCallback } from 'react';
 import { styled } from 'styled-components';
 
-import { useModal } from '@/hooks/modal';
-
-interface OrderQuitModalProps {
-  route: 'back' | 'home';
-}
-
-const OrderQuitModal = ({ route }: OrderQuitModalProps) => {
-  const { closeModal } = useModal();
+const SignUpModal = () => {
   const router = useRouter();
+  const { closeModal } = useModal();
 
-  const handleQuit = useCallback(() => {
-    if (route === 'back') {
-      router.back();
-    } else if (route === 'home') {
-      router.push('/');
-    }
-    closeModal('orderQuit');
-  }, [router]);
-
-  const handleCancel = useCallback(() => {
-    closeModal('orderQuit');
-  }, [closeModal]);
+  const handleWithdraw = async () => {
+    await withdraw();
+    await signOut({ callbackUrl: '/auth/login' });
+    closeModal('signUp');
+    router.push('/auth/login');
+    deleteCookie('accessToken');
+    deleteCookie('kakaoAccessToken');
+  };
 
   return (
-    <StQuitModal>
-      <strong>구매를 그만두시나요?</strong>
-      <p>지금 떠나면 구매 과정이 저장되지 않아요</p>
+    <StSignUpModal>
+      <strong>회원가입을 그만두시나요?</strong>
+      <p>지금 떠나면 가입 과정이 저장되지 않아요</p>
       <StButtonWrapper>
-        <StQuitButton type="button" onClick={handleQuit}>
-          그만두기
-        </StQuitButton>
-        <StCancelButton type="button" onClick={handleCancel}>
-          취소하기
+        <StSignUpButton type="button" onClick={handleWithdraw}>
+          삭제하기
+        </StSignUpButton>
+        <StCancelButton type="button" onClick={() => closeModal('signUp')}>
+          취소
         </StCancelButton>
       </StButtonWrapper>
-    </StQuitModal>
+    </StSignUpModal>
   );
 };
 
-export default React.memo(OrderQuitModal);
+export default SignUpModal;
 
-const StQuitModal = styled.div`
+const StSignUpModal = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -88,7 +81,7 @@ const StButtonWrapper = styled.div`
   }
 `;
 
-const StQuitButton = styled.button`
+const StSignUpButton = styled.button`
   width: 55%;
 
   background: ${({ theme }) => theme.colors.zw_black};

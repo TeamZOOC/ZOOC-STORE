@@ -13,8 +13,6 @@ const CartDeleteModal = ({ selectedIndex }: CartDeleteModalProps) => {
   const [cart, setCart] = useRecoilState(cartState);
   const { closeModal } = useModal();
 
-  console.log(selectedIndex);
-
   const handleDelete = () => {
     setCart(cart.filter((_, index) => index !== selectedIndex));
     closeModal('cartDelete');

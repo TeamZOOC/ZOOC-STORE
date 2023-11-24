@@ -6,7 +6,10 @@ const useCheckAgreement = () => {
     Array(AGREEMENT.length).fill(false),
   );
 
-  const isAllAgreement = agreement.every((check) => check === true);
+  const isAgreement =
+    agreement[0] === true && agreement[1] === true && agreement[2] === true;
+
+  const isAllAgreement = agreement.every((item) => item === true);
 
   const handleCheckAgreement = (index: number) => {
     setAgreement(agreement.map((item, i) => (i === index - 1 ? !item : item)));
@@ -18,6 +21,7 @@ const useCheckAgreement = () => {
 
   return {
     agreement,
+    isAgreement,
     isAllAgreement,
     handleCheckAgreement,
     handleCheckAllAgreement,

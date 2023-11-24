@@ -17,7 +17,7 @@ const ImageUploadHeader = () => {
         router.back();
       }}
       exitFunc={() => {
-        openModal('petRegisterQuit');
+        openModal('petRegisterQuit', { route: 'home' });
       }}
     />
   );

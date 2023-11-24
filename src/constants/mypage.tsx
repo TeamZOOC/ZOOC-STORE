@@ -1,5 +1,5 @@
 import { IcInquiry, IcMyOrderList, IcNotice } from '../../public/icons';
-import { FITAPAT_EMAIL, FITAPAT_INSTAGRAM } from './fitapatUrls';
+import { FITAPAT_INSTAGRAM, FITAPAT_KAKAO_LINK } from './fitapatUrls';
 
 export const MYPAGE_MENU = [
   {
@@ -13,6 +13,6 @@ export const MYPAGE_MENU = [
     id: 3,
     name: '문의하기',
     icon: <IcInquiry />,
-    path: `mailto:${FITAPAT_EMAIL}`,
+    path: FITAPAT_KAKAO_LINK,
   },
 ];

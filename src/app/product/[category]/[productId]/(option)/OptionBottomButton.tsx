@@ -6,10 +6,10 @@ import { cartState } from '@/recoil/cart/atom';
 import { selectedOptionsState } from '@/recoil/option/atom';
 import { useParams } from 'next/navigation';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
 import { css, styled } from 'styled-components';
-import { purchaseState } from '@/recoil/purchase/atom';
 
-interface OptionBottomButtonProps {
+export interface OptionBottomButtonProps {
   handleToggleOption: () => void;
 }
 
@@ -20,6 +20,7 @@ const OptionBottomButton = ({
   const [, setCart] = useRecoilState(cartState);
   const [, setPurchase] = useRecoilState(purchaseState);
   const resetPurchase = useResetRecoilState(purchaseState);
+  const resetPurchasePrice = useResetRecoilState(purchasePriceState);
   const selectedOption = useRecoilValue(selectedOptionsState);
   const { productDetail } = useGetProductDetail(Number(productId));
 
@@ -64,6 +65,7 @@ const OptionBottomButton = ({
 
   const handlePurchaseItem = () => {
     resetPurchase();
+    resetPurchasePrice();
     if (productDetail) {
       setPurchase((prevPurchase) => {
         // selectedOption의 길이에 따라 다른 로직 실행
@@ -120,9 +122,10 @@ const OptionBottomButton = ({
     </StOptionBottomButtonContainer>
   );
 };
+
 export default OptionBottomButton;
 
-const StOptionBottomButtonContainer = styled.div`
+export const StOptionBottomButtonContainer = styled.div`
   display: grid;
   grid-template-columns: 3.5fr 6.5fr;
   gap: 0.9rem;
@@ -139,7 +142,9 @@ const StOptionBottomButton = styled.button`
 
   box-shadow: 0 0 1.5rem 0 rgba(0, 0, 0, 0.06);
 `;
-const StOptionBasketButton = styled(StOptionBottomButton)<{ $active: boolean }>`
+export const StOptionBasketButton = styled(StOptionBottomButton)<{
+  $active: boolean;
+}>`
   background-color: ${({ theme }) => theme.colors.zw_background};
 
   transition: all 0.2s;
@@ -156,7 +161,7 @@ const StOptionBasketButton = styled(StOptionBottomButton)<{ $active: boolean }>`
         `}
 `;
 
-const StOptionPurchaseButton = styled(StOptionBottomButton)<{
+export const StOptionPurchaseButton = styled(StOptionBottomButton)<{
   $active: boolean;
 }>`
   transition: all 0.2s;

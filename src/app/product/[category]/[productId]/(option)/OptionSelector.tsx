@@ -6,7 +6,8 @@ import { css, styled } from 'styled-components';
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { productOptionState } from '@/recoil/product/atom';
-import { OptionInfo, selectedOptionsState } from '@/recoil/option/atom';
+import { selectedOptionsState } from '@/recoil/option/atom';
+import { OptionInfo } from '@/types/cart';
 import { IcDropDown, IcDropDownActive } from '../../../../../../public/icons';
 import OptionDropdown from './OptionDropdown';
 

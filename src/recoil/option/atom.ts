@@ -1,11 +1,6 @@
 import { atom } from 'recoil';
 
-export interface OptionInfo {
-  id: number;
-  name: string;
-  optionIndex: number;
-  quantity: number;
-}
+import { OptionInfo } from '@/types/cart';
 
 export const selectedOptionsState = atom<Array<OptionInfo[]>>({
   key: 'selectedOptionsState',
