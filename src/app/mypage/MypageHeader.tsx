@@ -1,5 +1,6 @@
 'use client';
 
+/* eslint-disable react/jsx-no-useless-fragment */
 import { Header } from '@/components/header';
 import { useRouter } from 'next/navigation';
 

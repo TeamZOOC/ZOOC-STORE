@@ -10,7 +10,7 @@ interface OrderQuitModalProps {
   route: 'back' | 'home';
 }
 
-const OrderQuitModal = ({route}:OrderQuitModalProps) => {
+const OrderQuitModal = ({ route }: OrderQuitModalProps) => {
   const { closeModal } = useModal();
   const router = useRouter();
 

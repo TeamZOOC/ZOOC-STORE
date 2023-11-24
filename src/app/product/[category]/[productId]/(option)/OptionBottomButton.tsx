@@ -1,4 +1,5 @@
 'use client';
+
 import React from 'react';
 import useGetProductDetail from '@/app/product/hooks/useGetProductDetail';
 import { cartState } from '@/recoil/cart/atom';

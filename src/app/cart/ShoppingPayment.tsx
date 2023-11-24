@@ -13,8 +13,8 @@ import { useEffect } from 'react';
 
 const ShoppingPayment = () => {
   const cart = useRecoilValue(cartState);
-  const [purchase, setPurchase] = useRecoilState(purchaseState);
-  const [purchasePrice, setPurchasePrice] = useRecoilState(purchasePriceState);
+  const [, setPurchase] = useRecoilState(purchaseState);
+  const [, setPurchasePrice] = useRecoilState(purchasePriceState);
   const userStatus = useRecoilValue(userState);
   const router = useRouter();
 
