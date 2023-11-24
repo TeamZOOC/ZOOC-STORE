@@ -3,7 +3,7 @@
 import { deleteCookie, getCookie } from 'cookies-next';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
-import { useRecoilState, useResetRecoilState } from 'recoil';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { MYPAGE_MENU } from '@/constants/mypage';
@@ -16,7 +16,7 @@ import { IcLogout } from '../../../public/icons';
 const MyPageMenu = () => {
   const { openModal } = useModal();
   const [, setUserStatus] = useRecoilState(userState);
-  const resetPetId = useResetRecoilState(petIdState);
+  const [, setPetId] = useRecoilState(petIdState);
   const kakaoAccessToken = getCookie('kakaoAccessToken');
 
   const handleLogout = () => {
@@ -26,7 +26,7 @@ const MyPageMenu = () => {
     deleteCookie('accessToken');
     signOut({ callbackUrl: 'https://www.fitapat.com/' });
     setUserStatus('GUEST');
-    resetPetId();
+    setPetId(undefined);
   };
 
   return (
