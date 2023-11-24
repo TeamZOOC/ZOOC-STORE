@@ -101,6 +101,7 @@ const StBottomButtonWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   width: 100%;
 `;
@@ -112,6 +113,7 @@ const StSocialLoginButton = styled.button`
   gap: 0.946rem;
 
   width: 100%;
+  width: 43rem;
   padding: 2.8rem 0;
 
   ${({ theme }) => theme.fonts.zw_Subhead1};
