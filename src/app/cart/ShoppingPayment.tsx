@@ -20,7 +20,7 @@ const ShoppingPayment = () => {
   const totalSaleQuantity = cart.reduce((total, item) => {
     // 첫 번째 optionList 원소의 quantity와 해당 item의 sale 값을 곱함
     const firstOptionQuantity = item.optionList[0]
-      ? item.optionList[0].quantity
+      ? item.optionList[0].pieces
       : 0;
     const itemTotal = item.price * firstOptionQuantity;
 
@@ -39,11 +39,12 @@ const ShoppingPayment = () => {
       // resetPurchase();
     } else {
       setPurchase(cart);
+      console.log(purchase);
       router.push('/order');
+      // 로그인으로 이동
       // router.push('/auth/login');
     }
   };
-  console.log(purchase);
 
   return (
     <>

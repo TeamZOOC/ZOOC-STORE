@@ -70,7 +70,7 @@ const Order = () => {
     purchases.map((product) => ({
       productId: product.id,
       optionIds: product.optionList.map((option) => option.id),
-      quantity: product.optionList[0].quantity,
+      pieces: product.optionList[0].pieces,
     }));
 
   console.log(purchaseData(purchase));
@@ -82,14 +82,7 @@ const Order = () => {
     const postData: OrderPostInfo = {
       ...formdata,
       petId,
-      products: [
-        // TODO: 주문할 상품, 옵션 받아오기
-        {
-          productId: 2,
-          optionIds: [1],
-          pieces: 3,
-        },
-      ],
+      products: purchaseData(purchase),
     };
     try {
       await orderPost(postData);

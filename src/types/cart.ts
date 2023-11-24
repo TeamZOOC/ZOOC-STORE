@@ -2,7 +2,7 @@ export interface OptionInfo {
   id: number;
   name: string;
   optionIndex: number;
-  quantity: number;
+  pieces: number;
 }
 
 export interface CartInfo {

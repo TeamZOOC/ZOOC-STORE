@@ -2,8 +2,9 @@
 
 'use client';
 
-import { OptionInfo } from '@/recoil/option/atom';
 import { styled } from 'styled-components';
+
+import { OptionInfo } from '@/types/cart';
 
 interface OptionDropdownProps {
   productOptionList: {
@@ -24,7 +25,7 @@ const OptionDropdown = ({
       <StOptionDropdownItem
         key={option.id}
         onClick={() =>
-          handleOptionSelect({ ...option, optionIndex, quantity: 1 })
+          handleOptionSelect({ ...option, optionIndex, pieces: 1 })
         }
       >
         {option.name}
