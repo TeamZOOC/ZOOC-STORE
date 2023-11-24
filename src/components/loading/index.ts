@@ -1,1 +1,1 @@
-export { default as ExLoading } from './ExLoading';
+export { default as LoadingSpinner } from './LoadingSpinner';
