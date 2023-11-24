@@ -18,3 +18,8 @@ export const buyerState = atom({
     buyerPhone: '',
   },
 });
+
+export const returnPathState = atom<string | undefined>({
+  key: 'returnPathState',
+  default: undefined,
+});
