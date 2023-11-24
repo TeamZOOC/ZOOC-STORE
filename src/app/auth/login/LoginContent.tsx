@@ -1,34 +1,23 @@
 'use client';
 
-import { getSession, signIn, useSession } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import { styled } from 'styled-components';
 
 // import { useEffect } from 'react';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { IcApple, IcKakao } from '../../../../public/icons';
+import { useLogin } from '../hooks/useLogin';
 // import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
-  const { data: session, status } = useSession();
+  useLogin();
 
-  const handleSignIn = async () => {
-    await signIn('kakao');
-    // 세션 갱신
-    await getSession();
-  };
+  // const handleSignIn = async () => {
+  //   await signIn('kakao');
+  //   // 세션 갱신
+  //   await getSession();
+  // };
 
-  useEffect(() => {
-    const refreshSession = async () => {
-      if (status === 'authenticated') {
-        await getSession();
-      }
-    };
-
-    refreshSession();
-  }, [status]);
-
-  console.log(session);
-  console.log(status);
   return (
     <>
       <StLoginContent>
@@ -53,7 +42,7 @@ const LoginContent = () => {
           <IcApple />
           Apple로 로그인
         </StAppleLoginButton>
-        <StKakaoLoginButton type="button" onClick={handleSignIn}>
+        <StKakaoLoginButton type="button" onClick={() => signIn('kakao')}>
           <IcKakao />
           Kakao로 로그인
         </StKakaoLoginButton>
