@@ -10,3 +10,8 @@ export const userState = atom<UserState>({
   default: 'GUEST',
   effects_UNSTABLE: [persistAtom],
 });
+
+export const loginLoadingState = atom<boolean>({
+  key: 'loginLoadingState',
+  default: false,
+});
