@@ -9,6 +9,7 @@ import { BottomButton } from '@/components/button';
 import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
+import { cartState } from '@/recoil/cart/atom';
 import { petIdState } from '@/recoil/pet/atom';
 import { purchaseState } from '@/recoil/purchase/atom';
 import { CartInfo } from '@/types/cart';
@@ -22,7 +23,6 @@ import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
 import PaymentMethod from './paymentMethod/PaymentMethod';
 import ProductsInfo from './productsInfo/ProductsInfo';
-import { cartState } from '@/recoil/cart/atom';
 
 const Order = () => {
   const { products, payment } = ORDER_DETAIL;
@@ -81,8 +81,9 @@ const Order = () => {
       showToast('no_pet');
       return;
     }
+    const { agreement, ...formDataWithoutAgreement } = formdata;
     const postData: OrderPostInfo = {
-      ...formdata,
+      ...formDataWithoutAgreement,
       petId,
       products: purchaseData(purchase),
     };

@@ -6,12 +6,21 @@ import { styled } from 'styled-components';
 
 import { useModal } from '@/hooks/modal';
 
-const OrderQuitModal = () => {
+interface OrderQuitModalProps {
+  route: 'back' | 'home';
+}
+
+const OrderQuitModal = ({route}:OrderQuitModalProps) => {
   const { closeModal } = useModal();
   const router = useRouter();
 
   const handleQuit = useCallback(() => {
-    router.back();
+    if (route === 'back') {
+      router.back();
+    } else if (route === 'home') {
+      router.push('/');
+    }
+    closeModal('orderQuit');
   }, [router]);
 
   const handleCancel = useCallback(() => {
