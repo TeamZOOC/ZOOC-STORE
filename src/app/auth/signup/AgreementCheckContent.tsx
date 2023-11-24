@@ -50,9 +50,13 @@ const AgreementCheckContent = () => {
         </StAgeementCheckBox>
       </StAgreementCheckAll>
       {AGREEMENT.map(({ id, agreementLink, agreementTitle, show }) => (
-        <StAgreementCheckItem key={id} onClick={() => handleCheckAgreement(id)}>
+        <StAgreementCheckItem key={id}>
           <StAgreementCheckItemLeft>
-            <StAgeementCheckBox type="button" $check={agreement[id - 1]}>
+            <StAgeementCheckBox
+              type="button"
+              $check={agreement[id - 1]}
+              onClick={() => handleCheckAgreement(id)}
+            >
               {agreement[id - 1] && <IcCheck />}
             </StAgeementCheckBox>
             {agreementTitle}
