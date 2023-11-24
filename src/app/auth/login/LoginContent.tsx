@@ -4,11 +4,12 @@ import { getSession, signIn, useSession } from 'next-auth/react';
 import { styled } from 'styled-components';
 
 // import { useEffect } from 'react';
+import { useEffect } from 'react';
 import { IcApple, IcKakao } from '../../../../public/icons';
 // import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const handleSignIn = async () => {
     await signIn('kakao');
@@ -16,8 +17,18 @@ const LoginContent = () => {
     await getSession();
   };
 
-  console.log(session);
+  useEffect(() => {
+    const refreshSession = async () => {
+      if (status === 'authenticated') {
+        await getSession();
+      }
+    };
 
+    refreshSession();
+  }, [status]);
+
+  console.log(session);
+  console.log(status);
   return (
     <>
       <StLoginContent>
