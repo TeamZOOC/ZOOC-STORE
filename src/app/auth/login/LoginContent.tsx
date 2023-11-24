@@ -27,11 +27,6 @@ const LoginContent = () => {
   if (session) {
     console.log(session.provider);
   }
-  // const handleSignIn = async () => {
-  //   await signIn('kakao');
-  //   // 세션 갱신
-  //   await getSession();
-  // };
 
   return (
     <>
