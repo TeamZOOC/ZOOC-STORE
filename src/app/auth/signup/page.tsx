@@ -1,10 +1,10 @@
-import { Header } from '@/components/header';
 import { MainLayout } from '@/components/layout';
 import SignUpTermsAgreement from './SignUpTermsAgreement';
+import SignUpHeaderContainer from './SignUpHeaderContainer';
 
 const page = () => (
   <>
-    <Header headerTitle="회원가입" exit />
+    <SignUpHeaderContainer />
     <MainLayout>
       <SignUpTermsAgreement />
     </MainLayout>

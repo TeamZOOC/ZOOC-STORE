@@ -8,6 +8,7 @@ const MODAL_KEY = [
   'cartDelete',
   'paymentQuit',
   'withdraw',
+  'signUp',
 ] as const;
 
 export type ModalKey = (typeof MODAL_KEY)[number];
