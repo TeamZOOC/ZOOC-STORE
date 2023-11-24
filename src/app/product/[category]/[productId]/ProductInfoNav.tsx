@@ -27,18 +27,31 @@ const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
   const [isUnMount, setIsUnMount] = useState(false);
   const [isOpenCartToast, setIsOpenCartToast] = useState(false);
 
-  const handleToggleOption = () => {
-    setIsOptionToggle(true);
-    setIsUnMount((prev) => !prev);
-  };
+  // const handleToggleOption = () => {
+  //   setIsOptionToggle(true);
+  //   setIsUnMount((prev) => !prev);
+  // };
 
-  const handleAnimationEnd = () => {
-    if (isUnMount) {
+  const handleToggleOption = () => {
+    if (isOptionToggle) {
+      setIsUnMount(!isUnMount);
+      setTimeout(() => {
+        setIsOptionToggle(!isOptionToggle);
+      }, 500);
       return;
     }
 
-    setIsOptionToggle(false);
+    setIsOptionToggle(!isOptionToggle);
+    setIsUnMount(!isUnMount);
   };
+
+  // const handleAnimationEnd = () => {
+  //   if (isUnMount) {
+  //     return;
+  //   }
+
+  //   setIsOptionToggle(false);
+  // };
 
   const handleCartToast = () => {
     setIsOpenCartToast((prev) => !prev);
@@ -104,7 +117,6 @@ const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
         <OptionBottomSheetContainer>
           <OptionBottomSheet
             isUnMount={isUnMount}
-            handleAnimationEnd={handleAnimationEnd}
             isOptionToggle={isOptionToggle}
             bottomSheetRef={bottomSheetRef}
             productPrice={productPrice}
