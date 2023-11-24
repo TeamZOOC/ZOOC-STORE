@@ -6,7 +6,7 @@ import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { Thumbnail } from '@/components/image';
-import { uploadImagesState } from '@/recoil/createmodel/atom';
+import { uploadImagesState } from '@/recoil/pet/atom';
 
 const ImageConfirm = () => {
   const [uploadImages, setUploadImages] =

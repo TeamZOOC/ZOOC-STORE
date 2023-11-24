@@ -2,24 +2,39 @@
 
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
 import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
 import { ORDER_DETAIL } from '@/mocks/orderDetailData';
+import { petIdState } from '@/recoil/pet/atom';
+import { purchaseState } from '@/recoil/purchase/atom';
+import { CartInfo } from '@/types/cart';
 import { OrderFormData } from '@/types/form';
+import { OrderPostInfo } from '@/types/order';
+import { formatPrice } from '@/utils/formatPrice';
 
+import usePostOrder from '../hooks/usePostOrder';
 import Agreement from './agreement/Agreement';
 import CustomerInfo from './customerInfo/CustomerInfo';
 import DeliveryInfo from './deliveryInfo/DeliveryInfo';
 import PaymentMethod from './paymentMethod/PaymentMethod';
-import ProductInfo from './productsInfo/ProductsInfo';
+import ProductsInfo from './productsInfo/ProductsInfo';
 
 const Order = () => {
   const { products, payment } = ORDER_DETAIL;
   const { showToast } = useToast();
   const router = useRouter();
+  const petId = useRecoilValue(petIdState);
+  const purchase = useRecoilValue(purchaseState);
+
+  const { orderPost } = usePostOrder();
+
+  const totalPrice = formatPrice(
+    payment.totalProductPrice + payment.deliveryFee,
+  );
 
   const methods = useForm<OrderFormData>({
     defaultValues: {
@@ -43,7 +58,7 @@ const Order = () => {
         thirdParty: false,
       },
     },
-    mode: 'onChange',
+    mode: 'onSubmit',
   });
 
   const {
@@ -51,9 +66,31 @@ const Order = () => {
     formState: { isValid },
   } = methods;
 
-  const onSubmit = (data: OrderFormData) => {
-    console.log(data);
-    router.push('/order/payment');
+  const purchaseData = (purchases: CartInfo[]) =>
+    purchases.map((product) => ({
+      productId: product.id,
+      optionIds: product.optionList.map((option) => option.id),
+      pieces: product.optionList[0].pieces,
+    }));
+
+  console.log('purchaseData', purchaseData(purchase));
+  const onSubmit = async (formdata: OrderFormData) => {
+    if (!petId) {
+      showToast('no_pet');
+      return;
+    }
+    const postData: OrderPostInfo = {
+      ...formdata,
+      petId,
+      products: purchaseData(purchase),
+    };
+    try {
+      await orderPost(postData);
+      router.push(`/order/payment?totalPrice=${totalPrice}`);
+    } catch (error) {
+      showToast('order_error');
+      console.error('주문 실패', error);
+    }
   };
 
   const onError = () => {
@@ -63,7 +100,7 @@ const Order = () => {
   return (
     <FormProvider {...methods}>
       <StOrder>
-        <ProductInfo products={products} />
+        <ProductsInfo products={products} />
         <StHr />
         <CustomerInfo />
         <DeliveryInfo />
@@ -77,7 +114,7 @@ const Order = () => {
         <Agreement />
         <BottomButton
           btnType="button"
-          btnName="38,000원 결제하기"
+          btnName={`${totalPrice}원 결제하기`}
           disabled={!isValid}
           activeFunc={handleSubmit(onSubmit, onError)}
         />

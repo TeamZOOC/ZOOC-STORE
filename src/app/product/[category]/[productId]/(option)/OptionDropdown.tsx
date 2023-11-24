@@ -1,18 +1,35 @@
+/* eslint-disable no-unused-vars */
+
 'use client';
 
 import { styled } from 'styled-components';
+
+import { OptionInfo } from '@/types/cart';
 
 interface OptionDropdownProps {
   productOptionList: {
     id: number;
     name: string;
   }[];
+  optionIndex: number;
+  handleOptionSelect: (option: OptionInfo) => void;
 }
 
-const OptionDropdown = ({ productOptionList }: OptionDropdownProps) => (
+const OptionDropdown = ({
+  optionIndex,
+  productOptionList,
+  handleOptionSelect,
+}: OptionDropdownProps) => (
   <StOptionDropdown>
-    {productOptionList.map(({ id, name }) => (
-      <StOptionDropdownItem key={id}>{name}</StOptionDropdownItem>
+    {productOptionList.map((option) => (
+      <StOptionDropdownItem
+        key={option.id}
+        onClick={() =>
+          handleOptionSelect({ ...option, optionIndex, pieces: 1 })
+        }
+      >
+        {option.name}
+      </StOptionDropdownItem>
     ))}
   </StOptionDropdown>
 );
@@ -41,4 +58,6 @@ const StOptionDropdownItem = styled.li`
   & + & {
     margin-top: 2.2rem;
   }
+
+  cursor: pointer;
 `;

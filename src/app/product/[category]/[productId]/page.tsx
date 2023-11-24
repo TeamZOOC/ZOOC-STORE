@@ -1,9 +1,9 @@
-import { Header } from '@/components/header';
 import ProductDetailContainer from './ProductDetailContainer';
+import ProductDetailHeaderContainer from './ProductDetailHeaderContainer';
 
 const page = ({ params }: { params: { productId: number } }) => (
   <>
-    <Header sideMenu />
+    <ProductDetailHeaderContainer />
     <ProductDetailContainer pageParams={params.productId} />
   </>
 );

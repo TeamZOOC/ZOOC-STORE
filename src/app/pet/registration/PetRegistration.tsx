@@ -1,35 +1,36 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
-import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
 import { TextInput } from '@/components/form';
 import { useToast } from '@/hooks/toast';
+import { petRegisterState } from '@/recoil/pet/atom';
 import { PetDataInfo } from '@/types/pet';
 
 const PetRegistration = () => {
+  const [petRegisterData, setPetRegisterData] =
+    useRecoilState(petRegisterState);
   const {
     control,
     handleSubmit,
+    setValue,
     formState: { isValid },
   } = useForm<PetDataInfo>({
     mode: 'onSubmit',
+    defaultValues: petRegisterData,
   });
 
-  const { registerPet } = useRegisterPet();
   const { showToast } = useToast();
   const router = useRouter();
 
-  const onSubmit = async (data: PetDataInfo) => {
-    try {
-      await registerPet(data);
-      router.push('/pet/registration/createmodel');
-    } catch (error) {
-      console.error(error);
-    }
+  const onSubmit = async (petData: PetDataInfo) => {
+    setPetRegisterData(petData);
+    router.push(`/pet/registration/createmodel`);
   };
 
   const onError = (errors: any) => {
@@ -38,6 +39,13 @@ const PetRegistration = () => {
     }
   };
 
+  useEffect(() => {
+    if (petRegisterData) {
+      setValue('name', petRegisterData.name);
+      setValue('breed', petRegisterData.breed);
+    }
+  }, [petRegisterData, setValue]);
+
   return (
     <>
       <StRegistration>
@@ -45,7 +53,7 @@ const PetRegistration = () => {
         <p>해당 정보는 상품 제작 및 관리에 활용돼요</p>
         <StRegistrationForm onSubmit={handleSubmit(onSubmit)}>
           <TextInput
-            name="petName"
+            name="name"
             label="이름"
             placeholder="사랑이"
             control={control}
@@ -65,7 +73,7 @@ const PetRegistration = () => {
       <BottomButton
         btnName="반려동물 AI 모델 생성하기"
         btnType="button"
-        disabled={!isValid}
+        disabled={!petRegisterData || !isValid}
         activeFunc={handleSubmit(onSubmit, onError)}
       />
     </>

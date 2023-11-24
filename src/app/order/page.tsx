@@ -1,10 +1,9 @@
-import { Header } from '@/components/header';
-
 import Order from './(order)/Order';
+import OrderHeader from './OrderHeader';
 
 const page = () => (
   <>
-    <Header headerTitle="주문하기" exit />
+    <OrderHeader />
     <Order />
   </>
 );
