@@ -8,7 +8,7 @@ import { IcApple, IcKakao } from '../../../../public/icons';
 // import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession({ required: true });
   console.log(session);
 
   return (
