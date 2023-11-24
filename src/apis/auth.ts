@@ -30,7 +30,6 @@ export const appleSignIn = async (email: string, sub: string) => {
       email,
       sub,
     });
-    console.log(response);
     return response.data;
   } catch (e) {
     console.error(e);
