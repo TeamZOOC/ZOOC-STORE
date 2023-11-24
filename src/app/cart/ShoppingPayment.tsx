@@ -1,21 +1,24 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
 import { cartState } from '@/recoil/cart/atom';
+import { prevPathState, returnPathState } from '@/recoil/order/atom';
 import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
 import { userState } from '@/recoil/user/atom';
 import { formatPrice } from '@/utils/formatPrice';
-import { useEffect } from 'react';
 
 const ShoppingPayment = () => {
   const cart = useRecoilValue(cartState);
   const [, setPurchase] = useRecoilState(purchaseState);
   const [, setPurchasePrice] = useRecoilState(purchasePriceState);
   const userStatus = useRecoilValue(userState);
+  const [, setReturnPath] = useRecoilState(returnPathState);
+  const [, setPrevPathStatus] = useRecoilState(prevPathState);
   const router = useRouter();
 
   const totalSaleQuantity = cart.reduce((total, item) => {
@@ -30,15 +33,18 @@ const ShoppingPayment = () => {
   }, 0);
 
   const handleCartToPurchase = () => {
-    if (userStatus === 'NO_PET') {
+    setPurchase(cart);
+    setReturnPath('/order');
+    setPrevPathStatus('cart');
+
+    if (userStatus === 'IMAGE_EXISTS') {
+      router.push('/order');
+      setReturnPath(undefined);
+    } else if (userStatus === 'NO_PET') {
       router.push('/pet/registration');
     } else if (userStatus === 'PET_EXISTS' || userStatus === 'DATASET_EXISTS') {
       router.push('/pet/registration/createmodel');
-    } else if (userStatus === 'IMAGE_EXISTS') {
-      setPurchase(cart);
-      router.push('/order');
     } else {
-      setPurchase(cart);
       router.push('/auth/login');
     }
   };

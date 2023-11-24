@@ -1,12 +1,17 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
+
+import { returnPathState } from '@/recoil/order/atom';
 
 import { IcWarning } from '../../../../public/icons';
 
 const PetEmpty = () => {
   const router = useRouter();
+  const [, setReturnPath] = useRecoilState(returnPathState);
+
   return (
     <StPetEmpty>
       <StEmpty>
@@ -17,6 +22,7 @@ const PetEmpty = () => {
       <StRegisterPetButton
         type="button"
         onClick={() => {
+          setReturnPath('/mypage');
           router.push('/pet/registration');
         }}
       >

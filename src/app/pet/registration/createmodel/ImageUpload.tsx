@@ -11,6 +11,7 @@ import { BottomButton } from '@/components/button';
 import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { useToast } from '@/hooks/toast';
+import { returnPathState } from '@/recoil/order/atom';
 import {
   petIdState,
   petRegisterState,
@@ -32,6 +33,7 @@ const ImageUpload = () => {
   const { showToast } = useToast();
   const [, setUserStatus] = useRecoilState(userState);
   const [, setPetIdStatus] = useRecoilState(petIdState);
+  const [returnPath, setReturnPath] = useRecoilState(returnPathState);
   const router = useRouter();
 
   const petRegisterData = useRecoilValue(petRegisterState);
@@ -78,7 +80,13 @@ const ImageUpload = () => {
       const datasetId = await createDataset(petId);
       await uploadDatasetImages(datasetId, validatedImages);
       setUserStatus('IMAGE_EXISTS');
-      router.push('/mypage');
+
+      if (returnPath) {
+        router.push(returnPath);
+        setReturnPath(undefined);
+      } else {
+        router.push('/mypage');
+      }
     } catch (e) {
       showToast('dataset_upload_error');
       console.error(e);

@@ -1,13 +1,16 @@
 'use client';
 
+import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { css, styled } from 'styled-components';
+
 import useGetProductDetail from '@/app/product/hooks/useGetProductDetail';
 import { cartState } from '@/recoil/cart/atom';
 import { selectedOptionsState } from '@/recoil/option/atom';
-import { useParams } from 'next/navigation';
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { prevPathState, returnPathState } from '@/recoil/order/atom';
 import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
-import { css, styled } from 'styled-components';
+import { userState } from '@/recoil/user/atom';
 
 export interface OptionBottomButtonProps {
   handleToggleOption: () => void;
@@ -18,11 +21,16 @@ const OptionBottomButton = ({
 }: OptionBottomButtonProps) => {
   const { productId } = useParams();
   const [, setCart] = useRecoilState(cartState);
-  const [, setPurchase] = useRecoilState(purchaseState);
+  const [purchase, setPurchase] = useRecoilState(purchaseState);
+  const [, setPurchasePrice] = useRecoilState(purchasePriceState);
   const resetPurchase = useResetRecoilState(purchaseState);
-  const resetPurchasePrice = useResetRecoilState(purchasePriceState);
   const selectedOption = useRecoilValue(selectedOptionsState);
   const { productDetail } = useGetProductDetail(Number(productId));
+
+  const userStatus = useRecoilValue(userState);
+  const [, setReturnPath] = useRecoilState(returnPathState);
+  const [, setPrevPathStatus] = useRecoilState(prevPathState);
+  const router = useRouter();
 
   const handleSaveCart = () => {
     if (productDetail) {
@@ -63,9 +71,24 @@ const OptionBottomButton = ({
     handleToggleOption();
   };
 
+  const handleGoPurchase = () => {
+    setReturnPath('/order');
+    setPrevPathStatus('buy');
+
+    if (userStatus === 'IMAGE_EXISTS') {
+      router.push('/order');
+      setReturnPath(undefined);
+    } else if (userStatus === 'NO_PET') {
+      router.push('/pet/registration');
+    } else if (userStatus === 'PET_EXISTS' || userStatus === 'DATASET_EXISTS') {
+      router.push('/pet/registration/createmodel');
+    } else {
+      router.push('/auth/login');
+    }
+  };
+
   const handlePurchaseItem = () => {
     resetPurchase();
-    resetPurchasePrice();
     if (productDetail) {
       setPurchase((prevPurchase) => {
         // selectedOption의 길이에 따라 다른 로직 실행
@@ -101,6 +124,23 @@ const OptionBottomButton = ({
         return prevPurchase;
       });
     }
+    calcTotalPrice();
+    handleGoPurchase();
+  };
+
+  const calcTotalPrice = () => {
+    const totalSaleQuantity = purchase.reduce((total, item) => {
+      const firstOptionQuantity = item.optionList[0]
+        ? item.optionList[0].pieces
+        : 0;
+      const itemTotal = item.price * firstOptionQuantity;
+
+      return total + itemTotal;
+    }, 0);
+    setPurchasePrice({
+      totalProductPrice: totalSaleQuantity,
+      deliveryFee: 0,
+    });
   };
 
   return (
