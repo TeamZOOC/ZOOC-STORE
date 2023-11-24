@@ -14,10 +14,12 @@ import { userState } from '@/recoil/user/atom';
 
 export interface OptionBottomButtonProps {
   handleToggleOption: () => void;
+  handleCartToast: () => void;
 }
 
 const OptionBottomButton = ({
   handleToggleOption,
+  handleCartToast,
 }: OptionBottomButtonProps) => {
   const { productId } = useParams();
   const [, setCart] = useRecoilState(cartState);
@@ -25,6 +27,7 @@ const OptionBottomButton = ({
   const [, setPurchasePrice] = useRecoilState(purchasePriceState);
   const resetPurchase = useResetRecoilState(purchaseState);
   const selectedOption = useRecoilValue(selectedOptionsState);
+  const resetSelectedOption = useResetRecoilState(selectedOptionsState);
   const { productDetail } = useGetProductDetail(Number(productId));
 
   const userStatus = useRecoilValue(userState);
@@ -67,6 +70,7 @@ const OptionBottomButton = ({
         // selectedOption의 길이가 1도 2도 아닐 경우, 카트를 변경하지 않음
         return prevCart;
       });
+      resetSelectedOption();
     }
     handleToggleOption();
   };
@@ -147,13 +151,18 @@ const OptionBottomButton = ({
     <StOptionBottomButtonContainer>
       <StOptionBasketButton
         type="button"
+        disabled={selectedOption.length === 0}
         $active={selectedOption.length > 0}
-        onClick={handleSaveCart}
+        onClick={() => {
+          handleSaveCart();
+          handleCartToast();
+        }}
       >
         장바구니
       </StOptionBasketButton>
       <StOptionPurchaseButton
         type="button"
+        disabled={selectedOption.length === 0}
         $active={selectedOption.length > 0}
         onClick={handlePurchaseItem}
       >

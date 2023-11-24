@@ -17,16 +17,16 @@ interface OptionBottomSheetProps {
   isOptionToggle: boolean;
   bottomSheetRef: React.RefObject<HTMLDivElement>;
   productPrice: number;
-  handleAnimationEnd: () => void;
   handleToggleOption: () => void;
+  handleCartToast: () => void;
 }
 const OptionBottomSheet = ({
   isUnMount,
   isOptionToggle,
   bottomSheetRef,
   handleToggleOption,
-  handleAnimationEnd,
   productPrice,
+  handleCartToast,
 }: OptionBottomSheetProps) => {
   const selectedOptions = useRecoilValue(selectedOptionsState);
 
@@ -35,7 +35,6 @@ const OptionBottomSheet = ({
       ref={bottomSheetRef}
       $animationUp={isOptionToggle}
       $isUnMount={isUnMount}
-      onAnimationEnd={handleAnimationEnd}
     >
       <StOptionBottomSheetInner $position="top">
         <OptionSelector />
@@ -54,7 +53,10 @@ const OptionBottomSheet = ({
         {selectedOptions.length > 0 && (
           <OptionTotalPrice productPrice={productPrice} />
         )}
-        <OptionBottomButton handleToggleOption={handleToggleOption} />
+        <OptionBottomButton
+          handleToggleOption={handleToggleOption}
+          handleCartToast={handleCartToast}
+        />
       </StOptionBottomSheetInner>
     </StOptionBottomSheet>
   );

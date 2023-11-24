@@ -29,9 +29,3 @@ export interface PetEditInfo {
 export interface DatasetInfo {
   datasetId: string;
 }
-
-export interface UploadInfo {
-  isUploading: boolean;
-  progress: number;
-  error: Error | null;
-}
