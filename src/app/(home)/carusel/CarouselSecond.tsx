@@ -12,6 +12,7 @@ const CarouselSecond = () => (
       alt="두번째 이미지 텍스트"
       fill
       style={{ position: 'absolute', zIndex: 10 }}
+      sizes="100vw"
     />
     <Image src={ImageCarouselSecond} alt="두번째 이미지" fill />
   </StCarouselSecond>
