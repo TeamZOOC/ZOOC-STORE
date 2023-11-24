@@ -11,10 +11,10 @@ const PetRegistrationHeader = () => {
       headerTitle="반려동물 등록"
       exit
       backFunc={() => {
-        openModal('petRegisterQuit');
+        openModal('petRegisterQuit', { route: 'back' });
       }}
       exitFunc={() => {
-        openModal('petRegisterQuit');
+        openModal('petRegisterQuit', { route: 'home' });
       }}
     />
   );

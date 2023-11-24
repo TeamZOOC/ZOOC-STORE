@@ -10,10 +10,10 @@ const OrderHeader = () => {
       headerTitle="주문하기"
       exit
       backFunc={() => {
-        openModal('orderQuit');
+        openModal('orderQuit', { route: 'back' });
       }}
       exitFunc={() => {
-        openModal('orderQuit');
+        openModal('orderQuit', { route: 'home' });
       }}
     />
   );

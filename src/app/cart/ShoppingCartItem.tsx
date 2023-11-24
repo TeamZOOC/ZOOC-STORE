@@ -3,15 +3,18 @@
 'use client';
 
 import React from 'react';
-import { styled } from 'styled-components';
-import { cartInfo, cartState } from '@/recoil/cart/atom';
 import { useRecoilState } from 'recoil';
-import { formatPrice } from '@/utils/formatPrice';
+import { styled } from 'styled-components';
+
 import { useModal } from '@/hooks/modal';
+import { cartState } from '@/recoil/cart/atom';
+import { CartInfo } from '@/types/cart';
+import { formatPrice } from '@/utils/formatPrice';
+
 import { IcMinus, IcPlus, IcProductDelete } from '../../../public/icons';
 
 interface cartItemProps {
-  cartItem: cartInfo;
+  cartItem: CartInfo;
   selectedIndex: number;
 }
 
@@ -37,7 +40,7 @@ const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
       optionList: [
         {
           ...updatedCart[selectedIndex].optionList[0],
-          quantity: updatedCart[selectedIndex].optionList[0].quantity + 1,
+          pieces: updatedCart[selectedIndex].optionList[0].pieces + 1,
         },
         ...updatedCart[selectedIndex].optionList.slice(1), // 나머지 optionList 원소들을 추가합니다.
       ],
@@ -46,7 +49,7 @@ const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
     setCart(updatedCart);
   };
   const handleDecreaseQuantity = () => {
-    if (cart[selectedIndex].optionList[0].quantity === 1) return;
+    if (cart[selectedIndex].optionList[0].pieces === 1) return;
     // cart 배열의 복사본을 생성합니다.
     const updatedCart = [...cart];
 
@@ -57,7 +60,7 @@ const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
       optionList: [
         {
           ...updatedCart[selectedIndex].optionList[0],
-          quantity: updatedCart[selectedIndex].optionList[0].quantity - 1,
+          pieces: updatedCart[selectedIndex].optionList[0].pieces - 1,
         },
         ...updatedCart[selectedIndex].optionList.slice(1), // 나머지 optionList 원소들을 추가합니다.
       ],
@@ -90,7 +93,7 @@ const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
             >
               <IcMinus />
             </StOptionItemQuantityControlButton>
-            <span>{optionList[0].quantity}</span>
+            <span>{optionList[0].pieces}</span>
             <StOptionItemQuantityControlButton
               type="button"
               onClick={handleIncreaseQuantity}

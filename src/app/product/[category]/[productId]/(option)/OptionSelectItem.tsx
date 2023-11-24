@@ -1,8 +1,11 @@
 'use client';
 
-import { styled } from 'styled-components';
-import { OptionInfo, selectedOptionsState } from '@/recoil/option/atom';
 import { useRecoilState } from 'recoil';
+import { styled } from 'styled-components';
+
+import { selectedOptionsState } from '@/recoil/option/atom';
+import { OptionInfo } from '@/types/cart';
+
 import {
   IcMinus,
   IcPlus,
@@ -32,7 +35,7 @@ const OptionSelectItem = ({
       prevOptions.map((optionPair, index) =>
         index === selectedIndex
           ? [
-              { ...optionPair[0], quantity: optionPair[0].quantity + 1 },
+              { ...optionPair[0], pieces: optionPair[0].pieces + 1 },
               ...optionPair.slice(1),
             ]
           : optionPair,
@@ -41,12 +44,12 @@ const OptionSelectItem = ({
   };
 
   const handleDecreaseQuantity = () => {
-    if (selectedOptions[selectedIndex][0].quantity === 1) return;
+    if (selectedOptions[selectedIndex][0].pieces === 1) return;
     setSelectedOptions((prevOptions) =>
       prevOptions.map((optionPair, index) =>
         index === selectedIndex
           ? [
-              { ...optionPair[0], quantity: optionPair[0].quantity - 1 },
+              { ...optionPair[0], pieces: optionPair[0].pieces - 1 },
               ...optionPair.slice(1),
             ]
           : optionPair,
@@ -71,7 +74,7 @@ const OptionSelectItem = ({
         >
           <IcMinus />
         </StOptionItemQuantityControlButton>
-        <span>{selectedOptions[selectedIndex][0].quantity}</span>
+        <span>{selectedOptions[selectedIndex][0].pieces}</span>
         <StOptionItemQuantityControlButton
           type="button"
           onClick={handleIncreaseQuantity}

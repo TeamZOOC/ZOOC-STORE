@@ -1,21 +1,27 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { styled } from 'styled-components';
+
 import { BottomButton } from '@/components/button';
 import { cartState } from '@/recoil/cart/atom';
-import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
-import { styled } from 'styled-components';
+import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
+import { userState } from '@/recoil/user/atom';
 import { formatPrice } from '@/utils/formatPrice';
-import { purchaseState } from '@/recoil/purchase/atom';
+import { useEffect } from 'react';
 
 const ShoppingPayment = () => {
   const cart = useRecoilValue(cartState);
-  const [purchase, setPurchase] = useRecoilState(purchaseState);
-  const resetPurchase = useResetRecoilState(purchaseState);
+  const [, setPurchase] = useRecoilState(purchaseState);
+  const [, setPurchasePrice] = useRecoilState(purchasePriceState);
+  const userStatus = useRecoilValue(userState);
+  const router = useRouter();
 
   const totalSaleQuantity = cart.reduce((total, item) => {
     // 첫 번째 optionList 원소의 quantity와 해당 item의 sale 값을 곱함
     const firstOptionQuantity = item.optionList[0]
-      ? item.optionList[0].quantity
+      ? item.optionList[0].pieces
       : 0;
     const itemTotal = item.price * firstOptionQuantity;
 
@@ -24,10 +30,22 @@ const ShoppingPayment = () => {
   }, 0);
 
   const handleCartToPurchase = () => {
-    resetPurchase();
-    setPurchase(cart);
+    if (userStatus === 'NO_PET') {
+      router.push('/pet/registration');
+    } else if (userStatus === 'PET_EXISTS' || userStatus === 'DATASET_EXISTS') {
+      router.push('/pet/registration/createmodel');
+    } else if (userStatus === 'IMAGE_EXISTS') {
+      setPurchase(cart);
+      router.push('/order');
+    } else {
+      setPurchase(cart);
+      router.push('/auth/login');
+    }
   };
-  console.log(purchase);
+
+  useEffect(() => {
+    setPurchasePrice({ totalProductPrice: totalSaleQuantity, deliveryFee: 0 });
+  }, [totalSaleQuantity]);
 
   return (
     <>
@@ -46,7 +64,7 @@ const ShoppingPayment = () => {
             <StShoppingPaymentInfoTitle $color="gray">
               배송비
             </StShoppingPaymentInfoTitle>
-            <StShoppingPaymentInfoPrice>35,000 원</StShoppingPaymentInfoPrice>
+            <StShoppingPaymentInfoPrice>0 원</StShoppingPaymentInfoPrice>
           </StShoppingPaymentInfo>
         </StShoppingPaymentInfoWrapper>
         <StShoppingPaymentInfo>

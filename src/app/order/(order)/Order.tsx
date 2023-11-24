@@ -2,12 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
+import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
 import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
-import { ORDER_DETAIL } from '@/mocks/orderDetailData';
+import { cartState } from '@/recoil/cart/atom';
+import { petIdState } from '@/recoil/pet/atom';
+import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
+import { CartInfo } from '@/types/cart';
 import { OrderFormData } from '@/types/form';
 import { OrderPostInfo } from '@/types/order';
 import { formatPrice } from '@/utils/formatPrice';
@@ -20,15 +24,15 @@ import PaymentMethod from './paymentMethod/PaymentMethod';
 import ProductsInfo from './productsInfo/ProductsInfo';
 
 const Order = () => {
-  const { products, payment } = ORDER_DETAIL;
   const { showToast } = useToast();
   const router = useRouter();
-
+  const petId = useRecoilValue(petIdState);
+  const purchase = useRecoilValue(purchaseState);
+  const purchasePrice = useRecoilValue(purchasePriceState);
+  const resetPurchase = useResetRecoilState(purchaseState);
+  const resetPurchasePrice = useResetRecoilState(purchasePriceState);
+  const resetCart = useResetRecoilState(cartState);
   const { orderPost } = usePostOrder();
-
-  const totalPrice = formatPrice(
-    payment.totalProductPrice + payment.deliveryFee,
-  );
 
   const methods = useForm<OrderFormData>({
     defaultValues: {
@@ -60,22 +64,50 @@ const Order = () => {
     formState: { isValid },
   } = methods;
 
+  const transformProduct = (purchases: CartInfo) => {
+    const firstOption = purchases.optionList[0];
+    const optionDetails = purchases.optionList.map((option) => option.name);
+
+    return {
+      id: String(purchases.id),
+      name: purchases.name,
+      image: purchases.image,
+      optionDetails,
+      pieces: firstOption.pieces,
+      price: purchases.price,
+    };
+  };
+
+  const transformedProducts = purchase.map(transformProduct);
+
+  const totalPrice = formatPrice(
+    purchasePrice.totalProductPrice + purchasePrice.deliveryFee,
+  );
+
+  const purchaseData = (purchases: CartInfo[]) =>
+    purchases.map((product) => ({
+      productId: product.id,
+      optionIds: product.optionList.map((option) => option.id),
+      pieces: product.optionList[0].pieces,
+    }));
+
   const onSubmit = async (formdata: OrderFormData) => {
+    if (!petId) {
+      showToast('no_pet');
+      return;
+    }
+    const { agreement, ...formDataWithoutAgreement } = formdata;
     const postData: OrderPostInfo = {
-      ...formdata,
-      petId: 523, // TODO: petId 받아오기
-      products: [
-        // TODO: 주문할 상품, 옵션 받아오기
-        {
-          productId: 2,
-          optionIds: [1],
-          pieces: 3,
-        },
-      ],
+      ...formDataWithoutAgreement,
+      petId,
+      products: purchaseData(purchase),
     };
     try {
       await orderPost(postData);
       router.push(`/order/payment?totalPrice=${totalPrice}`);
+      resetPurchase();
+      resetPurchasePrice();
+      resetCart();
     } catch (error) {
       showToast('order_error');
       console.error('주문 실패', error);
@@ -89,7 +121,7 @@ const Order = () => {
   return (
     <FormProvider {...methods}>
       <StOrder>
-        <ProductsInfo products={products} />
+        <ProductsInfo products={transformedProducts} />
         <StHr />
         <CustomerInfo />
         <DeliveryInfo />
@@ -97,7 +129,7 @@ const Order = () => {
         <PaymentMethod />
         <StHr />
         <StBillingInfoWrapper>
-          <BillingInfo payment={payment} />
+          <BillingInfo payment={purchasePrice} />
         </StBillingInfoWrapper>
         <StHr />
         <Agreement />
