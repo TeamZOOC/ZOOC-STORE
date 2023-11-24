@@ -1,6 +1,6 @@
 'use client';
 
-import { signIn, useSession } from 'next-auth/react';
+import { getSession, signIn, useSession } from 'next-auth/react';
 import { styled } from 'styled-components';
 
 // import { useEffect } from 'react';
@@ -8,7 +8,14 @@ import { IcApple, IcKakao } from '../../../../public/icons';
 // import { useLogin } from '../hooks/useLogin';
 
 const LoginContent = () => {
-  const { data: session } = useSession({ required: true });
+  const { data: session } = useSession();
+
+  const handleSignIn = async () => {
+    await signIn('kakao');
+    // 세션 갱신
+    await getSession();
+  };
+
   console.log(session);
 
   return (
@@ -35,10 +42,7 @@ const LoginContent = () => {
           <IcApple />
           Apple로 로그인
         </StAppleLoginButton>
-        <StKakaoLoginButton
-          type="button"
-          onClick={() => signIn('kakao', { redirect: true })}
-        >
+        <StKakaoLoginButton type="button" onClick={handleSignIn}>
           <IcKakao />
           Kakao로 로그인
         </StKakaoLoginButton>
