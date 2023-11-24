@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { deleteCookie, getCookie } from 'cookies-next';
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useRecoilState } from 'recoil';
 
@@ -18,9 +19,10 @@ export const useWithdraw = () => {
 
   return useMutation(withdraw, {
     onSuccess: async () => {
+      deleteCookie('accessToken');
+      signOut({ callbackUrl: 'https://www.fitapat.com/' });
       setUserStatus('GUEST');
       setPetId(undefined);
-      deleteCookie('accessToken');
 
       if (kakaoAccessToken) {
         await axios({
