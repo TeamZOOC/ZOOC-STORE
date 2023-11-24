@@ -22,7 +22,7 @@ const LoginContent = () => {
     };
 
     refreshSession();
-  }, [status]);
+  }, [status, session]);
 
   if (session) {
     console.log(session.provider);
