@@ -27,3 +27,9 @@ export const returnPathState = atom<string | undefined>({
   default: undefined,
   effects_UNSTABLE: [persistAtom],
 });
+
+export const prevPathState = atom<string | undefined>({
+  key: 'prevPathState',
+  default: undefined,
+  effects_UNSTABLE: [persistAtom],
+});
