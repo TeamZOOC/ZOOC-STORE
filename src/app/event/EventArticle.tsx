@@ -3,11 +3,13 @@
 import Image from 'next/image';
 import { styled } from 'styled-components';
 import { useRouter } from 'next/navigation';
+import useProgress from '@/hooks/progress/useProgress';
 import { ImageEvent } from '../../../public/images';
 import { IcBackWhite } from '../../../public/icons';
 
 const EventArticle = () => {
   const router = useRouter();
+  useProgress();
   return (
     <StEventArticle>
       <StEventArticleTitle>

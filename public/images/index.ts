@@ -17,9 +17,9 @@ import ImageCategoryCase from './image_category_case.png';
 import ImageCategoryAcc from './image_category_acc.png';
 import ImageEvent from './image_event.png';
 import ImageCoupon from './image_coupon.png';
-import ImageEventHoodie from './image_Event_Hoodie.png';
-import ImageEventSweat from './image_Event_Sweat.png';
-import ImageEventAcc from './image_Event_Acc.png';
+import ImageEventHoodie from './image_event_hoodie.png';
+import ImageEventSweat from './image_event_sweat.png';
+import ImageEventAcc from './image_event_acc.png';
 
 export {
   ImageArticle,
