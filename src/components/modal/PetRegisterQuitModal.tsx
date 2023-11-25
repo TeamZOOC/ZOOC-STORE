@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
 import { useModal } from '@/hooks/modal';
@@ -16,7 +16,7 @@ const PetRegisterQuitModal = ({ route }: PetRegisterQuitModalProps) => {
   const { closeModal } = useModal();
   const router = useRouter();
   const [, setReturnPath] = useRecoilState(returnPathState);
-  const [registerPath, setRegisterPath] = useRecoilState(registerPathState);
+  const registerPath = useRecoilValue(registerPathState);
 
   const handleQuit = () => {
     setReturnPath(undefined);
@@ -26,7 +26,6 @@ const PetRegisterQuitModal = ({ route }: PetRegisterQuitModalProps) => {
     } else if (route === 'home') {
       if (registerPath) {
         router.push(registerPath);
-        setRegisterPath(undefined);
       } else router.push('/');
     }
     closeModal('petRegisterQuit');
