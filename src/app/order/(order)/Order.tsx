@@ -1,12 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
+import { LoadingSpinner } from '@/components/loading';
 import { BillingInfo } from '@/components/order';
 import { useToast } from '@/hooks/toast';
 import { petIdState } from '@/recoil/pet/atom';
@@ -30,6 +31,7 @@ const Order = () => {
   const purchase = useRecoilValue(purchaseState);
   const [purchasePrice, setPurchasePrice] = useRecoilState(purchasePriceState);
   const { orderPost } = usePostOrder();
+  const [isOrderLoading, setIsOrderLoading] = useState(false);
 
   const methods = useForm<OrderFormData>({
     defaultValues: {
@@ -95,6 +97,7 @@ const Order = () => {
     }));
 
   const onSubmit = async (formdata: OrderFormData) => {
+    if (isOrderLoading) return;
     if (!petId) {
       showToast('no_pet');
       return;
@@ -106,9 +109,11 @@ const Order = () => {
       products: purchaseData(purchase),
     };
     try {
+      setIsOrderLoading(true);
       await orderPost(postData);
       router.push(`/order/payment?totalPrice=${totalPrice}`);
     } catch (error) {
+      setIsOrderLoading(false);
       showToast('order_error');
       console.error('주문 실패', error);
     }
@@ -121,6 +126,8 @@ const Order = () => {
   useEffect(() => {
     setPurchasePrice({ totalProductPrice: totalSaleQuantity, deliveryFee: 0 });
   }, [totalSaleQuantity]);
+
+  if (isOrderLoading) return <LoadingSpinner />;
 
   return (
     <FormProvider {...methods}>

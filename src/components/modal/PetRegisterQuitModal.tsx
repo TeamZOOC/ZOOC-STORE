@@ -2,9 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
 import { useModal } from '@/hooks/modal';
+import { registerPathState, returnPathState } from '@/recoil/order/atom';
 
 interface PetRegisterQuitModalProps {
   route: 'back' | 'home';
@@ -13,15 +15,21 @@ interface PetRegisterQuitModalProps {
 const PetRegisterQuitModal = ({ route }: PetRegisterQuitModalProps) => {
   const { closeModal } = useModal();
   const router = useRouter();
+  const [, setReturnPath] = useRecoilState(returnPathState);
+  const registerPath = useRecoilValue(registerPathState);
 
-  const handleQuit = useCallback(() => {
+  const handleQuit = () => {
+    setReturnPath(undefined);
+
     if (route === 'back') {
       router.back();
     } else if (route === 'home') {
-      router.push('/');
+      if (registerPath) {
+        router.push(registerPath);
+      } else router.push('/');
     }
     closeModal('petRegisterQuit');
-  }, [router]);
+  };
 
   const handleCancel = useCallback(() => {
     closeModal('petRegisterQuit');

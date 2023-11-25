@@ -2,9 +2,11 @@
 
 import { useRouter } from 'next/navigation';
 import React, { useCallback } from 'react';
+import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { useModal } from '@/hooks/modal';
+import { registerPathState } from '@/recoil/order/atom';
 
 interface OrderQuitModalProps {
   route: 'back' | 'home';
@@ -13,12 +15,19 @@ interface OrderQuitModalProps {
 const OrderQuitModal = ({ route }: OrderQuitModalProps) => {
   const { closeModal } = useModal();
   const router = useRouter();
+  const [registerPath, setRegisterPath] = useRecoilState(registerPathState);
 
   const handleQuit = useCallback(() => {
     if (route === 'back') {
-      router.back();
+      if (registerPath) {
+        router.push(registerPath);
+        setRegisterPath(undefined);
+      } else router.back();
     } else if (route === 'home') {
-      router.push('/');
+      if (registerPath) {
+        router.push(registerPath);
+        setRegisterPath(undefined);
+      } else router.push('/');
     }
     closeModal('orderQuit');
   }, [router]);

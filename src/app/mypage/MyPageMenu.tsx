@@ -63,6 +63,7 @@ export default MyPageMenu;
 
 const StMyPageMenu = styled.div`
   margin-top: 2.8rem;
+  margin-bottom: 5rem;
 
   & > .logout {
     border-bottom: 0;

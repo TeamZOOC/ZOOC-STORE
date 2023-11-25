@@ -20,7 +20,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
       </StProductImage>
       <StProductTitle>{name}</StProductTitle>
       <StProductPriceBox>
-        {sale && <StProductSalePercent>{sale}</StProductSalePercent>}
+        {sale && <StProductSalePercent>{sale}%</StProductSalePercent>}
         <StProductPrice>{formatPrice(price)}</StProductPrice>
       </StProductPriceBox>
     </StProductItem>

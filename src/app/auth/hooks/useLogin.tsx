@@ -55,8 +55,6 @@ export const useLogin = async () => {
         } catch (error) {
           setIsLoginLoading(false);
           console.error('로그인 실패', error);
-        } finally {
-          setIsLoginLoading(false);
         }
       };
 
