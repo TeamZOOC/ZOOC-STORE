@@ -23,7 +23,7 @@ export const fonts = {
     line-height: normal;
   `,
   zw_Subhead1: css`
-    font-family: var(--font-pretendard);
+    font-family: var(--font-pretendard-semi-bold);
     font-size: 1.8rem;
     font-style: normal;
     font-weight: 600;
@@ -39,7 +39,7 @@ export const fonts = {
     letter-spacing: -0.03rem;
   `,
   zw_Subhead3: css`
-    font-family: var(--font-pretendard);
+    font-family: var(--font-pretendard-semi-bold);
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 600;

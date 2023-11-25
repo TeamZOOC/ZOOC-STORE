@@ -14,6 +14,16 @@ const Pretendard = localFont({
   variable: '--font-pretendard',
 });
 
+const PretendardLight = localFont({
+  src: './fonts/Pretendard-Light.woff2',
+  variable: '--font-pretendard-light',
+});
+
+const PretendardSemiBold = localFont({
+  src: './fonts/Pretendard-SemiBold.woff2',
+  variable: '--font-pretendard-semi-bold',
+});
+
 const GmarketSansBold = localFont({
   src: './fonts/GmarketSansBold.woff2',
   variable: '--font-gmarketsans-bold',
@@ -22,6 +32,11 @@ const GmarketSansBold = localFont({
 const GmarketSansMedium = localFont({
   src: './fonts/GmarketSansMedium.woff2',
   variable: '--font-gmarketsans-medium',
+});
+
+const GmarketSansLight = localFont({
+  src: '/fonts/GmarketSansLight.woff2',
+  variable: '--font-gmarketsans-light',
 });
 
 export const metadata = {
@@ -37,7 +52,7 @@ export default async function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${Pretendard.variable} ${GmarketSansBold.variable} ${GmarketSansMedium.variable}`}
+      className={`${Pretendard.variable} ${GmarketSansBold.variable} ${GmarketSansMedium.variable} ${GmarketSansLight.variable} ${PretendardSemiBold.variable} ${PretendardLight.variable}`}
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
