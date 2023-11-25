@@ -47,7 +47,7 @@ const StProductTitle = styled.p`
   margin-bottom: 0.4rem;
 
   color: ${({ theme }) => theme.colors.zw_black};
-  ${({ theme }) => theme.fonts.zw_Subhead4};
+  ${({ theme }) => theme.fonts.zw_Subhead3};
 
   text-align: left;
 `;
@@ -58,7 +58,7 @@ const StProductPriceBox = styled.div`
 `;
 const StProductPrice = styled.span`
   color: ${({ theme }) => theme.colors.zw_darkgray};
-  ${({ theme }) => theme.fonts.zw_price_small};
+  ${({ theme }) => theme.fonts.zw_price_middle};
 `;
 const StProductSalePercent = styled(StProductPrice)`
   color: ${({ theme }) => theme.colors.zw_point};
