@@ -35,6 +35,8 @@ import IcThirdStep from './ic_third_step.svg';
 import IcToss from './ic_toss.svg';
 import IcWarning from './ic_warning.svg';
 import IcCartToast from './ic_cart_toast.svg';
+import IcBackWhite from './ic_back_white.svg';
+import IcFitaPatLogoEvent from './ic_fitapat_logo_event.svg';
 
 export {
   IcBtnAppstore,
@@ -74,4 +76,6 @@ export {
   IcFitapatLogo,
   IcLoadingLogo,
   IcCartToast,
+  IcBackWhite,
+  IcFitaPatLogoEvent,
 };

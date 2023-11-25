@@ -15,6 +15,11 @@ import ImageCategorySeason from './image_category_season.png';
 import ImageCategoryOutfit from './image_category_outfit.png';
 import ImageCategoryCase from './image_category_case.png';
 import ImageCategoryAcc from './image_category_acc.png';
+import ImageEvent from './image_event.png';
+import ImageCoupon from './image_coupon.png';
+import ImageEventHoodie from './image_Event_Hoodie.png';
+import ImageEventSweat from './image_Event_Sweat.png';
+import ImageEventAcc from './image_Event_Acc.png';
 
 export {
   ImageArticle,
@@ -34,4 +39,9 @@ export {
   ImageCategoryOutfit,
   ImageCategoryCase,
   ImageCategoryAcc,
+  ImageEvent,
+  ImageCoupon,
+  ImageEventHoodie,
+  ImageEventSweat,
+  ImageEventAcc,
 };
