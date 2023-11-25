@@ -27,7 +27,7 @@ export default EventCoupon;
 
 const StEventCoupon = styled.div`
   width: 100%;
-  padding: 4rem 0 7rem 2.8rem;
+  padding: 4rem 0 7rem 0;
 
   background-color: #ebe8d8;
 `;
@@ -35,6 +35,9 @@ const StEventCoupon = styled.div`
 const StEventCouponTitle = styled.div`
   display: flex;
   flex-direction: column;
+
+  padding-left: 2.8rem;
+
   span {
     ${({ theme }) => theme.colors.zw_black}
     font-family: Pretendard;
@@ -51,7 +54,7 @@ const StEventCouponLogoWrapper = styled.div`
   align-items: center;
   gap: 0.6rem;
 
-  margin-top: 0.6rem;
+  margin-top: 0.2rem;
 
   ${({ theme }) => theme.colors.zw_black}
   font-family: Pretendard;
@@ -64,6 +67,7 @@ const StEventCouponLogoWrapper = styled.div`
 
 const StEventCouponDesc = styled.div`
   margin-top: 1.2rem;
+  padding-left: 2.8rem;
 
   p {
     ${({ theme }) => theme.colors.zw_black}
