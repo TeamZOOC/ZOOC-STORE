@@ -110,7 +110,7 @@ const ImageUpload = () => {
         multiple
         ref={imageInputRef}
         onChange={handleImageChange}
-        accept="image/*"
+        accept=".png, .jpg, .jpeg, .webp"
       />
       {validatedImages.length === 0 ? (
         <>
