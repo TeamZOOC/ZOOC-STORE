@@ -33,4 +33,5 @@ const StProductList = styled.div`
 
   width: 100%;
   margin-top: 2rem;
+  padding-bottom: 3.6rem;
 `;

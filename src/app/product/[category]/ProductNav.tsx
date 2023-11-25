@@ -58,7 +58,7 @@ const StProductNav = styled.nav`
   top: 6.8rem;
 
   padding-top: 1.6rem;
-  padding-left: 2.8rem;
+  padding-left: 4.4rem;
 
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
   background-color: ${({ theme }) => theme.colors.zw_background};
@@ -69,6 +69,17 @@ const StProductNav = styled.nav`
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  @media (min-width: 340px) {
+    display: flex;
+    justify-content: space-between;
+
+    padding-right: 4.4rem;
+  }
+
+  @media (max-width: 340px) {
+    padding-right: 4.4rem;
   }
 `;
 
@@ -85,7 +96,9 @@ const StProductItem = styled.button<{ $active: boolean }>`
     `}
   ${({ theme }) => theme.fonts.zw_price_middle};
 
-  & + & {
-    margin-left: 2.8rem;
+  @media (max-width: 340px) {
+    & + & {
+      margin-left: 2.8rem;
+    }
   }
 `;

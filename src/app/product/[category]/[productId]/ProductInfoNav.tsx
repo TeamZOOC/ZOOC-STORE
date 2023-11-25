@@ -81,16 +81,6 @@ const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
       <MainLayout>
         <StProductInfoEmptySpace />
         {activeTab === '상품설명' && <StProductInfoImage />}
-        {activeTab === '제품후기' && (
-          <>
-            <StProductInfoImage />
-            <StProductInfoImage />
-            <StProductInfoImage />
-            <StProductInfoImage />
-            <StProductInfoImage />
-            <StProductInfoImage />
-          </>
-        )}
         {activeTab === '배송정보' && (
           <StProductShippingInfoWrapper>
             <StProductShippingInfo>
