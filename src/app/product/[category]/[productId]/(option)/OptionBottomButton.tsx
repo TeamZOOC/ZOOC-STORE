@@ -8,7 +8,7 @@ import { css, styled } from 'styled-components';
 import useGetProductDetail from '@/app/product/hooks/useGetProductDetail';
 import { cartState } from '@/recoil/cart/atom';
 import { selectedOptionsState } from '@/recoil/option/atom';
-import { prevPathState, returnPathState } from '@/recoil/order/atom';
+import { orderPathState, returnPathState } from '@/recoil/order/atom';
 import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
 import { userState } from '@/recoil/user/atom';
 
@@ -32,7 +32,7 @@ const OptionBottomButton = ({
 
   const userStatus = useRecoilValue(userState);
   const [, setReturnPath] = useRecoilState(returnPathState);
-  const [, setPrevPathStatus] = useRecoilState(prevPathState);
+  const [, setOrderPath] = useRecoilState(orderPathState);
   const router = useRouter();
 
   const handleSaveCart = () => {
@@ -77,7 +77,7 @@ const OptionBottomButton = ({
 
   const handleGoPurchase = () => {
     setReturnPath('/order');
-    setPrevPathStatus('buy');
+    setOrderPath('buy');
 
     if (userStatus === 'IMAGE_EXISTS') {
       router.push('/order');
