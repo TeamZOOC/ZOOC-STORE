@@ -111,9 +111,9 @@ const Order = () => {
     try {
       setIsOrderLoading(true);
       await orderPost(postData);
-      setIsOrderLoading(false);
       router.push(`/order/payment?totalPrice=${totalPrice}`);
     } catch (error) {
+      setIsOrderLoading(false);
       showToast('order_error');
       console.error('주문 실패', error);
     }
@@ -127,7 +127,7 @@ const Order = () => {
     setPurchasePrice({ totalProductPrice: totalSaleQuantity, deliveryFee: 0 });
   }, [totalSaleQuantity]);
 
-  if (isOrderLoading) <LoadingSpinner />;
+  if (isOrderLoading) return <LoadingSpinner />;
 
   return (
     <FormProvider {...methods}>
