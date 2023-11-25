@@ -7,7 +7,7 @@ import {
   ImageCorrect3,
   ImageWrong1,
   ImageWrong2,
-  ImageWrong3,
+  ImageWrong3
 } from '../../../../../public/images';
 
 const ImageGuide = () => (
@@ -56,6 +56,7 @@ const StImageGuide = styled.div`
   align-items: center;
 
   padding-top: 3.8rem;
+  margin-bottom: 18.7rem;
 
   & > h2 {
     margin-bottom: 0.8rem;
