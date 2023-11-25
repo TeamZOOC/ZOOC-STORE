@@ -18,7 +18,13 @@ const EventArticle = () => {
         </StBackButton>
         크리스마스 특별 기획전
       </StEventArticleTitle>
-      <Image src={ImageEvent} alt="홈 배너 아티클" fill priority />
+      <Image
+        src={ImageEvent}
+        alt="홈 배너 아티클"
+        fill
+        priority
+        sizes="100vh"
+      />
     </StEventArticle>
   );
 };
