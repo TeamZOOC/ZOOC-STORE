@@ -39,8 +39,8 @@ const FirstStep = ({ currentStep, handleNextStep }: FirstStepProps) => {
       <StContent>
         <StImage />
         <StInfo>
-          <p>예금주ㅣ 손애진</p>
-          <p>우리은행 1002259752313</p>
+          <p>예금주ㅣ 김효재</p>
+          <p>카카오뱅크 3333183994961</p>
         </StInfo>
       </StContent>
       <PopupButton

@@ -28,8 +28,18 @@ export const returnPathState = atom<string | undefined>({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const prevPathState = atom<string | undefined>({
-  key: 'prevPathState',
+type OrderPathType = 'cart' | 'buy' | undefined;
+
+export const orderPathState = atom<OrderPathType>({
+  key: 'orderPathState',
+  default: undefined,
+  effects_UNSTABLE: [persistAtom],
+});
+
+type RegisterPathType = string | undefined;
+
+export const registerPathState = atom<RegisterPathType>({
+  key: 'registerPathState',
   default: undefined,
   effects_UNSTABLE: [persistAtom],
 });
