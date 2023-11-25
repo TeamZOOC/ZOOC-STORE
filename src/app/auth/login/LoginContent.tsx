@@ -62,6 +62,8 @@ const StLoginContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+
+  max-width: 30rem;
 `;
 
 const StLoginContentTextWrapper = styled.div`
@@ -87,7 +89,7 @@ const StLoginContentTextWrapper = styled.div`
 `;
 
 const StLoginContentHorizontalLine = styled.div`
-  width: 16.7rem;
+  width: 60%;
   height: 0.1rem;
   margin-left: 0.5rem;
 
