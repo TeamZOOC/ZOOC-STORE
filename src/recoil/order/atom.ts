@@ -28,10 +28,18 @@ export const returnPathState = atom<string | undefined>({
   effects_UNSTABLE: [persistAtom],
 });
 
-type OrderPathType = 'cart' | 'buy';
+type OrderPathType = 'cart' | 'buy' | undefined;
 
-export const orderPathState = atom<OrderPathType | undefined>({
+export const orderPathState = atom<OrderPathType>({
   key: 'orderPathState',
+  default: undefined,
+  effects_UNSTABLE: [persistAtom],
+});
+
+type RegisterPathType = string | undefined;
+
+export const registerPathState = atom<RegisterPathType>({
+  key: 'registerPathState',
   default: undefined,
   effects_UNSTABLE: [persistAtom],
 });

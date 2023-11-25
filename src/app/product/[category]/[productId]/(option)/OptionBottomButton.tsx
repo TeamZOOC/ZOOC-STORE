@@ -1,6 +1,6 @@
 'use client';
 
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { css, styled } from 'styled-components';
@@ -8,7 +8,11 @@ import { css, styled } from 'styled-components';
 import useGetProductDetail from '@/app/product/hooks/useGetProductDetail';
 import { cartState } from '@/recoil/cart/atom';
 import { selectedOptionsState } from '@/recoil/option/atom';
-import { orderPathState, returnPathState } from '@/recoil/order/atom';
+import {
+  orderPathState,
+  registerPathState,
+  returnPathState,
+} from '@/recoil/order/atom';
 import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
 import { userState } from '@/recoil/user/atom';
 
@@ -33,7 +37,9 @@ const OptionBottomButton = ({
   const userStatus = useRecoilValue(userState);
   const [, setReturnPath] = useRecoilState(returnPathState);
   const [, setOrderPath] = useRecoilState(orderPathState);
+  const [, setRegisterPath] = useRecoilState(registerPathState);
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleSaveCart = () => {
     if (productDetail) {
@@ -78,6 +84,7 @@ const OptionBottomButton = ({
   const handleGoPurchase = () => {
     setReturnPath('/order');
     setOrderPath('buy');
+    setRegisterPath(pathname);
 
     if (userStatus === 'IMAGE_EXISTS') {
       router.push('/order');
