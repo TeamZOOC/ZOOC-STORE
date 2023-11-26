@@ -31,7 +31,7 @@ export const fonts = {
     letter-spacing: -0.03rem;
   `,
   zw_Subhead2: css`
-    font-family: var(--font-pretendard);
+    font-family: var(--font-pretendard-medium);
     font-size: 1.8rem;
     font-style: normal;
     font-weight: 500;
@@ -46,7 +46,7 @@ export const fonts = {
     line-height: normal;
   `,
   zw_Subhead4: css`
-    font-family: var(--font-pretendard);
+    font-family: var(--font-pretendard-medium);
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 500;
@@ -54,7 +54,7 @@ export const fonts = {
     letter-spacing: -0.0042rem;
   `,
   zw_Body1: css`
-    font-family: var(--font-pretendard);
+    font-family: var(--font-pretendard-regular);
     font-size: 1.6rem;
     font-style: normal;
     font-weight: 400;
@@ -62,7 +62,7 @@ export const fonts = {
     letter-spacing: -0.0048rem;
   `,
   zw_Body2: css`
-    font-family: var(--font-pretendard);
+    font-family: var(--font-pretendard-regular);
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 400;
@@ -70,7 +70,7 @@ export const fonts = {
     letter-spacing: -0.03rem;
   `,
   zw_caption: css`
-    font-family: var(--font-pretendard);
+    font-family: var(--font-pretendard-regular);
     font-size: 1.4rem;
     font-style: normal;
     font-weight: 400;

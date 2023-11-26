@@ -29,7 +29,7 @@ const StSignUpTermsAgreement = styled.div`
 
 const StSignUpTermsAgreementTitle = styled.p`
   color: ${({ theme }) => theme.colors.zw_black};
-  font-family: Pretendard;
+  font-family: var(--font-pretendard-regular);
   font-size: 2.4rem;
   font-style: normal;
   font-weight: 400;
@@ -37,7 +37,7 @@ const StSignUpTermsAgreementTitle = styled.p`
   letter-spacing: -0.03rem;
 
   span {
-    font-family: Pretendard;
+    font-family: var(--font-pretendard-semi-bold);
     font-size: 2.4rem;
     font-style: normal;
     font-weight: 600;
