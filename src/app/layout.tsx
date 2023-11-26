@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import localFont from 'next/font/local';
 import React from 'react';
 
@@ -73,6 +74,14 @@ export default async function RootLayout({
               fbq('init', '1037687987375235');
               fbq('track', 'PageView');`}
         </Script>
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=1037687987375235&ev=PageView&noscript=1"
+          />
+        </noscript>
       </head>
       <body>
         <ReactQueryProvider>
