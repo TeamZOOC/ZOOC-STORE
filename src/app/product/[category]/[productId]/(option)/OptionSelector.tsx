@@ -73,8 +73,6 @@ const OptionSelector = () => {
     }
   };
 
-  console.log(selectedOptionName);
-
   return productOption.map(({ name, optionDetails }, index) => (
     <StOptionSelector
       $active={selectedOptionName[index] !== ''}
