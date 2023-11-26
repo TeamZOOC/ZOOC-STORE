@@ -1,6 +1,7 @@
 'use client';
 
 import { selectedOptionsSelector } from '@/recoil/option/selector';
+import { formatPrice } from '@/utils/formatPrice';
 import { useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
@@ -15,7 +16,7 @@ const OptionTotalPrice = ({ productPrice }: OptionTotalPriceProps) => {
     <StOptionTotalPrice>
       <span>총 상품 금액</span>
       <div>
-        <span>{productPrice * selectedOptions}</span>
+        <span>{formatPrice(productPrice * selectedOptions)}</span>
         <span> 원</span>
       </div>
     </StOptionTotalPrice>
