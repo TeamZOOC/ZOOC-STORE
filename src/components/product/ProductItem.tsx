@@ -7,9 +7,10 @@ import { useRouter } from 'next/navigation';
 
 interface ProductItemProps {
   product: ProductInfoResponse;
+  usedComponent: string;
 }
 
-const ProductItem = ({ product }: ProductItemProps) => {
+const ProductItem = ({ product, usedComponent }: ProductItemProps) => {
   const router = useRouter();
   const { id, name, sale, price } = product;
 
@@ -18,10 +19,12 @@ const ProductItem = ({ product }: ProductItemProps) => {
       <StProductImage>
         {/* <Image src={imgSrc} alt={imgAlt} fill /> */}
       </StProductImage>
-      <StProductTitle>{name}</StProductTitle>
+      <StProductTitle $usedComponent={usedComponent}>{name}</StProductTitle>
       <StProductPriceBox>
         {sale && <StProductSalePercent>{sale}%</StProductSalePercent>}
-        <StProductPrice>{formatPrice(price)}</StProductPrice>
+        <StProductPrice $usedComponent={usedComponent}>
+          {formatPrice(price)}
+        </StProductPrice>
       </StProductPriceBox>
     </StProductItem>
   );
@@ -42,12 +45,18 @@ const StProductImage = styled.div`
   background-color: #eaeaea;
 `;
 
-const StProductTitle = styled.p`
+const StProductTitle = styled.p<{ $usedComponent: string }>`
   margin-top: 1rem;
   margin-bottom: 0.4rem;
 
   color: ${({ theme }) => theme.colors.zw_black};
-  ${({ theme }) => theme.fonts.zw_Subhead4};
+  ${({ theme }) => theme.fonts.zw_Subhead3};
+
+  ${({ $usedComponent, theme }) =>
+    $usedComponent === 'article' && theme.fonts.zw_Subhead4}
+
+  ${({ $usedComponent, theme }) =>
+    $usedComponent === 'product' && theme.fonts.zw_Subhead3};
 
   text-align: left;
 `;
@@ -56,9 +65,14 @@ const StProductPriceBox = styled.div`
   display: flex;
   gap: 0.4rem;
 `;
-const StProductPrice = styled.span`
+const StProductPrice = styled.span<{ $usedComponent?: string }>`
   color: ${({ theme }) => theme.colors.zw_darkgray};
-  ${({ theme }) => theme.fonts.zw_price_small};
+
+  ${({ $usedComponent, theme }) =>
+    $usedComponent === 'article' && theme.fonts.zw_price_small};
+
+  ${({ $usedComponent, theme }) =>
+    $usedComponent === 'product' && theme.fonts.zw_price_middle};
 `;
 const StProductSalePercent = styled(StProductPrice)`
   color: ${({ theme }) => theme.colors.zw_point};

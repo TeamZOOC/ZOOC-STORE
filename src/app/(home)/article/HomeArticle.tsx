@@ -20,7 +20,11 @@ const HomeArticle = ({ article }: HomeArticleProps) => {
       <StHomeArticleDesc>{detail}</StHomeArticleDesc>
       <StHomeProduct>
         {products?.map((product) => (
-          <ProductItem key={product.id} product={product} />
+          <ProductItem
+            key={product.id}
+            product={product}
+            usedComponent="article"
+          />
         ))}
       </StHomeProduct>
     </StHomeArticle>
