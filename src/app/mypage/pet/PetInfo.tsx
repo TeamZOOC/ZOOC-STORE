@@ -77,6 +77,8 @@ const StProfileImage = styled.img`
 
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.zw_darkgray};
+
+  object-fit: cover;
 `;
 
 const StEditProfileButton = styled(StRegisterPetButton)``;
