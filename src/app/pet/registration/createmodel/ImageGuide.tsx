@@ -74,8 +74,10 @@ const StImageGuide = styled.div`
 
 const StHr = styled.hr`
   width: 100%;
+  height: 0.1rem;
 
-  ${({ theme }) => theme.colors.zw_brightgray};
+  border: none;
+  background-color: ${({ theme }) => theme.colors.zw_brightgray};
 `;
 
 const StGuides = styled.div`
