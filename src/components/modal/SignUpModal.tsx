@@ -1,11 +1,12 @@
 'use client';
 
-import { withdraw } from '@/apis/auth';
-import { useModal } from '@/hooks/modal';
 import { deleteCookie } from 'cookies-next';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
+
+import { withdraw } from '@/apis/auth';
+import { useModal } from '@/hooks/modal';
 
 const SignUpModal = () => {
   const router = useRouter();
@@ -18,6 +19,7 @@ const SignUpModal = () => {
     router.push('/auth/login');
     deleteCookie('accessToken');
     deleteCookie('kakaoAccessToken');
+    deleteCookie('appleAccessToken');
   };
 
   return (
