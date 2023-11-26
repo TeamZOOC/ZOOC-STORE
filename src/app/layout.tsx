@@ -8,6 +8,7 @@ import ReactQueryProvider from '@/lib/ReactQueryProvider';
 import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
+import Script from 'next/script';
 
 const PretendardLight = localFont({
   src: './fonts/Pretendard-Light.woff2',
@@ -60,6 +61,18 @@ export default async function RootLayout({
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <Script id="facebook-pixel">
+          {`!function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '1037687987375235');
+              fbq('track', 'PageView');`}
+        </Script>
       </head>
       <body>
         <ReactQueryProvider>
