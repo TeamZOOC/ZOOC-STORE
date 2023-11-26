@@ -50,7 +50,7 @@ const StCompleteContent = styled.div`
 `;
 const StCompleteContentText = styled.p`
   color: ${({ theme }) => theme.colors.zw_black};
-  font-family: Gmarket Sans;
+  font-family: var(--font-gmarketsans-light);
   font-size: 3rem;
   font-style: normal;
   font-weight: 300;
@@ -58,7 +58,7 @@ const StCompleteContentText = styled.p`
   letter-spacing: -0.03rem;
 
   span {
-    font-family: Gmarket Sans;
+    font-family: var(--font-gmarketsans-medium);
     font-size: 3rem;
     font-style: normal;
     font-weight: 400;
@@ -69,7 +69,7 @@ const StCompleteContentText = styled.p`
 
 const StCompleteContentDesc = styled.p`
   color: ${({ theme }) => theme.colors.zw_gray};
-  font-family: Pretendard;
+  font-family: var(--font-pretendard-light);
   font-size: 1.6rem;
   font-style: normal;
   font-weight: 300;

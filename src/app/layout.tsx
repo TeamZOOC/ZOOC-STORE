@@ -9,11 +9,6 @@ import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
 
-const Pretendard = localFont({
-  src: './fonts/PretendardVariable.woff2',
-  variable: '--font-pretendard',
-});
-
 const PretendardLight = localFont({
   src: './fonts/Pretendard-Light.woff2',
   variable: '--font-pretendard-light',
@@ -22,6 +17,15 @@ const PretendardLight = localFont({
 const PretendardSemiBold = localFont({
   src: './fonts/Pretendard-SemiBold.woff2',
   variable: '--font-pretendard-semi-bold',
+});
+const PretendardMedium = localFont({
+  src: './fonts/Pretendard-Medium.woff2',
+  variable: '--font-pretendard-medium',
+});
+
+const PretendardRegular = localFont({
+  src: './fonts/Pretendard-Regular.woff2',
+  variable: '--font-pretendard-regular',
 });
 
 const GmarketSansBold = localFont({
@@ -52,7 +56,7 @@ export default async function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${Pretendard.variable} ${GmarketSansBold.variable} ${GmarketSansMedium.variable} ${GmarketSansLight.variable} ${PretendardSemiBold.variable} ${PretendardLight.variable}`}
+      className={`${GmarketSansBold.variable} ${GmarketSansMedium.variable} ${GmarketSansLight.variable} ${PretendardSemiBold.variable} ${PretendardLight.variable} ${PretendardMedium.variable} ${PretendardRegular.variable}`}
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
