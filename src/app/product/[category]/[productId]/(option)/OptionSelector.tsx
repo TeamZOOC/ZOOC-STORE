@@ -48,6 +48,7 @@ const OptionSelector = () => {
       if (!isDuplicate) {
         setSelectedOptions((prevOptions) => [...prevOptions, [option]]);
       }
+      setSelectedOptionName(['', '']); // 선택된 옵션 이름 초기화
     } else if (tempOption) {
       // 첫 번째 선택된 옵션(tempOption)과 두 번째 선택된 옵션(option)을
       // 하나의 배열로 묶어서 selectedOptions 배열에 추가
@@ -71,6 +72,8 @@ const OptionSelector = () => {
       setTempOption(option);
     }
   };
+
+  console.log(selectedOptionName);
 
   return productOption.map(({ name, optionDetails }, index) => (
     <StOptionSelector
