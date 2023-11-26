@@ -17,7 +17,7 @@ interface FirstStepProps {
 const FirstStep = ({ currentStep, handleNextStep }: FirstStepProps) => {
   const { showToast } = useToast();
   const handleCopy = () => {
-    navigator.clipboard.writeText(ACCOUNT_NUMBER).then(() => {
+    navigator.clipboard.writeText(`${ACCOUNT_NUMBER} 카카오뱅크`).then(() => {
       showToast('accountnumber_copied');
     });
   };
