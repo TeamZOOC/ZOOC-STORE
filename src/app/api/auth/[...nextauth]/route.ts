@@ -6,7 +6,7 @@ import NextAuth from 'next-auth/next';
 import AppleProvider from 'next-auth/providers/apple';
 import KakaoProvider from 'next-auth/providers/kakao';
 
-const getAppleToken = async () => {
+export const getAppleToken = async () => {
   if (
     !process.env.APPLE_TEAM_ID ||
     !process.env.APPLE_ID ||
