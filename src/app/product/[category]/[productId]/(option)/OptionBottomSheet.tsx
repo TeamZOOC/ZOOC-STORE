@@ -37,6 +37,9 @@ const OptionBottomSheet = ({
       $isUnMount={isUnMount}
     >
       <StOptionBottomSheetInner $position="top">
+        <StOptionBottomSheetTopBorderWrapper>
+          <StOptionBottomSheetTopBorder />
+        </StOptionBottomSheetTopBorderWrapper>
         <OptionSelector />
         <StOptionSelectedItemWrapper>
           {selectedOptions.map((selected, index) => (
@@ -93,7 +96,7 @@ const StOptionBottomSheetInner = styled.div<{ $position: string }>`
   ${({ $position }) =>
     $position === 'top'
       ? css`
-          padding: 4.4rem 2.8rem 0 2.8rem;
+          padding: 1.2rem 2.8rem 0 2.8rem;
         `
       : css`
           padding: 0 2.8rem 2.8rem 2.8rem;
@@ -106,4 +109,20 @@ const StHr = styled.div`
 `;
 const StOptionSelectedItemWrapper = styled.div`
   margin-top: 4rem;
+`;
+
+const StOptionBottomSheetTopBorderWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-bottom: 2.8rem;
+`;
+
+const StOptionBottomSheetTopBorder = styled.div`
+  width: 5rem;
+  height: 0.4rem;
+
+  border-radius: 0.2rem;
+  background-color: ${({ theme }) => theme.colors.zw_brightgray};
 `;
