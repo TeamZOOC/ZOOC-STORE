@@ -7,7 +7,11 @@ import { styled } from 'styled-components';
 
 import { BottomButton } from '@/components/button';
 import { cartState } from '@/recoil/cart/atom';
-import { prevPathState, returnPathState } from '@/recoil/order/atom';
+import {
+  orderPathState,
+  registerPathState,
+  returnPathState,
+} from '@/recoil/order/atom';
 import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
 import { userState } from '@/recoil/user/atom';
 import { formatPrice } from '@/utils/formatPrice';
@@ -18,7 +22,8 @@ const ShoppingPayment = () => {
   const [, setPurchasePrice] = useRecoilState(purchasePriceState);
   const userStatus = useRecoilValue(userState);
   const [, setReturnPath] = useRecoilState(returnPathState);
-  const [, setPrevPathStatus] = useRecoilState(prevPathState);
+  const [, setOrderPath] = useRecoilState(orderPathState);
+  const [, setRegisterPath] = useRecoilState(registerPathState);
   const router = useRouter();
 
   const totalSaleQuantity = cart.reduce((total, item) => {
@@ -35,7 +40,8 @@ const ShoppingPayment = () => {
   const handleCartToPurchase = () => {
     setPurchase(cart);
     setReturnPath('/order');
-    setPrevPathStatus('cart');
+    setOrderPath('cart');
+    setRegisterPath('/cart');
 
     if (userStatus === 'IMAGE_EXISTS') {
       router.push('/order');

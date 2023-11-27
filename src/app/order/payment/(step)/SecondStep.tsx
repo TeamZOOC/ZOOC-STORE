@@ -5,6 +5,12 @@ import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
 
 import { PopupButton } from '@/components/button';
+import {
+  BankUrlInfo,
+  KAKAOBANK_URL,
+  KAKAOPAY_URL,
+  TOSS_URL,
+} from '@/constants/payment';
 
 import {
   IcKakaoBank,
@@ -22,6 +28,23 @@ interface SecondStepProps {
 const SecondStep = ({ currentStep, handleNextStep }: SecondStepProps) => {
   const params = useSearchParams();
   const totalPrice = params.get('totalPrice');
+
+  const ua = navigator.userAgent.toLowerCase();
+  const isAndroid = /android/i.test(ua);
+  const isIOS = /iphone|ipad|ipod/i.test(ua);
+
+  const redirectToApp = (app: BankUrlInfo) => {
+    if (!isAndroid && !isIOS) return;
+    const visitedAt = new Date().getTime();
+
+    window.location.href = app.deepLink;
+
+    setTimeout(() => {
+      if (new Date().getTime() - visitedAt < 1500) {
+        window.location.href = isAndroid ? app.playStore : app.appStore;
+      }
+    }, 500);
+  };
 
   if (currentStep !== 2) {
     return (
@@ -44,9 +67,21 @@ const SecondStep = ({ currentStep, handleNextStep }: SecondStepProps) => {
           <span>{totalPrice}</span>원을 입금해주세요
         </StInfo>
         <StImages>
-          <IcToss />
-          <IcKakaoBank />
-          <IcKakaoPay />
+          <IcToss
+            onClick={() => {
+              redirectToApp(TOSS_URL);
+            }}
+          />
+          <IcKakaoBank
+            onClick={() => {
+              redirectToApp(KAKAOBANK_URL);
+            }}
+          />
+          <IcKakaoPay
+            onClick={() => {
+              redirectToApp(KAKAOPAY_URL);
+            }}
+          />
         </StImages>
         <p>선택 시, 해당 서비스로 이동할 수 있어요</p>
       </StSecondContent>

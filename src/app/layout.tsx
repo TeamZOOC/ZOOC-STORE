@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/alt-text */
 import localFont from 'next/font/local';
 import React from 'react';
 
@@ -8,10 +9,25 @@ import ReactQueryProvider from '@/lib/ReactQueryProvider';
 import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
+import Fpixel from '@/components/fpixel/Fpixel';
 
-const Pretendard = localFont({
-  src: './fonts/PretendardVariable.woff2',
-  variable: '--font-pretendard',
+const PretendardLight = localFont({
+  src: './fonts/Pretendard-Light.woff2',
+  variable: '--font-pretendard-light',
+});
+
+const PretendardSemiBold = localFont({
+  src: './fonts/Pretendard-SemiBold.woff2',
+  variable: '--font-pretendard-semi-bold',
+});
+const PretendardMedium = localFont({
+  src: './fonts/Pretendard-Medium.woff2',
+  variable: '--font-pretendard-medium',
+});
+
+const PretendardRegular = localFont({
+  src: './fonts/Pretendard-Regular.woff2',
+  variable: '--font-pretendard-regular',
 });
 
 const GmarketSansBold = localFont({
@@ -22,6 +38,11 @@ const GmarketSansBold = localFont({
 const GmarketSansMedium = localFont({
   src: './fonts/GmarketSansMedium.woff2',
   variable: '--font-gmarketsans-medium',
+});
+
+const GmarketSansLight = localFont({
+  src: '/fonts/GmarketSansLight.woff2',
+  variable: '--font-gmarketsans-light',
 });
 
 export const metadata = {
@@ -37,12 +58,21 @@ export default async function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${Pretendard.variable} ${GmarketSansBold.variable} ${GmarketSansMedium.variable}`}
+      className={`${GmarketSansBold.variable} ${GmarketSansMedium.variable} ${GmarketSansLight.variable} ${PretendardSemiBold.variable} ${PretendardLight.variable} ${PretendardMedium.variable} ${PretendardRegular.variable}`}
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: 'none' }}
+            src="https://www.facebook.com/tr?id=315317384790025&ev=PageView&noscript=1"
+          />
+        </noscript>
       </head>
       <body>
+        <Fpixel />
         <ReactQueryProvider>
           <SessionProvider>
             <Providers>

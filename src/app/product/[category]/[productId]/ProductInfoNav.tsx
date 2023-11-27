@@ -10,14 +10,19 @@ import { css, styled } from 'styled-components';
 import { useRef, useState } from 'react';
 import useOutSideClick from '@/hooks/outside/useOutsideClick';
 import CartToast from '@/components/toast/CartToast';
+import Image from 'next/image';
 import OptionBottomSheetContainer from './(option)/OptionBottomSheetContainer';
 import OptionBottomSheet from './(option)/OptionBottomSheet';
 
 interface ProductInfoNavProps {
   productPrice: number;
+  productDetailImage: string;
 }
 
-const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
+const ProductInfoNav = ({
+  productPrice,
+  productDetailImage,
+}: ProductInfoNavProps) => {
   const { activeTab, setActiveTab } = useTab({
     tabList: TAB_LIST,
     defaultTabIndex: 0,
@@ -80,7 +85,15 @@ const ProductInfoNav = ({ productPrice }: ProductInfoNavProps) => {
       </StProductInfoNav>
       <MainLayout>
         <StProductInfoEmptySpace />
-        {activeTab === '상품설명' && <StProductInfoImage />}
+        {activeTab === '상품설명' && (
+          <StProductInfoImage>
+            <Image
+              src={productDetailImage}
+              alt="상품 상세 디테일 이미지"
+              fill
+            />
+          </StProductInfoImage>
+        )}
         {activeTab === '배송정보' && (
           <StProductShippingInfoWrapper>
             <StProductShippingInfo>
@@ -128,6 +141,8 @@ const StProductInfoNav = styled.nav`
 
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
   background-color: ${({ theme }) => theme.colors.zw_background};
+
+  z-index: 1;
 `;
 const StProductInfoNavItem = styled.button<{ $active: boolean }>`
   padding-bottom: 1.2rem;
@@ -151,13 +166,10 @@ const StProductInfoEmptySpace = styled.div`
   background-color: transparent;
 `;
 const StProductInfoImage = styled.div`
-  height: 24rem;
+  position: relative;
+  width: 100%;
 
-  background-color: #efefef;
-
-  & + & {
-    margin-top: 1rem;
-  }
+  aspect-ratio: 1/7.5;
 `;
 const StProductShippingInfoWrapper = styled.div`
   height: 26.2rem;

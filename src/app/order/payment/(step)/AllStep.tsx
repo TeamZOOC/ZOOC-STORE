@@ -5,7 +5,7 @@ import { useRecoilState, useResetRecoilState } from 'recoil';
 import { styled } from 'styled-components';
 
 import { cartState } from '@/recoil/cart/atom';
-import { prevPathState } from '@/recoil/order/atom';
+import { orderPathState } from '@/recoil/order/atom';
 import { purchasePriceState, purchaseState } from '@/recoil/purchase/atom';
 
 import FirstStep from './FirstStep';
@@ -15,7 +15,7 @@ import ThirdStep from './ThirdStep';
 const AllStep = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
-  const [prevPathStatus, setPrevPathStatus] = useRecoilState(prevPathState);
+  const [orderPath, setOrderPath] = useRecoilState(orderPathState);
   const resetPurchase = useResetRecoilState(purchaseState);
   const resetPurchasePrice = useResetRecoilState(purchasePriceState);
   const resetCart = useResetRecoilState(cartState);
@@ -24,9 +24,9 @@ const AllStep = () => {
     resetPurchase();
     resetPurchasePrice();
 
-    if (prevPathStatus === 'cart') {
+    if (orderPath === 'cart') {
       resetCart();
-      setPrevPathStatus(undefined);
+      setOrderPath(undefined);
     }
   };
 

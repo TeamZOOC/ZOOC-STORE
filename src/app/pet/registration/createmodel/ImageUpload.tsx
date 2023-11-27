@@ -89,10 +89,9 @@ const ImageUpload = () => {
         router.push('/mypage');
       }
     } catch (e) {
+      setIsLoading(false);
       showToast('dataset_upload_error');
       console.error(e);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -111,7 +110,7 @@ const ImageUpload = () => {
         multiple
         ref={imageInputRef}
         onChange={handleImageChange}
-        accept="image/*"
+        accept=".png, .jpg, .jpeg, .webp"
       />
       {validatedImages.length === 0 ? (
         <>

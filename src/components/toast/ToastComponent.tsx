@@ -40,7 +40,7 @@ const StToastWrapper = styled.div`
   z-index: ${({ theme }) => theme.zIndex.zw_toast};
 
   position: absolute;
-  bottom: 9.7rem;
+  bottom: 10rem;
 
   display: flex;
   justify-content: center;

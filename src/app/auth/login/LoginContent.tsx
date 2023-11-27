@@ -62,6 +62,8 @@ const StLoginContent = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
+
+  max-width: 30rem;
 `;
 
 const StLoginContentTextWrapper = styled.div`
@@ -69,25 +71,25 @@ const StLoginContentTextWrapper = styled.div`
   align-items: center;
 
   color: ${({ theme }) => theme.colors.zw_black};
-  font-family: Gmarket Sans;
+  font-family: var(--font-gmarketsans-light);
   font-size: 3rem;
   font-style: normal;
-  font-weight: 300;
+  /* font-weight: 300; */
   line-height: 4rem; /* 133.333% */
   letter-spacing: -0.03rem;
 
   p {
-    font-family: Gmarket Sans;
+    font-family: var(--font-gmarketsans-medium);
     font-size: 3rem;
     font-style: normal;
-    font-weight: 400;
+    /* font-weight: 400; */
     line-height: 4rem; /* 133.333% */
     letter-spacing: -0.03rem;
   }
 `;
 
 const StLoginContentHorizontalLine = styled.div`
-  width: 16.7rem;
+  width: 60%;
   height: 0.1rem;
   margin-left: 0.5rem;
 
@@ -96,10 +98,10 @@ const StLoginContentHorizontalLine = styled.div`
 
 const StLoginContentSubText = styled.p`
   color: ${({ theme }) => theme.colors.zw_gray};
-  font-family: Pretendard;
+  font-family: var(--font-pretendard-light);
   font-size: 1.6rem;
   font-style: normal;
-  font-weight: 300;
+  /* font-weight: 300; */
   line-height: 2.4rem; /* 150% */
   letter-spacing: -0.0048rem;
 `;

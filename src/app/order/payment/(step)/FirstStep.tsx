@@ -1,5 +1,6 @@
 'use client';
 
+import { useSearchParams } from 'next/navigation';
 import { Dispatch, SetStateAction } from 'react';
 import { styled } from 'styled-components';
 
@@ -15,11 +16,16 @@ interface FirstStepProps {
 }
 
 const FirstStep = ({ currentStep, handleNextStep }: FirstStepProps) => {
+  const params = useSearchParams();
+  const totalPrice = params.get('totalPrice');
   const { showToast } = useToast();
+
   const handleCopy = () => {
-    navigator.clipboard.writeText(ACCOUNT_NUMBER).then(() => {
-      showToast('accountnumber_copied');
-    });
+    navigator.clipboard
+      .writeText(`카카오뱅크 ${ACCOUNT_NUMBER} ${totalPrice}원`)
+      .then(() => {
+        showToast('accountnumber_copied');
+      });
   };
 
   if (currentStep !== 1) {
@@ -39,8 +45,8 @@ const FirstStep = ({ currentStep, handleNextStep }: FirstStepProps) => {
       <StContent>
         <StImage />
         <StInfo>
-          <p>예금주ㅣ 손애진</p>
-          <p>우리은행 1002259752313</p>
+          <p>예금주ㅣ 김효재</p>
+          <p>카카오뱅크 {ACCOUNT_NUMBER}</p>
         </StInfo>
       </StContent>
       <PopupButton

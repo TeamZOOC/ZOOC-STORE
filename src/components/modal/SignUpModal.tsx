@@ -26,7 +26,7 @@ const SignUpModal = () => {
       <p>지금 떠나면 가입 과정이 저장되지 않아요</p>
       <StButtonWrapper>
         <StSignUpButton type="button" onClick={handleWithdraw}>
-          삭제하기
+          그만두기
         </StSignUpButton>
         <StCancelButton type="button" onClick={() => closeModal('signUp')}>
           취소

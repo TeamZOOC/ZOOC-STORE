@@ -7,10 +7,11 @@ import React from '../modal/ImageValidateModal';
 interface CheckBoxProps {
   name: string;
   label: string;
+  labelColor?: string;
   control: Control<any>;
 }
 
-const CheckBox = ({ name, label, control }: CheckBoxProps) => {
+const CheckBox = ({ name, label, control, labelColor }: CheckBoxProps) => {
   const { formState } = useFormContext();
   const { field, fieldState } = useController({
     name,
@@ -22,7 +23,7 @@ const CheckBox = ({ name, label, control }: CheckBoxProps) => {
   const isError = formState.isSubmitted && fieldState.invalid;
 
   return (
-    <StCheckboxLabel htmlFor={name}>
+    <StCheckboxLabel htmlFor={name} $labelColor={labelColor}>
       <StCheckbox
         id={name}
         checked={field.value}
@@ -44,14 +45,14 @@ const CheckBox = ({ name, label, control }: CheckBoxProps) => {
 
 export default CheckBox;
 
-const StCheckboxLabel = styled.label`
+const StCheckboxLabel = styled.label<{ $labelColor?: string }>`
   display: flex;
   align-items: center;
   gap: 0.4rem;
 
   & > span {
-    color: ${({ theme }) => theme.colors.zw_black};
-    ${({ theme }) => theme.fonts.zw_Body2};
+    color: ${({ $labelColor, theme }) => $labelColor || theme.colors.zw_black};
+    ${({ theme }) => theme.fonts.zw_Body1};
   }
 `;
 

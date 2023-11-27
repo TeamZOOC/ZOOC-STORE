@@ -23,6 +23,9 @@ module.exports = {
 
     return config;
   },
+  images: {
+    domains: ['zooc-bucket.s3.ap-northeast-2.amazonaws.com'],
+  },
   compiler: {
     styledComponents: {
       displayName: true,

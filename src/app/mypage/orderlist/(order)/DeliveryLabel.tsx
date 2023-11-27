@@ -27,10 +27,10 @@ const StDeliveryLabel = styled.label<{ $isCompleted: boolean }>`
 
   color: ${({ theme }) => theme.colors.zw_point};
   text-align: center;
-  font-family: 'Pretendard';
+  font-family: var(--font-pretendard-semi-bold);
   font-size: 1.2rem;
   font-style: normal;
-  font-weight: 600;
+  /* font-weight: 600; */
   line-height: 130%; /* 1.56rem */
 
   ${({ $isCompleted, theme }) =>
