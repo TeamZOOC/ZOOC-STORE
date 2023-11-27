@@ -10,9 +10,10 @@ import { registerPathState, returnPathState } from '@/recoil/order/atom';
 
 interface PetRegisterQuitModalProps {
   route: 'back' | 'home';
+  onBack?: () => void;
 }
 
-const PetRegisterQuitModal = ({ route }: PetRegisterQuitModalProps) => {
+const PetRegisterQuitModal = ({ route, onBack }: PetRegisterQuitModalProps) => {
   const { closeModal } = useModal();
   const router = useRouter();
   const [, setReturnPath] = useRecoilState(returnPathState);
@@ -22,7 +23,9 @@ const PetRegisterQuitModal = ({ route }: PetRegisterQuitModalProps) => {
     setReturnPath(undefined);
 
     if (route === 'back') {
-      router.back();
+      if (onBack) {
+        onBack();
+      } else router.back();
     } else if (route === 'home') {
       if (registerPath) {
         router.push(registerPath);
