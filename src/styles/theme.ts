@@ -5,28 +5,28 @@ export const fonts = {
     font-family: var(--font-gmarketsans-bold);
     font-size: 2.2rem;
     font-style: normal;
-    font-weight: 500;
+    /* font-weight: 500; */
     line-height: normal;
   `,
   zw_price_middle: css`
     font-family: var(--font-gmarketsans-medium);
     font-size: 1.5rem;
     font-style: normal;
-    font-weight: 400;
+    /* font-weight: 400; */
     line-height: normal;
   `,
   zw_price_small: css`
     font-family: var(--font-gmarketsans-medium);
     font-size: 1.2rem;
     font-style: normal;
-    font-weight: 400;
+    /* font-weight: 400; */
     line-height: normal;
   `,
   zw_Subhead1: css`
     font-family: var(--font-pretendard-semi-bold);
     font-size: 1.8rem;
     font-style: normal;
-    font-weight: 600;
+    /* font-weight: 600; */
     line-height: normal;
     letter-spacing: -0.03rem;
   `,
@@ -34,7 +34,7 @@ export const fonts = {
     font-family: var(--font-pretendard-medium);
     font-size: 1.8rem;
     font-style: normal;
-    font-weight: 500;
+    /* font-weight: 500; */
     line-height: normal;
     letter-spacing: -0.03rem;
   `,
@@ -42,14 +42,14 @@ export const fonts = {
     font-family: var(--font-pretendard-semi-bold);
     font-size: 1.6rem;
     font-style: normal;
-    font-weight: 600;
+    /* font-weight: 600; */
     line-height: normal;
   `,
   zw_Subhead4: css`
     font-family: var(--font-pretendard-medium);
     font-size: 1.4rem;
     font-style: normal;
-    font-weight: 500;
+    /* font-weight: 500; */
     line-height: normal;
     letter-spacing: -0.0042rem;
   `,
@@ -57,7 +57,7 @@ export const fonts = {
     font-family: var(--font-pretendard-regular);
     font-size: 1.6rem;
     font-style: normal;
-    font-weight: 400;
+    /* font-weight: 400; */
     line-height: 2rem; /* 125% */
     letter-spacing: -0.0048rem;
   `,
@@ -65,7 +65,7 @@ export const fonts = {
     font-family: var(--font-pretendard-regular);
     font-size: 1.4rem;
     font-style: normal;
-    font-weight: 400;
+    /* font-weight: 400; */
     line-height: 2rem; /* 142.857% */
     letter-spacing: -0.03rem;
   `,
@@ -73,7 +73,7 @@ export const fonts = {
     font-family: var(--font-pretendard-regular);
     font-size: 1.4rem;
     font-style: normal;
-    font-weight: 400;
+    /* font-weight: 400; */
     line-height: normal;
     letter-spacing: -0.0042rem;
   `,

@@ -26,8 +26,9 @@ const Fpixel = () => {
         t.src=v;s=b.getElementsByTagName(e)[0];
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1037687987375235');
-        fbq('track', 'PageView');`,
+        fbq('init', '315317384790025');
+        fbq('track', 'PageView');
+        `,
       }}
     />
   );
