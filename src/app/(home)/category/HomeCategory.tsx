@@ -11,7 +11,7 @@ const HomeCategory = () => {
   return (
     <StHomeCategory>
       <StHomeCategoryTop>
-        <h2>카테고리</h2>
+        <span>카테고리</span>
         <StHomeCategoryViewAllButton type="button">
           <Link href="/product/all" scroll={false}>
             상품 전체보기
@@ -45,7 +45,7 @@ const StHomeCategoryTop = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  & > h2 {
+  & > span {
     color: ${({ theme }) => theme.colors.zw_black};
     ${({ theme }) => theme.fonts.zw_Subhead1};
   }

@@ -3,6 +3,7 @@
 import { styled } from 'styled-components';
 import React, { useRef } from 'react';
 import useOutSideClick from '@/hooks/outside/useOutsideClick';
+import Link from 'next/link';
 import { IcCartToast } from '../../../public/icons';
 
 interface CartToastProps {
@@ -21,7 +22,9 @@ const CartToast = ({ isOpenCartToast, handleCartToast }: CartToastProps) => {
         <IcCartToast />
         <StCartToastTextWrapper>
           <p>장바구니에 상품을 담았어요</p>
-          <p>장바구니 바로가기</p>
+          <Link href="/cart">
+            <p>장바구니 바로가기</p>
+          </Link>
         </StCartToastTextWrapper>
       </StCartToastContainer>
     </StCartToastWrapper>

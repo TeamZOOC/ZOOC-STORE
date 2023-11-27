@@ -49,7 +49,7 @@ const AgreementCheckContent = () => {
           {isAllAgreement && <IcCheck />}
         </StAgeementCheckBox>
       </StAgreementCheckAll>
-      {AGREEMENT.map(({ id, agreementLink, agreementTitle, show }) => (
+      {AGREEMENT.map(({ id, agreementLink, agreementTitle }) => (
         <StAgreementCheckItem key={id}>
           <StAgreementCheckItemLeft>
             <StAgeementCheckBox
@@ -61,13 +61,11 @@ const AgreementCheckContent = () => {
             </StAgeementCheckBox>
             {agreementTitle}
           </StAgreementCheckItemLeft>
-          {show && (
-            <StAgreementLinkButton>
-              <Link target="_blank" href={agreementLink}>
-                보기
-              </Link>
-            </StAgreementLinkButton>
-          )}
+          <StAgreementLinkButton>
+            <Link target="_blank" href={agreementLink}>
+              보기
+            </Link>
+          </StAgreementLinkButton>
         </StAgreementCheckItem>
       ))}
       <BottomButton

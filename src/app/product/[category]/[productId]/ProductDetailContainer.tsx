@@ -39,7 +39,10 @@ const ProductDetailContainer = ({
             productDesc={productDetail.description}
           />
         </MainLayout>
-        <ProductInfoNav productPrice={productDetail.price} />
+        <ProductInfoNav
+          productPrice={productDetail.price}
+          productDetailImage={productDetail.detail}
+        />
       </>
     )
   );

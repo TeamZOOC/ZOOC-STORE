@@ -67,7 +67,7 @@ export default async function RootLayout({
             height="1"
             width="1"
             style={{ display: 'none' }}
-            src="https://www.facebook.com/tr?id=1037687987375235&ev=PageView&noscript=1"
+            src="https://www.facebook.com/tr?id=315317384790025&ev=PageView&noscript=1"
           />
         </noscript>
       </head>

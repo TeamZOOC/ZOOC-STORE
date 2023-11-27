@@ -17,7 +17,7 @@ const ProductList = () => {
       {isLoading && <ProductLoadingContainer />}
       {productList?.map((product) => (
         <Link href={`${pathname}/${product.id}`} key={product.id}>
-          <ProductItem product={product} />
+          <ProductItem product={product} usedComponent="product" />
         </Link>
       ))}
     </StProductList>
