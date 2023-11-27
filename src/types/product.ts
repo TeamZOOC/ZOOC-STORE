@@ -1,7 +1,7 @@
 export interface ProductInfoResponse {
   id: number;
   name: string;
-  sale: number | null;
+  sale: number;
   price: number;
 }
 
