@@ -2,10 +2,7 @@
 
 import { styled } from 'styled-components';
 import Image from 'next/image';
-import { FITAPAT_INSTAGRAM } from '@/constants/fitapatUrls';
-import Link from 'next/link';
 import {
-  ImageEventFooter,
   ImageSampleAcc,
   ImageSampleAccDetail,
   ImageSampleHoodie,
@@ -13,7 +10,6 @@ import {
   ImageSampleSweat,
   ImageSampleSweatDetail,
 } from '../../../public/images';
-import { IcBtnInsta } from '../../../public/icons';
 
 const EventSample = () => (
   <>
@@ -64,14 +60,6 @@ const EventSample = () => (
       />
     </StEventSampleSweatDetail>
     <StEventFooterSpace />
-    <StEventFooter>
-      <Image src={ImageEventFooter} alt="이벤트 하단" fill sizes="100vw" />
-      <StEventFooteSocialWrapper>
-        <Link href={FITAPAT_INSTAGRAM}>
-          <IcBtnInsta />
-        </Link>
-      </StEventFooteSocialWrapper>
-    </StEventFooter>
   </>
 );
 
@@ -111,13 +99,6 @@ const StEventSampleSweatDetail = styled.div`
   aspect-ratio: 1/2.3;
 `;
 
-const StEventFooter = styled.div`
-  position: relative;
-  width: 100%;
-
-  aspect-ratio: 1/1.5;
-`;
-
 const StEventProductButton = styled.button`
   position: absolute;
   left: 50%;
@@ -134,13 +115,4 @@ const StEventProductButton = styled.button`
   letter-spacing: -0.03rem;
 
   transform: translate(-50%);
-`;
-
-const StEventFooteSocialWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  bottom: 6rem;
-
-  width: 100%;
 `;
