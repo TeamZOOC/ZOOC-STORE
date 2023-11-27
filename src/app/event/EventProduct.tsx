@@ -46,10 +46,9 @@ const StEventProductTitle = styled.div`
   span {
     color: ${({ theme }) => theme.colors.zw_white};
     text-align: center;
-    font-family: Pretendard;
+    font-family: var(--font-pretendard-light);
     font-size: 2rem;
     font-style: normal;
-    font-weight: 300;
     line-height: normal;
     letter-spacing: -0.03rem;
   }
@@ -57,10 +56,9 @@ const StEventProductTitle = styled.div`
     margin-top: 0.5rem;
 
     color: ${({ theme }) => theme.colors.zw_white};
-    font-family: Pretendard;
+    font-family: var(--font-pretendard-bold);
     font-size: 2rem;
     font-style: normal;
-    font-weight: 700;
     line-height: normal;
     letter-spacing: -0.03rem;
   }

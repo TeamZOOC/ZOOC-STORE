@@ -16,6 +16,11 @@ const PretendardLight = localFont({
   variable: '--font-pretendard-light',
 });
 
+const PretendardBold = localFont({
+  src: './fonts/Pretendard-Bold.woff2',
+  variable: '--font-pretendard-bold',
+});
+
 const PretendardSemiBold = localFont({
   src: './fonts/Pretendard-SemiBold.woff2',
   variable: '--font-pretendard-semi-bold',
@@ -28,6 +33,11 @@ const PretendardMedium = localFont({
 const PretendardRegular = localFont({
   src: './fonts/Pretendard-Regular.woff2',
   variable: '--font-pretendard-regular',
+});
+
+const PretendardExtraLight = localFont({
+  src: './fonts/Pretendard-ExtraLight.woff2',
+  variable: '--font-pretendard-extralight',
 });
 
 const GmarketSansBold = localFont({
@@ -58,7 +68,7 @@ export default async function RootLayout({
   return (
     <html
       lang="ko"
-      className={`${GmarketSansBold.variable} ${GmarketSansMedium.variable} ${GmarketSansLight.variable} ${PretendardSemiBold.variable} ${PretendardLight.variable} ${PretendardMedium.variable} ${PretendardRegular.variable}`}
+      className={`${GmarketSansBold.variable} ${GmarketSansMedium.variable} ${GmarketSansLight.variable} ${PretendardSemiBold.variable} ${PretendardLight.variable} ${PretendardMedium.variable} ${PretendardRegular.variable} ${PretendardExtraLight.variable} ${PretendardBold.variable}`}
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
