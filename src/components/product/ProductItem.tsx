@@ -21,8 +21,14 @@ const ProductItem = ({ product, usedComponent }: ProductItemProps) => {
       </StProductImage>
       <StProductTitle $usedComponent={usedComponent}>{name}</StProductTitle>
       <StProductPriceBox>
-        {sale > 0 && <StProductSalePercent $usedComponent={usedComponent}>{sale}%</StProductSalePercent>}
-        <StProductPrice $usedComponent={usedComponent}>{formatPrice(price)}</StProductPrice>
+        {sale > 0 && (
+          <StProductSalePercent $usedComponent={usedComponent}>
+            {sale}%
+          </StProductSalePercent>
+        )}
+        <StProductPrice $usedComponent={usedComponent}>
+          {formatPrice(price)}
+        </StProductPrice>
       </StProductPriceBox>
     </StProductItem>
   );
