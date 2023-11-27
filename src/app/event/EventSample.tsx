@@ -107,10 +107,9 @@ const StEventProductButton = styled.button`
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_black};
 
   color: ${({ theme }) => theme.colors.zw_black};
-  font-family: Pretendard;
+  font-family: var(--font-pretendard-semi-bold);
   font-size: 1.4rem;
   font-style: normal;
-  font-weight: 600;
   line-height: normal;
   letter-spacing: -0.03rem;
 
