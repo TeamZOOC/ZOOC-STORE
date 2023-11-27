@@ -142,18 +142,19 @@ const StProductInfoNav = styled.nav`
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_brightgray};
   background-color: ${({ theme }) => theme.colors.zw_background};
 
-  z-index: 10;
+  z-index: 1;
 `;
 const StProductInfoNavItem = styled.button<{ $active: boolean }>`
   padding-bottom: 1.2rem;
 
   color: ${({ theme }) => theme.colors.zw_lightgray};
-  ${({ theme }) => theme.fonts.zw_Subhead3};
+  ${({ theme }) => theme.fonts.zw_Body1};
   ${({ $active }) =>
     $active &&
     css`
-      color: ${({ theme }) => theme.colors.zw_black};
       border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_black};
+      color: ${({ theme }) => theme.colors.zw_black};
+      ${({ theme }) => theme.fonts.zw_Subhead3};
     `}
   & + & {
     margin-left: 3.2rem;

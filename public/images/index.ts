@@ -15,6 +15,18 @@ import ImageCategorySeason from './image_category_season.png';
 import ImageCategoryOutfit from './image_category_outfit.png';
 import ImageCategoryCase from './image_category_case.png';
 import ImageCategoryAcc from './image_category_acc.png';
+import ImageEvent from './image_event.png';
+import ImageCoupon from './image_coupon.png';
+import ImageEventHoodie from './image_event_hoodie.png';
+import ImageEventSweat from './image_event_sweat.png';
+import ImageEventAcc from './image_event_acc.png';
+import ImageSampleAcc from './image_sample_acc.png';
+import ImageSampleAccDetail from './image_sample_acc_detail.png';
+import ImageSampleHoodie from './image_sample_hoodie.png';
+import ImageSampleHoodieDetail from './image_sample_hoodie_detail.png';
+import ImageSampleSweat from './image_sample_sweat.png';
+import ImageSampleSweatDetail from './image_sample_sweat_detail.png';
+import ImageEventFooter from './image_event_footer.png';
 
 export {
   ImageArticle,
@@ -34,4 +46,16 @@ export {
   ImageCategoryOutfit,
   ImageCategoryCase,
   ImageCategoryAcc,
+  ImageEvent,
+  ImageCoupon,
+  ImageEventHoodie,
+  ImageEventSweat,
+  ImageEventAcc,
+  ImageSampleAcc,
+  ImageSampleAccDetail,
+  ImageSampleHoodie,
+  ImageSampleHoodieDetail,
+  ImageSampleSweat,
+  ImageSampleSweatDetail,
+  ImageEventFooter,
 };
