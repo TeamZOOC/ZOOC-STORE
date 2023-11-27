@@ -34,6 +34,7 @@ const StBottomButtonWrapper = styled.div`
   justify-content: center;
 
   width: 100%;
+  z-index: 10;
 `;
 
 const StBottomButton = styled.button<{ $disabled: boolean }>`
