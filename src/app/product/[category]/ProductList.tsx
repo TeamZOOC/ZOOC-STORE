@@ -28,7 +28,7 @@ export default ProductList;
 const StProductList = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  row-gap: 2.8rem;
+  row-gap: 3.6rem;
   column-gap: 1.1rem;
 
   width: 100%;

@@ -27,7 +27,7 @@ const ProductItem = ({ product, usedComponent }: ProductItemProps) => {
           </StProductSalePercent>
         )}
         <StProductPrice $usedComponent={usedComponent}>
-          {formatPrice(price)}
+          {formatPrice(price)}원
         </StProductPrice>
       </StProductPriceBox>
     </StProductItem>
@@ -51,16 +51,11 @@ const StProductImage = styled.div`
 
 const StProductTitle = styled.p<{ $usedComponent: string }>`
   margin-top: 1rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.8rem;
 
   color: ${({ theme }) => theme.colors.zw_black};
-  ${({ theme }) => theme.fonts.zw_Subhead3};
+  ${({ theme }) => theme.fonts.zw_Subhead4};
 
-  ${({ $usedComponent, theme }) =>
-    $usedComponent === 'article' && theme.fonts.zw_Subhead4}
-
-  ${({ $usedComponent, theme }) =>
-    $usedComponent === 'product' && theme.fonts.zw_Subhead3};
   text-align: left;
 `;
 
