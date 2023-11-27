@@ -148,7 +148,7 @@ const StAgreementCheckItemLeft = styled.div`
   gap: 1rem;
 `;
 const StAgreementLinkButton = styled.button`
-  padding: 0 0.5rem;
+  padding: 0 0.3rem;
 
   border-bottom: 0.1rem solid ${({ theme }) => theme.colors.zw_lightgray};
 

@@ -3,6 +3,7 @@ export interface ProductInfoResponse {
   name: string;
   sale: number;
   price: number;
+  image: string;
 }
 
 export interface OptionCategoriesInfo {

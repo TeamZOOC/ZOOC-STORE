@@ -31,7 +31,7 @@ const ProductDetailContainer = ({
   return (
     productDetail && (
       <>
-        <ProductImage />
+        <ProductImage productImage={productDetail.image} />
         <MainLayout>
           <ProductDetail
             productName={productDetail.name}

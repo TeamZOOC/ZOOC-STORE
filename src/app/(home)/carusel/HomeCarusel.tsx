@@ -15,8 +15,9 @@ const HomeCarusel = () => {
   return (
     <StHomeCarusel>
       <Swiper
-        spaceBetween={20}
-        slidesPerView={1.1}
+        spaceBetween={12}
+        slidesPerView={1.2}
+        centeredSlides
         autoplay={{
           delay: 3000,
           disableOnInteraction: false,
@@ -24,6 +25,19 @@ const HomeCarusel = () => {
         loop
         modules={[Autoplay]}
       >
+        <SwiperSlide onClick={() => router.push('/event')}>
+          <StHomeCaruselItem>
+            <CarouselFirst />
+          </StHomeCaruselItem>
+        </SwiperSlide>
+        <SwiperSlide>
+          <CarouselSecond />
+        </SwiperSlide>
+        <SwiperSlide>
+          <StHomeCaruselItem>
+            <CarouselLast />
+          </StHomeCaruselItem>
+        </SwiperSlide>
         <SwiperSlide onClick={() => router.push('/event')}>
           <StHomeCaruselItem>
             <CarouselFirst />

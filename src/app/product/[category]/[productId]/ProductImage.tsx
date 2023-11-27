@@ -1,13 +1,27 @@
 'use client';
 
+import Image from 'next/image';
 import { styled } from 'styled-components';
 
-const ProductImage = () => <StProductImage />;
+interface ProductImageProps {
+  productImage: string;
+}
+
+const ProductImage = ({ productImage }: ProductImageProps) => (
+  <StProductImage>
+    {productImage !== 'tmp' && (
+      <Image src={productImage} alt="제품 상세" layout="fill" />
+    )}
+  </StProductImage>
+);
 
 export default ProductImage;
 
 const StProductImage = styled.div`
-  height: 37.5rem;
+  position: relative;
+  width: 100%;
+
+  aspect-ratio: 1/1;
 
   background-color: #e2e2e2;
 `;
