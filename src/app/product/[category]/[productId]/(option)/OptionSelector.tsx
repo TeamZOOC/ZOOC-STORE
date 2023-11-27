@@ -8,10 +8,12 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { productOptionState } from '@/recoil/product/atom';
 import { selectedOptionsState } from '@/recoil/option/atom';
 import { OptionInfo } from '@/types/cart';
+import { useToast } from '@/hooks/toast';
 import { IcDropDown, IcDropDownActive } from '../../../../../../public/icons';
 import OptionDropdown from './OptionDropdown';
 
 const OptionSelector = () => {
+  const { showToast } = useToast();
   const [selectedOptions, setSelectedOptions] =
     useRecoilState(selectedOptionsState);
   const productOption = useRecoilValue(productOptionState);
@@ -47,7 +49,10 @@ const OptionSelector = () => {
 
       if (!isDuplicate) {
         setSelectedOptions((prevOptions) => [...prevOptions, [option]]);
+      } else {
+        showToast('option_duplicated');
       }
+      setSelectedOptionName(['', '']); // 선택된 옵션 이름 초기화
     } else if (tempOption) {
       // 첫 번째 선택된 옵션(tempOption)과 두 번째 선택된 옵션(option)을
       // 하나의 배열로 묶어서 selectedOptions 배열에 추가
@@ -62,6 +67,8 @@ const OptionSelector = () => {
           ...prevOptions,
           [tempOption, option],
         ]);
+      } else {
+        showToast('option_duplicated');
       }
 
       setTempOption(null); // 임시 옵션 초기화

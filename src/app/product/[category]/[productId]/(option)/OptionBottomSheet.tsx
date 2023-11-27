@@ -48,7 +48,7 @@ const OptionBottomSheet = ({
           ))}
         </StOptionSelectedItemWrapper>
       </StOptionBottomSheetInner>
-      <StHr />
+      {selectedOptions.length > 0 && <StHr />}
       <StOptionBottomSheetInner $position="bottom">
         {selectedOptions.length > 0 && (
           <OptionTotalPrice productPrice={productPrice} />
