@@ -9,7 +9,9 @@ interface ProductImageProps {
 
 const ProductImage = ({ productImage }: ProductImageProps) => (
   <StProductImage>
-    <Image src={productImage} alt="제품 상세" layout="fill" />
+    {productImage !== 'tmp' && (
+      <Image src={productImage} alt="제품 상세" layout="fill" />
+    )}
   </StProductImage>
 );
 

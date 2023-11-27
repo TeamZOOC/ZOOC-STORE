@@ -87,13 +87,15 @@ const ProductInfoNav = ({
         <StProductInfoEmptySpace />
         {activeTab === '상품설명' && (
           <StProductInfoImage>
-            <Image
-              src={productDetailImage}
-              alt="상품 상세 디테일 이미지"
-              fill
-              placeholder="blur"
-              blurDataURL="data:image/png;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII="
-            />
+            {productDetailImage !== 'tmp' && (
+              <Image
+                src={productDetailImage}
+                alt="상품 상세 디테일 이미지"
+                fill
+                placeholder="blur"
+                blurDataURL="data:image/png;iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkqAcAAIUAgUW0RjgAAAAASUVORK5CYII="
+              />
+            )}
           </StProductInfoImage>
         )}
         {activeTab === '배송정보' && (
@@ -172,6 +174,8 @@ const StProductInfoImage = styled.div`
   width: 100%;
 
   aspect-ratio: 1/7.5;
+
+  background-color: #e2e2e2;
 `;
 const StProductShippingInfoWrapper = styled.div`
   height: 26.2rem;
