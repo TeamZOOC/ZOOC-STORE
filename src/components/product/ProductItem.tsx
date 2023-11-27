@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import { ProductInfoResponse } from '@/types/product';
 import { formatPrice } from '@/utils/formatPrice';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface ProductItemProps {
   product: ProductInfoResponse;
@@ -12,12 +13,14 @@ interface ProductItemProps {
 
 const ProductItem = ({ product, usedComponent }: ProductItemProps) => {
   const router = useRouter();
-  const { id, name, sale, price } = product;
+  const { id, name, sale, price, image } = product;
 
   return (
     <StProductItem onClick={() => router.push(`/product/all/${id}`)}>
       <StProductImage>
-        {/* <Image src={imgSrc} alt={imgAlt} fill /> */}
+        {image !== 'tmp' && (
+          <Image src={image} alt="제품 이미지" fill sizes="100vw" />
+        )}
       </StProductImage>
       <StProductTitle $usedComponent={usedComponent}>{name}</StProductTitle>
       <StProductPriceBox>
@@ -27,7 +30,7 @@ const ProductItem = ({ product, usedComponent }: ProductItemProps) => {
           </StProductSalePercent>
         )}
         <StProductPrice $usedComponent={usedComponent}>
-          {formatPrice(price)}
+          {formatPrice(price)}원
         </StProductPrice>
       </StProductPriceBox>
     </StProductItem>
@@ -51,16 +54,11 @@ const StProductImage = styled.div`
 
 const StProductTitle = styled.p<{ $usedComponent: string }>`
   margin-top: 1rem;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.8rem;
 
   color: ${({ theme }) => theme.colors.zw_black};
-  ${({ theme }) => theme.fonts.zw_Subhead3};
+  ${({ theme }) => theme.fonts.zw_Subhead4};
 
-  ${({ $usedComponent, theme }) =>
-    $usedComponent === 'article' && theme.fonts.zw_Subhead4}
-
-  ${({ $usedComponent, theme }) =>
-    $usedComponent === 'product' && theme.fonts.zw_Subhead3};
   text-align: left;
 `;
 
