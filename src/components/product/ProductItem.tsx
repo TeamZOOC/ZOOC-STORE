@@ -4,6 +4,7 @@ import { styled } from 'styled-components';
 import { ProductInfoResponse } from '@/types/product';
 import { formatPrice } from '@/utils/formatPrice';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 
 interface ProductItemProps {
   product: ProductInfoResponse;
@@ -12,12 +13,14 @@ interface ProductItemProps {
 
 const ProductItem = ({ product, usedComponent }: ProductItemProps) => {
   const router = useRouter();
-  const { id, name, sale, price } = product;
+  const { id, name, sale, price, image } = product;
 
   return (
     <StProductItem onClick={() => router.push(`/product/all/${id}`)}>
       <StProductImage>
-        {/* <Image src={imgSrc} alt={imgAlt} fill /> */}
+        {image !== 'tmp' && (
+          <Image src={image} alt="제품 이미지" fill sizes="100vw" />
+        )}
       </StProductImage>
       <StProductTitle $usedComponent={usedComponent}>{name}</StProductTitle>
       <StProductPriceBox>
