@@ -1,7 +1,9 @@
 'use client';
 
 import { styled } from 'styled-components';
+import Image from 'next/image';
 import { IcFitaPatLogoEvent } from '../../../public/icons';
+import { ImageChristmas, ImageCoupon } from '../../../public/images';
 
 const EventCoupon = () => (
   <StEventCoupon>
@@ -20,12 +22,21 @@ const EventCoupon = () => (
       <span>행복한 크리스마스를 미리 준비하는</span>
       <p>얼리버드 특별 해택</p>
     </StEventEarlyBird>
+    <StCouponImage>
+      <Image src={ImageCoupon} alt="coupon" fill sizes="100vw" />
+    </StCouponImage>
+    <StCouponText>구매 시 전국 무료배송</StCouponText>
+    <StChrismas>
+      <Image src={ImageChristmas} alt="christmas" fill sizes="100vw" />
+    </StChrismas>
   </StEventCoupon>
 );
 
 export default EventCoupon;
 
 const StEventCoupon = styled.div`
+  position: relative;
+
   width: 100%;
   padding: 4rem 0 7rem 0;
 
@@ -39,11 +50,10 @@ const StEventCouponTitle = styled.div`
   padding-left: 2.8rem;
 
   span {
-    ${({ theme }) => theme.colors.zw_black}
-    font-family: Pretendard;
+    ${({ theme }) => theme.colors.zw_black};
+    font-family: var(--font-pretendard-extralight);
     font-size: 2.8rem;
     font-style: normal;
-    font-weight: 200;
     line-height: normal;
     letter-spacing: -0.03rem;
   }
@@ -56,11 +66,10 @@ const StEventCouponLogoWrapper = styled.div`
 
   margin-top: 0.2rem;
 
-  ${({ theme }) => theme.colors.zw_black}
-  font-family: Pretendard;
+  ${({ theme }) => theme.colors.zw_black};
+  font-family: var(--font-pretendard-regular);
   font-size: 2.8rem;
   font-style: normal;
-  font-weight: 400;
   line-height: normal;
   letter-spacing: -0.03rem;
 `;
@@ -70,11 +79,10 @@ const StEventCouponDesc = styled.div`
   padding-left: 2.8rem;
 
   p {
-    ${({ theme }) => theme.colors.zw_black}
-    font-family: Pretendard;
+    ${({ theme }) => theme.colors.zw_black};
+    font-family: var(--font-pretendard-light);
     font-size: 1.3rem;
     font-style: normal;
-    font-weight: 300;
     line-height: 2.2rem; /* 169.231% */
     letter-spacing: -0.03rem;
   }
@@ -91,10 +99,9 @@ const StEventEarlyBird = styled.div`
 
   span {
     ${({ theme }) => theme.colors.zw_black};
-    font-family: Pretendard;
+    font-family: var(--font-pretendard-regular);
     font-size: 1.6rem;
     font-style: normal;
-    font-weight: 400;
     line-height: normal;
     letter-spacing: -0.03rem;
   }
@@ -103,11 +110,49 @@ const StEventEarlyBird = styled.div`
     margin-top: 0.5rem;
 
     ${({ theme }) => theme.colors.zw_black};
-    font-family: Pretendard;
+    font-family: var(--font-pretendard-semi-bold);
     font-size: 2rem;
     font-style: normal;
-    font-weight: 600;
     line-height: normal;
     letter-spacing: -0.03px;
   }
+`;
+
+const StCouponImage = styled.div`
+  display: flex;
+  justify-content: center;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%);
+
+  width: 90%;
+  margin-top: 2.4rem;
+
+  aspect-ratio: 1/0.43;
+`;
+
+const StCouponText = styled.div`
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  margin-top: 1.6rem;
+
+  color: ${({ theme }) => theme.colors.zw_black};
+  font-family: var(--font-pretendard-regular);
+  font-size: 1.2rem;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -0.03rem;
+`;
+
+const StChrismas = styled.div`
+  position: relative;
+  position: absolute;
+  bottom: -13rem;
+
+  width: 100%;
+  margin-top: 2.4rem;
+
+  aspect-ratio: 1/0.41;
 `;

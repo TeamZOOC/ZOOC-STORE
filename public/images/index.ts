@@ -27,6 +27,7 @@ import ImageSampleHoodieDetail from './image_sample_hoodie_detail.png';
 import ImageSampleSweat from './image_sample_sweat.png';
 import ImageSampleSweatDetail from './image_sample_sweat_detail.png';
 import ImageEventFooter from './image_event_footer.png';
+import ImageChristmas from './image_christmas.png';
 
 export {
   ImageArticle,
@@ -58,4 +59,5 @@ export {
   ImageSampleSweat,
   ImageSampleSweatDetail,
   ImageEventFooter,
+  ImageChristmas,
 };
