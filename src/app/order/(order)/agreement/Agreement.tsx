@@ -15,6 +15,7 @@ const Agreement = () => {
           key={item.id}
           name={`agreement.${item.id}`}
           label={item.label}
+          labelColor={item.labelColor}
           control={control}
         />
       ))}

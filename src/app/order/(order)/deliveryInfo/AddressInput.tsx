@@ -119,8 +119,8 @@ const StAddressInput = styled.input<{ $isError?: boolean }>`
   color: ${({ theme }) => theme.colors.zw_black};
   ${({ theme }) => theme.fonts.zw_Body1};
 
-  ::placeholder {
-    color: ${({ theme }) => theme.colors.zw_black};
+  &::placeholder {
+    color: ${({ theme }) => theme.colors.zw_lightgray};
     ${({ theme }) => theme.fonts.zw_Body1};
   }
 `;
