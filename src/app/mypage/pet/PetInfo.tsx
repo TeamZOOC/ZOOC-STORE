@@ -1,6 +1,6 @@
 'use client';
 
-import { getCookie } from 'cookies-next';
+import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
@@ -12,12 +12,11 @@ import useGetPet from '../hooks/useGetPetInfo';
 import PetEmpty, { StPetEmpty, StRegisterPetButton } from './PetEmpty';
 
 const PetInfo = () => {
-  const { petInfo, isLoading } = useGetPet();
+  const { petInfo, isLoading, errorStatus } = useGetPet();
   const router = useRouter();
-  const accessToken = getCookie('accessToken');
 
-  if (!accessToken) {
-    router.push('/auth/login');
+  if (errorStatus === 401) {
+    signOut({ callbackUrl: '/auth/login' });
   }
   if (isLoading) return <LoadingSpinner />;
 
