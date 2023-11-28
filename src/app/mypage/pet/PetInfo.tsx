@@ -3,22 +3,25 @@
 import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
 import { LoadingSpinner } from '@/components/loading';
 
 import { ImgProfileEmpty } from '../../../../public/images';
+import { userState } from '../../../recoil/user/atom';
 import useGetPet from '../hooks/useGetPetInfo';
 import PetEmpty, { StPetEmpty, StRegisterPetButton } from './PetEmpty';
 
 const PetInfo = () => {
   const { petInfo, isLoading, errorStatus } = useGetPet();
+  const userStatus = useRecoilValue(userState);
   const router = useRouter();
 
   if (errorStatus === 401) {
     signOut({ callbackUrl: '/auth/login' });
   }
-  if (isLoading) return <LoadingSpinner />;
+  if (userStatus !== 'NO_PET' && isLoading) return <LoadingSpinner />;
 
   return petInfo ? (
     <StPetInfo>
