@@ -2,31 +2,35 @@
 
 import Image from 'next/image';
 import { styled } from 'styled-components';
+import { useRouter } from 'next/navigation';
 import {
   ImageEventAcc,
   ImageEventHoodie,
   ImageEventSweat,
 } from '../../../public/images';
 
-const EventProduct = () => (
-  <StEventProduct>
-    <StEventProductTitle>
-      <span>귀여운 내 반려동물로</span>
-      <p>나를 위한 선물 만들기</p>
-    </StEventProductTitle>
-    <StEventProductImageGrid>
-      <StEventProductImage>
-        <Image src={ImageEventHoodie} alt="이벤트 후드" fill sizes="100vw" />
-      </StEventProductImage>
-      <StEventProductImage>
-        <Image src={ImageEventSweat} alt="이벤트 맨투맨" fill sizes="100vw" />
-      </StEventProductImage>
-    </StEventProductImageGrid>
-    <StEventProductAccImage>
-      <Image src={ImageEventAcc} alt="이벤트 부가상품" fill sizes="100vw" />
-    </StEventProductAccImage>
-  </StEventProduct>
-);
+const EventProduct = () => {
+  const router = useRouter();
+  return (
+    <StEventProduct>
+      <StEventProductTitle>
+        <span>귀여운 내 반려동물로</span>
+        <p>나를 위한 선물 만들기</p>
+      </StEventProductTitle>
+      <StEventProductImageGrid>
+        <StEventProductImage onClick={() => router.push('/product/season/8')}>
+          <Image src={ImageEventHoodie} alt="이벤트 후드" fill sizes="100vw" />
+        </StEventProductImage>
+        <StEventProductImage onClick={() => router.push('/product/season/7')}>
+          <Image src={ImageEventSweat} alt="이벤트 맨투맨" fill sizes="100vw" />
+        </StEventProductImage>
+      </StEventProductImageGrid>
+      <StEventProductAccImage onClick={() => router.push('/product/season/14')}>
+        <Image src={ImageEventAcc} alt="이벤트 부가상품" fill sizes="100vw" />
+      </StEventProductAccImage>
+    </StEventProduct>
+  );
+};
 
 export default EventProduct;
 
