@@ -2,6 +2,7 @@
 import localFont from 'next/font/local';
 import React from 'react';
 
+import Fpixel from '@/components/fpixel/Fpixel';
 import { ModalContainer } from '@/components/modal';
 import { SessionProvider } from '@/components/provider';
 import { ToastContainer } from '@/components/toast';
@@ -9,7 +10,7 @@ import ReactQueryProvider from '@/lib/ReactQueryProvider';
 import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
-import Fpixel from '@/components/fpixel/Fpixel';
+import { Analytics } from '@vercel/analytics/react';
 
 const PretendardLight = localFont({
   src: './fonts/Pretendard-Light.woff2',
@@ -89,6 +90,7 @@ export default async function RootLayout({
               <RecoilRootProvider>
                 <GlobalStyles />
                 {children}
+                <Analytics />
                 <div id="portal" />
                 <ModalContainer />
                 <ToastContainer />
