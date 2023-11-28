@@ -1,4 +1,3 @@
-import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
 
 import { ProductInfo } from '@/types/order';
@@ -11,14 +10,13 @@ interface OrderProductProps {
 }
 
 const OrderProduct = ({ order }: OrderProductProps) => {
-  const { id, pieces, name, price, sale, image, deliveryState, optionDetails } =
+  const { pieces, name, price, sale, image, deliveryState, optionDetails } =
     order;
   const optionsString =
     optionDetails && optionDetails.length > 0 ? optionDetails.join(' | ') : '';
-  const router = useRouter();
 
   return (
-    <StOrderProductWrapper onClick={() => router.push(`/product/all/${id}`)}>
+    <StOrderProductWrapper>
       <StOrderContent>
         <StProductImage src={image} alt={name} />
         <StOrderDetail>
