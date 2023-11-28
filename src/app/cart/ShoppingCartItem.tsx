@@ -11,6 +11,7 @@ import { useModal } from '@/hooks/modal';
 import { cartState } from '@/recoil/cart/atom';
 import { CartInfo } from '@/types/cart';
 import { formatPrice } from '@/utils/formatPrice';
+import Image from 'next/image';
 
 import { IcMinus, IcPlus, IcProductDelete } from '../../../public/icons';
 
@@ -21,7 +22,7 @@ interface cartItemProps {
 
 const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
   const router = useRouter();
-  const { id, name, price, sale, optionList } = cartItem;
+  const { id, name, price, image, sale, optionList } = cartItem;
   const [cart, setCart] = useRecoilState(cartState);
   const { openModal } = useModal();
 
@@ -74,9 +75,9 @@ const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
   return (
     <StShoppingCartItem>
       <StShoppingCartMain>
-        <StShoppingCartImage
-          onClick={() => router.push(`/product/all/${id}`)}
-        />
+        <StShoppingCartImage onClick={() => router.push(`/product/all/${id}`)}>
+          <Image src={image} alt="카드 이미지" fill priority sizes="100vw" />
+        </StShoppingCartImage>
         <StShoppingCartInfo>
           <div>
             <StCartItemTitle onClick={() => router.push(`/product/all/${id}`)}>
