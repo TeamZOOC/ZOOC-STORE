@@ -12,11 +12,13 @@ import useGetPet from '../hooks/useGetPetInfo';
 import PetEmpty, { StPetEmpty, StRegisterPetButton } from './PetEmpty';
 
 const PetInfo = () => {
-  const { petInfo, isLoading, isError } = useGetPet();
+  const { petInfo, isLoading } = useGetPet();
   const router = useRouter();
   const accessToken = getCookie('accessToken');
 
-  if (!accessToken || isError) router.push('/auth/login');
+  if (!accessToken) {
+    router.push('/auth/login');
+  }
   if (isLoading) return <LoadingSpinner />;
 
   return petInfo ? (
