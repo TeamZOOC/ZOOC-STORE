@@ -8,7 +8,9 @@ import useProgress from '@/hooks/progress/useProgress';
 
 const MypageHeader = () => {
   const router = useRouter();
+
   useProgress();
+
   return (
     <>
       <Header

@@ -1,5 +1,6 @@
 'use client';
 
+import { getCookie } from 'cookies-next';
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
@@ -33,6 +34,7 @@ const Header = ({
   const pathname = usePathname();
   const router = useRouter();
   const userStatus = useRecoilValue(userState);
+  const accessToken = getCookie('accessToken');
 
   const showIcon = () => {
     if (pathname === '/') {
@@ -53,7 +55,7 @@ const Header = ({
           <IcCart onClick={() => router.push('/cart')} />
           <IcMyPage
             onClick={() =>
-              userStatus === 'GUEST'
+              userStatus === 'GUEST' || !accessToken
                 ? router.push('/auth/login')
                 : router.push('/mypage')
             }

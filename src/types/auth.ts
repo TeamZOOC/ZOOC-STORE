@@ -12,3 +12,9 @@ export interface KakaoSignInResponse {
     isExistedUser: boolean;
   };
 }
+
+export interface ErrorResponse {
+  message: string;
+  status: number;
+  success: boolean;
+}
