@@ -2,22 +2,24 @@
 
 'use client';
 
-import { BottomButton } from '@/components/button';
-import { MainLayout } from '@/components/layout';
-import { TAB_LIST } from '@/constants/productTab';
-import useTab from '@/hooks/tab/useTab';
-import { css, styled } from 'styled-components';
-import { useEffect, useRef, useState } from 'react';
-import useOutSideClick from '@/hooks/outside/useOutsideClick';
-import CartToast from '@/components/toast/CartToast';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import OptionBottomSheetContainer from './(option)/OptionBottomSheetContainer';
-import OptionBottomSheet from './(option)/OptionBottomSheet';
+import { useEffect, useRef, useState } from 'react';
+import { css, styled } from 'styled-components';
+
+import { BottomButton } from '@/components/button';
+import { MainLayout } from '@/components/layout';
+import CartToast from '@/components/toast/CartToast';
+import { TAB_LIST } from '@/constants/productTab';
+import useOutSideClick from '@/hooks/outside/useOutsideClick';
+import useTab from '@/hooks/tab/useTab';
+
 import {
   ImageCarouselSecond,
   ImageCarouselText,
 } from '../../../../../public/images';
+import OptionBottomSheet from './(option)/OptionBottomSheet';
+import OptionBottomSheetContainer from './(option)/OptionBottomSheetContainer';
 
 interface ProductInfoNavProps {
   productPrice: number;
@@ -81,12 +83,14 @@ const ProductInfoNav = ({
 
   return (
     <>
-      {isOpenCartToast && (
-        <CartToast
-          handleCartToast={handleCartToast}
-          isOpenCartToast={isOpenCartToast}
-        />
-      )}
+      <StCartToast>
+        {isOpenCartToast && (
+          <CartToast
+            handleCartToast={handleCartToast}
+            isOpenCartToast={isOpenCartToast}
+          />
+        )}
+      </StCartToast>
       <StProductInfoNav>
         {TAB_LIST.map((tab, index) => (
           <StProductInfoNavItem
@@ -165,6 +169,15 @@ const ProductInfoNav = ({
   );
 };
 export default ProductInfoNav;
+
+const StCartToast = styled.div`
+  width: 100%;
+  max-width: 43rem;
+
+  position: absolute;
+  bottom: 0rem;
+`;
+
 const StProductInfoNav = styled.nav`
   position: sticky;
   top: 6.8rem;
