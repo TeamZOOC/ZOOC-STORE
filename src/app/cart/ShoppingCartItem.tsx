@@ -2,6 +2,7 @@
 
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { useRecoilState } from 'recoil';
 import { styled } from 'styled-components';
@@ -11,7 +12,6 @@ import { cartState } from '@/recoil/cart/atom';
 import { CartInfo } from '@/types/cart';
 import { formatPrice } from '@/utils/formatPrice';
 
-import { useRouter } from 'next/navigation';
 import { IcMinus, IcPlus, IcProductDelete } from '../../../public/icons';
 
 interface cartItemProps {
@@ -85,7 +85,9 @@ const ShoppingCartItem = ({ cartItem, selectedIndex }: cartItemProps) => {
             <StCartItemPriceBox
               onClick={() => router.push(`/product/all/${id}`)}
             >
-              {sale && <StCartItemSalePercent>{sale}</StCartItemSalePercent>}
+              {sale !== 0 && (
+                <StCartItemSalePercent>{sale}%</StCartItemSalePercent>
+              )}
               <StCartItemPrice>{formatPrice(price)}</StCartItemPrice>
             </StCartItemPriceBox>
           </div>

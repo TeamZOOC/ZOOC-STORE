@@ -4,6 +4,7 @@ export interface ProductInfo {
   optionDetails: string[];
   pieces: number;
   price: number;
+  sale: number;
   id?: string;
   deliveryState?: string;
 }

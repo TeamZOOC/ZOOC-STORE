@@ -14,6 +14,7 @@ export const ORDER_DETAIL: OrderDetailInfo = {
       name: 'string',
       image: 'string',
       pieces: 2,
+      sale: 0,
       optionDetails: ['string'],
       price: 10000,
       deliveryState: 'string',
