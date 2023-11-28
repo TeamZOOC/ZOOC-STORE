@@ -30,10 +30,10 @@ const HomeCarusel = () => {
             <CarouselFirst />
           </StHomeCaruselItem>
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide onClick={() => router.push('/product/season/14')}>
           <CarouselSecond />
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide onClick={() => router.push('/product/season/7')}>
           <StHomeCaruselItem>
             <CarouselLast />
           </StHomeCaruselItem>
@@ -43,10 +43,10 @@ const HomeCarusel = () => {
             <CarouselFirst />
           </StHomeCaruselItem>
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide onClick={() => router.push('/product/season/14')}>
           <CarouselSecond />
         </SwiperSlide>
-        <SwiperSlide>
+        <SwiperSlide onClick={() => router.push('/product/season/7')}>
           <StHomeCaruselItem>
             <CarouselLast />
           </StHomeCaruselItem>
