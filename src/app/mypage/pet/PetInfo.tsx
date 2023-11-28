@@ -7,6 +7,7 @@ import { useRecoilValue } from 'recoil';
 import { styled } from 'styled-components';
 
 import { LoadingSpinner } from '@/components/loading';
+import { useToast } from '@/hooks/toast';
 
 import { ImgProfileEmpty } from '../../../../public/images';
 import { userState } from '../../../recoil/user/atom';
@@ -17,8 +18,10 @@ const PetInfo = () => {
   const { petInfo, isLoading, errorStatus } = useGetPet();
   const userStatus = useRecoilValue(userState);
   const router = useRouter();
+  const { showToast } = useToast();
 
   if (errorStatus === 401) {
+    showToast('token_error');
     signOut({ callbackUrl: '/auth/login' });
   }
   if (userStatus !== 'NO_PET' && isLoading) return <LoadingSpinner />;
