@@ -1,9 +1,11 @@
 'use client';
 
-import { styled } from 'styled-components';
-import React, { useRef } from 'react';
-import useOutSideClick from '@/hooks/outside/useOutsideClick';
 import Link from 'next/link';
+import React, { useRef } from 'react';
+import { styled } from 'styled-components';
+
+import useOutSideClick from '@/hooks/outside/useOutsideClick';
+
 import { IcCartToast } from '../../../public/icons';
 
 interface CartToastProps {
@@ -37,6 +39,8 @@ const StCartToastWrapper = styled.div`
   position: absolute;
   left: 0.8rem;
   bottom: 6.5rem;
+
+  width: 100%;
 
   z-index: ${({ theme }) => theme.zIndex.zw_toast};
 `;
