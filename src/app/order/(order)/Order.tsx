@@ -1,5 +1,6 @@
 'use client';
 
+import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -30,7 +31,7 @@ const Order = () => {
   const petId = useRecoilValue(petIdState);
   const purchase = useRecoilValue(purchaseState);
   const [purchasePrice, setPurchasePrice] = useRecoilState(purchasePriceState);
-  const { orderPost } = usePostOrder();
+  const { orderPost, errorStatus } = usePostOrder();
   const [isOrderLoading, setIsOrderLoading] = useState(false);
 
   const methods = useForm<OrderFormData>({
@@ -123,6 +124,11 @@ const Order = () => {
   const onError = () => {
     showToast('order_required');
   };
+
+  if (errorStatus === 401) {
+    showToast('token_error');
+    signOut({ callbackUrl: '/auth/login' });
+  }
 
   useEffect(() => {
     setPurchasePrice({ totalProductPrice: totalSaleQuantity, deliveryFee: 0 });

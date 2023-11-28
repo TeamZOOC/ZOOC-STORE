@@ -9,6 +9,7 @@ const TOAST_KEY = [
   'no_pet',
   'dataset_upload_error',
   'order_error',
+  'token_error',
   'pet_register_error',
   'option_duplicated',
 ] as const;
@@ -26,6 +27,7 @@ export const TOAST_MESSAGES: Record<ToastKey, string> = {
   order_error: '주문에 실패했어요. 다시 시도해주세요.',
   pet_register_error: '반려동물 등록에 실패했어요. 다시 시도해주세요.',
   option_duplicated: '이미 추가된 옵션이에요',
+  token_error: '사용자 정보가 만료되었어요. 다시 로그인해주세요.',
 };
 
 export type Toast = {
