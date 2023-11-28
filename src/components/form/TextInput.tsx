@@ -42,7 +42,7 @@ function TextInput({
   };
 
   useEffect(() => {
-    setInputLength(field.value.length);
+    if (field.value) setInputLength(field.value.length);
   }, [field.value]);
 
   return (
