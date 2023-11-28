@@ -29,7 +29,6 @@ export const useUserState = () => {
     try {
       const datasetRes = await getPetDataset(petid);
       if (datasetRes) {
-        console.log(datasetRes);
         return datasetRes.dataset_images.length > 0
           ? 'IMAGE_EXISTS'
           : 'DATASET_EXISTS';

@@ -28,7 +28,7 @@ const OrderProduct = ({ order }: OrderProductProps) => {
             <StProductPieces>{pieces}개</StProductPieces>
           </StProductTitle>
           <StProductPrice>
-            {sale !== 0 && (
+            {sale && sale !== 0 && (
               <StCartItemSalePercent>{sale}%</StCartItemSalePercent>
             )}
             {formatPrice(price)}
