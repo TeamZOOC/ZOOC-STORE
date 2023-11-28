@@ -1,6 +1,7 @@
 'use client';
 
 import { getCookie } from 'cookies-next';
+import { signOut } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import React from 'react';
 import { useRecoilValue } from 'recoil';
@@ -46,6 +47,14 @@ const Header = ({
     return <StEmpty />;
   };
 
+  const handleMyPageClick = async () => {
+    if (userStatus === 'GUEST' || !accessToken) {
+      await signOut({ callbackUrl: '/auth/login' });
+    } else {
+      router.push('/mypage');
+    }
+  };
+
   return (
     <StHeader>
       {showIcon()}
@@ -53,13 +62,7 @@ const Header = ({
       {sideMenu && (
         <StHeaderRight>
           <IcCart onClick={() => router.push('/cart')} />
-          <IcMyPage
-            onClick={() =>
-              userStatus === 'GUEST' || !accessToken
-                ? router.push('/auth/login')
-                : router.push('/mypage')
-            }
-          />
+          <IcMyPage onClick={handleMyPageClick} />
         </StHeaderRight>
       )}
       {exit && <IcExit onClick={exitFunc} />}
