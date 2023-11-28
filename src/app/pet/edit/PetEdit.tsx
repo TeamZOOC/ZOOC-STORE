@@ -110,22 +110,24 @@ const PetEdit = () => {
               <IcBtnPicture />
             </StUploadBtn>
           </StUploadProfileImage>
-          <TextInput
-            name="nickName"
-            label="이름"
-            placeholder="사랑이"
-            control={control}
-            rules={{ required: true, maxLength: 5 }}
-            showCount
-          />
-          <TextInput
-            name="breed"
-            label="종"
-            placeholder="포메라니안"
-            control={control}
-            rules={{ maxLength: 20 }}
-            showCount
-          />
+          <StTextField>
+            <TextInput
+              name="nickName"
+              label="이름"
+              placeholder="사랑이"
+              control={control}
+              rules={{ required: true, maxLength: 5 }}
+              showCount
+            />
+            <TextInput
+              name="breed"
+              label="종"
+              placeholder="포메라니안"
+              control={control}
+              rules={{ maxLength: 20 }}
+              showCount
+            />
+          </StTextField>
         </StEditForm>
       </StEdit>
       <BottomButton
@@ -157,6 +159,12 @@ const StEdit = styled.div`
 
 const StEditForm = styled.form``;
 
+const StTextField = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+`;
+
 const StImageInput = styled.input`
   display: none;
 `;
@@ -164,6 +172,8 @@ const StImageInput = styled.input`
 const StUploadProfileImage = styled.div`
   position: relative;
   margin-bottom: 3.6rem;
+
+  min-height: 9rem;
 
   & > img {
     width: 9rem;

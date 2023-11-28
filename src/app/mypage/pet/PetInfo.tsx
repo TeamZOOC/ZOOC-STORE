@@ -1,16 +1,23 @@
 'use client';
 
+import { getCookie } from 'cookies-next';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
+
+import { LoadingSpinner } from '@/components/loading';
 
 import { ImgProfileEmpty } from '../../../../public/images';
 import useGetPet from '../hooks/useGetPetInfo';
 import PetEmpty, { StPetEmpty, StRegisterPetButton } from './PetEmpty';
 
 const PetInfo = () => {
-  const { petInfo } = useGetPet();
+  const { petInfo, isLoading, isError } = useGetPet();
   const router = useRouter();
+  const accessToken = getCookie('accessToken');
+
+  if (!accessToken || isError) router.push('/auth/login');
+  if (isLoading) return <LoadingSpinner />;
 
   return petInfo ? (
     <StPetInfo>
