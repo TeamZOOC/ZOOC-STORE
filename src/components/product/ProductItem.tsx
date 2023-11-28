@@ -18,9 +18,7 @@ const ProductItem = ({ product, usedComponent }: ProductItemProps) => {
   return (
     <StProductItem onClick={() => router.push(`/product/all/${id}`)}>
       <StProductImage>
-        {image !== 'tmp' && (
-          <Image src={image} alt="제품 이미지" fill sizes="100vw" />
-        )}
+        <Image src={image} alt="제품 이미지" fill sizes="100vw" />
       </StProductImage>
       <StProductTitle $usedComponent={usedComponent}>{name}</StProductTitle>
       <StProductPriceBox>
