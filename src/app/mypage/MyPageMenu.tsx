@@ -18,10 +18,14 @@ const MyPageMenu = () => {
   const [, setUserStatus] = useRecoilState(userState);
   const [, setPetId] = useRecoilState(petIdState);
   const kakaoAccessToken = getCookie('kakaoAccessToken');
+  const appleAccessToken = getCookie('appleAccessToken');
 
   const handleLogout = () => {
     if (kakaoAccessToken) {
       deleteCookie('kakaoAccessToken');
+    }
+    if (appleAccessToken) {
+      deleteCookie('appleAccessToken');
     }
     deleteCookie('accessToken');
     signOut({ callbackUrl: 'https://www.fitapat.com/' });

@@ -8,6 +8,7 @@ import { withdraw } from '@/apis/auth';
 import { useModal } from '@/hooks/modal';
 import { petIdState } from '@/recoil/pet/atom';
 import { userState } from '@/recoil/user/atom';
+import { getAppleSecret } from '@/utils/getAppleSecret';
 import { useMutation } from '@tanstack/react-query';
 
 export const useWithdraw = () => {
@@ -16,7 +17,7 @@ export const useWithdraw = () => {
   const [, setUserStatus] = useRecoilState(userState);
   const [, setPetId] = useRecoilState(petIdState);
   const kakaoAccessToken = getCookie('kakaoAccessToken');
-
+  const appleAccessToken = getCookie('appleAccessToken');
   return useMutation(withdraw, {
     onSuccess: async () => {
       deleteCookie('accessToken');
@@ -33,6 +34,25 @@ export const useWithdraw = () => {
           },
         });
         deleteCookie('kakaoAccessToken');
+      }
+
+      if (appleAccessToken) {
+        const appleSecret = await getAppleSecret();
+        await axios.post(
+          'https://appleid.apple.com/auth/revoke',
+          new URLSearchParams({
+            client_id: process.env.APPLE_ID!,
+            client_secret: appleSecret,
+            token: appleAccessToken,
+            token_type_hint: 'access_token',
+          }),
+          {
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+            },
+          },
+        );
+        deleteCookie('appleAccessToken');
       }
 
       closeModal('withdraw');

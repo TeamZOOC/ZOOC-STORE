@@ -7,20 +7,29 @@ import 'nprogress/nprogress.css';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import NProgress from 'nprogress';
 import { useEffect } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 
 import { returnPathState } from '@/recoil/order/atom';
+import { userState } from '@/recoil/user/atom';
 
 const ChangeRoute = () => {
   const [returnPath, setReturnPath] = useRecoilState(returnPathState);
+  const userStatus = useRecoilValue(userState);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     if (!returnPath) return;
-    router.push(returnPath);
-    setReturnPath(undefined);
+
+    if (userStatus === 'NO_PET') {
+      router.push('pet/registration');
+    } else if (userStatus === 'PET_EXISTS' || userStatus === 'DATASET_EXISTS') {
+      router.push('pet/registration');
+    } else if (userStatus === 'IMAGE_EXISTS') {
+      router.push(returnPath);
+      setReturnPath(undefined);
+    }
   }, []);
 
   useEffect(() => {
