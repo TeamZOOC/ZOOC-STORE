@@ -45,7 +45,7 @@ const StOrderContent = styled.div`
 const StProductImage = styled.img`
   object-fit: cover;
 
-  width: 8.2rem;
+  min-width: 8.2rem;
   height: 10.9rem;
 
   background: ${({ theme }) => theme.colors.zw_lightgray};
@@ -57,6 +57,10 @@ const StProductTitle = styled.p`
 
   color: ${({ theme }) => theme.colors.zw_black};
   ${({ theme }) => theme.fonts.zw_Subhead3};
+
+  overflow: hidden; // Prevents text from spilling over container
+  white-space: nowrap; // Keeps the text on a single line
+  text-overflow: ellipsis; // Adds ellipsis if text overflows
 
   & > span {
     padding-left: 0.8rem;

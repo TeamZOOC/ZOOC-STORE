@@ -15,7 +15,7 @@ import { returnPathState } from '@/recoil/order/atom';
 import {
   petIdState,
   petRegisterState,
-  uploadImagesState,
+  uploadImagesState
 } from '@/recoil/pet/atom';
 import { userState } from '@/recoil/user/atom';
 import { uploadImagesService } from '@/utils/uploadImagesService';
@@ -33,7 +33,7 @@ const ImageUpload = () => {
   const { openModal, closeModal } = useModal();
   const { showToast } = useToast();
   const [, setUserStatus] = useRecoilState(userState);
-  const [, setPetIdStatus] = useRecoilState(petIdState);
+  const [petIdStatus, setPetIdStatus] = useRecoilState(petIdState);
   const [returnPath, setReturnPath] = useRecoilState(returnPathState);
   const router = useRouter();
 
@@ -76,8 +76,13 @@ const ImageUpload = () => {
   const handleCreateModel = async () => {
     setIsLoading(true);
     try {
-      const petId = await registerPet(petRegisterData);
-      setPetIdStatus(petId);
+      let petId;
+      if (petIdStatus){
+        petId = petIdStatus;
+      } else {
+        petId = await registerPet(petRegisterData);
+        setPetIdStatus(petId);
+      }
       const datasetId = await createDataset(petId);
       await uploadImagesService(datasetId, validatedImages);
       setUserStatus('IMAGE_EXISTS');
