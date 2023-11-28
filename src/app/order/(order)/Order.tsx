@@ -74,6 +74,7 @@ const Order = () => {
       optionDetails,
       pieces: firstOption.pieces,
       price: purchases.price,
+      sale: purchases.sale!,
     };
   };
 
