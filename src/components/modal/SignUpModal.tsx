@@ -1,6 +1,5 @@
 'use client';
 
-import { deleteCookie } from 'cookies-next';
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';

@@ -40,6 +40,7 @@ export const useLogin = async () => {
             case 'apple':
               if (!session.email || !session.sub) return;
               response = await appleSignIn(session.email, session.sub);
+              setCookie('appleAccessToken', session.accessToken);
               break;
             default:
               return;

@@ -1,39 +1,13 @@
 /* eslint-disable no-param-reassign */
 
-import { createPrivateKey } from 'crypto';
-import { SignJWT } from 'jose';
 import NextAuth from 'next-auth/next';
 import AppleProvider from 'next-auth/providers/apple';
 import KakaoProvider from 'next-auth/providers/kakao';
 
-const getAppleToken = async () => {
-  if (
-    !process.env.APPLE_TEAM_ID ||
-    !process.env.APPLE_ID ||
-    !process.env.APPLE_KEY_ID ||
-    !process.env.APPLE_PRIVATE_KEY
-  ) {
-    throw new Error('Apple 환경변수가 존재하지 않습니다.');
-  }
-
-  const applePrivateKey = `-----BEGIN PRIVATE KEY-----\n${process.env.APPLE_PRIVATE_KEY}\n-----END PRIVATE KEY-----\n`;
-  const appleToken = await new SignJWT({})
-    .setAudience('https://appleid.apple.com')
-    .setIssuer(process.env.APPLE_TEAM_ID)
-    .setIssuedAt(new Date().getTime() / 1000)
-    .setExpirationTime(new Date().getTime() / 1000 + 3600 * 2)
-    .setSubject(process.env.APPLE_ID)
-    .setProtectedHeader({
-      alg: 'ES256',
-      kid: process.env.APPLE_KEY_ID,
-    })
-    .sign(createPrivateKey(applePrivateKey));
-
-  return appleToken;
-};
+import { getAppleSecret } from '@/utils/getAppleSecret';
 
 const initAuthOptions = async () => {
-  const appleToken = await getAppleToken();
+  const appleSecret = await getAppleSecret();
 
   return {
     cookies: {
@@ -55,7 +29,7 @@ const initAuthOptions = async () => {
       }),
       AppleProvider({
         clientId: process.env.APPLE_ID!,
-        clientSecret: appleToken,
+        clientSecret: appleSecret,
         checks: ['pkce', 'state'],
         wellKnown: 'https://appleid.apple.com/.well-known/openid-configuration',
         token: {
