@@ -15,7 +15,7 @@ import { returnPathState } from '@/recoil/order/atom';
 import {
   petIdState,
   petRegisterState,
-  uploadImagesState
+  uploadImagesState,
 } from '@/recoil/pet/atom';
 import { userState } from '@/recoil/user/atom';
 import { uploadImagesService } from '@/utils/uploadImagesService';
@@ -77,7 +77,7 @@ const ImageUpload = () => {
     setIsLoading(true);
     try {
       let petId;
-      if (petIdStatus){
+      if (petIdStatus) {
         petId = petIdStatus;
       } else {
         petId = await registerPet(petRegisterData);
