@@ -1,3 +1,5 @@
+/* eslint-disable no-new */
+
 'use client';
 
 import { useRouter } from 'next/navigation';

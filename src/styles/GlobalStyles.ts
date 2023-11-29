@@ -29,7 +29,7 @@ ${reset}
 
 #root, body, html {
   width: 100vw;
-  height: 100dvh;
+  height: 100lvh;
   max-width: 43rem;
   margin: 0 auto;
   overflow-y: auto;
