@@ -1,3 +1,5 @@
+/* eslint-disable no-new */
+
 'use client';
 
 import { useRouter } from 'next/navigation';
@@ -8,6 +10,7 @@ import { styled } from 'styled-components';
 import { createDataset } from '@/apis/pet';
 import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
+import { LoadingSpinner } from '@/components/loading';
 import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { useToast } from '@/hooks/toast';
@@ -25,7 +28,7 @@ import ImageGuide from './ImageGuide';
 import ImageUploadLoading from './ImageUploadLoading';
 
 const ImageUpload = () => {
-  const { uploadImages, handleImageChange, handleResetImage } =
+  const { uploadImages, handleImageChange, handleResetImage, isImageLoading } =
     useMultipleImageUpload();
   const [validatedImages, setValidatedImages] =
     useRecoilState<File[]>(uploadImagesState);
@@ -117,6 +120,7 @@ const ImageUpload = () => {
         onChange={handleImageChange}
         accept=".png, .jpg, .jpeg, .webp"
       />
+      {isImageLoading && <LoadingSpinner />}
       {validatedImages.length === 0 ? (
         <>
           <ImageGuide />
