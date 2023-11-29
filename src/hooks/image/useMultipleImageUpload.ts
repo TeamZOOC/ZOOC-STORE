@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 
 const useMultipleImageUpload = () => {
   const [multipleUploadImages, setMultipleUploadImages] = useState<File[]>([]);
+  const [isImageLoading, setIsImageLoading] = useState(false);
 
   const compressImage = (file: File) =>
     new Promise<File>((resolve) => {
@@ -27,12 +28,12 @@ const useMultipleImageUpload = () => {
     const { files } = event.target;
     if (!files) return;
 
-    if (event.target.files) {
-      const compressedFiles: File[] = await Promise.all(
-        Array.from(event.target.files).map((file) => compressImage(file)),
-      );
-      setMultipleUploadImages(Array.from(compressedFiles));
-    }
+    setIsImageLoading(true);
+    const compressedFiles: File[] = await Promise.all(
+      Array.from(files).map((file) => compressImage(file)),
+    );
+    setMultipleUploadImages(Array.from(compressedFiles));
+    setIsImageLoading(false);
   };
 
   const handleResetImage = () => {
@@ -43,6 +44,7 @@ const useMultipleImageUpload = () => {
     uploadImages: multipleUploadImages,
     handleImageChange,
     handleResetImage,
+    isImageLoading,
   };
 };
 
