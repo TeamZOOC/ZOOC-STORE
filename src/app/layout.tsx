@@ -83,10 +83,11 @@ export default async function RootLayout({
         </noscript>
         <meta property="og:url" content="https://www.fitapat.com/" />
         <meta property="og:title" content="fitapat" />
+        <meta property="og:site_name" content="fitapat" />
         <meta property="og:type" content="website" />
         <meta
           property="og:image"
-          content="https://private-user-images.githubusercontent.com/73213437/286627306-ed724523-d917-4211-b2f3-da9a55b1a6c4.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTEiLCJleHAiOjE3MDEyNjgzMDAsIm5iZiI6MTcwMTI2ODAwMCwicGF0aCI6Ii83MzIxMzQzNy8yODY2MjczMDYtZWQ3MjQ1MjMtZDkxNy00MjExLWIyZjMtZGE5YTU1YjFhNmM0LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFJV05KWUFYNENTVkVINTNBJTJGMjAyMzExMjklMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjMxMTI5VDE0MjY0MFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTM1NGI1NWIxOTJmMDk5YjU3NWIwNTJkYTVmNWM2ODg3MDE4MTU3NjM0OTkwNzIzMzlkZGE2MDVmZDU3ZDg5NzAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0JmFjdG9yX2lkPTAma2V5X2lkPTAmcmVwb19pZD0wIn0.NPDFDJTGO18IFHEhtSJEF8EMtz7hgeyegeBWwaawwJI"
+          content="https://velog.velcdn.com/images/imphj3/post/ea94be96-de31-480c-a91a-2d0f887f6b91/image.png"
         />
         <meta
           property="og:description"
