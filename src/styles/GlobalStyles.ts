@@ -6,6 +6,10 @@ import reset from 'styled-reset';
 const GlobalStyles = createGlobalStyle`
 ${reset}
 
+:root {
+    --viewport-height: 100dvh; 
+}
+
 * {
     box-sizing: border-box;
   }
@@ -29,7 +33,9 @@ ${reset}
 
 #root, body, html {
   width: 100vw;
-  height: 100dvh;
+  height: var(--viewport-height);
+  min-height: -webkit-fill-available;
+  height: fill-available;
   max-width: 43rem;
   margin: 0 auto;
   overflow-y: auto;
