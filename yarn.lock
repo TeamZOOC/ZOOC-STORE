@@ -1026,6 +1026,11 @@
     "@babel/helper-validator-identifier" "^7.22.20"
     to-fast-properties "^2.0.0"
 
+"@channel.io/channel-web-sdk-loader@^1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@channel.io/channel-web-sdk-loader/-/channel-web-sdk-loader-1.1.6.tgz#b077e8228822ba09c67eb47b522f514dd7c50294"
+  integrity sha512-jet+teY6sbZGtYCsNn6HRoItGDgVbP1+UzbMWEmAFNJSoBmKs6TuKPf0Teky/VH4IjevVPZqSbwnAvromHSJ4A==
+
 "@emotion/is-prop-valid@^1.2.1":
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/@emotion/is-prop-valid/-/is-prop-valid-1.2.1.tgz#23116cf1ed18bfeac910ec6436561ecb1a3885cc"
