@@ -3,6 +3,7 @@
 import { styled } from 'styled-components';
 import { ArticleResponse } from '@/types/article';
 import { ProductItem } from '@/components/product';
+import Image from 'next/image';
 
 interface HomeArticleProps {
   article: ArticleResponse;
@@ -13,8 +14,9 @@ const HomeArticle = ({ article }: HomeArticleProps) => {
   return (
     <StHomeArticle>
       <StHomeArticleImage>
-        {/* <Image src={image} alt="아티클" fill /> */}
-        <img src={image} alt="테스트 이미지" />
+        {image !== 'test' && (
+          <Image src={image} alt="아티클" fill sizes="100vw" />
+        )}
       </StHomeArticleImage>
       <StHomeArticleTitle>{title}</StHomeArticleTitle>
       <StHomeArticleDesc>{detail}</StHomeArticleDesc>
