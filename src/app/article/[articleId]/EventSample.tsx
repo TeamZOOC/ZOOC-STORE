@@ -10,7 +10,7 @@ import {
   ImageSampleHoodieDetail,
   ImageSampleSweat,
   ImageSampleSweatDetail,
-} from '../../../public/images';
+} from '../../../../public/images';
 
 const EventSample = () => {
   const router = useRouter();

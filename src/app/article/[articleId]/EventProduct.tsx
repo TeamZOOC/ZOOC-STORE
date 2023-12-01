@@ -7,7 +7,7 @@ import {
   ImageEventAcc,
   ImageEventHoodie,
   ImageEventSweat,
-} from '../../../public/images';
+} from '../../../../public/images';
 
 const EventProduct = () => {
   const router = useRouter();

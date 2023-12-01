@@ -5,8 +5,8 @@ import Link from 'next/link';
 import React from 'react';
 import { styled } from 'styled-components';
 import Image from 'next/image';
-import { IcBtnInstaBig, IcBtnMail } from '../../../public/icons';
-import { ImageEventFooter } from '../../../public/images';
+import { IcBtnInstaBig, IcBtnMail } from '../../../../public/icons';
+import { ImageEventFooter } from '../../../../public/images';
 
 const EventFooter = () => (
   <StEventFooter>
