@@ -7,7 +7,7 @@ interface BottomButtonProps {
   btnType: 'button' | 'submit' | 'reset';
   btnName: string;
   disabled: boolean;
-  activeFunc: React.MouseEventHandler;
+  activeFunc?: React.MouseEventHandler;
 }
 
 const BottomButton = ({
