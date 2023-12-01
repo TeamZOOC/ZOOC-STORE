@@ -59,6 +59,21 @@ const GmarketSansLight = localFont({
 export const metadata = {
   title: 'fitapat',
   description: '반려동물과 당신만의 설렘을 포장합니다',
+  openGraph: {
+    title: 'fitapat',
+    description: '반려동물과 당신만의 설렘을 포장합니다',
+    url: 'https://www.fitapat.com/',
+    siteName: 'fitapat',
+    images: [
+      {
+        url: 'https://velog.velcdn.com/images/imphj3/post/ea94be96-de31-480c-a91a-2d0f887f6b91/image.png',
+        width: 800,
+        height: 400,
+      },
+    ],
+    locale: 'ko_KR',
+    type: 'website',
+  },
 };
 
 export default async function RootLayout({
@@ -72,6 +87,19 @@ export default async function RootLayout({
       className={`${GmarketSansBold.variable} ${GmarketSansMedium.variable} ${GmarketSansLight.variable} ${PretendardSemiBold.variable} ${PretendardLight.variable} ${PretendardMedium.variable} ${PretendardRegular.variable} ${PretendardExtraLight.variable} ${PretendardBold.variable}`}
     >
       <head>
+        <meta property="og:title" content="fitapat" />
+        <meta
+          property="og:description"
+          content="반려동물과 당신만의 설렘을 포장합니다"
+        />
+        <meta property="og:url" content="https://www.fitapat.com/" />
+        <meta property="og:site_name" content="fitapat" />
+        <meta property="og:locale" content="ko_KR" />
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:image"
+          content="https://velog.velcdn.com/images/imphj3/post/ea94be96-de31-480c-a91a-2d0f887f6b91/image.png"
+        />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <noscript>
           <img
@@ -81,18 +109,6 @@ export default async function RootLayout({
             src="https://www.facebook.com/tr?id=315317384790025&ev=PageView&noscript=1"
           />
         </noscript>
-        <meta property="og:url" content="https://www.fitapat.com/" />
-        <meta property="og:title" content="fitapat" />
-        <meta property="og:site_name" content="fitapat" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:image"
-          content="https://velog.velcdn.com/images/imphj3/post/ea94be96-de31-480c-a91a-2d0f887f6b91/image.png"
-        />
-        <meta
-          property="og:description"
-          content="반려동물과 당신만의 설렘을 포장합니다"
-        />
       </head>
       <body>
         <Fpixel />
