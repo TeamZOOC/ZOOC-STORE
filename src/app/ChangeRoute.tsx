@@ -12,12 +12,16 @@ import { useRecoilState, useRecoilValue } from 'recoil';
 import { returnPathState } from '@/recoil/order/atom';
 import { userState } from '@/recoil/user/atom';
 
+import useChannelTalk from './useChannelTalk';
+
 const ChangeRoute = () => {
   const [returnPath, setReturnPath] = useRecoilState(returnPathState);
   const userStatus = useRecoilValue(userState);
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+
+  useChannelTalk();
 
   useEffect(() => {
     if (!returnPath) return;
