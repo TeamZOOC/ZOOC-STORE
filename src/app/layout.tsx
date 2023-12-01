@@ -57,13 +57,13 @@ const GmarketSansLight = localFont({
 });
 
 export const metadata = {
-  title: 'fitapat',
+  title: 'fitapat(핏어팻)',
   description: '반려동물과 당신만의 설렘을 포장합니다',
   openGraph: {
-    title: 'fitapat',
+    title: 'fitapat(핏어팻)',
     description: '반려동물과 당신만의 설렘을 포장합니다',
     url: 'https://www.fitapat.com/',
-    siteName: 'fitapat',
+    siteName: 'fitapat(핏어팻)',
     images: [
       {
         url: 'https://velog.velcdn.com/images/imphj3/post/ea94be96-de31-480c-a91a-2d0f887f6b91/image.png',
@@ -87,13 +87,13 @@ export default async function RootLayout({
       className={`${GmarketSansBold.variable} ${GmarketSansMedium.variable} ${GmarketSansLight.variable} ${PretendardSemiBold.variable} ${PretendardLight.variable} ${PretendardMedium.variable} ${PretendardRegular.variable} ${PretendardExtraLight.variable} ${PretendardBold.variable}`}
     >
       <head>
-        <meta property="og:title" content="fitapat" />
+        <meta property="og:title" content="fitapat(핏어팻)" />
         <meta
           property="og:description"
           content="반려동물과 당신만의 설렘을 포장합니다"
         />
         <meta property="og:url" content="https://www.fitapat.com/" />
-        <meta property="og:site_name" content="fitapat" />
+        <meta property="og:site_name" content="fitapat(핏어팻)" />
         <meta property="og:locale" content="ko_KR" />
         <meta property="og:type" content="website" />
         <meta
