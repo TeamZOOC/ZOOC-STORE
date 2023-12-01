@@ -13,6 +13,7 @@ import { returnPathState } from '@/recoil/order/atom';
 import { userState } from '@/recoil/user/atom';
 
 import useChannelTalk from './useChannelTalk';
+import { useViewportHeight } from './useViewportHeight';
 
 const ChangeRoute = () => {
   const [returnPath, setReturnPath] = useRecoilState(returnPathState);
@@ -22,6 +23,7 @@ const ChangeRoute = () => {
   const searchParams = useSearchParams();
 
   useChannelTalk();
+  useViewportHeight();
 
   useEffect(() => {
     if (!returnPath) return;
