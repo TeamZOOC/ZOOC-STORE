@@ -188,7 +188,7 @@ const StArticleSeriesProductSecondDesc = styled.div`
 
 const StArticleSeriesProductDesc = styled.p`
   color: ${({ theme }) => theme.colors.zw_darkgray};
-  font-family: var(--font-gmarketsans-light);
+  font-family: var(--font-pretendard-light);
   font-size: 1.5rem;
   font-style: normal;
   line-height: 2.4rem; /* 160% */
