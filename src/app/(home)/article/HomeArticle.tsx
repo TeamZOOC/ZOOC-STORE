@@ -13,9 +13,18 @@ interface HomeArticleProps {
 const HomeArticle = ({ article }: HomeArticleProps) => {
   const { id, title, detail, image, products } = article;
   const router = useRouter();
+
+  const handleRouting = () => {
+    console.log(id);
+    if (id === 2) {
+      router.push('/article/series');
+    } else {
+      router.push('/event');
+    }
+  };
   return (
     <StHomeArticle>
-      <StHomeArticleImage onClick={() => router.push(`/artcle/${id}`)}>
+      <StHomeArticleImage onClick={handleRouting}>
         <Image src={image} alt="아티클" fill sizes="100vw" />
       </StHomeArticleImage>
       <StHomeArticleTitle>{title}</StHomeArticleTitle>
