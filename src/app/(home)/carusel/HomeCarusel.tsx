@@ -25,7 +25,7 @@ const HomeCarusel = () => {
         loop
         modules={[Autoplay]}
       >
-        <SwiperSlide onClick={() => router.push('/article/3')}>
+        <SwiperSlide onClick={() => router.push('/event')}>
           <StHomeCaruselItem>
             <CarouselFirst />
           </StHomeCaruselItem>
@@ -38,7 +38,7 @@ const HomeCarusel = () => {
             <CarouselLast />
           </StHomeCaruselItem>
         </SwiperSlide>
-        <SwiperSlide onClick={() => router.push('/article/3')}>
+        <SwiperSlide onClick={() => router.push('/event')}>
           <StHomeCaruselItem>
             <CarouselFirst />
           </StHomeCaruselItem>

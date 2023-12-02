@@ -2,8 +2,8 @@
 
 import { styled } from 'styled-components';
 import Image from 'next/image';
-import { IcFitaPatLogoEvent } from '../../../../public/icons';
-import { ImageChristmas, ImageCoupon } from '../../../../public/images';
+import { IcFitaPatLogoEvent } from '../../../public/icons';
+import { ImageChristmas, ImageCoupon } from '../../../public/images';
 
 const EventCoupon = () => (
   <StEventCoupon>
