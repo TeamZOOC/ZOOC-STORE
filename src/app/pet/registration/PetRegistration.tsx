@@ -70,12 +70,15 @@ const PetRegistration = () => {
           />
         </StRegistrationForm>
       </StRegistration>
+
+      {/* <StBottomButton> */}
       <BottomButton
         btnName="반려동물 AI 모델 생성하기"
         btnType="button"
         disabled={!petRegisterData || !isValid}
         activeFunc={handleSubmit(onSubmit, onError)}
       />
+      {/* </StBottomButton> */}
     </>
   );
 };

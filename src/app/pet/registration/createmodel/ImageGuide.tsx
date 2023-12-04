@@ -73,7 +73,7 @@ const StImageGuide = styled.div`
 `;
 
 const StHr = styled.hr`
-  width: 100%;
+  width: 85%;
   height: 0.1rem;
 
   border: none;
