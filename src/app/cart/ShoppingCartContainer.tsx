@@ -1,12 +1,14 @@
 'use client';
 
-import { MainLayout } from '@/components/layout';
 import { useRecoilValue } from 'recoil';
+
+import { MainLayout } from '@/components/layout';
 import { cartState } from '@/recoil/cart/atom';
-import ShoppingCartList from './ShoppingCartList';
+
 import Hr from './Hr';
-import ShoppingPayment from './ShoppingPayment';
 import ShoppingCartEmpty from './ShoppingCartEmpty';
+import ShoppingCartList from './ShoppingCartList';
+import ShoppingPayment from './ShoppingPayment';
 
 const ShoppingCartContainer = () => {
   const cart = useRecoilValue(cartState);
