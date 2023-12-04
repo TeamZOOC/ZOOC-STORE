@@ -15,7 +15,6 @@ const HomeArticle = ({ article }: HomeArticleProps) => {
   const router = useRouter();
 
   const handleRouting = () => {
-    console.log(id);
     if (id === 2) {
       router.push('/article/series');
     } else {
