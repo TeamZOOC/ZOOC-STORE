@@ -26,7 +26,7 @@ const BottomButton = ({
 export default BottomButton;
 
 const StBottomButtonWrapper = styled.div`
-  position: absolute;
+  position: sticky;
   bottom: 0;
   left: 0;
 
