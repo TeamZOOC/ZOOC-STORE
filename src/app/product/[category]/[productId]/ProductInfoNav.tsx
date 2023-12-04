@@ -255,4 +255,5 @@ const StProductCaseGif = styled.div`
 const StBottomButton = styled.div`
   position: sticky;
   bottom: 0;
+  z-index: 10;
 `;

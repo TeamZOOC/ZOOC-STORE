@@ -72,7 +72,7 @@ const StOptionBottomSheet = styled.div<{
   $isUnMount: boolean;
   $animationUp: boolean;
 }>`
-  position: absolute;
+  position: sticky;
   bottom: 0;
 
   width: 100%;
