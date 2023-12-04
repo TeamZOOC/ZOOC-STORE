@@ -28,6 +28,17 @@ import ImageSampleSweat from './image_sample_sweat.png';
 import ImageSampleSweatDetail from './image_sample_sweat_detail.png';
 import ImageEventFooter from './image_event_footer.png';
 import ImageChristmas from './image_christmas.png';
+import ImageSeriesTitle from './image_series_title.png';
+import ImageSeriesLogo from './image_series_logo.png';
+import ImageSeriesSweat from './image_series_sweat.png';
+import ImageSeriesSweat1 from './image_series_sweat_1.png';
+import ImageSeriesSweat2 from './image_series_sweat_2.png';
+import ImageSeriesSweat3 from './image_series_sweat_3.png';
+import ImageSeriesCase from './image_series_case.png';
+import ImageSeriesCase1 from './image_series_case_1.png';
+import ImageSeriesCase2 from './image_series_case_2.png';
+import ImageSeriesCase3 from './image_series_case_3.png';
+import ImageSeriesDesc from './image_series_desc.png';
 
 export {
   ImageArticle,
@@ -60,4 +71,15 @@ export {
   ImageSampleSweatDetail,
   ImageEventFooter,
   ImageChristmas,
+  ImageSeriesTitle,
+  ImageSeriesLogo,
+  ImageSeriesSweat,
+  ImageSeriesSweat1,
+  ImageSeriesSweat2,
+  ImageSeriesSweat3,
+  ImageSeriesCase,
+  ImageSeriesCase1,
+  ImageSeriesCase2,
+  ImageSeriesCase3,
+  ImageSeriesDesc,
 };
