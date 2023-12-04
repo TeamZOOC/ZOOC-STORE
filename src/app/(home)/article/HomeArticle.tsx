@@ -4,19 +4,27 @@ import { styled } from 'styled-components';
 import { ArticleResponse } from '@/types/article';
 import { ProductItem } from '@/components/product';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 interface HomeArticleProps {
   article: ArticleResponse;
 }
 
 const HomeArticle = ({ article }: HomeArticleProps) => {
-  const { title, detail, image, products } = article;
+  const { id, title, detail, image, products } = article;
+  const router = useRouter();
+
+  const handleRouting = () => {
+    if (id === 2) {
+      router.push('/article/series');
+    } else {
+      router.push('/event');
+    }
+  };
   return (
     <StHomeArticle>
-      <StHomeArticleImage>
-        {image !== 'test' && (
-          <Image src={image} alt="아티클" fill sizes="100vw" />
-        )}
+      <StHomeArticleImage onClick={handleRouting}>
+        <Image src={image} alt="아티클" fill sizes="100vw" />
       </StHomeArticleImage>
       <StHomeArticleTitle>{title}</StHomeArticleTitle>
       <StHomeArticleDesc>{detail}</StHomeArticleDesc>
