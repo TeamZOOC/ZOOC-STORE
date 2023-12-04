@@ -28,6 +28,12 @@ import ImageSampleSweat from './image_sample_sweat.png';
 import ImageSampleSweatDetail from './image_sample_sweat_detail.png';
 import ImageEventFooter from './image_event_footer.png';
 import ImageChristmas from './image_christmas.png';
+import ImageReviewTori from './image_review_tori.jpg';
+import ImageReviewTori1 from './image_review_tori_1.png';
+import ImageReviewDanbi from './image_review_danbi.jpg';
+import ImageReviewDanbi1 from './image_review_danbi_1.jpg';
+import ImageReviewDanbi2 from './image_review_danbi_2.jpg';
+import ImageReviewDanbi3 from './image_review_danbi_3.jpg';
 
 export {
   ImageArticle,
@@ -60,4 +66,10 @@ export {
   ImageSampleSweatDetail,
   ImageEventFooter,
   ImageChristmas,
+  ImageReviewTori,
+  ImageReviewTori1,
+  ImageReviewDanbi,
+  ImageReviewDanbi1,
+  ImageReviewDanbi2,
+  ImageReviewDanbi3,
 };
