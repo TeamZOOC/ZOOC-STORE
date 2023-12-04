@@ -1,8 +1,9 @@
 'use client';
 
-import { BottomButton } from '@/components/button';
 import { useRouter } from 'next/navigation';
 import { styled } from 'styled-components';
+
+import { BottomButton } from '@/components/button';
 
 const ShoppingCartEmpty = () => {
   const router = useRouter();

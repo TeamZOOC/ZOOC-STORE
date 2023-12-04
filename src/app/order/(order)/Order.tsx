@@ -151,12 +151,14 @@ const Order = () => {
         </StBillingInfoWrapper>
         <StHr />
         <Agreement />
-        <BottomButton
-          btnType="button"
-          btnName={`${totalPrice}원 결제하기`}
-          disabled={!isValid}
-          activeFunc={handleSubmit(onSubmit, onError)}
-        />
+        <StBottomButton>
+          <BottomButton
+            btnType="button"
+            btnName={`${totalPrice}원 결제하기`}
+            disabled={!isValid}
+            activeFunc={handleSubmit(onSubmit, onError)}
+          />
+        </StBottomButton>
       </StOrder>
     </FormProvider>
   );
@@ -178,4 +180,9 @@ const StHr = styled.hr`
 
 const StBillingInfoWrapper = styled.div`
   padding: 4rem 2.8rem;
+`;
+
+const StBottomButton = styled.div`
+  position: sticky;
+  bottom: 0;
 `;
