@@ -145,14 +145,13 @@ const ProductInfoNav = ({
           </StProductShippingInfoWrapper>
         )}
       </MainLayout>
-      <StBottomButton>
-        <BottomButton
-          btnType="button"
-          btnName="구매하기"
-          disabled={false}
-          activeFunc={handleToggleOption}
-        />
-      </StBottomButton>
+      <BottomButton
+        btnType="button"
+        btnName="구매하기"
+        disabled={false}
+        activeFunc={handleToggleOption}
+        position="sticky"
+      />
       {isOptionToggle && (
         <OptionBottomSheetContainer>
           <OptionBottomSheet
@@ -250,10 +249,4 @@ const StProductCaseGif = styled.div`
   margin-bottom: 1.015rem;
 
   aspect-ratio: 1/1.53;
-`;
-
-const StBottomButton = styled.div`
-  position: sticky;
-  bottom: 0;
-  z-index: 10;
 `;

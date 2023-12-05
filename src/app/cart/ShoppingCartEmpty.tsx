@@ -28,6 +28,7 @@ const ShoppingCartEmpty = () => {
         btnName="구매하기"
         disabled
         activeFunc={() => {}}
+        position="absolute"
       />
     </>
   );
