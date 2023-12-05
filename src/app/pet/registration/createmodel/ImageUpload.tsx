@@ -124,14 +124,12 @@ const ImageUpload = () => {
       {validatedImages.length === 0 ? (
         <>
           <ImageGuide />
-          <StBottomButton>
-            <BottomButton
-              btnType="button"
-              btnName="8 - 15장의 사진 업로드"
-              disabled={false}
-              activeFunc={handleUploadImage}
-            />
-          </StBottomButton>
+          <BottomButton
+            btnType="button"
+            btnName="8 - 15장의 사진 업로드"
+            disabled={false}
+            activeFunc={handleUploadImage}
+          />
         </>
       ) : (
         <>
@@ -156,10 +154,4 @@ const StImageUpload = styled.div`
 
 const StImageInput = styled.input`
   display: none;
-`;
-
-const StBottomButton = styled.div`
-  position: sticky;
-  bottom: 0;
-  z-index: 10;
 `;
