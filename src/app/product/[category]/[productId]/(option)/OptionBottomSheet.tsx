@@ -72,11 +72,12 @@ const StOptionBottomSheet = styled.div<{
   $isUnMount: boolean;
   $animationUp: boolean;
 }>`
-  position: absolute;
-  bottom: 0;
+  position: sticky;
+  top: 0;
 
   width: 100%;
   max-width: 43rem;
+  height: fit-content;
 
   border-radius: 0.6rem 0.6rem 0 0;
   background-color: ${({ theme }) => theme.colors.zw_background};

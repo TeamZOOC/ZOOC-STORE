@@ -73,6 +73,7 @@ const AgreementCheckContent = () => {
         btnName="회원가입"
         disabled={!isAgreement && !isAllAgreement}
         activeFunc={handleCheckAgreementToast}
+        position="absolute"
       />
     </StAgreementCheckContent>
   );
