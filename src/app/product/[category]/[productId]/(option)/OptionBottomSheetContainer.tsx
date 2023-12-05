@@ -16,7 +16,7 @@ export default OptionBottomSheetContainer;
 const StOptionBottomSheetContainer = styled.div`
   display: flex;
   justify-content: center;
-  position: sticky;
+  position: absolute;
   top: 0;
   left: 0;
 

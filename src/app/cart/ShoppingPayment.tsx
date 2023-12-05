@@ -91,14 +91,12 @@ const ShoppingPayment = () => {
           </div>
         </StShoppingPaymentInfo>
       </StShoppingPayment>
-      <StBottomButton>
-        <BottomButton
-          btnType="button"
-          btnName="구매하기"
-          disabled={!cart.length}
-          activeFunc={handleCartToPurchase}
-        />
-      </StBottomButton>
+      <BottomButton
+        btnType="button"
+        btnName="구매하기"
+        disabled={!cart.length}
+        activeFunc={handleCartToPurchase}
+      />
     </>
   );
 };
@@ -141,10 +139,4 @@ const StShoppingPaymentInfoPrice = styled.span`
 const StShoppingPaymentTotalPrice = styled.span`
   color: ${({ theme }) => theme.colors.zw_point};
   ${({ theme }) => theme.fonts.zw_price_big};
-`;
-
-const StBottomButton = styled.div`
-  position: sticky;
-  bottom: 0;
-  z-index: 10;
 `;

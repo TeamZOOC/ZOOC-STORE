@@ -36,7 +36,7 @@ const CartToast = ({ isOpenCartToast, handleCartToast }: CartToastProps) => {
 export default CartToast;
 
 const StCartToastWrapper = styled.div`
-  position: sticky;
+  position: absolute;
   left: 0.8rem;
   bottom: 6.5rem;
 
