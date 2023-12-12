@@ -9,7 +9,7 @@ import ImageWrong1 from './image_wrong_1.png';
 import ImageWrong2 from './image_wrong_2.png';
 import ImageWrong3 from './image_wrong_3.png';
 import ImgProfileEmpty from './img_profile_empty.png';
-import ImageCarouselSecond from './gif_carousel.gif';
+import ImageCarouselSecond from './gif_carousel.webp';
 import ImageCarouselText from './image_carousel_text.png';
 import ImageCategorySeason from './image_category_season.png';
 import ImageCategoryOutfit from './image_category_outfit.png';
