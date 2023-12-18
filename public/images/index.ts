@@ -34,6 +34,13 @@ import ImageReviewDanbi from './image_review_danbi.jpg';
 import ImageReviewDanbi1 from './image_review_danbi_1.jpg';
 import ImageReviewDanbi2 from './image_review_danbi_2.jpg';
 import ImageReviewDanbi3 from './image_review_danbi_3.jpg';
+import ImageReviewSebong from './image_review_sebong.jpeg';
+import ImageReviewSebong1 from './image_review_sebong_1.jpeg';
+import ImageReviewSebong2 from './image_review_sebong_2.jpeg';
+import ImageReviewSebong3 from './image_review_sebong_3.jpeg';
+import ImageReviewBomi from './image_review_bomi.jpeg';
+import ImageReviewBomi1 from './image_review_bomi_1.jpeg';
+import ImageReviewBomi2 from './image_review_bomi_2.jpeg';
 
 export {
   ImageArticle,
@@ -72,4 +79,11 @@ export {
   ImageReviewDanbi1,
   ImageReviewDanbi2,
   ImageReviewDanbi3,
+  ImageReviewSebong,
+  ImageReviewSebong1,
+  ImageReviewSebong2,
+  ImageReviewSebong3,
+  ImageReviewBomi,
+  ImageReviewBomi1,
+  ImageReviewBomi2,
 };

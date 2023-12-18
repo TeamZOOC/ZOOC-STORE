@@ -7,10 +7,12 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import Image from 'next/image';
 import { REVIEW } from '@/constants/review';
+import { useRouter } from 'next/navigation';
 import { IcBack, IcSwiperNext } from '../../../../public/icons';
 
 const HomeReview = () => {
   const [swiper, setSwiper] = useState<any>(null);
+  const router = useRouter();
   return (
     <StHomeReview>
       <SwiperTopWrapper>
@@ -34,7 +36,10 @@ const HomeReview = () => {
         }}
       >
         {REVIEW.map((review) => (
-          <SwiperSlide key={review.id}>
+          <SwiperSlide
+            key={review.id}
+            onClick={() => router.push(review.productLink)}
+          >
             {review.imageSrc.length === 1 ? (
               <StHomeReviewItem>
                 <Image
