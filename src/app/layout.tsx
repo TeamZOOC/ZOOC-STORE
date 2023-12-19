@@ -11,6 +11,7 @@ import RecoilRootProvider from '@/lib/RecoilRootProvider';
 import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
 import { Analytics } from '@vercel/analytics/react';
+import GoogleAnalytics from '@/components/ga/GoogleAnalytics';
 
 const PretendardLight = localFont({
   src: './fonts/Pretendard-Light.woff2',
@@ -111,6 +112,7 @@ export default async function RootLayout({
         </noscript>
       </head>
       <body>
+        <GoogleAnalytics />
         <Fpixel />
         <ReactQueryProvider>
           <SessionProvider>
