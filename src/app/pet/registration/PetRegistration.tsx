@@ -75,6 +75,7 @@ const PetRegistration = () => {
         btnType="button"
         disabled={!petRegisterData || !isValid}
         activeFunc={handleSubmit(onSubmit, onError)}
+        position="absolute"
       />
     </>
   );

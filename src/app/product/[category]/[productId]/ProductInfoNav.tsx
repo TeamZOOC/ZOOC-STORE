@@ -150,6 +150,7 @@ const ProductInfoNav = ({
         btnName="구매하기"
         disabled={false}
         activeFunc={handleToggleOption}
+        position="sticky"
       />
       {isOptionToggle && (
         <OptionBottomSheetContainer>

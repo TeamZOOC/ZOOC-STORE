@@ -96,6 +96,7 @@ const ShoppingPayment = () => {
         btnName="구매하기"
         disabled={!cart.length}
         activeFunc={handleCartToPurchase}
+        position="absolute"
       />
     </>
   );

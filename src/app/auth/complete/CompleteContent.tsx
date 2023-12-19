@@ -34,6 +34,7 @@ const CompleteContent = () => {
         btnName="홈으로 돌아가기"
         disabled={false}
         activeFunc={() => router.push('/')}
+        position="absolute"
       />
     </>
   );

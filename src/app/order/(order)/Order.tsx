@@ -156,6 +156,7 @@ const Order = () => {
           btnName={`${totalPrice}원 결제하기`}
           disabled={!isValid}
           activeFunc={handleSubmit(onSubmit, onError)}
+          position="sticky"
         />
       </StOrder>
     </FormProvider>
