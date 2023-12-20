@@ -1,5 +1,6 @@
 import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { getCookie, setCookie } from 'cookies-next';
+import { signOut } from 'next-auth/react';
 
 /* eslint-disable no-param-reassign */
 
@@ -33,6 +34,8 @@ export const createAxios = (baseURL: string): AxiosInstance => {
 
       if (tokenError.response?.status === 401) {
         try {
+          signOut();
+
           const response = await axios.post(
             refreshTokenURL,
             {},
