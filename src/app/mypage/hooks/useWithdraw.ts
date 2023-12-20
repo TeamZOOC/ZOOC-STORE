@@ -21,6 +21,7 @@ export const useWithdraw = () => {
   return useMutation(withdraw, {
     onSuccess: async () => {
       deleteCookie('accessToken');
+      deleteCookie('refreshToken');
       signOut({ callbackUrl: 'https://www.fitapat.com/' });
       setUserStatus('GUEST');
       setPetId(undefined);

@@ -20,10 +20,10 @@ const PetInfo = () => {
   const router = useRouter();
   const { showToast } = useToast();
 
-  if (errorStatus === 401) {
-    showToast('token_error');
-    signOut({ callbackUrl: '/auth/login' });
-  }
+  // if (errorStatus === 401) {
+  //   showToast('token_error');
+  //   signOut({ callbackUrl: '/auth/login' });
+  // }
   if (userStatus !== 'NO_PET' && isLoading) return <LoadingSpinner />;
 
   return petInfo ? (
