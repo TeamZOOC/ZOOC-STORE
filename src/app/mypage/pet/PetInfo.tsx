@@ -1,6 +1,5 @@
 'use client';
 
-import { signOut } from 'next-auth/react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useRecoilValue } from 'recoil';
@@ -20,10 +19,9 @@ const PetInfo = () => {
   const router = useRouter();
   const { showToast } = useToast();
 
-  // if (errorStatus === 401) {
-  //   showToast('token_error');
-  //   signOut({ callbackUrl: '/auth/login' });
-  // }
+  if (errorStatus === 401) {
+    showToast('token_error');
+  }
   if (userStatus !== 'NO_PET' && isLoading) return <LoadingSpinner />;
 
   return petInfo ? (
