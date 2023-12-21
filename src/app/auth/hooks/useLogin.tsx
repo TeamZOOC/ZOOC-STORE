@@ -47,6 +47,7 @@ export const useLogin = async () => {
           }
           if (response) {
             setCookie('accessToken', response.data.accessToken);
+            setCookie('refreshToken', response.data.refreshToken);
             await checkUserStatus();
             const routePath = response.data.isExistedUser
               ? '/'
