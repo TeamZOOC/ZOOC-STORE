@@ -39,6 +39,7 @@ import IcBackWhite from './ic_back_white.svg';
 import IcFitaPatLogoEvent from './ic_fitapat_logo_event.svg';
 import IcBtnMail from './ic_btn_footer_mail.svg';
 import IcBtnInstaBig from './ic_btn_footer_insta_big.svg';
+import IcSwiperNext from './ic_swiper_next.svg';
 
 export {
   IcBtnAppstore,
@@ -82,4 +83,5 @@ export {
   IcFitaPatLogoEvent,
   IcBtnMail,
   IcBtnInstaBig,
+  IcSwiperNext,
 };

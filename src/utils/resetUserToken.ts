@@ -4,4 +4,5 @@ export const resetUserToken = () => {
   deleteCookie('kakaoAccessToken');
   deleteCookie('appleAccessToken');
   deleteCookie('accessToken');
+  deleteCookie('refreshToken');
 };

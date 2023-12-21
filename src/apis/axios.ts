@@ -1,6 +1,8 @@
+import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
+import { getCookie, setCookie } from 'cookies-next';
+import { signOut } from 'next-auth/react';
+
 /* eslint-disable no-param-reassign */
-import axios, { AxiosInstance } from 'axios';
-import { getCookie } from 'cookies-next';
 
 export const createAxios = (baseURL: string): AxiosInstance => {
   const axiosInstance = axios.create({
@@ -18,6 +20,46 @@ export const createAxios = (baseURL: string): AxiosInstance => {
     }
     return config;
   });
+
+  axiosInstance.interceptors.response.use(
+    (response: AxiosResponse) => response,
+    async (tokenError: AxiosError) => {
+      const originalRequest = tokenError.config!;
+      const refreshTokenURL = `${process.env.NEXT_PUBLIC_GENERAL_BASE_URL}/user/refresh`;
+      const refreshHeaders = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${getCookie('accessToken')}`,
+        RefreshToken: getCookie('refreshToken'),
+      };
+
+      if (tokenError.response?.status === 401) {
+        try {
+          signOut();
+
+          const response = await axios.post(
+            refreshTokenURL,
+            {},
+            {
+              headers: refreshHeaders,
+            },
+          );
+          const { accessToken: newAccessToken } = response.data;
+          setCookie('accessToken', newAccessToken);
+          axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
+
+          return axiosInstance(originalRequest);
+        } catch (refreshTokenError) {
+          const refreshError = refreshTokenError as AxiosError;
+
+          if (refreshError.response && refreshError.response.status === 406) {
+            window.location.href = '/auth/login';
+          }
+          return Promise.reject(refreshTokenError);
+        }
+      }
+      return Promise.reject(tokenError);
+    },
+  );
 
   return axiosInstance;
 };

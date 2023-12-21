@@ -28,6 +28,19 @@ import ImageSampleSweat from './image_sample_sweat.png';
 import ImageSampleSweatDetail from './image_sample_sweat_detail.png';
 import ImageEventFooter from './image_event_footer.png';
 import ImageChristmas from './image_christmas.png';
+import ImageReviewTori from './image_review_tori.jpg';
+import ImageReviewTori1 from './image_review_tori_1.png';
+import ImageReviewDanbi from './image_review_danbi.jpg';
+import ImageReviewDanbi1 from './image_review_danbi_1.jpg';
+import ImageReviewDanbi2 from './image_review_danbi_2.jpg';
+import ImageReviewDanbi3 from './image_review_danbi_3.jpg';
+import ImageReviewSebong from './image_review_sebong.jpeg';
+import ImageReviewSebong1 from './image_review_sebong_1.jpeg';
+import ImageReviewSebong2 from './image_review_sebong_2.jpeg';
+import ImageReviewSebong3 from './image_review_sebong_3.jpeg';
+import ImageReviewBomi from './image_review_bomi.jpeg';
+import ImageReviewBomi1 from './image_review_bomi_1.jpeg';
+import ImageReviewBomi2 from './image_review_bomi_2.jpeg';
 import ImageSeriesTitle from './image_series_title.png';
 import ImageSeriesLogo from './image_series_logo.png';
 import ImageSeriesSweat from './image_series_sweat.png';
@@ -71,6 +84,19 @@ export {
   ImageSampleSweatDetail,
   ImageEventFooter,
   ImageChristmas,
+  ImageReviewTori,
+  ImageReviewTori1,
+  ImageReviewDanbi,
+  ImageReviewDanbi1,
+  ImageReviewDanbi2,
+  ImageReviewDanbi3,
+  ImageReviewSebong,
+  ImageReviewSebong1,
+  ImageReviewSebong2,
+  ImageReviewSebong3,
+  ImageReviewBomi,
+  ImageReviewBomi1,
+  ImageReviewBomi2,
   ImageSeriesTitle,
   ImageSeriesLogo,
   ImageSeriesSweat,

@@ -1,6 +1,5 @@
 'use client';
 
-import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
@@ -127,7 +126,6 @@ const Order = () => {
 
   if (errorStatus === 401) {
     showToast('token_error');
-    signOut({ callbackUrl: '/auth/login' });
   }
 
   useEffect(() => {
