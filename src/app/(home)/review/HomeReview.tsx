@@ -15,17 +15,17 @@ const HomeReview = () => {
   const router = useRouter();
   return (
     <StHomeReview>
-      <SwiperTopWrapper>
+      <StSwiperTopWrapper>
         <span>리뷰</span>
         <div>
-          <SwiperButton onClick={() => swiper?.slidePrev()}>
+          <StSwiperButton type="button" onClick={() => swiper?.slidePrev()}>
             <IcBack />
-          </SwiperButton>
-          <SwiperButton onClick={() => swiper?.slideNext()}>
+          </StSwiperButton>
+          <StSwiperButton type="button" onClick={() => swiper?.slideNext()}>
             <IcSwiperNext />
-          </SwiperButton>
+          </StSwiperButton>
         </div>
-      </SwiperTopWrapper>
+      </StSwiperTopWrapper>
       <Swiper
         modules={[Navigation]}
         loop
@@ -36,12 +36,9 @@ const HomeReview = () => {
         }}
       >
         {REVIEW.map((review) => (
-          <SwiperSlide
-            key={review.id}
-            onClick={() => router.push(review.productLink)}
-          >
+          <SwiperSlide key={review.id}>
             {review.imageSrc.length === 1 ? (
-              <StHomeReviewItem>
+              <StHomeReviewItem onClick={() => router.push(review.productLink)}>
                 <Image
                   src={review.imageSrc[0]}
                   alt="리뷰 이미지"
@@ -62,7 +59,7 @@ const HomeReview = () => {
                 modules={[Pagination, Autoplay]}
               >
                 {review.imageSrc.map((image) => (
-                  <SwiperSlide>
+                  <SwiperSlide onClick={() => router.push(review.productLink)}>
                     <StHomeReviewItem>
                       <Image
                         src={image}
@@ -75,12 +72,14 @@ const HomeReview = () => {
                 ))}
               </Swiper>
             )}
-            <SwiperItemReviewTitle>
-              <SwiperItemReviewName>{review.reviewTitle}</SwiperItemReviewName>
-              <SwiperItemReviewProduct>
+            <StSwiperItemReviewTitle>
+              <StSwiperItemReviewName>
+                {review.reviewTitle}
+              </StSwiperItemReviewName>
+              <StSwiperItemReviewProduct>
                 {review.reviewDesc}
-              </SwiperItemReviewProduct>
-            </SwiperItemReviewTitle>
+              </StSwiperItemReviewProduct>
+            </StSwiperItemReviewTitle>
           </SwiperSlide>
         ))}
       </Swiper>
@@ -113,7 +112,7 @@ const StHomeReviewItem = styled.div`
   aspect-ratio: 1/1;
 `;
 
-const SwiperTopWrapper = styled.div`
+const StSwiperTopWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -125,18 +124,18 @@ const SwiperTopWrapper = styled.div`
     ${({ theme }) => theme.fonts.zw_Subhead1};
   }
 `;
-const SwiperButton = styled.button``;
+const StSwiperButton = styled.button``;
 
-const SwiperItemReviewTitle = styled.div`
+const StSwiperItemReviewTitle = styled.div`
   width: 100%;
   margin-top: 1rem;
 `;
 
-const SwiperItemReviewName = styled.span`
+const StSwiperItemReviewName = styled.span`
   color: ${({ theme }) => theme.colors.zw_black};
   ${({ theme }) => theme.fonts.zw_Subhead3};
 `;
-const SwiperItemReviewProduct = styled.span`
+const StSwiperItemReviewProduct = styled.span`
   color: ${({ theme }) => theme.colors.zw_black};
   ${({ theme }) => theme.fonts.zw_Body1};
 `;
