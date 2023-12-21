@@ -129,6 +129,7 @@ const ImageUpload = () => {
             btnName="8 - 15장의 사진 업로드"
             disabled={false}
             activeFunc={handleUploadImage}
+            position="sticky"
           />
         </>
       ) : (
@@ -139,6 +140,7 @@ const ImageUpload = () => {
             btnName="사진 업로드 완료"
             disabled={false}
             activeFunc={handleCreateModel}
+            position="absolute"
           />
         </>
       )}
@@ -148,7 +150,9 @@ const ImageUpload = () => {
 
 export default ImageUpload;
 
-const StImageUpload = styled.div``;
+const StImageUpload = styled.div`
+  padding-top: 1.6rem;
+`;
 
 const StImageInput = styled.input`
   display: none;

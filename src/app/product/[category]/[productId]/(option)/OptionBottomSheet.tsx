@@ -3,13 +3,15 @@
 'use client';
 
 import React from 'react';
-import { styled, css } from 'styled-components';
-import { slideInFromBottom, slideInFromTop } from '@/styles/animation/slide';
 import { useRecoilValue } from 'recoil';
+import { css, styled } from 'styled-components';
+
 import { selectedOptionsState } from '@/recoil/option/atom';
-import OptionSelector from './OptionSelector';
+import { slideInFromBottom, slideInFromTop } from '@/styles/animation/slide';
+
 import OptionBottomButton from './OptionBottomButton';
 import OptionSelectItem from './OptionSelectItem';
+import OptionSelector from './OptionSelector';
 import OptionTotalPrice from './OptionTotalPrice';
 
 interface OptionBottomSheetProps {
@@ -70,11 +72,12 @@ const StOptionBottomSheet = styled.div<{
   $isUnMount: boolean;
   $animationUp: boolean;
 }>`
-  position: absolute;
-  bottom: 0;
+  position: sticky;
+  top: 0;
 
   width: 100%;
   max-width: 43rem;
+  height: fit-content;
 
   border-radius: 0.6rem 0.6rem 0 0;
   background-color: ${({ theme }) => theme.colors.zw_background};

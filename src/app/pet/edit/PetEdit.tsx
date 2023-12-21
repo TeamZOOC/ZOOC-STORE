@@ -135,6 +135,7 @@ const PetEdit = () => {
         btnType="button"
         disabled={!isValid}
         activeFunc={handleSubmit(onSubmit, onError)}
+        position="absolute"
       />
     </>
   );

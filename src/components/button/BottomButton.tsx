@@ -8,6 +8,7 @@ interface BottomButtonProps {
   btnName: string;
   disabled: boolean;
   activeFunc?: React.MouseEventHandler;
+  position: string;
 }
 
 const BottomButton = ({
@@ -15,8 +16,9 @@ const BottomButton = ({
   btnName,
   disabled,
   activeFunc,
+  position,
 }: BottomButtonProps) => (
-  <StBottomButtonWrapper>
+  <StBottomButtonWrapper $position={position}>
     <StBottomButton type={btnType} $disabled={disabled} onClick={activeFunc}>
       {btnName}
     </StBottomButton>
@@ -25,8 +27,8 @@ const BottomButton = ({
 
 export default BottomButton;
 
-const StBottomButtonWrapper = styled.div`
-  position: absolute;
+const StBottomButtonWrapper = styled.div<{ $position: string }>`
+  ${({ $position }) => `position: ${$position};`}
   bottom: 0;
   left: 0;
 
