@@ -1,13 +1,16 @@
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { styled } from 'styled-components';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import Image from 'next/image';
+
 import { REVIEW } from '@/constants/review';
-import { useRouter } from 'next/navigation';
+
 import { IcBack, IcSwiperNext } from '../../../../public/icons';
 
 const HomeReview = () => {
@@ -44,6 +47,7 @@ const HomeReview = () => {
                   alt="리뷰 이미지"
                   fill
                   sizes="100vw"
+                  priority
                 />
               </StHomeReviewItem>
             ) : (
@@ -65,7 +69,8 @@ const HomeReview = () => {
                         src={image}
                         alt="리뷰 이미지"
                         fill
-                        sizes="100vw "
+                        sizes="100vw"
+                        priority
                       />
                     </StHomeReviewItem>
                   </SwiperSlide>
