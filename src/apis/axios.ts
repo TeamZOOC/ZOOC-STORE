@@ -26,34 +26,39 @@ export const createAxios = (baseURL: string): AxiosInstance => {
     async (tokenError: AxiosError) => {
       const originalRequest = tokenError.config!;
       const refreshTokenURL = `${process.env.NEXT_PUBLIC_GENERAL_BASE_URL}/user/refresh`;
-      const refreshHeaders = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${getCookie('accessToken')}`,
-        RefreshToken: getCookie('refreshToken'),
-      };
 
       if (tokenError.response?.status === 401) {
         try {
-          signOut();
-
           const response = await axios.post(
             refreshTokenURL,
             {},
             {
-              headers: refreshHeaders,
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${getCookie('accessToken')}`,
+                RefreshToken: getCookie('refreshToken'),
+              },
             },
           );
-          const { accessToken: newAccessToken } = response.data;
-          setCookie('accessToken', newAccessToken);
-          axios.defaults.headers.common.Authorization = `Bearer ${newAccessToken}`;
 
-          return axiosInstance(originalRequest);
-        } catch (refreshTokenError) {
-          const refreshError = refreshTokenError as AxiosError;
+          if (response.status === 200) {
+            const newAccessToken = response.data.data.accessToken;
+            const newRefreshToken = response.data.data.refreshToken;
 
-          if (refreshError.response && refreshError.response.status === 406) {
-            window.location.href = '/auth/login';
+            setCookie('accessToken', newAccessToken, {
+              path: '/',
+            });
+            setCookie('refreshToken', newRefreshToken, {
+              path: '/',
+            });
+
+            originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+
+            return axiosInstance(originalRequest);
           }
+        } catch (refreshTokenError) {
+          signOut();
+          window.location.href = '/auth/login';
           return Promise.reject(refreshTokenError);
         }
       }
