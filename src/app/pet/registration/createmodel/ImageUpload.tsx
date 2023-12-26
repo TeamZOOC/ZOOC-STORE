@@ -10,7 +10,7 @@ import { styled } from 'styled-components';
 import { createDataset } from '@/apis/pet';
 import useRegisterPet from '@/app/mypage/hooks/useRegisterPet';
 import { BottomButton } from '@/components/button';
-import { LoadingSpinner } from '@/components/loading';
+import { LoadingConvertImage } from '@/components/loading';
 import { useMultipleImageUpload } from '@/hooks/image';
 import { useModal } from '@/hooks/modal';
 import { useToast } from '@/hooks/toast';
@@ -120,7 +120,7 @@ const ImageUpload = () => {
         onChange={handleImageChange}
         accept=".png, .jpg, .jpeg, .webp"
       />
-      {isImageLoading && <LoadingSpinner />}
+      {isImageLoading && <LoadingConvertImage />}
       {validatedImages.length === 0 ? (
         <>
           <ImageGuide />

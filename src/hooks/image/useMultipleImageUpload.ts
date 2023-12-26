@@ -1,5 +1,6 @@
 /* eslint-disable no-new */
 import Compressor from 'compressorjs';
+import heic2any from 'heic2any';
 import React, { useState } from 'react';
 
 const useMultipleImageUpload = () => {
@@ -7,19 +8,59 @@ const useMultipleImageUpload = () => {
   const [isImageLoading, setIsImageLoading] = useState(false);
 
   const compressImage = (file: File) =>
-    new Promise<File>((resolve) => {
-      new Compressor(file, {
-        quality: 0.6,
-        maxWidth: 1024,
-        maxHeight: 1024,
-        success: (compressedBlob) => {
-          const compressedFile = new File([compressedBlob], file.name, {
-            type: file.type,
-            lastModified: new Date().getTime(),
+    new Promise<File>((resolve, reject) => {
+      const compressToWebp = (inputFile: File) => {
+        new Compressor(inputFile, {
+          quality: 0.6,
+          maxWidth: 1024,
+          maxHeight: 1024,
+          convertSize: 0,
+          mimeType: 'image/webp',
+          success: (compressedBlob) => {
+            const compressedFileName = `${inputFile.name.replace(
+              /\.[^/.]+$/,
+              '',
+            )}.webp`;
+            const compressedFile = new File(
+              [compressedBlob],
+              compressedFileName,
+              {
+                type: 'image/webp',
+                lastModified: new Date().getTime(),
+              },
+            );
+            resolve(compressedFile);
+          },
+          error: (err) => {
+            reject(err);
+          },
+        });
+      };
+
+      if (file.type === 'image/heic') {
+        heic2any({
+          blob: file,
+          toType: 'image/webp',
+        })
+          .then((convertedBlob) => {
+            const convertedBlobSingle = Array.isArray(convertedBlob)
+              ? convertedBlob[0]
+              : convertedBlob;
+            const convertedFile = new File(
+              [convertedBlobSingle],
+              `${file.name.replace(/\.[^/.]+$/, '')}.webp`,
+              {
+                type: 'image/webp',
+              },
+            );
+            compressToWebp(convertedFile);
+          })
+          .catch((error) => {
+            reject(error);
           });
-          resolve(compressedFile);
-        },
-      });
+      } else {
+        compressToWebp(file);
+      }
     });
 
   const handleImageChange = async (
@@ -29,10 +70,10 @@ const useMultipleImageUpload = () => {
     if (!files) return;
 
     setIsImageLoading(true);
-    const compressedFiles: File[] = await Promise.all(
+    const changedFiles: File[] = await Promise.all(
       Array.from(files).map((file) => compressImage(file)),
     );
-    setMultipleUploadImages(Array.from(compressedFiles));
+    setMultipleUploadImages(Array.from(changedFiles));
     setIsImageLoading(false);
   };
 
