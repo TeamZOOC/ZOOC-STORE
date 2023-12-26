@@ -2,6 +2,8 @@
 
 import { styled } from 'styled-components';
 
+import { spin } from '@/styles/animation';
+
 const LoadingConvertImage = () => (
   <StLoading>
     <div className="spinner" />
@@ -36,7 +38,7 @@ const StLoading = styled.section`
     border-top: 0.3rem solid #000;
     width: 4rem;
     height: 4rem;
-    animation: spin 1s linear infinite;
+    animation: ${spin} 1s linear infinite;
   }
 
   & > h2 {
@@ -50,14 +52,5 @@ const StLoading = styled.section`
     ${({ theme }) => theme.fonts.zw_Body1};
 
     text-align: center;
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
   }
 `;

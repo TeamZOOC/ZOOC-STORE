@@ -2,6 +2,8 @@
 
 import { styled } from 'styled-components';
 
+import { spin } from '@/styles/animation';
+
 const LoadingSpinner = () => (
   <StLoading>
     <div className="spinner" />
@@ -29,15 +31,6 @@ const StLoading = styled.section`
     border-top: 0.3rem solid #000;
     width: 4rem;
     height: 4rem;
-    animation: spin 1s linear infinite;
-  }
-
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+    animation: ${spin} 1s linear infinite;
   }
 `;
