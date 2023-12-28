@@ -103,7 +103,7 @@ export default async function RootLayout({
         />
         <meta
           name="naver-site-verification"
-          content="9d100900962b8014d25eccae260e4709941d4cdd"
+          content="ebfa31257c992ba72b96c652b1294f1c4777c1d2"
         />
 
         <link rel="icon" href="/favicon.ico" sizes="any" />
