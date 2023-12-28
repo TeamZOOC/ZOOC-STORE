@@ -101,6 +101,11 @@ export default async function RootLayout({
           property="og:image"
           content="https://velog.velcdn.com/images/imphj3/post/ea94be96-de31-480c-a91a-2d0f887f6b91/image.png"
         />
+        <meta
+          name="naver-site-verification"
+          content="9d100900962b8014d25eccae260e4709941d4cdd"
+        />
+
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <noscript>
           <img
