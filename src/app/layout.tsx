@@ -90,7 +90,7 @@ export default async function RootLayout({
       <head>
         <meta
           name="naver-site-verification"
-          content="b12acc31b8004555f81a64477a444851eeec3b0d"
+          content="ebfa31257c992ba72b96c652b1294f1c4777c1d2"
         />
         <meta property="og:title" content="fitapat(핏어팻)" />
         <meta
