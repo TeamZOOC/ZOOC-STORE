@@ -88,6 +88,10 @@ export default async function RootLayout({
       className={`${GmarketSansBold.variable} ${GmarketSansMedium.variable} ${GmarketSansLight.variable} ${PretendardSemiBold.variable} ${PretendardLight.variable} ${PretendardMedium.variable} ${PretendardRegular.variable} ${PretendardExtraLight.variable} ${PretendardBold.variable}`}
     >
       <head>
+        <meta
+          name="naver-site-verification"
+          content="b12acc31b8004555f81a64477a444851eeec3b0d"
+        />
         <meta property="og:title" content="fitapat(핏어팻)" />
         <meta
           property="og:description"
