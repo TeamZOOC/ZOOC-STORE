@@ -12,6 +12,7 @@ import GlobalStyles from '@/styles/GlobalStyles';
 import Providers from '@/styles/Providers';
 import { Analytics } from '@vercel/analytics/react';
 import GoogleAnalytics from '@/components/ga/GoogleAnalytics';
+import { Metadata } from 'next';
 
 const PretendardLight = localFont({
   src: './fonts/Pretendard-Light.woff2',
@@ -57,7 +58,7 @@ const GmarketSansLight = localFont({
   variable: '--font-gmarketsans-light',
 });
 
-export const metadata = {
+export const metadata: Metadata = {
   title: 'fitapat(핏어팻)',
   description: '반려동물과 당신만의 설렘을 포장합니다',
   openGraph: {
@@ -91,19 +92,6 @@ export default async function RootLayout({
         <meta
           name="naver-site-verification"
           content="ebfa31257c992ba72b96c652b1294f1c4777c1d2"
-        />
-        <meta property="og:title" content="fitapat(핏어팻)" />
-        <meta
-          property="og:description"
-          content="반려동물과 당신만의 설렘을 포장합니다"
-        />
-        <meta property="og:url" content="https://www.fitapat.com/" />
-        <meta property="og:site_name" content="fitapat(핏어팻)" />
-        <meta property="og:locale" content="ko_KR" />
-        <meta property="og:type" content="website" />
-        <meta
-          property="og:image"
-          content="https://velog.velcdn.com/images/imphj3/post/ea94be96-de31-480c-a91a-2d0f887f6b91/image.png"
         />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <noscript>
