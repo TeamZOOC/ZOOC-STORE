@@ -76,6 +76,12 @@ export const metadata: Metadata = {
     locale: 'ko_KR',
     type: 'website',
   },
+  verification: {
+    google: 'fiC0NU8DxxzXEcRLCPDuncxNkJEWxTMjFu1yzgrWWBc',
+    other: {
+      naverSiteVerification: 'ebfa31257c992ba72b96c652b1294f1c4777c1d2',
+    },
+  },
 };
 
 export default async function RootLayout({
@@ -89,14 +95,6 @@ export default async function RootLayout({
       className={`${GmarketSansBold.variable} ${GmarketSansMedium.variable} ${GmarketSansLight.variable} ${PretendardSemiBold.variable} ${PretendardLight.variable} ${PretendardMedium.variable} ${PretendardRegular.variable} ${PretendardExtraLight.variable} ${PretendardBold.variable}`}
     >
       <head>
-        <meta
-          name="naver-site-verification"
-          content="ebfa31257c992ba72b96c652b1294f1c4777c1d2"
-        />
-        <meta
-          name="google-site-verification"
-          content="fiC0NU8DxxzXEcRLCPDuncxNkJEWxTMjFu1yzgrWWBc"
-        />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <noscript>
           <img
