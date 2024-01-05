@@ -13,6 +13,7 @@ import Providers from '@/styles/Providers';
 import { Analytics } from '@vercel/analytics/react';
 import GoogleAnalytics from '@/components/ga/GoogleAnalytics';
 import { Metadata } from 'next';
+import Script from 'next/script';
 
 const PretendardLight = localFont({
   src: './fonts/Pretendard-Light.woff2',
@@ -104,6 +105,8 @@ export default async function RootLayout({
             src="https://www.facebook.com/tr?id=315317384790025&ev=PageView&noscript=1"
           />
         </noscript>
+        <Script src="//cdn.jsdelivr.net/npm/eruda" />
+        <script>eruda.init();</script>
       </head>
       <body>
         <GoogleAnalytics />
