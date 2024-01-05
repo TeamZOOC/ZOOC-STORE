@@ -1,3 +1,7 @@
+/* eslint-disable react/no-array-index-key */
+
+'use client';
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -62,8 +66,11 @@ const HomeReview = () => {
                 }}
                 modules={[Pagination, Autoplay]}
               >
-                {review.imageSrc.map((image) => (
-                  <SwiperSlide onClick={() => router.push(review.productLink)}>
+                {review.imageSrc.map((image, index) => (
+                  <SwiperSlide
+                    key={index}
+                    onClick={() => router.push(review.productLink)}
+                  >
                     <StHomeReviewItem>
                       <Image
                         src={image}
