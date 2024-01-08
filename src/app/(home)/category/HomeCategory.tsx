@@ -12,6 +12,8 @@ const HomeCategory = () => {
   const { isiOS, isAndroid } = useMobileDetector();
   const { goBack } = usePlatformServices(isiOS, isAndroid);
 
+  console.log(localStorage.getItem('iOSToken'));
+
   return (
     <StHomeCategory>
       <StHomeCategoryTop>
