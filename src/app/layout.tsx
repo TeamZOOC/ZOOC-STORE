@@ -60,10 +60,10 @@ const GmarketSansLight = localFont({
 
 export const metadata: Metadata = {
   title: 'fitapat(핏어팻)',
-  description: '반려동물과 당신만의 설렘을 포장합니다',
+  description: '반려동물과 당신만의 설렘을 포장합니다 | fitapat(핏어팻)',
   openGraph: {
     title: 'fitapat(핏어팻)',
-    description: '반려동물과 당신만의 설렘을 포장합니다',
+    description: '반려동물과 당신만의 설렘을 포장합니다 | fitapat(핏어팻)',
     url: 'https://www.fitapat.com/',
     siteName: 'fitapat(핏어팻)',
     images: [
