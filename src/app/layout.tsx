@@ -96,6 +96,22 @@ export default async function RootLayout({
     >
       <head>
         <link rel="icon" href="/favicon.ico" sizes="any" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'http://schema.org',
+              '@type': 'Organization',
+              name: 'fitapat(핏어팻)',
+              url: 'https://www.fitapat.com',
+              sameAs: [
+                'https://www.instagram.com/fitapat.official/',
+                'https://blog.naver.com/fitapat_',
+                'https://www.youtube.com/@fitapat',
+              ],
+            }),
+          }}
+        />
         <noscript>
           <img
             height="1"
