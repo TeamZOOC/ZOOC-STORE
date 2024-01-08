@@ -49,7 +49,9 @@ const usePlatformServices = (isiOS: boolean, isAndroid: boolean) => {
   const goBack = useCallback(() => {
     try {
       if (isiOS && window.webkit?.messageHandlers) {
-        window.webkit.messageHandlers.callBackHandler.postMessage('back');
+        window.webkit.messageHandlers.callBackHandler.postMessage(
+          JSON.stringify({ name: 'callbackHandler Test' }),
+        );
       }
       if (isAndroid && window.Native?.onClickBack) {
         window.Native.onClickBack();

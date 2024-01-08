@@ -1,21 +1,26 @@
 'use client';
 
 import { styled } from 'styled-components';
-import Link from 'next/link';
+// import Link from 'next/link';
+import useMobileDetector from '@/hooks/mobileDetect/useMobileDetector';
+import usePlatformServices from '@/hooks/platformService/usePlatformServices';
 import HomeCategoryItem from './HomeCategoryItem';
 import useGetCategories from '../hooks/useGetCategories';
 
 const HomeCategory = () => {
   const { categoryList } = useGetCategories();
+  const { isiOS, isAndroid } = useMobileDetector();
+  const { goBack } = usePlatformServices(isiOS, isAndroid);
 
   return (
     <StHomeCategory>
       <StHomeCategoryTop>
         <span>카테고리</span>
-        <StHomeCategoryViewAllButton type="button">
-          <Link href="/product/all" scroll={false}>
+        <StHomeCategoryViewAllButton type="button" onClick={goBack}>
+          {/* <Link href="/product/all" scroll={false}>
             상품 전체보기
-          </Link>
+          </Link> */}
+          상품 전체보기
         </StHomeCategoryViewAllButton>
       </StHomeCategoryTop>
       <StHomeCatoryList>
